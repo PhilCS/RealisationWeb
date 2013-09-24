@@ -3,12 +3,52 @@
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     color: #232323;
     background-color: #fff;
+    margin:0;
+    padding:0;
+    background-color:#beebb2;
 }
 
 header, footer, nav, section {
     display: block;
 }
 
+header{
+    margin:0 auto;
+    padding:0;
+    height:100px;
+    background-color:white;
+    
+}
+
+ul{
+    list-style-type:none;
+}
+
+.separateur
+{
+    border-right:1px solid #000000;
+}
+
+.menu-h{
+    float:right;
+    margin-top:40px;
+    margin-right:60px;
+}
+
+.menu-h ul li{
+    padding-left:20px;
+    padding-right:20px;
+    display:inline-block;
+}
+
+.menu-h ul{
+    margin-top:0px;
+}
+
+.content
+{
+
+}
 
 /* Styles for basic forms
 -----------------------------------------------------------*/
