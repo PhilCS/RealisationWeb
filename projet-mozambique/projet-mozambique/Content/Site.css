@@ -7,6 +7,17 @@
     padding:0;
 }
 
+.connexion
+{
+    float:right;
+}
+
+.menu-h a
+{
+    text-decoration:none;
+    padding:20px;
+}
+
 header, footer, nav, section {
     display: block;
 }
@@ -22,25 +33,53 @@ ul{
     list-style-type:none;
 }
 
+header .main-titre
+{
+    font-size: 70px;
+    font-weight:bolder;
+}
+
+header .sous-titre
+{
+    font-size: 15px;
+    font-weight:bold;
+}
+
+.titre-header
+{
+    font-family: 'Roboto Slab';
+    margin-left: 150px;
+    line-height:15px;
+    padding-top: 35px;
+    color: #d3d3d3;
+}
+
 .separateur
 {
-    border-right:1px solid #000000;
+    border-right:1px solid #ddd;
 }
 
 .menu-h{
     float:right;
-    margin-top:40px;
+    margin-top:10px;
     margin-right:60px;
 }
 
-.menu-h ul li{
-    padding-left:20px;
-    padding-right:20px;
+.menu-h li{
     display:inline-block;
+    text-transform:uppercase;
+    font-family:'Roboto Slab';
+    font-size:13px;
+    font-weight:bold;
+    padding:10px 0 10px 0;
 }
 
+
+
 .menu-h ul{
-    margin-top:0px;
+    padding-left:0;
+    border-top:1px solid #ddd;
+    border-bottom:1px solid #ddd;
 }
 
 .content

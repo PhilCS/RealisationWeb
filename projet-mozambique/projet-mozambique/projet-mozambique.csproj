@@ -221,6 +221,8 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Public\Index.cshtml" />
+    <Content Include="Views\Shared\_MenuPublic.cshtml" />
+    <Content Include="Views\Public\Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
