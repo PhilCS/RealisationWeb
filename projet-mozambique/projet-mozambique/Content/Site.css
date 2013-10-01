@@ -2,10 +2,9 @@
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     color: #232323;
-    background-color: #fff;
+    background:url('images/pw_maze_white.png') repeat;
     margin:0;
     padding:0;
-    background-color:#beebb2;
 }
 
 header, footer, nav, section {
@@ -16,7 +15,6 @@ header{
     margin:0 auto;
     padding:0;
     height:100px;
-    background-color:white;
     
 }
 
