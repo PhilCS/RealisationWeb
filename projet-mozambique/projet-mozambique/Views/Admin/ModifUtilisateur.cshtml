@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "AjoutUtilisateur";
+    bool supprime = (bool)ViewData["supprime"];
+}
+
+
+@if (supprime)
+{
+    <p style="color:#538d12">L'utilisateur a été supprimé avec succès.</p>
+    <p style="color:#ce2203">Échec. L'utilisateur ne peut pas être supprimé.</p>
+} 
+else
+{
+    <p style="color:#538d12">L'utilisateur a été modifié avec succès.</p>
+    <p style="color:#ce2203">Erreur dans la modification de l'utilisateur.</p>
+    
+    <h2>Modifier l'utilisateur : smnoreau002</h2>
+    <form id="frmAjoutUtil" method="post" action="#">
+        <label for="login">Identifiant :</label>
+        <input type="text" name="login" id="ajoutId" value="smnoreau002" />
+        <br />
+        <label for="prenom">Prénom : </label>
+        <input type="text" name="prenom" id="ajoutPrenom" value="Sara-Maude" />
+        <span style="color:#ce2203">*</span>
+        <br />
+        <label for="nom">Nom : </label>
+        <input type="text" name="nom" id="ajoutNom" value="Noreau" />
+        <br />
+        <label for="courriel">Courriel : </label>
+        <input type="email" name="courriel" id="ajoutCourriel" value="smnoreau@gmail.com" />
+        <br />
+        <label for="adresse">Adresse : </label>
+        <input type="text" name="adresse" id="ajoutAdresse" value="555 avenue blabla" />
+        <br />
+        <label for="ville">Ville : </label>
+        <input type="text" name="ville" id="ajoutVille" value="Maputo" />
+        <br />
+        <label for="naissance">Date de naissance : </label>
+        <input type="date" name="naissance" id="ajoutNaissance" value="1993-09-10" />
+        <br />
+        <label for="ecole">École : </label>
+        <select name="ecole">
+            <option>École 1</option>
+            <option selected="selected">École 2</option>
+            <option>École 3</option>
+        </select>
+        <br />
+        <label for="secteur">Secteur : </label>
+        <input type="checkbox" name="secteur" value="1" checked="checked" />Agriculture
+        <input type="checkbox" name="secteur" value="2" />Tourisme
+        <input type="checkbox" name="secteur" value="3" />Construction
+        <br />
+        <label for="role">Rôle : </label>
+        <select name="role">
+            <option>Professeur</option>
+            <option selected="selected">Étudiant</option>
+            <option>Administrateur</option>
+        </select>
+        <br />
+        <label for="langue">Langue : </label>
+        <input type="radio" name="langue" value="FR" checked="checked" />Français
+        <input type="radio" name="langue" value="PT" />Portuguais
+        <br />
+        <input type="submit" id="btnModifierUtil" value="Modifier" />
+        <input type="button" id="btnGestionCancel" value="Annuler" />
+        <br />
+    </form>
+}

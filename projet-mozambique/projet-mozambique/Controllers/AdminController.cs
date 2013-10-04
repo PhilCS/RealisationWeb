@@ -26,14 +26,22 @@ namespace projet_mozambique.Controllers
             return View("RechUtilisateur");
         }
 
-        public ActionResult ajoutUtil()
+        public ActionResult modifierUtil(bool supprime)
         {
-            return View("AjoutUtilisateur");
+            ViewBag.Supprime = supprime;
+            ViewData["supprime"] = supprime;
+            return View("ModifUtilisateur");
         }
 
         public ActionResult roles()
         {
             return View("Roles");
+        }
+
+        public ActionResult getRole(string nomRole)
+        {
+            ViewData["role"] = nomRole;
+            return View("Role");
         }
 
         public ActionResult publique()

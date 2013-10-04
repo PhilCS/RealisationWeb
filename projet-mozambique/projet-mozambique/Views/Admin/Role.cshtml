@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Role";
+    string role = ViewData["role"].ToString();
+}
+
+<h2>@role</h2>
+<form action="roles">
+    <input type="checkbox" name="secteur" value="1" checked="checked" />Publier des documents
+    <br />
+    <input type="checkbox" name="secteur" value="2" />Supprimer des documents
+    <br />
+    <input type="checkbox" name="secteur" value="3" />Ajouter des utilisateurs
+    <br />
+    <br />
+    <input type="submit" id="btnModifierUtil" value="Modifier" class="btnForm" />
+    <br />
+</form>

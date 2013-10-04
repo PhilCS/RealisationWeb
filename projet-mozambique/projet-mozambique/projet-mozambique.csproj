@@ -252,7 +252,7 @@
     <Content Include="Views\Admin\Roles.cshtml" />
     <Content Include="Views\Admin\SectionPublique.cshtml" />
     <Content Include="Views\Admin\RechUtilisateur.cshtml" />
-    <Content Include="Views\Admin\AjoutUtilisateur.cshtml" />
+    <Content Include="Views\Admin\ModifUtilisateur.cshtml" />
     <Content Include="Views\Public\_ViewStart.cshtml" />
     <Content Include="Views\Public\_LayoutPublic.cshtml" />
     <Content Include="Views\Sectoriel\_LayoutSectoriel.cshtml" />
@@ -271,6 +271,7 @@
     <Content Include="Views\Sectoriel\ModifierMotPasseErreur.cshtml" />
     <Content Include="Views\Sectoriel\ModifierPreferences.cshtml" />
     <Content Include="Views\Sectoriel\ModifierPreferencesOK.cshtml" />
+    <Content Include="Views\Admin\Role.cshtml" />
     <Content Include="Views\Sectoriel\Forum.cshtml" />
     <Content Include="Views\Sectoriel\MessagesEnvoyes.cshtml" />
     <Content Include="Views\Sectoriel\Corbeille.cshtml" />

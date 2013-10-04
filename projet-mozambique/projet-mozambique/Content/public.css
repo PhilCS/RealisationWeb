@@ -206,95 +206,57 @@ header nav ul.nav-secondaire li {
 }
 
 .panneau {
-    margin:20px auto 0;
+    /*margin:20px auto 0;*/
     width:80%;
 }
 
 .panneau h2 {
     cursor:pointer;
+    background:url('images/icones/icon-arrow.png') no-repeat left center; 
+    padding-left: 25px; /* the width of your image + some space */
+    font-size:1.4em;
+    font-weight:normal;
 }
 .panneauFerme {
     display:none;
 }
 
-/*#topnav a.menu-open {
-    opacity:0.4;
-    color:#666!important;
-    outline:none;
+.liste-fleche li
+{
+    margin-bottom:5px;
 }
 
-#small_signup {
-    display:inline;
-    float:none;
-    line-height:23px;
-    margin:25px 0 0;
-    width:170px;
+#divCarteGoogle {
+
+	border:5px ridge #CCC;
+
+	background-color:gray;
+
+	height:450px;
+
+	margin:0 auto;
+
 }
 
-#signin_menu {
-    -moz-border-radius-topleft:5px;
-    -moz-border-radius-bottomleft:5px;
-    -moz-border-radius-bottomright:5px;
-    -webkit-border-top-left-radius:5px;
-    -webkit-border-bottom-left-radius:5px;
-    -webkit-border-bottom-right-radius:5px;
-    display:none;
-    background-color:#538d12!important;
-    opacity:0.4;
-    width:25%;
-    z-index:999;
-    position:absolute;
-    border:1px transparent;
-    text-align:left;
-    padding:12px;
-    top: 24.5px;
-    right:0;
-    margin-top:5px;
-    font-size:1.1em;
+
+
+
+/* SECTION ADMIN */
+ a.supprimer {
+    background:url('images/icones/icone-delete.png') no-repeat top left;
+    display:inline-block;
+    width:20px;
+    height:20px;
+    text-indent:-9999px;
 }
 
-#signin_menu input[type=text], #signin_menu input[type=password] {
-    display:block;
-    -moz-border-radius:4px;
-    -webkit-border-radius:4px;
-    border:1px solid #ACE;
-    font-size:13px;
-    margin:0 0 5px;
-    padding:5px;
-    width:75%;
+a.modifier {
+    background:url('images/icones/icone-pen.png') no-repeat top left;
+    display:inline-block;
+    width:20px;
+    height:20px;
+    text-indent:-9999px;
 }
-#signin_menu p {
-    margin:0;
-}
-#signin_menu label {
-    font-weight:normal;
-}
-#signin_menu p.remember {
-    padding:10px 0;
-}
-#signin_menu p.forgot, #signin_menu p.complete {
-    clear:both;
-    margin:5px 0;
-}
-#signin_submit {
-    -moz-border-radius:4px;
-    -webkit-border-radius:4px;
-    background:#39d url('images/bg-btn-blue.png') repeat-x scroll 0 0;
-    border:1px solid #39D;
-    text-shadow:0 -1px 0 #39d;
-    padding:4px 10px 5px;
-    font-size:11px;
-    margin:0 5px 0 0;
-    font-weight:bold;
-}
-#signin_submit::-moz-focus-inner {
-    padding:0;
-    border:0;
-}
-#signin_submit:hover, #signin_submit:focus {
-    background-position:0 -5px;
-    cursor:pointer;
-}*/
 
 /* Styles for basic forms
 -----------------------------------------------------------*/

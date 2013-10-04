@@ -7,28 +7,13 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
     @Styles.Render("~/Content/cssPublic")
     @Scripts.Render("~/bundles/modernizr")
+
 </head>
 <body>
     <div id="all">
         <header>
             <div class="connexion">
                 <div id="topnav">@Html.ActionLink("Se connecter", "Index", "admin")</div>
-                <!--<fieldset id="signin_menu">
-                    <form method="post" id="signin" action="#">
-                        <p>
-                            <label for="username">Username or email</label>
-                            <input id="username" name="username" value="" title="username" tabindex="4" type="text">
-                        </p>
-                        <p>
-                            <label for="password">Password</label>
-                            <input id="password" name="password "value="" title="password" tabindex="5" type="password">
-                        </p>
-                        <p class="remember">
-                            <input id="signin_submit" value="Sign in" tabindex="6" type="submit">
-                            <input id="remember" name="remember_me" value="1 "tabindex="7" type="checkbox">
-                            <label for="remember">Remember me</label><a href="#" id="resend_password_link">Forgot your password?</a></p>
-                    </form>
-                </fieldset>-->
             </div>
             <div class="titre-header">
                 @Html.ActionLink("Mozambique", "Index", new { controller = "Public" }, new {@class="main-titre"})<br />
