@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Projet Mozambique - @ViewBag.Title</title>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
+    @Styles.Render("~/Content/cssPublic")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <div id="all">
+        <header>
+            <div class="connexion">
+                <div class="user_name">
+                    <p>Nom de l'utilisateur</p>
+                    <div class="icons">
+                        <img src="~/Content/images/mail.png" title="Messagerie" />
+                        <img src="~/Content/images/profile.png" title="Profil" />
+                    </div>
+                 </div>
+                @Html.ActionLink("Se déconnecter", "Index", "public", new { logout = 1 }, new { @class = "logout" })
+            </div>
+            <div class="titre-header">
+                <span class="main-titre">Mozambique</span><br />
+                <span class="sous-titre">Portail pédagogique</span>
+            </div>
+            <nav>
+                <ul>
+                    <li>@Html.ActionLink("Accueil", "Index")</li>
+                    <!-- La gestion du contenu de la section publique devrait se faire dans l'administration ou ici -->
+                    <li>@Html.ActionLink("Nouvelles", "#")</li>
+                    <li>@Html.ActionLink("Partenaires", "#")</li>
+                    <li>@Html.ActionLink("Documents", "#")</li>
+                    <li>@Html.ActionLink("Forum", "#")</li>
+                    <li>@Html.ActionLink("Sondages", "#")</li>
+                    <li><a class="menu-admin">Administration</a></li>
+                </ul>
+                <ul class="nav-secondaire">
+                    <li>@Html.ActionLink("Utilisateurs", "utilisateurs")</li>
+                    <li>@Html.ActionLink("Rôles", "roles")</li>
+                    <li>@Html.ActionLink("Section publique", "publique")</li>
+                </ul>
+            </nav>
+        </header>
+        <div class="content">
+            @RenderBody()
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function (){
+            $(".menu-admin").click(function (e) {
+                e.preventDefault();
+                $(".nav-secondaire").toggle();
+            });
+        });
+
+    </script>
+</body>
+</html>

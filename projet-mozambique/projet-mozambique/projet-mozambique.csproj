@@ -135,8 +135,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\Falco2.jpg" />
+    <Content Include="Content\images\mail.png" />
+    <Content Include="Content\images\profile.png" />
     <Content Include="Content\images\pw_maze_white.png" />
     <Content Include="Content\images\pw_maze_white_%402X.png" />
+    <Content Include="Content\public.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -221,13 +225,24 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Public\Index.cshtml" />
-    <Content Include="Views\Shared\_MenuPublic.cshtml" />
-    <Content Include="Views\Public\Menu.cshtml" />
+    <Content Include="Views\Admin\_ViewStart.cshtml" />
+    <Content Include="Views\Admin\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Public\_LayoutPublic.cshtml" />
+    <Content Include="Views\Public\_ViewStart.cshtml" />
+    <Content Include="Views\Public\Nouvelles.cshtml" />
+    <Content Include="Views\Public\Partenaires.cshtml" />
+    <Content Include="Views\Public\APropos.cshtml" />
+    <Content Include="Views\Public\NousJoindre.cshtml" />
+    <Content Include="Views\Admin\Utilisateurs.cshtml" />
+    <Content Include="Views\Admin\Roles.cshtml" />
+    <Content Include="Views\Admin\SectionPublique.cshtml" />
+    <Content Include="Views\Admin\RechUtilisateur.cshtml" />
+    <Content Include="Views\Admin\AjoutUtilisateur.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

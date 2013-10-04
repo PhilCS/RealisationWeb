@@ -11,9 +11,29 @@ namespace projet_mozambique.Controllers
         //
         // GET: /Public/
 
-        public ActionResult Index()
+        public ActionResult index()
         {
             return View();
+        }
+
+        public ActionResult nouvelles()
+        {
+            return View("Nouvelles");
+        }
+
+        public ActionResult partenaires()
+        {
+            return View("Partenaires");
+        }
+
+        public ActionResult apropos()
+        {
+            return View("APropos");
+        }
+
+        public ActionResult nousjoindre()
+        {
+            return View("NousJoindre");
         }
 
     }
