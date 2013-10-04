@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Modifier informations personnelles";
+}
+
+<h1>Modifier vos infos personnelles</h1>
+
+<div class="msg">
+    <p>@projet_mozambique.Utilitaires.Constantes.MESSAGE_CHAMPS_OBLIGATOIRE</p>
+</div>
+
+<form method="post" action="ModifierInfosOK" class="formulaire">
+
+    <div>
+        <label for="adresse">Adresse : *</label>
+        <input type="text" id="adresse" name="adresse" value="5185 rue Massue"/>
+    </div>
+
+    <div>
+        <label for="ville">Ville : *</label>
+        <input type="text" id="ville" name="ville" value="Québec"/>
+    </div>
+
+    <div>
+        <label for="courriel">Courriel : *</label>
+        <input type="email" id="courriel" name="courriel" value="trepanier.vanessa@gmail.com"/>
+    </div>
+
+    <input type="submit" class="btnForm" value="Modifier" />
+    <p><a href="ModifierInfosErreur">ERREUR</a></p>
+</form>

@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Modifier informations personnelles";
+}
+
+<h1>Modifier vos infos personnelles</h1>
+
+<div class="msg erreur">
+    <p>@projet_mozambique.Utilitaires.Constantes.MESSAGE_CHAMPS_OBLIGATOIRE</p>
+    <p>Votre profil n'a pu être modifié.</p>
+    <ul>
+        <li>L'adresse courriel inscrite est invalide.</li>
+    </ul>
+</div>
+
+<form method="post" action="ModifierInfosOK" class="formulaire">
+
+    <div>
+        <label for="adresse">Adresse : *</label>
+        <input type="text" id="adresse" name="adresse" value="5185 rue Massue"/>
+    </div>
+
+    <div>
+        <label for="ville">Ville : *</label>
+        <input type="text" id="ville" name="ville" value="Québec"/>
+    </div>
+
+    <div>
+        <label for="courriel" class="erreur">Courriel : *</label>
+        <input type="email" id="courriel" name="courriel" value="trepanier.vanessa@gmail" autofocus/>
+    </div>
+
+    <input type="submit" class="btnForm" value="Modifier" />
+</form>
