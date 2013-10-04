@@ -6,10 +6,10 @@
 
 <nav class="nav-tab">
     <ul>
-        <li>@Html.ActionLink("Boite de réception", "Messagerie", new { controller = "Sectoriel" }, new { @class = "tab-active" })</li>
+        <li>@Html.ActionLink("Boite de réception", "Messagerie", new { controller = "Sectoriel" })</li>
         <li>@Html.ActionLink("Nouveau message", "NouveauMessage", new { controller = "Sectoriel" })</li>
         <li>@Html.ActionLink("Messages envoyés", "MessagesEnvoyes", "Sectoriel")</li>
-        <li>@Html.ActionLink("Corbeille", "Corbeille", "Sectoriel")</li>
+        <li>@Html.ActionLink("Corbeille", "Corbeille", new { controller = "Sectoriel" }, new { @class = "tab-active" })</li>
     </ul>
 </nav>
 
@@ -26,7 +26,7 @@
                     | 2 octobre 2013 14:55
                     <img class="attachment" src="~/Content/images/icones/icon-attachment.png" alt="Icône pièce jointe" />
                 </span></a></li>
-            <li class="nouveau-msg"><a href="#"><input type="checkbox" />Hey mon ami préféré! 
+            <li><a href="#"><input type="checkbox" />Hey mon ami préféré! 
                 <span class="infos-supp-msg">| 2 octobre 2013 14:55
                 </span></a></li>
             <li><a href="#"><input type="checkbox" />Salut toi! <span class="infos-supp-msg">| 2 octobre 2013 14:55</span></a></li>

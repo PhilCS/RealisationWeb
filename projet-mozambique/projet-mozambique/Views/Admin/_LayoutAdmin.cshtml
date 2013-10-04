@@ -31,9 +31,9 @@
                 <ul>
                     <li>@Html.ActionLink("Accueil", "Index")</li>
                     <!-- La gestion du contenu de la section publique devrait se faire dans l'administration ou ici -->
-                    <li>@Html.ActionLink("Documents", "#")</li>
-                    <li>@Html.ActionLink("Forum", "#")</li>
-                    <li>@Html.ActionLink("Sondages", "#")</li>
+                    <li>@Html.ActionLink("Documents", "Documents", "Admin")</li>
+                    <li>@Html.ActionLink("Forum", "ForumModerateur", "Admin")</li>
+                    <li>@Html.ActionLink("Sondages", "Sondages", "Admin")</li>
                     <li><a class="menu-admin">Administration</a></li>
                 </ul>
                 <ul class="nav-secondaire">

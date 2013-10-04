@@ -137,8 +137,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\images\Falco2.jpg" />
+    <Content Include="Content\images\icones\icon-add-black.png" />
     <Content Include="Content\images\icones\icon-add.png" />
     <Content Include="Content\images\icones\icon-arrow.png" />
+    <Content Include="Content\images\icones\icon-attachment.png" />
+    <Content Include="Content\images\icones\icon-delete-forum-petit.png" />
+    <Content Include="Content\images\icones\icon-delete-forum.png" />
+    <Content Include="Content\images\icones\icon-reply-forum.png" />
+    <Content Include="Content\images\icones\icon-reply.png" />
+    <Content Include="Content\images\icones\icon-trashcan.png" />
     <Content Include="Content\images\icones\icone-excel.png" />
     <Content Include="Content\images\icones\icone-pdf.png" />
     <Content Include="Content\images\icones\icone-text.png" />
@@ -255,10 +262,6 @@
     <Content Include="Views\Sectoriel\IndexAdmin.cshtml" />
     <Content Include="Views\Sectoriel\Messagerie.cshtml" />
     <Content Include="Views\Sectoriel\Documents.cshtml" />
-    <Content Include="Views\Sectoriel\DocumentsDroitPublication.cshtml" />
-    <Content Include="Views\Sectoriel\PublicationDocument.cshtml" />
-    <Content Include="Views\Sectoriel\PublicationErreur.cshtml" />
-    <Content Include="Views\Sectoriel\PublicationOK.cshtml" />
     <Content Include="Views\Sectoriel\Profil.cshtml" />
     <Content Include="Views\Sectoriel\ModifierInfos.cshtml" />
     <Content Include="Views\Sectoriel\ModifierInfosOK.cshtml" />
@@ -268,6 +271,30 @@
     <Content Include="Views\Sectoriel\ModifierMotPasseErreur.cshtml" />
     <Content Include="Views\Sectoriel\ModifierPreferences.cshtml" />
     <Content Include="Views\Sectoriel\ModifierPreferencesOK.cshtml" />
+    <Content Include="Views\Sectoriel\Forum.cshtml" />
+    <Content Include="Views\Sectoriel\MessagesEnvoyes.cshtml" />
+    <Content Include="Views\Sectoriel\Corbeille.cshtml" />
+    <Content Include="Views\Sectoriel\NouveauMessage.cshtml" />
+    <Content Include="Views\Sectoriel\MessageEnvoyeOK.cshtml" />
+    <Content Include="Views\Sectoriel\MessagePasEnvoye.cshtml" />
+    <Content Include="Views\Sectoriel\NouveauFil.cshtml" />
+    <Content Include="Views\Sectoriel\FilPasAjoute.cshtml" />
+    <Content Include="Views\Sectoriel\FilAjouteOK.cshtml" />
+    <Content Include="Views\Sectoriel\FilDiscu.cshtml" />
+    <Content Include="Views\Sectoriel\RepondreFilDiscu.cshtml" />
+    <Content Include="Views\Sectoriel\MessageFilAjouteOK.cshtml" />
+    <Content Include="Views\Sectoriel\MessageFilPasAjoute.cshtml" />
+    <Content Include="Views\Admin\ForumModerateur.cshtml" />
+    <Content Include="Views\Admin\FilDiscuModerateur.cshtml" />
+    <Content Include="Views\Admin\ModifierMsgFil.cshtml" />
+    <Content Include="Views\Admin\SupprimerFil.cshtml" />
+    <Content Include="Views\Sectoriel\Sondages.cshtml" />
+    <Content Include="Views\Admin\Sondages.cshtml" />
+    <Content Include="Views\Admin\SupprimerPublication.cshtml" />
+    <Content Include="Views\Admin\Documents.cshtml" />
+    <Content Include="Views\Admin\PublicationDocument.cshtml" />
+    <Content Include="Views\Admin\PublicationErreur.cshtml" />
+    <Content Include="Views\Admin\PublicationOK.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

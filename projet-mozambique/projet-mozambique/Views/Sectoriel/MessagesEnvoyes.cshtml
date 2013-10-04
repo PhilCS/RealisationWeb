@@ -6,9 +6,9 @@
 
 <nav class="nav-tab">
     <ul>
-        <li>@Html.ActionLink("Boite de réception", "Messagerie", new { controller = "Sectoriel" }, new { @class = "tab-active" })</li>
+        <li>@Html.ActionLink("Boite de réception", "Messagerie", new { controller = "Sectoriel" })</li>
         <li>@Html.ActionLink("Nouveau message", "NouveauMessage", new { controller = "Sectoriel" })</li>
-        <li>@Html.ActionLink("Messages envoyés", "MessagesEnvoyes", "Sectoriel")</li>
+        <li>@Html.ActionLink("Messages envoyés", "MessagesEnvoyes", new { controller = "Sectoriel" }, new { @class = "tab-active" })</li>
         <li>@Html.ActionLink("Corbeille", "Corbeille", "Sectoriel")</li>
     </ul>
 </nav>
@@ -24,19 +24,16 @@
             <li class="msg-courant"><a href="#"><input type="checkbox" />Salut toi! 
                 <span class="infos-supp-msg">
                     | 2 octobre 2013 14:55
-                    <img class="attachment" src="~/Content/images/icones/icon-attachment.png" alt="Icône pièce jointe" />
                 </span></a></li>
-            <li class="nouveau-msg"><a href="#"><input type="checkbox" />Hey mon ami préféré! 
-                <span class="infos-supp-msg">| 2 octobre 2013 14:55
+            <li><a href="#"><input type="checkbox" />Hey mon ami préféré! 
+                <span class="infos-supp-msg">| 1 octobre 2013 14:55
                 </span></a></li>
-            <li><a href="#"><input type="checkbox" />Salut toi! <span class="infos-supp-msg">| 2 octobre 2013 14:55</span></a></li>
-            <li><a href="#"><input type="checkbox" />Salut toi! <span class="infos-supp-msg">| 2 octobre 2013 14:55</span></a></li>
+            <li><a href="#"><input type="checkbox" />Salut toi! <span class="infos-supp-msg">| 5 septembre 2013 14:55</span></a></li>
         </ul>
     </div>
     <div id="lecture" class="mess-lecture">
         <div class="actions-messagerie">
             <div class="icones-actions">        
-                <a href="#"><img src="~/Content/images/icones/icon-reply.png" alt="Icône répondre" /></a>
                 <a href="#"><img src="~/Content/images/icones/icon-trashcan.png" alt="Icône supprimer" /></a>
             </div>
         </div>
@@ -63,5 +60,6 @@
         </p>
     </div>
 </div>
+
 
 

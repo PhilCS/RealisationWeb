@@ -18,7 +18,7 @@
                 <div class="user_name">
                     <p>Nom de l'utilisateur</p>
                     <div class="icons">
-                        <img src="~/Content/images/mail.png" title="Messagerie" />
+                        @Html.ActionLink(" ", "Messagerie", new { controller = "Sectoriel" }, new { @class = "msg-img" })
                         @Html.ActionLink(" ", "Profil", new { controller = "Sectoriel" }, new { @class = "profil-img" })
                     </div>
                  </div>
@@ -32,9 +32,9 @@
                 <ul>
                     <li>@Html.ActionLink("Accueil", "Index", "Sectoriel")</li>
                     <!-- La gestion du contenu de la section publique devrait se faire dans l'administration ou ici -->
-                    <li>@Html.ActionLink("Documents", "Documents")</li>
-                    <li>@Html.ActionLink("Forum", "#")</li>
-                    <li>@Html.ActionLink("Sondages", "#")</li>
+                    <li>@Html.ActionLink("Documents", "Documents", "Sectoriel")</li>
+                    <li>@Html.ActionLink("Forum", "Forum", "Sectoriel")</li>
+                    <li>@Html.ActionLink("Sondages", "Sondages", "Sectoriel")</li>
                 </ul>
             </nav>
         </header>

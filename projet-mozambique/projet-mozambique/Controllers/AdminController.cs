@@ -40,5 +40,55 @@ namespace projet_mozambique.Controllers
         {
             return View("SectionPublique");
         }
+
+        public ActionResult ForumModerateur()
+        {
+            return View();
+        }
+
+        public ActionResult FilDiscuModerateur()
+        {
+            return View();
+        }
+
+        public ActionResult ModifierMsgFil()
+        {
+            return View();
+        }
+
+        public ActionResult SupprimerFil()
+        {
+            return View();
+        }
+
+        public ActionResult Sondages()
+        {
+            return View();
+        }
+
+        public ActionResult SupprimerPublication()
+        {
+            return View();
+        }
+
+        public ActionResult Documents()
+        {
+            return View();
+        }
+
+        public ActionResult PublicationDocument()
+        {
+            return View();
+        }
+
+        public ActionResult PublicationErreur()
+        {
+            return View();
+        }
+
+        public ActionResult PublicationOK()
+        {
+            return View();
+        }
     }
 }

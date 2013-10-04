@@ -1,0 +1,140 @@
+﻿@{
+    ViewBag.Title = "Forum";
+}
+
+<h1>Forum</h1>
+
+<nav class="nav-tab">
+    <ul>
+        <li>@Html.ActionLink("Construction", "Forum", new { controller = "Sectoriel" }, new { @class = "tab-active" })</li>
+        <li>@Html.ActionLink("Agriculture", "Forum", "Sectoriel")</li>
+    </ul>
+</nav>
+
+<div class="msg succes"><p>Le fil de discussion a bien été supprimé.</p></div>
+
+<div class="forum">
+    
+    <a href="NouveauFil"><img src="~/Content/images/icones/icon-add-black.png" alt="Icône Nouveau fil" class="icone" /></a>
+    <ul class="nav-forum">
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">...</a></li>
+        <li><a href="#">Page suivante</a></li>
+        <li><a href="#">Dernière page</a></li>
+    </ul>
+
+    <table>
+        <thead>
+            <tr>
+                <th class="col-petite-ad">Supprimer</th>
+                <th class="col-fildiscu-ad">Fil de discussion</th>
+                <th class="col-petite-ad">Nb Réponses</th>
+                <th class="col-petite-ad">Nb Lectures</th>
+                <th class="col-derniermsg-ad">Dernier message</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="#">Supprimer</a></td>
+                <td class="col-fildiscu"><a href="FilDiscuModerateur">Quisque volutpat metus id purus pulvinar consectetur.</a></td>
+                <td>12</td>
+                <td>56</td>
+                <td>Par Vanessa Trépanier<br />
+                    2 octobre 2013 10:21
+                </td>
+            </tr>
+            <tr>
+                <td><a href="#">Supprimer</a></td>
+                <td class="col-fildiscu"><a href="#">Maecenas eleifend tortor sed odio auctor, a facilisis purus faucibus.</a></td>
+                <td>12</td>
+                <td>56</td>
+                <td>Par Vanessa Trépanier<br />
+                    2 octobre 2013 10:21
+                </td>
+            </tr>
+            <tr>
+                <td><a href="#">Supprimer</a></td>
+                <td class="col-fildiscu"><a href="#">Quisque volutpat metus id purus pulvinar consectetur.</a></td>
+                <td>12</td>
+                <td>56</td>
+                <td>Par Vanessa Trépanier<br />
+                    2 octobre 2013 10:21
+                </td>
+            </tr>
+            <tr>
+                <td><a href="#">Supprimer</a></td>
+               <td class="col-fildiscu"><a href="#">Maecenas laoreet ante non orci aliquet, id pellentesque erat venenatis.</a></td>
+                <td>12</td>
+                <td>56</td>
+                <td>Par Vanessa Trépanier<br />
+                    2 octobre 2013 10:21
+                </td>
+            </tr>
+            <tr>
+                <td><a href="#">Supprimer</a></td>
+               <td class="col-fildiscu"><a href="#">Suspendisse rutrum sem eget lacinia vulputate.</a></td>
+                <td>12</td>
+                <td>56</td>
+                <td>Par Vanessa Trépanier<br />
+                    2 octobre 2013 10:21
+                </td>
+            </tr>
+            <tr>
+                <td><a href="#">Supprimer</a></td>
+               <td class="col-fildiscu"><a href="#">Maecenas laoreet ante non orci aliquet, id pellentesque erat venenatis.</a></td>
+                <td>12</td>
+                <td>56</td>
+                <td>Par Vanessa Trépanier<br />
+                    2 octobre 2013 10:21
+                </td>
+            </tr>
+            <tr>
+                <td><a href="#">Supprimer</a></td>
+               <td class="col-fildiscu"><a href="#">Suspendisse rutrum sem eget lacinia vulputate.</a></td>
+                <td>12</td>
+                <td>56</td>
+                <td>Par Vanessa Trépanier<br />
+                    2 octobre 2013 10:21
+                </td>
+            </tr>
+            <tr>
+                <td><a href="#">Supprimer</a></td>
+               <td class="col-fildiscu"><a href="#">Maecenas eleifend tortor sed odio auctor, a facilisis purus faucibus.</a></td>
+                <td>12</td>
+                <td>56</td>
+                <td>Par Vanessa Trépanier<br />
+                    2 octobre 2013 10:21
+                </td>
+            </tr>
+            <tr>
+                <td><a href="#">Supprimer</a></td>
+               <td class="col-fildiscu"><a href="#">Maecenas eleifend tortor sed odio auctor, a facilisis purus faucibus.</a></td>
+                <td>12</td>
+                <td>56</td>
+                <td>Par Vanessa Trépanier<br />
+                    2 octobre 2013 10:21
+                </td>
+            </tr>
+            <tr>
+                <td><a href="#">Supprimer</a></td>
+               <td class="col-fildiscu"><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a></td>
+                <td>12</td>
+                <td>56</td>
+                <td>Par Vanessa Trépanier<br />
+                    2 octobre 2013 10:21
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul class="nav-forum">
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">...</a></li>
+        <li><a href="#">Page suivante</a></li>
+        <li><a href="#">Dernière page</a></li>
+    </ul>
+</div>

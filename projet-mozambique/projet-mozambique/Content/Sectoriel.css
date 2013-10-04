@@ -85,45 +85,57 @@
     margin-bottom:10px;
 }
 
-.formulaire input:not([type=submit])
+.formulaire input:not([type=submit][type=button])
 {
     width:260px;
 }
 
-/*CHANGEMENT SECTEUR*/
-.choix-secteur
+.nouveau-message input[type=text]
 {
-    width:auto;
-    margin:0 auto 20px auto;
+    width:400px;
 }
 
-.choix-secteur ul 
+.nouveau-message textarea
+{
+    width:80%;
+    height:300px;
+}
+
+
+/*CHANGEMENT SECTEUR*/
+.nav-tab
+{
+    width:auto;
+    margin:0 auto 40px auto;
+}
+
+.nav-tab ul 
 {
     margin:0;
     padding:0;
     text-align:center;
 }
 
-.choix-secteur li
+.nav-tab li
 {
     display:inline-block;
     margin:5px;
 }
 
-.choix-secteur a
+.nav-tab a
 {
     background-color:rgba(0,0,0,0.2);
-    padding:15px;
+    padding:10px 15px 10px 15px;
 }
 
-.choix-secteur a:hover
+.nav-tab a:hover
 {
     color:black;
+    padding:10px 15px 10px 15px;
     background-color:rgba(0,0,0,0.3);
-    padding:15px;
 }
 
-.secteur-actif
+.tab-active
 {
     border-bottom:3px solid rgba(0, 0, 0, 0.68);
 }
@@ -224,6 +236,7 @@
      padding-left: 25px; /* the width of your image + some space */
 }
 
+/*MENU ICÔNES*/
 .profil-img
 {
     background:url('images/profile.png') no-repeat center right;
@@ -232,4 +245,251 @@
     height:24px;
 }
 
+.msg-img
+{
+    background:url('images/mail.png') no-repeat center right;
+    display:inline-block;
+    width:24px;
+    height:24px;
+}
+
+/*MESSAGERIE*/
+
+.messagerie
+{
+    margin-bottom:10px;
+    overflow:hidden;
+}
+
+.mess-lecture
+{
+    width:60%;
+    float:right;
+    background-color:rgba(0,0,0,0.2);
+    padding:5px;
+    margin-bottom: -99999px;
+	padding-bottom: 99999px;
+}
+
+.mess-reception
+{
+    width:37%;
+    margin:0;
+    float:left;
+    background-color:rgba(0,0,0,0.2);
+    margin-bottom: -99999px;
+	padding-bottom: 99999px;
+    font-size:11px;
+}
+
+.mess-reception ul
+{
+    padding:0;
+}
+
+.mess-reception li
+{
+    padding:5px;
+}
+
+.mess-reception li:hover:not([class=nouveau-msg])
+{
+    background-color:rgba(0,0,0,0.3);
+}
+
+.mess-reception a
+{
+    display:block;
+    padding:5px;
+}
+
+.mess-reception input
+{
+    margin-right:10px;
+}
+
+.mess-reception a:hover
+{
+    color:black;
+}
+
+.msg-courant
+{
+    font-weight:bold;
+    background-color:rgba(0,0,0,0.3);
+}
+
+.infos-supp-msg
+{
+    float:right;
+    width:185px;
+}
+
+.attachment
+{
+    margin-left:4px;
+    vertical-align:middle;
+}
+
+.actions-boite-reception
+{
+    text-align:right;
+    border-bottom:2px solid rgba(0,0,0,0.6);
+    font-weight:bold;
+    font-size:12px;
+    padding:3px;
+}
+
+.actions-messagerie
+{
+    margin-bottom:20px;
+}
+
+.icones-actions
+{
+    float:right;
+}
+
+.icones-actions img
+{
+    margin:2px;
+}
+
+.nouveau-msg
+{
+    background-color:rgba(83,141,18,0.3);
+}
+
+.nouveau-msg:hover
+{
+    background-color:rgba(83,141,18,0.7);
+}
+
+/*FORUM*/
+.nav-forum
+{
+    float:right;
+    margin-bottom:20px;
+    margin-top:10px;
+    padding-right:5px;
+}
+
+.nav-forum a
+{
+    text-decoration:underline;
+}
+
+.nav-forum li
+{
+    display:inline;
+    margin-right:5px;
+}
+
+.forum
+{
+    width:100%;
+    background-color:rgba(0,0,0,0.05);
+}
+
+.forum table
+{
+    text-align:center;
+    width:100%;
+    border-collapse:collapse;
+    margin-bottom:10px;
+}
+
+.forum table tbody tr:hover
+{
+    background-color:rgba(0,0,0,0.1);
+}
+
+.forum table a
+{
+    color:#538d12;
+    font-weight:bold;
+}
+
+.icone
+{
+    margin:5px;
+}
+
+.forum table a:hover
+{
+    color:#000;
+}
+
+.forum thead
+{
+    background-color:rgba(0,0,0,0.4);
+}
+
+.forum th
+{
+    font-size:15px;
+    padding:10px;
+}
+
+.forum td
+{
+    border-bottom:1px solid rgba(0,0,0,0.2);
+    padding:10px;
+}
+
+.col-fildiscu
+{
+    width:60%;
+    text-align:left;
+}
+
+.col-nb
+{
+    width:8%;
+}
+
+.col-derniermsg
+{
+    width:24%;
+}
+
+.col-petite-ad
+{
+    width:8%;
+}
+
+.col-derniermsg-ad
+{
+    width:50%;
+}
+
+.col-fildiscu-ad
+{
+    width:26%;
+}
+
+/*FIL DISCUSSION*/
+.forum-message
+{
+    background-color:rgba(0,0,0,0.2);
+    padding:5px 10px 5px 10px;
+    margin-bottom:15px;
+}
+
+.date-auteur-message
+{
+    font-weight:bold;
+}
+
+/*SONDAGE*/
+.choix-reponses
+{
+    margin-left:25px;
+}
+
+.sondage label:not([class=radio])
+{
+    width:150px;
+    float:left;
+}
 

@@ -1,0 +1,26 @@
+﻿@{
+    //ViewBag.Title = "Nouveau fil de discussion";
+}
+
+<h1>Nouveau fil de discussion</h1>
+
+<div class="msg">
+    <p>@projet_mozambique.Utilitaires.Constantes.MESSAGE_CHAMPS_OBLIGATOIRE</p>
+</div>
+
+<form method="post" action="FilAjouteOK" class="formulaire nouveau-message">
+
+    <div>
+        <label for="sujet">Sujet du message : *</label>
+        <input autofocus type="text" name="sujet" id="sujet" placeholder="Sujet" />
+    </div>
+    *<br />
+    <textarea></textarea><br />
+
+    <input type="submit" class="btnForm" value="Publier" />
+    <a href="FilPasAjoute">ERREUR</a>
+</form>
+
+
+
+

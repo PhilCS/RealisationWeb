@@ -21,27 +21,32 @@ namespace projet_mozambique.Controllers
             return View();
         }
 
+        public ActionResult MessagesEnvoyes()
+        {
+            return View();
+        }
+
+        public ActionResult Corbeille()
+        {
+            return View();
+        }
+
+        public ActionResult NouveauMessage()
+        {
+            return View();
+        }
+
+        public ActionResult MessageEnvoyeOK()
+        {
+            return View();
+        }
+
+        public ActionResult MessagePasEnvoye()
+        {
+            return View();
+        }
+
         public ActionResult Documents()
-        {
-            return View();
-        }
-
-        public ActionResult DocumentsDroitPublication()
-        {
-            return View();
-        }
-
-        public ActionResult PublicationDocument()
-        {
-            return View();
-        }
-
-        public ActionResult PublicationErreur()
-        {
-            return View();
-        }
-
-        public ActionResult PublicationOK()
         {
             return View();
         }
@@ -87,6 +92,51 @@ namespace projet_mozambique.Controllers
         }
 
         public ActionResult ModifierPreferencesOK()
+        {
+            return View();
+        }
+
+        public ActionResult Forum()
+        {
+            return View();
+        }
+
+        public ActionResult NouveauFil()
+        {
+            return View();
+        }
+
+        public ActionResult FilPasAjoute()
+        {
+            return View();
+        }
+
+        public ActionResult FilAjouteOK()
+        {
+            return View();
+        }
+
+        public ActionResult FilDiscu()
+        {
+            return View();
+        }
+
+        public ActionResult RepondreFilDiscu()
+        {
+            return View();
+        }
+
+        public ActionResult MessageFilAjouteOK()
+        {
+            return View();
+        }
+
+        public ActionResult MessageFilPasAjoute()
+        {
+            return View();
+        }
+
+        public ActionResult Sondages()
         {
             return View();
         }
