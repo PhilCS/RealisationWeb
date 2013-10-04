@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Projet Mozambique - @ViewBag.Title</title>
+    <title>@projet_mozambique.Utilitaires.Constantes.TITLE_COMMUN @ViewBag.Title</title>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
@@ -19,18 +19,18 @@
                     <p>Nom de l'utilisateur</p>
                     <div class="icons">
                         <img src="~/Content/images/mail.png" title="Messagerie" />
-                        <img src="~/Content/images/profile.png" title="Profil" />
+                        @Html.ActionLink(" ", "Profil", new { controller = "Sectoriel" }, new { @class = "profil-img" })
                     </div>
                  </div>
-                @Html.ActionLink("Se déconnecter", "Index", "public", new { logout = 1 }, new { @class = "logout" })
+                @Html.ActionLink("Se déconnecter", "Index", new { logout = 1, controller = "public" }, new { @class = "logout" })
             </div>
             <div class="titre-header">
-                <span class="main-titre">Mozambique</span><br />
-                <span class="sous-titre">Portail pédagogique</span>
+                @Html.ActionLink("Mozambique", "Index", new { controller = "Sectoriel" }, new {@class="main-titre"})<br />
+                @Html.ActionLink("Portail Pédagogique", "Index", new { controller = "Sectoriel" }, new { @class = "sous-titre" })
             </div>
             <nav>
                 <ul>
-                    <li>@Html.ActionLink("Accueil", "Index")</li>
+                    <li>@Html.ActionLink("Accueil", "Index", "Sectoriel")</li>
                     <!-- La gestion du contenu de la section publique devrait se faire dans l'administration ou ici -->
                     <li>@Html.ActionLink("Documents", "Documents")</li>
                     <li>@Html.ActionLink("Forum", "#")</li>

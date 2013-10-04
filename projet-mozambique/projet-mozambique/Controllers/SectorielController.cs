@@ -46,5 +46,50 @@ namespace projet_mozambique.Controllers
             return View();
         }
 
+        public ActionResult Profil()
+        {
+            return View();
+        }
+
+        public ActionResult ModifierInfos()
+        {
+            return View();
+        }
+
+        public ActionResult ModifierInfosOK()
+        {
+            return View();
+        }
+
+        public ActionResult ModifierInfosErreur()
+        {
+            return View();
+        }
+
+        public ActionResult ModifierMDP()
+        {
+            return View();
+        }
+
+        public ActionResult ModifierMotPasseOK()
+        {
+            return View();
+        }
+
+        public ActionResult ModifierMotPasseErreur()
+        {
+            return View();
+        }
+
+        public ActionResult ModifierPreferences()
+        {
+            return View();
+        }
+
+        public ActionResult ModifierPreferencesOK()
+        {
+            return View();
+        }
+
     }
 }

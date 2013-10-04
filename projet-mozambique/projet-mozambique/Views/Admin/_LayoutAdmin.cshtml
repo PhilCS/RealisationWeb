@@ -18,21 +18,19 @@
                     <p>Nom de l'utilisateur</p>
                     <div class="icons">
                         <img src="~/Content/images/mail.png" title="Messagerie" />
-                        <img src="~/Content/images/profile.png" title="Profil" />
+                        @Html.ActionLink(" ", "Profil", new { controller = "Sectoriel" }, new { @class = "profil-img" })
                     </div>
                  </div>
                 @Html.ActionLink("Se déconnecter", "Index", "public", new { logout = 1 }, new { @class = "logout" })
             </div>
             <div class="titre-header">
-                <span class="main-titre">Mozambique</span><br />
-                <span class="sous-titre">Portail pédagogique</span>
+                @Html.ActionLink("Mozambique", "Index", new { controller = "Admin" }, new {@class="main-titre"})<br />
+                @Html.ActionLink("Portail Pédagogique", "Index", new { controller = "Admin" }, new { @class = "sous-titre" })
             </div>
             <nav>
                 <ul>
                     <li>@Html.ActionLink("Accueil", "Index")</li>
                     <!-- La gestion du contenu de la section publique devrait se faire dans l'administration ou ici -->
-                    <li>@Html.ActionLink("Nouvelles", "#")</li>
-                    <li>@Html.ActionLink("Partenaires", "#")</li>
                     <li>@Html.ActionLink("Documents", "#")</li>
                     <li>@Html.ActionLink("Forum", "#")</li>
                     <li>@Html.ActionLink("Sondages", "#")</li>

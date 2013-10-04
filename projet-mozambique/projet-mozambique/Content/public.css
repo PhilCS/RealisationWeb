@@ -84,6 +84,10 @@ header .titre-header
     font-family: 'Roboto Slab';
     line-height:15px;
     padding: 35px 0 20px;
+}
+
+header .titre-header a
+{
     color: #d3d3d3;
 }
 
