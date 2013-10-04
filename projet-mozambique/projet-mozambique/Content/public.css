@@ -140,7 +140,7 @@ header nav ul.nav-secondaire li {
 /* CONTENT */
 .content {
     clear:both;
-    margin:130px 0 50px 30px;
+    margin:130px 0 50px 0;
 }
 
 .content h1 {

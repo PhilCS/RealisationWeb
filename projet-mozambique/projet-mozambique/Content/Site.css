@@ -1,4 +1,9 @@
-﻿body {
+﻿html, body
+{
+    height:100%;
+}
+
+body {
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     color: #232323;
@@ -7,7 +12,13 @@
     padding:0;
 }
 
-.connexion
+a:link, a:visited, a:hover, a:active
+{
+    color:black;
+    
+}
+
+#connexion
 {
     float:right;
 }
@@ -18,6 +29,12 @@
     padding:20px;
 }
 
+.menu-h li:hover
+{
+    border-bottom:3px solid #894545;
+    padding:10px 0 7px 0;
+}
+
 header, footer, nav, section {
     display: block;
 }
@@ -25,8 +42,7 @@ header, footer, nav, section {
 header{
     margin:0 auto;
     padding:0;
-    height:100px;
-    
+    height:100px;    
 }
 
 ul{
@@ -48,9 +64,9 @@ header .sous-titre
 .titre-header
 {
     font-family: 'Roboto Slab';
-    margin-left: 150px;
+    margin-left: 140px;
     line-height:15px;
-    padding-top: 35px;
+    padding-top: 60px;
     color: #d3d3d3;
 }
 
@@ -60,31 +76,35 @@ header .sous-titre
 }
 
 .menu-h{
+    clear:both;
     float:right;
-    margin-top:10px;
+    margin-top:25px;
     margin-right:60px;
 }
 
 .menu-h li{
-    display:inline-block;
+    display:block;
+    float:left;
     text-transform:uppercase;
     font-family:'Roboto Slab';
     font-size:13px;
     font-weight:bold;
     padding:10px 0 10px 0;
-}
-
-
-
-.menu-h ul{
-    padding-left:0;
     border-top:1px solid #ddd;
     border-bottom:1px solid #ddd;
 }
 
 .content
 {
+    margin:50px auto;
+    width:90%;
+    text-align:justify;
+}
 
+.img-accueil
+{
+    float:right;
+    margin:0 0 10px 10px;
 }
 
 /* Styles for basic forms

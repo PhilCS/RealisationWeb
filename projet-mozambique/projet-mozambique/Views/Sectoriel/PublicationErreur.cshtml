@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = projet_mozambique.Utilitaires.Constantes.TITLE_COMMUN + "Publication Erreur";
+}
+
+<h1>Publication d'un document</h1>
+
+<div class="msg erreur">
+    <p>Votre document n'a pu être publié.</p>
+    <ul>
+        <li>Vous devez absolument sélectionner un secteur.</li>
+    </ul>
+</div>
+
+<form method="post" action="PublicationOK" class="publication-document">
+
+    <div>
+        <label for="titre">Titre du document : </label>
+        <input type="text" id="titre" name="titre"/>
+    </div>
+
+    <div>
+        <label for="fichier">Fichier : </label>
+        <input type="file" id="fichier" name="fichier" />
+    </div>
+
+    <div>
+        <label>Secteur : </label>
+        <select>
+            <option value="undefined"></option>
+            <option value="construction">Construction</option>
+            <option value="agriculture">Agriculture</option>
+        </select>
+    </div>
+
+    <div>
+        <label class="erreur">Catégorie : </label>
+        <select>
+            <option value="undefined"></option>
+            <option value="cate1">Catégorie 1</option>
+            <option value="cate2">Catégorie 2</option>
+            <option value="cate3">Catégorie 3</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="mot-cle">Mots-clés (séparés par des virgules) : </label>
+        <input type="text" name="mot-cle" id="mot-cle" />
+    </div>
+
+    <input type="submit" class="btnForm" />
+</form>
+
