@@ -3,8 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Projet Mozambique - @ViewBag.Title</title>
+    <title>@projet_mozambique.Utilitaires.Constantes.TITLE_COMMUN @ViewBag.Title</title>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     @Styles.Render("~/Content/cssSectoriel")
     @Styles.Render("~/Content/cssPublic")
     @Scripts.Render("~/bundles/modernizr")
@@ -31,7 +33,6 @@
             <nav>
                 <ul>
                     <li>@Html.ActionLink("Accueil", "Index")</li>
-                    <!-- La gestion du contenu de la section publique devrait se faire dans l'administration ou ici -->
                     <li>@Html.ActionLink("Documents", "Documents", "Admin")</li>
                     <li>@Html.ActionLink("Forum", "ForumModerateur", "Admin")</li>
                     <li>@Html.ActionLink("Sondages", "Sondages", "Admin")</li>
@@ -40,6 +41,8 @@
                 <ul class="nav-secondaire">
                     <li>@Html.ActionLink("Utilisateurs", "utilisateurs")</li>
                     <li>@Html.ActionLink("Rôles", "roles")</li>
+                    <li>@Html.ActionLink("Secteurs", "secteurs")</li>
+                    <li>@Html.ActionLink("Écoles", "ecoles")</li>
                     <li>@Html.ActionLink("Section publique", "publique")</li>
                 </ul>
             </nav>

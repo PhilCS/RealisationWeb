@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "PageResultat";
+}
+
+<h2>Résultats de la recherche</h2>
+
+@{
+    if(String.IsNullOrEmpty(Request.QueryString["resultat"]) == false)
+    {
+        if(Request.QueryString["resultat"] == "nouvelles")
+        {
+            <ul>
+                <li>Titre de la nouvelle - Publié le 23 janvier 2013</li>
+                <li>Titre de la nouvelle - Publié le 23 janvier 2013</li>
+                <li>Titre de la nouvelle - Publié le 23 janvier 2013</li>
+                <li>Titre de la nouvelle - Publié le 23 janvier 2013</li>
+            </ul>  
+        }
+        else 
+        {
+            <ul>
+                <li>Nom de l'entreprise</li>
+                <li>Nom de l'entreprise</li>
+                <li>Nom de l'entreprise</li>
+                <li>Nom de l'entreprise</li>
+                <li>Nom de l'entreprise</li>
+            </ul>
+        }
+    }
+}
+
+

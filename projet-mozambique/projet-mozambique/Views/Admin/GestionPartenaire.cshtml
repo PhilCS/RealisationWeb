@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "Gestion des partenaires";
+}
+
+@{
+    if(String.IsNullOrEmpty(Request.QueryString["gestion"]) == false)
+    {
+        if(Request.QueryString["gestion"] == "1")
+        {
+            <h2>Ajouter un partenaire</h2>
+            <p class="msgErreur">Tous les champs doivent être complétés.</p>
+            <form>
+                <label for="nom">Nom de l'entreprise : </label>
+                <input type="text" name="nom" />
+                <br />
+                <label for="raison">Raison sociale : </label>
+                <br />
+                <textarea name="raison"></textarea>
+                <br />
+                <label for="adr">Adresse : </label>
+                <input type="text" name="adr" />
+                <br />
+                <label for="tel">Téléphone : </label>
+                <input type="text" name="tel" value="xx xxx xxxxx" />
+                <br />
+                <label for="site">Site web : </label>
+                <input type="text" name="site" value="http://www.exemple.com" />
+                <br />
+                <label for="courriel">Courriel : </label>
+                <input type="text" name="courriel" value="exemple@site.com" />
+                <br />
+                <a href="publique" class="btnForm">Ajouter</a>
+            </form>
+        }
+        else
+        {
+            <h2>Modifier/Supprimer un partenaire</h2>
+            <p class="msgOk">Le partenaire a été modifié.</p>
+            <ul>
+                <li><a href="gestionPartenaires">Partenaire 1</a></li>
+                <li><a href="gestionPartenaires">Partenaire 2</a></li>
+                <li><a href="gestionPartenaires">Partenaire 3</a></li>
+            </ul>
+        }
+    }
+    else
+    {
+        <h2>Modifier un partenaire</h2>
+        <p class="msgErreur">Tous les champs doivent être complétés.</p>
+            <form>
+                <label for="nom">Nom de l'entreprise : </label>
+                <input type="text" name="nom" value="Entreprise 1"/>
+                <br />
+                <label for="raison">Raison sociale : </label>
+                <br />
+                <textarea name="raison">Cras mattis consectetur purus sit amet fermentum. 
+                    Nulla vitae elit libero, a pharetra augue.</textarea>
+                <br />
+                <label for="adr">Adresse : </label>
+                <input type="text" name="adr" value="555 avenue blablah, Maputo, Mozambique" />
+                <br />
+                <label for="tel">Téléphone : </label>
+                <input type="text" name="tel" value="21 555 12345" />
+                <br />
+                <label for="site">Site web : </label>
+                <input type="text" name="site" value="http://www.chose.com" />
+                <br />
+                <label for="courriel">Courriel : </label>
+                <input type="text" name="courriel" value="chose@site.com" />
+                <br />
+                <a href="gestionPartenaires?gestion=2" class="btnForm">Modifier</a>
+            </form>
+    }
+}
+

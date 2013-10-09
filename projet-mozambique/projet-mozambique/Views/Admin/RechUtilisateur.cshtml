@@ -5,10 +5,12 @@
 <h2>Résultats de la recherche</h2>
 <p>Nom : Noreau</p>
 <ul>
-    <li>Marie-Christine Noreau (mcnoreau001)
-        @Html.ActionLink("Modifier", "modifierUtil", new { supprime = false }, new { @class="modifier" })
-        @Html.ActionLink("Supprimer", "modifierUtil", new { supprime = true }, new { @class="supprimer" })</li>
-    <li>Sara-Maude Noreau (smnoreau002)
-        @Html.ActionLink("Modifier", "modifierUtil", new { supprime = false }, new { @class="modifier" })
-        @Html.ActionLink("Supprimer", "modifierUtil", new { supprime = true }, new { @class="supprimer" })</li>
+    <li>@Html.ActionLink("Marie-Christine Noreau (mcnoreau001)", "modifierUtil")</li>
+    <li>@Html.ActionLink("Sara-Maude Noreau (smnoreau002)", "modifierUtil")</li>
 </ul>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".nav-secondaire").toggle();
+    });
+</script>

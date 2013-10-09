@@ -26,11 +26,14 @@ namespace projet_mozambique.Controllers
             return View("RechUtilisateur");
         }
 
-        public ActionResult modifierUtil(bool supprime)
+        public ActionResult modifierUtil()
         {
-            ViewBag.Supprime = supprime;
-            ViewData["supprime"] = supprime;
             return View("ModifUtilisateur");
+        }
+
+        public ActionResult ajoutUtil()
+        {
+            return View("AjoutUtilisateur");
         }
 
         public ActionResult roles()
@@ -44,9 +47,55 @@ namespace projet_mozambique.Controllers
             return View("Role");
         }
 
+        public ActionResult ajoutRole()
+        {
+            return View("AjouterRole");
+        }
+
+        public ActionResult ecoles()
+        {
+            return View("Ecoles");
+        }
+
+        public ActionResult getEcole(string nomEcole)
+        {
+            ViewData["ecole"] = nomEcole;
+            return View("Ecole");
+        }
+
+        public ActionResult ajoutEcole()
+        {
+            return View("AjoutEcole");
+        }
+
+        public ActionResult secteurs()
+        {
+            return View("Secteurs");
+        }
+
         public ActionResult publique()
         {
             return View("SectionPublique");
+        }
+
+        public ActionResult gestionNouvelles()
+        {
+            return View("GestionNouvelles");
+        }
+
+        public ActionResult gestionPartenaires()
+        {
+            return View("GestionPartenaire");
+        }
+
+        public ActionResult modifierAPropos()
+        {
+            return View("ModifierAPropos");
+        }
+
+        public ActionResult modifierNousJoindre()
+        {
+            return View("ModifierNousJoindre");
         }
 
         public ActionResult ForumModerateur()

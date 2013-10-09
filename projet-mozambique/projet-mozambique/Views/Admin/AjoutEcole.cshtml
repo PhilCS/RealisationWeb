@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "AjoutEcole";
+}
+
+<h2>Ajouter une ecole</h2>
+<p>Les champs marqués d'une étoile sont obligatoires.</p>
+<p class="msgErreur">L'école ne peut pas être ajoutée.</p>
+<form>
+    <label for="nomEcole">Nom : *</label>
+    <input type="text" name="nomEcole" />
+    <br />
+    <label for="adresse">Adresse : *</label>
+    <input type="text" name="adresse" />
+    <br />
+    <label for="ville">Ville : *</label>
+    <input type="text" name="ville" />
+    <br />
+    <a href="ecoles?ajout=1" class="btnForm">Ajouter</a>
+    <a href="ecoles" class="btnForm">Annuler</a>
+    <br />
+</form>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".nav-secondaire").toggle();
+        });
+</script>

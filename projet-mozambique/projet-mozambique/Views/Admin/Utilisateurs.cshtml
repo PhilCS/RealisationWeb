@@ -3,147 +3,43 @@
 }
 
 <h1>Gestion des utilisateurs</h1>
+@{
+    if(String.IsNullOrEmpty(Request.QueryString["supprimer"]) == false)
+    {
+        <p class="msgOk">L'utilisateur a été supprimé.</p>
+        <p class="msgErreur">L'utilisateur ne peut pas être supprimé.</p>
+    
+    }
+    else {  
+        <p class="msgErreur">Veuillez entrez au moins un champ de recherche.</p>
+    }
+}
 
-<ul class="liste-fleche">
-    <li class="panneau">
-        <h2 class="lienPanneau">Rechercher un utilisateur</h2>
-        <div class="panneauFerme">
-            <form id="frmRechUtil" method="post" action="rechUtil">
-                <label for="prenom">Prénom de l'utilisateur : </label>
-                <input type="text" name="prenom" id="gestionPrenom" />
-                <label for="nom">Nom de l'utilisateur : </label>
-                <input type="text" name="nom" id="gestionNom" />
-                <input type="submit" id="btnGestionRech" value="Rechercher" />
-            </form>
-        </div>
-    </li>
-    <li class="panneau">
-        <h2 class="lienPanneau">Ajouter un utilisateur</h2>
-        <div class="panneauFerme">
-            <form id="frmAjoutUtil" method="post" action="ajoutUtil">
-                <label for="login">Identifiant :</label>
-                <input type="text" name="login" id="ajoutId" />
-                <br />
-                <label for="prenom">Prénom : </label>
-                <input type="text" name="prenom" id="ajoutPrenom" />
-                <br />
-                <label for="nom">Nom : </label>
-                <input type="text" name="nom" id="ajoutNom" />
-                <br />
-                <label for="courriel">Courriel : </label>
-                <input type="email" name="courriel" id="ajoutCourriel" />
-                <br />
-                <label for="adresse">Adresse : </label>
-                <input type="text" name="adresse" id="ajoutAdresse" />
-                <br />
-                <label for="ville">Ville : </label>
-                <input type="text" name="ville" id="ajoutVille" />
-                <br />
-                <label for="naissance">Date de naissance : </label>
-                <input type="date" name="naissance" id="ajoutNaissance" />
-                <br />
-                <label for="ecole">École : </label>
-                <select name="ecole">
-                    <option>École 1</option>
-                    <option selected="selected">École 2</option>
-                    <option>École 3</option>
-                </select>
-                <br />
-                <label for="secteur">Secteur : </label>
-                <input type="checkbox" name="secteur" value="1" checked="checked" />Agriculture
-                <input type="checkbox" name="secteur" value="2" />Tourisme
-                <input type="checkbox" name="secteur" value="3" />Construction
-                <br />
-                <label for="role">Rôle : </label>
-                <select name="role">
-                    <option>Professeur</option>
-                    <option selected="selected">Étudiant</option>
-                    <option>Administrateur</option>
-                </select>
-                <br />
-                <label for="langue">Langue : </label>
-                <input type="radio" name="langue" value="FR" checked="checked" />Français
-                <input type="radio" name="langue" value="PT" />Portuguais
-                <br />
-                <input type="submit" id="btnGestionAjout" value="Ajouter" />
-                <input type="button" id="btnGestionCancel" value="Annuler" />
-                <br />
-            </form>
-        </div>
-    </li>
-</ul>
+<form id="frmRechUtil" method="post" action="rechUtil">
+    <ul>
+        <li>
+            <label for="nom">Identifiant : </label>
+            <input type="text" name="nom" id="gestionId" />
+        </li>
+        <li><label for="prenom">Prénom : </label>
+            <input type="text" name="prenom" id="gestionPrenom" /></li>
+        <li><label for="nom">Nom : </label>
+            <input type="text" name="nom" id="gestionNom" /></li>
+        <li><label for="ecole">École : </label>
+            <input type="text" name="ecole" id="gestionEcole" /></li>
+        <li><label for="secteur">Secteur : </label>
+            <input type="text" name="ecole" id="gestionSecteur" /></li>   
+        <li> <input type="submit" id="btnGestionRech" value="Rechercher" class="btnForm" />
+            <a href="ajoutUtil" class="btnForm">Ajouter</a>
+        </li>   
+    </ul>
+</form>
 
-<!--<div class="panneau">
-    <h2 class="lienPanneau">Rechercher un utilisateur +</h2>
-    <div class="panneauFerme">
-        <form id="frmRechUtil" method="post" action="rechUtil">
-            <label for="prenom">Prénom de l'utilisateur : </label>
-            <input type="text" name="prenom" id="gestionPrenom" />
-            <label for="nom">Nom de l'utilisateur : </label>
-            <input type="text" name="nom" id="gestionNom" />
-            <input type="submit" id="btnGestionRech" value="Rechercher" />
-        </form>
-    </div>
-</div>
 
-<div class="panneau">
-    <h2 class="lienPanneau">Ajouter un utilisateur +</h2>
-    <div class="panneauFerme">
-        <form id="frmAjoutUtil" method="post" action="ajoutUtil">
-            <label for="login">Identifiant :</label>
-            <input type="text" name="login" id="ajoutId" />
-            <br />
-            <label for="prenom">Prénom : </label>
-            <input type="text" name="prenom" id="ajoutPrenom" />
-            <br />
-            <label for="nom">Nom : </label>
-            <input type="text" name="nom" id="ajoutNom" />
-            <br />
-            <label for="courriel">Courriel : </label>
-            <input type="email" name="courriel" id="ajoutCourriel" />
-            <br />
-            <label for="adresse">Adresse : </label>
-            <input type="text" name="adresse" id="ajoutAdresse" />
-            <br />
-            <label for="ville">Ville : </label>
-            <input type="text" name="ville" id="ajoutVille" />
-            <br />
-            <label for="naissance">Date de naissance : </label>
-            <input type="date" name="naissance" id="ajoutNaissance" />
-            <br />
-            <label for="ecole">École : </label>
-            <input type="text" name="adresse" id="ajoutEcole" />
-            <br />
-            <label for="secteur">Secteur : </label>
-            <input type="checkbox" name="secteur" value="1" checked="checked" />Agriculture
-            <input type="checkbox" name="secteur" value="2" />Tourisme
-            <input type="checkbox" name="secteur" value="3" />Construction
-            <br />
-            <label for="role">Rôle : </label>
-            <select name="role">
-                <option>Professeur</option>
-                <option selected="selected">Étudiant</option>
-                <option>Administrateur</option>
-            </select>
-            <br />
-            <label for="langue">Langue : </label>
-            <input type="radio" name="langue" value="FR" checked="checked" />Français
-            <input type="radio" name="langue" value="PT" />Portuguais
-            <br />
-            <input type="submit" id="btnGestionAjout" value="Ajouter" />
-            <input type="button" id="btnGestionCancel" value="Annuler" />
-            <br />
-        </form>
-    </div>
-</div>-->
 
 <script type="text/javascript">
     $(document).ready(function () {
-            $(".nav-secondaire").toggle();
-            $(".lienPanneau").click(function (e) {
-                e.preventDefault();
-                $(this).siblings("div.panneauFerme").toggle();
-            });
-        });
+        $(".nav-secondaire").toggle();
+    });
 </script>
 

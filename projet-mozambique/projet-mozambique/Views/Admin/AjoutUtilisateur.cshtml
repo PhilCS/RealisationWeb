@@ -1,5 +1,57 @@
 ﻿@{
-    ViewBag.Title = "AjoutUtilisateur";
+    ViewBag.Title = "Ajouter un utilisateur";
 }
 
-<h2>AjoutUtilisateur</h2>
+<h2>Ajouter un utilisateur</h2>
+
+<p>Les champs marqués d'une étoile sont obligatoires.</p>
+<p class="msgErreur">L'utilisateur ne peut être modifié.</p>
+ <form id="frmAjoutUtil" action="utilisateurs">
+    <label for="login">Identifiant : *</label>
+    <input type="text" name="login" id="ajoutId" />
+    <br />
+    <label for="prenom">Prénom : *</label>
+    <input type="text" name="prenom" id="ajoutPrenom" />
+    <br />
+    <label for="nom">Nom : *</label>
+    <input type="text" name="nom" id="ajoutNom" />
+    <br />
+    <label for="courriel">Courriel : *</label>
+    <input type="email" name="courriel" id="ajoutCourriel" />
+    <br />
+    <label for="adresse">Adresse : *</label>
+    <input type="text" name="adresse" id="ajoutAdresse" />
+    <br />
+    <label for="ville">Ville : *</label>
+    <input type="text" name="ville" id="ajoutVille" />
+    <br />
+    <label for="naissance">Date de naissance : *</label>
+    <input type="date" name="naissance" id="ajoutNaissance" />
+    <br />
+    <label for="ecole">École : *</label>
+    <select name="ecole">
+        <option>École 1</option>
+        <option selected="selected">École 2</option>
+        <option>École 3</option>
+    </select>
+    <br />
+    <label for="secteur">Secteurs : *</label>
+    <input type="checkbox" name="secteur" value="1" checked="checked" />Agriculture
+    <input type="checkbox" name="secteur" value="2" />Tourisme
+    <input type="checkbox" name="secteur" value="3" />Construction
+    <br />
+    <label for="role">Rôle : *</label>
+    <select name="role">
+        <option>Professeur</option>
+        <option selected="selected">Étudiant</option>
+        <option>Administrateur</option>
+    </select>
+    <br />
+    <label for="langue">Langue : *</label>
+    <input type="radio" name="langue" value="FR" checked="checked" />Français
+    <input type="radio" name="langue" value="PT" />Portuguais
+    <br />
+    <input type="submit" id="btnGestionAjout" value="Ajouter" class="btnForm" />
+    <a href="utilisateurs" class="btnForm">Annuler</a>
+    <br />
+</form>

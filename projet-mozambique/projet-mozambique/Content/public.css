@@ -25,16 +25,19 @@ a:hover {
     margin:auto;
 }
 
+.content li.lienPanneau {
+}
+
 /* HEADER */
 
 .connexion{
     float:right;
     margin:10px 0 0 10px;
-    width:30%;
+    width:50%;
     text-align:right;
 }
 
-.connexion a {
+.connexion p {
     font-size:1.3em;
 }
 
@@ -56,6 +59,24 @@ a:hover {
 .connexion a.logout {
   padding-top:10px;
   display:block;
+}
+
+.connexion p.login {
+  cursor:pointer;
+  padding:0;
+  margin:0;
+}
+
+.connexion form#frmConnexion input {
+    
+}
+
+.connexion p.login:hover {
+    color:#538d12;
+}
+
+.div-login {
+    display:none;
 }
 
 header, footer, nav, section {
@@ -144,13 +165,13 @@ header nav ul.nav-secondaire li {
 /* CONTENT */
 .content {
     clear:both;
-    margin:130px 0 50px 0;
+    margin-top:130px;
 }
 
 .content h1 {
     font-size:2.1em;
     text-transform:uppercase;
-    margin:15px 15px 30px;
+    margin:15px 0 30px;
 }
 
 .texte_accueil {
@@ -181,44 +202,16 @@ header nav ul.nav-secondaire li {
     margin:0 0 10px;
 }
 
-#frmRechUtil {
-    margin-left:50px;
-}
 
-#frmRechUtil input, #frmRechUtil label, #frmRechUtil select{
-    margin-left:10px;
-}
-
-#frmAjoutUtil {
-    margin:0 0 0 50px;
-    
-}
-
-#frmAjoutUtil label {
+.content form label {
     display:block;
     float:left;
     width:200px;
     margin-bottom:10px;
 }
 
-#frmAjoutUtil input {
+.content form input, .content form select {
     margin-bottom: 10px;
-}
-
-.panneau {
-    /*margin:20px auto 0;*/
-    width:80%;
-}
-
-.panneau h2 {
-    cursor:pointer;
-    background:url('images/icones/icon-arrow.png') no-repeat left center; 
-    padding-left: 25px; /* the width of your image + some space */
-    font-size:1.4em;
-    font-weight:normal;
-}
-.panneauFerme {
-    display:none;
 }
 
 .liste-fleche li
@@ -229,33 +222,22 @@ header nav ul.nav-secondaire li {
 #divCarteGoogle {
 
 	border:5px ridge #CCC;
-
 	background-color:gray;
-
 	height:450px;
-
 	margin:0 auto;
 
 }
 
-
-
-
-/* SECTION ADMIN */
- a.supprimer {
-    background:url('images/icones/icone-delete.png') no-repeat top left;
-    display:inline-block;
-    width:20px;
-    height:20px;
-    text-indent:-9999px;
+.msgErreur {
+    color:#ce2203;
 }
 
-a.modifier {
-    background:url('images/icones/icone-pen.png') no-repeat top left;
-    display:inline-block;
-    width:20px;
-    height:20px;
-    text-indent:-9999px;
+.msgOk {
+    color:#538d12;
+}
+
+img.modifier {
+    
 }
 
 /* Styles for basic forms

@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "AjouterRole";
+}
+
+<h2>Ajouter un rôle</h2>
+<p>Les champs marqués d'une étoile sont obligatoires.</p>
+<p class="msgErreur">Le rôle ne peut être ajouté.<br />Au moins un droit doit être associé au rôle.</p>
+<form action="roles">
+    <label for="nomRole">Nom du rôle : *</label>
+    <input type="text" name="nomRole"  />
+    <br />
+    <input type="checkbox" name="secteur" value="1" checked="checked" />Publier des documents
+    <br />
+    <input type="checkbox" name="secteur" value="2" />Supprimer des documents
+    <br />
+    <input type="checkbox" name="secteur" value="3" />Ajouter/Modifier/Supprimer des utilisateurs
+    <br />
+    <br />
+    <a href="roles?supprimer=1" class="btnForm">Ajouter</a>
+    <a href="roles" class="btnForm">Annuler</a>
+    <br />
+</form>

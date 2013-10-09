@@ -4,14 +4,29 @@
 }
 
 <h2>@role</h2>
+
+<p>Les champs marqués d'une étoile sont obligatoires.</p>
+<p class="msgErreur">Le rôle ne peut pas être modifié. <br />Un nom doit être saisi.<br />Au moins un droit doit être sélectionné.<br />Le rôle ne peut être supprimé.</p>
 <form action="roles">
+    <label for="nomRole">Nom du rôle : *</label>
+    <input type="text" name="nomRole" value="@role" />
+    <br />
+    <label for="secteur">Droits de l'utilisateur : *</label>
     <input type="checkbox" name="secteur" value="1" checked="checked" />Publier des documents
     <br />
     <input type="checkbox" name="secteur" value="2" />Supprimer des documents
     <br />
-    <input type="checkbox" name="secteur" value="3" />Ajouter des utilisateurs
+    <input type="checkbox" name="secteur" value="3" />Ajouter/Modifier/Supprimer des utilisateurs
     <br />
     <br />
-    <input type="submit" id="btnModifierUtil" value="Modifier" class="btnForm" />
+    <a href="roles?supprimer=1" class="btnForm">Modifier</a>
+    <a href="roles?supprimer=1" class="btnForm">Supprimer</a>
+    <a href="roles" class="btnForm">Annuler</a>
     <br />
 </form>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".nav-secondaire").toggle();
+        });
+</script>

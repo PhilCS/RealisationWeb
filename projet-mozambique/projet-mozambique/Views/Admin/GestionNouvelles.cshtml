@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Gestion des nouvelles";
+}
+
+@{
+    if(String.IsNullOrEmpty(Request.QueryString["gestion"]) == false)
+    {
+        if(Request.QueryString["gestion"] == "1")
+        {
+            <h2>Ajouter une nouvelle</h2>
+            <p class="msgErreur">Tous les champs doivent être complétés.</p>
+            <form>
+                <label for="nomNew">Titre de la nouvelle : *</label>
+                <input type="text" name="nomNew" />
+                <br />
+                <label for="descNew">Description de la nouvelle : *</label>
+                <br />
+                <textarea name="descNew"></textarea>
+                <br />
+                <a href="publique" class="btnForm">Ajouter</a>
+                <a href="publique" class="btnForm">Annuler</a>
+            </form>
+        }
+        else
+        {
+            <h2>Modifier/Supprimer une nouvelle</h2>
+            <p class="msgOk">La nouvelle a été modifiée.</p>
+            
+            <ul>
+                <li><a href="gestionNouvelles">Nouvelle 1</a></li>
+                <li><a href="gestionNouvelles">Nouvelle 2</a></li>
+                <li><a href="gestionNouvelles">Nouvelle 3</a></li>
+            </ul>
+        }
+    }
+    else
+    {
+        <h2>Modifier une nouvelle</h2>
+        <p class="msgErreur">Tous les champs doivent être complétés.</p>
+            <form>
+                <label for="nomNew">Titre de la nouvelle : </label>
+                <input type="text" name="nomNew" value="Nouvelle 1" />
+                <br />
+                <label for="descNew">Description de la nouvelle :</label>
+                <br />
+                <textarea name="descNew">Maecenas faucibus mollis interdum. Integer posuere erat a ante 
+                    venenatis dapibus posuere velit aliquet. Donec ullamcorper nulla non metus auctor 
+                    fringilla. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Integer
+                     posuere erat a ante venenatis dapibus posuere velit aliquet.</textarea>
+                <br />
+                <a href="gestionNouvelles?gestion=2" class="btnForm">Modifier</a>
+            </form>
+    }
+}

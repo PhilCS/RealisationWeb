@@ -3,10 +3,23 @@
 }
 
 <h1>Gestion des rôles</h1>
+@{
+    if(String.IsNullOrEmpty(Request.QueryString["supprimer"]) == false)
+    {
+        <p class="msgOk">Le rôle a été ajouté/modifié.</p>
+    }
+}
 
 <ul class="liste-fleche">
     <li>@Html.ActionLink("Professeur", "getRole", new { nomRole = "Professeur" })</li>
     <li>@Html.ActionLink("Étudiant", "getRole", new { nomRole = "Étudiant" })</li>
     <li>@Html.ActionLink("Administrateur", "getRole", new { nomRole = "Administrateur" })</li>
 </ul>
+<br />
+<a href="ajoutRole" class="btnForm">Ajouter un rôle</a>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+            $(".nav-secondaire").toggle();
+        });
+</script>

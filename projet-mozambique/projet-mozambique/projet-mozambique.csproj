@@ -122,6 +122,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_GlobalResources\StringResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StringResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -296,6 +301,17 @@
     <Content Include="Views\Admin\PublicationDocument.cshtml" />
     <Content Include="Views\Admin\PublicationErreur.cshtml" />
     <Content Include="Views\Admin\PublicationOK.cshtml" />
+    <Content Include="Views\Admin\Ecoles.cshtml" />
+    <Content Include="Views\Admin\Secteurs.cshtml" />
+    <Content Include="Views\Admin\Ecole.cshtml" />
+    <Content Include="Views\Admin\AjoutUtilisateur.cshtml" />
+    <Content Include="Views\Admin\AjouterRole.cshtml" />
+    <Content Include="Views\Admin\AjoutEcole.cshtml" />
+    <Content Include="Views\Public\Nouvelle.cshtml" />
+    <Content Include="Views\Public\PageResultat.cshtml" />
+    <Content Include="Views\Admin\GestionNouvelles.cshtml" />
+    <Content Include="Views\Admin\GestionPartenaire.cshtml" />
+    <Content Include="Views\Admin\ModifierAPropos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -303,6 +319,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App_GlobalResources\StringResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>StringResources.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>StringResources</CustomToolNamespace>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

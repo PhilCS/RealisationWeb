@@ -21,6 +21,11 @@ namespace projet_mozambique.Controllers
             return View("Nouvelles");
         }
 
+        public ActionResult getNouvelle()
+        {
+            return View("Nouvelle");
+        }
+
         public ActionResult partenaires()
         {
             return View("Partenaires");
@@ -34,6 +39,11 @@ namespace projet_mozambique.Controllers
         public ActionResult nousjoindre()
         {
             return View("NousJoindre");
+        }
+
+        public ActionResult getResultats()
+        {
+            return View("PageResultat");
         }
 
     }

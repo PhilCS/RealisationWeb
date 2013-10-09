@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Secteurs";
+}
+
+<h1>Gestion des secteurs</h1>
+
+@{
+    if (String.IsNullOrEmpty(Request.QueryString["ajout"]) == false)
+    {
+        <p class="msgOk">Le secteur a été ajouté avec succès.</p>
+    }
+    else 
+    {
+        <p class="msgErreur">Le secteur ne peut pas être ajouté.</p>
+    }
+}
+        
+
+<ul class="liste-fleche">
+    <li class="agri">Agriculture <img class="modifier" src="~/Content/images/icones/icone-pen.png" /></li>
+    <li>Tourisme</li>
+    <li>Construction</li>
+</ul>
+<br />
+<p>Les champs marqués d'une étoile sont obligatoires.</p>
+<form>
+    <label for="nomSecteur" />Nom du nouveau secteur : *</label>
+    <input type="text" name="nomSecteur" />
+    <a href="secteurs?ajout=1" class="btnForm">Ajouter un secteur</a>
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".nav-secondaire").toggle();
+        $(".modifier").click(function () {
+            $(".agri").html('<input type="text" value="Agriculture" />');
+
+        });
+    });
+</script>

@@ -1,4 +1,4 @@
-﻿/*ADMIN*/
+﻿f/*ADMIN*/
 .img-accueil
 {
     float:left;
@@ -169,13 +169,12 @@
 	font-size:12px;
 	font-weight:bold;
 	font-style:normal;
-	height:25px;
 	text-decoration:none;
 	text-align:center;
 	text-shadow:1px 1px 0px #75a341;
-    padding-left:15px;
-    padding-right:15px;
+    padding:10px;
 }
+
 .btnForm:hover {
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #99d64f), color-stop(1, #709e37) );
 	background:-moz-linear-gradient( center top, #99d64f 5%, #709e37 100% );
@@ -228,11 +227,7 @@
 .liste-fleche li
 {
     margin-bottom:5px;
-}
-
-.liste-fleche a
-{
-     background:url('images/icones/icon-arrow.png') no-repeat left center; 
+    background:url('images/icones/icon-arrow.png') no-repeat left center; 
      padding-left: 25px; /* the width of your image + some space */
 }
 

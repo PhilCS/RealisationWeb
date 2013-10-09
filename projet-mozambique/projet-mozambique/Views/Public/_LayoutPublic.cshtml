@@ -6,6 +6,7 @@
     <title>Portail Mozambique - @ViewBag.Title</title>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
     @Styles.Render("~/Content/cssPublic")
+    @Styles.Render("~/Content/cssSectoriel")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -13,7 +14,16 @@
     <div id="all">
         <header>
             <div class="connexion">
-                <div id="topnav">@Html.ActionLink("Se connecter", "Index", "admin")</div>
+                <p class="login">Se connecter</p>
+                <div class="div-login">
+                    <form id="frmConnexion">
+                        <input type="text" placeholder="Nom de l'utilisateur" />
+                        <input type="text" placeholder="Mot de passe" />
+                        <input type="submit" value="Connexion" />
+                    </form>
+                    <a href="../admin">Connexion admin</a><br />
+                    <a href="../sectoriel">Connexion utilisateur</a>
+                </div>
             </div>
             <div class="titre-header">
                 @Html.ActionLink("Mozambique", "Index", new { controller = "Public" }, new {@class="main-titre"})<br />
@@ -21,11 +31,11 @@
             </div>
             <nav>
                 <ul>
-                    <li>@Html.ActionLink("Accueil", "Index")</li>
-                    <li>@Html.ActionLink("Nouvelles", "nouvelles")</li>
-                    <li>@Html.ActionLink("Partenaires", "partenaires")</li>
-                    <li>@Html.ActionLink("Qui sommes-nous?", "apropos")</li>
-                    <li>@Html.ActionLink("Nous joindre", "nousjoindre")</li>
+                    <li>@Html.ActionLink(StringResources.StringResources.accueil, "Index")</li>
+                    <li>@Html.ActionLink(StringResources.StringResources.nouvelles, "nouvelles")</li>
+                    <li>@Html.ActionLink(StringResources.StringResources.partenaires, "partenaires")</li>
+                    <li>@Html.ActionLink(StringResources.StringResources.apropos, "apropos")</li>
+                    <li>@Html.ActionLink(StringResources.StringResources.nousjoindre, "nousjoindre")</li>
                 </ul>
             </nav>
         
@@ -36,26 +46,14 @@
     </div>
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
-    <!--<script type="text/javascript">
+    <script type="text/javascript">
         $(document).ready(function () {
-
-            $(".signin").click(function (e) {
+            $(".login").click(function (e) {
                 e.preventDefault();
-                $("fieldset#signin_menu").toggle();
-                $(".signin").toggleClass("menu-open");
+                $(".div-login").toggle();
+                $(".login").toggle();
             });
-
-            $("fieldset#signin_menu").mouseup(function () {
-                return false
-            });
-            $(document).mouseup(function (e) {
-                if ($(e.target).parent("a.signin").length == 0) {
-                    $(".signin").removeClass("menu-open");
-                    $("fieldset#signin_menu").hide();
-                }
-            });
-
         });
-    </script>-->
+    </script>
 </body>
 </html>
