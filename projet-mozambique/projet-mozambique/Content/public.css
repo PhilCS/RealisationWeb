@@ -7,6 +7,11 @@
     padding:0;
 }
 
+a img
+{
+    border:none;
+}
+
 ul{
     list-style-type:none;
 }
@@ -212,7 +217,7 @@ header nav ul.nav-secondaire li {
 }
 
 
-.content form label {
+.content form label:not([class=cb]):not([class=radio]) {
     display:block;
     float:left;
     width:200px;
@@ -297,4 +302,10 @@ textarea {
 
 .validation-summary-valid {
     display: none;
+}
+
+footer
+{
+    clear:both;
+    height:50px;
 }

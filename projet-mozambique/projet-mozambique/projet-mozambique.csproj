@@ -142,6 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\images\Falco2.jpg" />
+    <Content Include="Content\images\icones\icon-add-black-petite.png" />
     <Content Include="Content\images\icones\icon-add-black.png" />
     <Content Include="Content\images\icones\icon-add.png" />
     <Content Include="Content\images\icones\icon-arrow.png" />
@@ -274,8 +275,6 @@
     <Content Include="Views\Sectoriel\ModifierMDP.cshtml" />
     <Content Include="Views\Sectoriel\ModifierMotPasseOK.cshtml" />
     <Content Include="Views\Sectoriel\ModifierMotPasseErreur.cshtml" />
-    <Content Include="Views\Sectoriel\ModifierPreferences.cshtml" />
-    <Content Include="Views\Sectoriel\ModifierPreferencesOK.cshtml" />
     <Content Include="Views\Admin\Role.cshtml" />
     <Content Include="Views\Sectoriel\Forum.cshtml" />
     <Content Include="Views\Sectoriel\MessagesEnvoyes.cshtml" />
@@ -301,6 +300,12 @@
     <Content Include="Views\Admin\PublicationDocument.cshtml" />
     <Content Include="Views\Admin\PublicationErreur.cshtml" />
     <Content Include="Views\Admin\PublicationOK.cshtml" />
+    <Content Include="Views\Sectoriel\MenuMessagerie.cshtml" />
+    <Content Include="Views\Sectoriel\Calendrier.cshtml" />
+    <Content Include="Views\Sectoriel\Evenement.cshtml" />
+    <Content Include="Views\Admin\AjouterEvenement.cshtml" />
+    <Content Include="Views\Admin\Evenement.cshtml" />
+    <Content Include="Views\Admin\Calendrier.cshtml" />
     <Content Include="Views\Admin\Ecoles.cshtml" />
     <Content Include="Views\Admin\Secteurs.cshtml" />
     <Content Include="Views\Admin\Ecole.cshtml" />
@@ -312,6 +317,24 @@
     <Content Include="Views\Admin\GestionNouvelles.cshtml" />
     <Content Include="Views\Admin\GestionPartenaire.cshtml" />
     <Content Include="Views\Admin\ModifierAPropos.cshtml" />
+    <Content Include="Views\Admin\ModifierEvenement.cshtml" />
+    <Content Include="Views\Admin\ModifEvenementOK.cshtml" />
+    <Content Include="Views\Admin\ModifEvenementErreur.cshtml" />
+    <Content Include="Views\Admin\AjoutEvenementOK.cshtml" />
+    <Content Include="Views\Admin\AjoutEvenementErreur.cshtml" />
+    <Content Include="Views\Admin\ModifAccueil.cshtml" />
+    <Content Include="Views\Admin\IndexModifie.cshtml" />
+    <Content Include="Views\Sectoriel\ResultRechDoc.cshtml" />
+    <Content Include="Views\Admin\NouveauFil.cshtml" />
+    <Content Include="Views\Admin\FilAjouteOK.cshtml" />
+    <Content Include="Views\Admin\FilPasAjoute.cshtml" />
+    <Content Include="Views\Admin\FilModifieOK.cshtml" />
+    <Content Include="Views\Admin\SupprimerSondage.cshtml" />
+    <Content Include="Views\Sectoriel\SupprimerMessage.cshtml" />
+    <Content Include="Views\Sectoriel\RepondreMessage.cshtml" />
+    <Content Include="Views\Admin\AjouterSondage.cshtml" />
+    <Content Include="Views\Admin\AjoutSondageOK.cshtml" />
+    <Content Include="Views\Admin\AjoutSondageErreur.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

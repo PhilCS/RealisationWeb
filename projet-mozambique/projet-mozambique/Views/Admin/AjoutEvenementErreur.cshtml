@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Ajouter un événement";
+}
+
+<h1>Ajouter un événement</h1>
+
+<div class="msg erreur">
+    <p>@projet_mozambique.Utilitaires.Constantes.MESSAGE_CHAMPS_OBLIGATOIRE</p>
+    <p>L'événement n'a pu être ajouté.</p>
+    <ul><li>Vous devez inscrire un nom d'événement.</li></ul>
+</div>
+
+<form method="post" action="AjoutEvenementOK" class="formulaire">
+
+    <div>
+        <label for="nom" class="erreur">Nom de l'événement : *</label>
+        <input type="text" id="nom" name="nom" autofocus/>
+    </div>
+
+    <div>
+        <label for="endroit">Endroit : *</label>
+        <input type="text" id="endroit" name="endroit"/>
+    </div>
+
+    <div>
+        <label>Secteur : *</label>
+        <input type="checkbox" name="construction" value="construction" id="const" /><label for="const" class="cb">Construction</label>
+        <input type="checkbox" name="agriculture" value="agriculture" id="agric" /><label for="agric" class="cb">Agriculture</label>
+    </div>
+
+    <div>
+        <label for="datepicker">Date : *</label>
+        <input type="date" id="datepicker" name="datepicker"/>        
+    </div>
+
+    <div>
+        <label for="heure-deb">Heure début : *</label>
+        <input type="time" name="heure-deb" id="heure-deb" />
+    </div>
+
+    <div>
+        <label for="heure-fin">Heure fin : </label>
+        <input type="time" name="heure-fin" id="heure-fin" />
+    </div>
+
+    <div>
+        <label for="cate">Catégorie : *</label>
+        <select name="categorie" id="categorie">
+            <option value="undefined"></option>
+            <option value="Categorie1">Categorie 1</option>
+            <option value="Categorie2">Categorie 2</option>
+            <option value="Categorie3">Categorie 3</option>
+        </select>
+    </div>
+
+     <div>
+        <label for="desc">Description : *</label>
+        <textarea name="desc" id="desc">
+        </textarea>
+    </div>
+
+    <input type="submit" class="btnForm" value="Ajouter"/>
+    <p><a href="AjoutEvenementErreur">ERREUR</a></p>
+</form>
+

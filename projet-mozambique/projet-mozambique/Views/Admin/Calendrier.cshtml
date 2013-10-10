@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Calendrier";
+}
+
+<h1><a href="AjouterEvenement"><img src="~/Content/images/icones/icon-add-black.png" title="Ajouter un événement" alt="Icône Ajouter" class="icone" /></a>Calendrier</h1>
+
+<div class="calendrier">
+
+    <table>
+        <thead>
+            <tr><th class="mois" colspan="7"><a href="#"><<</a> Octobre <a href="#">>></a></th></tr>
+            <tr><th>Dim</th><th>Lun</th><th>Mar</th><th>Mer</th><th>Jeu</th><th>Ven</th><th>Sam</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><span class="date">&nbsp;</span></td><td><span class="date">&nbsp;</span></td><td><span class="date">1</span></td><td><span class="date">2</span></td><td><span class="date">3</span></td><td><span class="date">4</span></td><td><span class="date">5</span></td></tr>
+            <tr><td><span class="date">6</span></td><td><span class="date">7</span></td><td><span class="date">8</span></td>
+                <td class="ajd">
+                    <span class="date">9</span>
+                    <ul class="event">
+                        <li class="discussion"><span>@Html.ActionLink("Titre évènement", "Evenement", "Admin")</span>
+                        </li>
+                    </ul>
+                </td>
+                <td><span class="date">10</span></td><td><span class="date">11</span></td>
+                <td>
+                    <span class="date">12</span>
+                    <ul class="event">
+                        <li class="conference"><span>@Html.ActionLink("Titre évènement 1", "Evenement", "Admin")</span></li>
+                        <li class="discussion"><span>@Html.ActionLink("Titre évènement 2", "Evenement", "Admin")</span></li>
+                    </ul>
+                </td></tr>
+            <tr><td><span class="date">13</span></td><td><span class="date">14</span></td><td><span class="date">15</span></td><td><span class="date">16</span></td><td><span class="date">17</span></td><td><span class="date">18</span></td><td><span class="date">19</span></td></tr>
+            <tr>
+                <td>
+                    <span class="date">20</span>
+                    <ul class="event">
+                        <li class="discussion"><span>@Html.ActionLink("Titre évènement", "Evenement", "Admin")</span></li>
+                    </ul>
+                </td>
+                <td><span class="date">21</span></td><td><span class="date">22</span></td><td><span class="date">23</span></td><td><span class="date">24</span></td><td><span class="date">25</span></td><td><span class="date">26</span></td>
+            </tr>
+            <tr><td><span class="date">27</span></td><td><span class="date">28</span></td><td><span class="date">29</span></td><td><span class="date">30</span></td><td><span class="date">31</span></td><td><span class="date">&nbsp;</span></td><td><span class="date">&nbsp;</span></td></tr>
+        </tbody>
+    </table>
+
+    <fieldset class="legende">
+        <legend>Légende</legend>
+        <ul>
+            <li class="conference"><span>Conférence</span></li>
+            <li class="discussion"><span>Discussion</span></li>
+        </ul>
+    </fieldset>
+</div>
+
+

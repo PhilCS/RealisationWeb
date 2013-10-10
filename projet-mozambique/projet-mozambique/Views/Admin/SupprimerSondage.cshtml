@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Sondages";
+}
+
+<h1><a href="AjouterSondage"><img src="~/Content/images/icones/icon-add-black.png" title="Ajouter" alt="Icône ajouter sondage" class="icone" /></a> Sondage</h1>
+
+<div class="msg succes"><p>Le sondage a bien été supprimé.</p></div>
+
+<div class="sondage">
+    <form method="post" action="#">
+        <h2>Encore une question? <a href="SupprimerSondage"><img src="~/Content/images/icones/icon-trashcan.png" alt="Icône Supprimer" title="Supprimer" /></a></h2>
+        <div class="choix-reponses">
+            <p>
+                <input type="radio" id="1" value="oui" name="question" />
+                <label class="radio" for="1">Oui</label>                
+            </p>
+            <p>
+                <input type="radio" id="2" value="non" name="question" />
+                <label class="radio" for="2">Non</label>
+            </p>
+        </div>
+        <input type="submit" class="btnForm" value="Voter"/>
+    </form>
+    
+</div>

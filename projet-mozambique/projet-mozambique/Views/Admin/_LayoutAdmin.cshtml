@@ -6,11 +6,11 @@
     <title>@projet_mozambique.Utilitaires.Constantes.TITLE_COMMUN @ViewBag.Title</title>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     @Styles.Render("~/Content/cssSectoriel")
     @Styles.Render("~/Content/cssPublic")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     @RenderSection("scripts", required: false)
 </head>
 <body>
@@ -20,7 +20,7 @@
                 <div class="user_name">
                     <p>Nom de l'utilisateur</p>
                     <div class="icons">
-                        <img src="~/Content/images/mail.png" title="Messagerie" />
+                        <img src="~/Content/images/mail.png" title="Messagerie" alt="Icône Messagerie"/>
                         @Html.ActionLink(" ", "Profil", new { controller = "Sectoriel" }, new { @class = "profil-img" })
                     </div>
                  </div>
@@ -34,6 +34,7 @@
             <nav>
                 <ul>
                     <li>@Html.ActionLink("Accueil", "Index")</li>
+                    <li>@Html.ActionLink("Calendrier", "Calendrier", "Admin")</li>
                     <li>@Html.ActionLink("Documents", "Documents", "Admin")</li>
                     <li>@Html.ActionLink("Forum", "ForumModerateur", "Admin")</li>
                     <li>@Html.ActionLink("Sondages", "Sondages", "Admin")</li>
@@ -52,6 +53,7 @@
             @RenderBody()
         </div>
     </div>
+    <footer></footer>
     <script type="text/javascript">
         $(document).ready(function (){
             $(".menu-admin").click(function (e) {

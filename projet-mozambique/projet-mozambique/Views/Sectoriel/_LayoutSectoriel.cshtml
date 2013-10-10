@@ -33,6 +33,7 @@
                 <ul>
                     <li>@Html.ActionLink("Accueil", "Index", "Sectoriel")</li>
                     <!-- La gestion du contenu de la section publique devrait se faire dans l'administration ou ici -->
+                    <li>@Html.ActionLink("Calendrier", "Calendrier", "Sectoriel")</li>
                     <li>@Html.ActionLink("Documents", "Documents", "Sectoriel")</li>
                     <li>@Html.ActionLink("Forum", "Forum", "Sectoriel")</li>
                     <li>@Html.ActionLink("Sondages", "Sondages", "Sectoriel")</li>
@@ -43,6 +44,7 @@
             @RenderBody()
         </div>
     </div>
+    <footer></footer>
      <script type="text/javascript">
          $(document).ready(function () {
              $(".langue").click(function () {

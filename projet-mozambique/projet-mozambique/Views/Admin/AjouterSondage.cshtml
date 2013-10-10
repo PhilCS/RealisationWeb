@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Ajouter un sondage";
+}
+
+<h1>Ajouter un sondage</h1>
+
+<div class="msg">
+    <p>@projet_mozambique.Utilitaires.Constantes.MESSAGE_CHAMPS_OBLIGATOIRE</p>
+</div>
+
+<form method="post" action="AjoutSondageOK" class="formulaire">
+
+    <div>
+        <label for="nom">Question : *</label>
+        <input type="text" id="nom" name="nom"/>
+    </div>
+
+    <div>
+        <label for="secteur">Secteur : *</label>
+        <select name="secteur" id="secteur">
+            <option value="undefined"></option>
+            <option value="Agriculture">Agriculture</option>
+            <option value="Tourisme">Tourisme</option>
+            <option value="Construction">Construction</option>
+        </select>
+
+    </div>
+
+    <div>
+        <label for="datepicker">Date début : *</label>
+        <input type="date" id="datedebut" name="datedebut"/>        
+    </div>
+
+    <div>
+        <label for="datefin">Date fin : *</label>
+        <input type="date" name="datefin" id="datefin" />
+    </div>
+
+    <div>
+        <label>Choix de réponse : *</label><br /><br />
+        <input type="text" name="choix1" id="choix1" /><br />
+        <input type="text" name="choix2" id="choix2" /> <a href="#"><img src="~/Content/images/icones/icon-add-black-petite.png" alt="Icône Ajouter" title="Ajouter un choix" /></a>
+    </div>
+
+
+    <input type="submit" class="btnForm" value="Créer"/>
+    <p><a href="AjoutSondageErreur">ERREUR</a></p>
+</form>
+

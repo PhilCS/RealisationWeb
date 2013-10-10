@@ -2,7 +2,7 @@
     ViewBag.Title = "Ajouter un utilisateur";
 }
 
-<h2>Ajouter un utilisateur</h2>
+<h1>Ajouter un utilisateur</h1>
 
 <p>Les champs marqués d'une étoile sont obligatoires.</p>
 <p class="msgErreur">L'utilisateur ne peut être modifié.</p>
@@ -35,10 +35,10 @@
         <option>École 3</option>
     </select>
     <br />
-    <label for="secteur">Secteurs : *</label>
-    <input type="checkbox" name="secteur" value="1" checked="checked" />Agriculture
-    <input type="checkbox" name="secteur" value="2" />Tourisme
-    <input type="checkbox" name="secteur" value="3" />Construction
+    <label>Secteurs : *</label>
+    <input type="checkbox" name="secteur" value="1" id="1" checked="checked" /><label for="1" class="cb">Agriculture</label>
+    <input type="checkbox" name="secteur" value="2" id="2" /><label for="2" class="cb">Tourisme</label>
+    <input type="checkbox" name="secteur" value="3" id="3" /><label for="3" class="cb">Construction</label>
     <br />
     <label for="role">Rôle : *</label>
     <select name="role">

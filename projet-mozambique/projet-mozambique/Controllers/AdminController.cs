@@ -147,5 +147,96 @@ namespace projet_mozambique.Controllers
         {
             return View();
         }
+
+        public ActionResult AjouterEvenement()
+        {
+            return View();
+        }
+
+        public ActionResult Calendrier()
+        {
+            return View();
+        }
+
+        public ActionResult Evenement()
+        {
+            return View();
+        }
+
+        public ActionResult AjouterSondage()
+        {
+            return View();
+        }
+
+        public ActionResult AjoutSondageOK()
+        {
+            return View();
+        }
+
+        public ActionResult AjoutSondageErreur()
+        {
+            return View();
+        }
+
+        public ActionResult ModifierEvenement()
+        {
+            return View();
+        }
+
+        public ActionResult ModifEvenementOK()
+        {
+            return View();
+        }
+
+        public ActionResult ModifEvenementErreur()
+        {
+            return View();
+        }
+
+        public ActionResult AjoutEvenementOK()
+        {
+            return View();
+        }
+
+        public ActionResult AjoutEvenementErreur()
+        {
+            return View();
+        }
+
+        public ActionResult ModifAccueil()
+        {
+            return View();
+        }
+
+        public ActionResult IndexModifie()
+        {
+            return View();
+        }
+
+        public ActionResult NouveauFil()
+        {
+            return View();
+        }
+
+        public ActionResult FilAjouteOK()
+        {
+            return View();
+        }
+
+        public ActionResult FilPasAjoute()
+        {
+            return View();
+        }
+
+        public ActionResult FilModifieOK()
+        {
+            return View();
+        }
+
+        public ActionResult SupprimerSondage()
+        {
+            return View();
+        }
+
     }
 }

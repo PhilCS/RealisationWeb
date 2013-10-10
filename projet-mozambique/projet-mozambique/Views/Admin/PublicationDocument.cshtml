@@ -20,7 +20,7 @@
 
     <div>
         <label>Secteur : *</label>
-        <select>
+        <select name="secteur" id="secteur">
             <option value="undefined"></option>
             <option value="construction">Construction</option>
             <option value="agriculture">Agriculture</option>
@@ -29,7 +29,7 @@
 
     <div>
         <label>Catégorie : *</label>
-        <select>
+        <select name="categorie" id="categorie">
             <option value="undefined"></option>
             <option value="cate1">Catégorie 1</option>
             <option value="cate2">Catégorie 2</option>
@@ -41,7 +41,7 @@
         <label for="mot-cle">Mots-clés (séparés par des virgules) : </label>
         <input type="text" name="mot-cle" id="mot-cle" />
     </div>
-
+    <br />
     <input type="submit" class="btnForm" value="Publier"/>
     <p><a href="PublicationErreur">ERREUR</a></p>
 </form>

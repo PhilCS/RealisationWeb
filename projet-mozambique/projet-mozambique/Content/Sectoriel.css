@@ -1,4 +1,4 @@
-﻿f/*ADMIN*/
+﻿/*ADMIN*/
 .img-accueil
 {
     float:left;
@@ -61,7 +61,7 @@
     padding:3px;
 }
 
-.categorie img
+.categorie img, .result-rech-doc img
 {
     vertical-align:middle;
     margin:5px;
@@ -72,20 +72,19 @@
     font-size:11px;
 }
 
-/*PUBLICATION DOCUMENT*/
-.formulaire label
-{
-    width:175px;
-    float:left;
-}
-
+/*FORMULAIRE*/
 .formulaire div
 {
     margin-top:10px;
     margin-bottom:10px;
 }
 
-.formulaire input:not([type=submit][type=button])
+label[class=cb]
+{
+    margin:0 5px;
+}
+
+.formulaire select, .formulaire input:not([type=checkbox]):not([type=date]):not([type=time]):not([type=submit]):not([type=button])
 {
     width:260px;
 }
@@ -139,6 +138,54 @@
 {
     border-bottom:3px solid rgba(0, 0, 0, 0.68);
 }
+
+/*MENU MESSAGERIE*/
+.menu-messagerie
+{
+    width:auto;
+    margin:0 auto 0 auto;
+    float:left;
+}
+
+.menu-messagerie ul 
+{
+    margin:0;
+    padding:0;
+    text-align:center;
+}
+
+.menu-messagerie li
+{
+    display:inline-block;
+    padding: 15px 0 10px 0;
+    margin:0;
+}
+
+.menu-messagerie a
+{
+    background-color:rgba(0,0,0,0.2);
+    padding: 15px 7px 10px 7px;
+    border-radius:25px 0px 0 0;
+}
+
+.menu-messagerie li:not([class=active]) a
+{
+    background-color:rgba(0,0,0,0.3);
+    padding: 15px 7px 10px 7px;
+}
+
+.menu-messagerie a:hover
+{
+    color:black;
+    padding: 15px 7px 10px 7px;
+}
+
+.menu-messagerie li:not([class=active]) a:hover
+{
+    background-color:rgba(0,0,0,0.4);
+}
+
+
 
 /*BOUTONS*/
 .btnForm {
@@ -252,6 +299,7 @@
 
 .messagerie
 {
+    clear:both;
     margin-bottom:10px;
     overflow:hidden;
 }
@@ -261,20 +309,26 @@
     width:60%;
     float:right;
     background-color:rgba(0,0,0,0.2);
-    padding:5px;
     margin-bottom: -99999px;
 	padding-bottom: 99999px;
 }
 
+.mess-lecture p
+{
+    padding-left:12px;
+    padding-right:8px
+}
+
 .mess-reception
 {
-    width:37%;
+    width:40%;
     margin:0;
     float:left;
     background-color:rgba(0,0,0,0.2);
     margin-bottom: -99999px;
 	padding-bottom: 99999px;
     font-size:11px;
+
 }
 
 .mess-reception ul
@@ -292,12 +346,6 @@
     background-color:rgba(0,0,0,0.3);
 }
 
-.mess-reception a
-{
-    display:block;
-    padding:5px;
-}
-
 .mess-reception input
 {
     margin-right:10px;
@@ -306,6 +354,11 @@
 .mess-reception a:hover
 {
     color:black;
+}
+
+.mess-reception a:active
+{
+    background-color:rgba(0,0,0,0);
 }
 
 .msg-courant
@@ -317,7 +370,7 @@
 .infos-supp-msg
 {
     float:right;
-    width:185px;
+    width:145px;
 }
 
 .attachment
@@ -328,12 +381,24 @@
 
 .actions-boite-reception
 {
-    text-align:right;
     border-bottom:2px solid rgba(0,0,0,0.6);
     font-weight:bold;
     font-size:12px;
-    padding:3px;
+    padding:8px;
 }
+
+.actions-boite-reception li
+{
+    display:inline;
+    margin:8px 5px 8px 5px;
+}
+
+.actions-boite-reception li:hover
+{
+    background-color:rgba(0,0,0,0);
+}
+
+
 
 .actions-messagerie
 {
@@ -343,6 +408,7 @@
 .icones-actions
 {
     float:right;
+    margin:5px;
 }
 
 .icones-actions img
@@ -369,7 +435,7 @@
     padding-right:5px;
 }
 
-.nav-forum a
+.nav-forum li a
 {
     text-decoration:underline;
 }
@@ -487,4 +553,162 @@
     width:150px;
     float:left;
 }
+
+/*CALENDRIER*/
+
+.calendrier .mois
+{
+    font-size:25px;
+}
+
+.calendrier .mois a
+{
+    margin:25px;
+}
+
+.calendrier table
+{
+    float:left;
+    margin-top:25px;
+    width:80%;
+    margin:0 auto;
+    border-collapse:collapse;
+}
+
+.calendrier th
+{
+    text-align:center;
+    padding:10px;
+}
+
+.calendrier th:not([class=mois])
+{
+    font-size:16px;
+}
+
+.calendrier td
+{
+    padding: 5px 5px;   
+    width: 14%; 
+    height: 80px;
+    text-align: left;
+    vertical-align: top;
+    position:relative;
+}
+
+.calendrier td:not([class=ajd])
+{
+    background-color:rgba(0,0,0,0.1);    
+}
+
+.calendrier td, .calendrier th
+{
+    border:1px solid rgba(0,0,0,0.3);
+}
+
+.date
+{
+    font-weight:bold;
+}
+
+.ajd
+{
+    background-color:rgba(83,141,18, 0.4);
+
+}
+
+.event
+{
+    font-size:11px;
+    position:absolute;
+    bottom:0;
+    right:0;
+    margin:0 3px 3px 0;
+    padding:0;
+    list-style-type:square;
+}
+
+.event a
+{
+    color:black;
+}
+
+.event a:hover
+{
+    color:#324f10;
+}
+
+.conference
+{
+    color:#192da5;
+}
+
+.discussion
+{
+    color:#e4371f;
+}
+
+.calendrier .legende
+{
+    border:1px solid rgba(0,0,0,0.3);
+    width:15%;
+    margin:0 auto 15px auto;
+    float:right;
+}
+
+.calendrier .legende ul 
+{
+    margin-top:10px;
+    list-style-type:square;
+}
+
+.calendrier .legende span
+{
+    color:black;
+}
+
+.desc-event
+{
+    background-color:rgba(0,0,0,0.2);
+    width:60%;
+    text-align:justify;
+    padding:20px;
+}
+
+.desc-event span
+{
+    font-weight:bold;
+}
+
+.evenement textarea
+{
+    width:500px;
+    height:150px;
+}
+
+/*CMS*/
+.modif-cms input[type=submit]
+{
+    float:right;
+}
+
+.modif-cms
+{
+    width:400px;
+}
+
+.modif-titre
+{
+    font-size:25px;
+}
+
+.gras
+{
+    font-weight:bold;
+}
+
+
+
+
+
 

@@ -7,7 +7,7 @@
     {
         if(Request.QueryString["gestion"] == "1")
         {
-            <h2>Ajouter une nouvelle</h2>
+            <h1>Ajouter une nouvelle</h1>
             <p class="msgErreur">Tous les champs doivent être complétés.</p>
             <form>
                 <label for="nomNew">Titre de la nouvelle : *</label>
@@ -23,7 +23,7 @@
         }
         else
         {
-            <h2>Modifier/Supprimer une nouvelle</h2>
+            <h1>Modifier/Supprimer une nouvelle</h1>
             <p class="msgOk">La nouvelle a été modifiée.</p>
             
             <ul>
@@ -35,7 +35,7 @@
     }
     else
     {
-        <h2>Modifier une nouvelle</h2>
+        <h1>Modifier une nouvelle</h1>
         <p class="msgErreur">Tous les champs doivent être complétés.</p>
             <form>
                 <label for="nomNew">Titre de la nouvelle : </label>

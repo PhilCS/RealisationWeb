@@ -91,11 +91,6 @@ namespace projet_mozambique.Controllers
             return View();
         }
 
-        public ActionResult ModifierPreferencesOK()
-        {
-            return View();
-        }
-
         public ActionResult Forum()
         {
             return View();
@@ -137,6 +132,31 @@ namespace projet_mozambique.Controllers
         }
 
         public ActionResult Sondages()
+        {
+            return View();
+        }
+
+        public ActionResult Calendrier()
+        {
+            return View();
+        }
+
+        public ActionResult Evenement()
+        {
+            return View();
+        }
+
+        public ActionResult ResultRechDoc()
+        {
+            return View();
+        }
+
+        public ActionResult SupprimerMessage()
+        {
+            return View();
+        }
+
+        public ActionResult RepondreMessage()
         {
             return View();
         }
