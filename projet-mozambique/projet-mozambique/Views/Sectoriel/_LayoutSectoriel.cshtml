@@ -27,6 +27,7 @@
             <div class="titre-header">
                 @Html.ActionLink("Mozambique", "Index", new { controller = "Sectoriel" }, new {@class="main-titre"})<br />
                 @Html.ActionLink("Portail Pédagogique", "Index", new { controller = "Sectoriel" }, new { @class = "sous-titre" })
+                <p class="langue" style="cursor:pointer;">Français</p>
             </div>
             <nav>
                 <ul>
@@ -42,5 +43,20 @@
             @RenderBody()
         </div>
     </div>
+     <script type="text/javascript">
+         $(document).ready(function () {
+             $(".langue").click(function () {
+                 var langue = $(".langue").html();
+
+                 if (langue == "Français") {
+                     $(".langue").html("Portuguais");
+                 }
+                 else {
+                     $(".langue").html("Français");
+                 }
+
+             });
+         });
+    </script>
 </body>
 </html>

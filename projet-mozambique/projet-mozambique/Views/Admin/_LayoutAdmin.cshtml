@@ -29,6 +29,7 @@
             <div class="titre-header">
                 @Html.ActionLink("Mozambique", "Index", new { controller = "Admin" }, new {@class="main-titre"})<br />
                 @Html.ActionLink("Portail Pédagogique", "Index", new { controller = "Admin" }, new { @class = "sous-titre" })
+                <p class="langue">Français</p>
             </div>
             <nav>
                 <ul>
@@ -56,6 +57,17 @@
             $(".menu-admin").click(function (e) {
                 e.preventDefault();
                 $(".nav-secondaire").toggle();
+            });
+            $(".langue").click(function () {
+                var langue = $(".langue").html();
+
+                if (langue == "Français") {
+                    $(".langue").html("Portuguais");
+                }
+                else {
+                    $(".langue").html("Français");
+                }
+
             });
         });
 

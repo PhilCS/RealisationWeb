@@ -45,6 +45,10 @@ a:hover {
 .connexion p {
     font-size:1.3em;
 }
+ 
+p.langue {
+    cursor:pointer;
+}
 
 .connexion img {
     display:inline;
