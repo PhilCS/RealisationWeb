@@ -10,10 +10,19 @@ namespace projet_mozambique.Controllers
     {
         //
         // GET: /Sectoriel/
-
         public ActionResult Index()
         {
-            return View();
+            // Si l'utilisateur n'a pas accès à cette section
+            // Faut trouver comment empêcher un utilisateur non connecté d'accéder à 
+            // tout le controller
+            if (Session["currentUserId"] == null)
+            {
+                return Redirect("/public");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public ActionResult Messagerie()

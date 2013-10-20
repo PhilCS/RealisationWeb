@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="MVP" Class="UtilisateursDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.\SQLEXPRESS;Initial Catalog=MVP;Integrated Security=True;MultipleActiveResultSets=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ConnectionStringName" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.UTILISATEUR" Member="UTILISATEUR">
+    <Type Name="UTILISATEUR">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NOMUTIL" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="MOTPASSE" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="COURRIEL" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="PRENOM" Type="System.String" DbType="VarChar(60) NOT NULL" CanBeNull="false" />
+      <Column Name="NOM" Type="System.String" DbType="VarChar(60) NOT NULL" CanBeNull="false" />
+      <Column Name="ADRESSE" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="VILLE" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DATENAISSANCE" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="DATECREATION" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="DERNIERECONNEXION" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="COMPTEACTIF" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LANGUE" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="IDROLE" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IDECOLE" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="REINITIALISERMOTPASSE" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="UTILISATEUR_UTILISATEURSECTEUR" Member="UTILISATEURSECTEUR" ThisKey="ID" OtherKey="IDUTILISATEUR" Type="UTILISATEURSECTEUR" />
+      <Association Name="ROLE_UTILISATEUR" Member="ROLE" ThisKey="IDROLE" OtherKey="ID" Type="ROLE" IsForeignKey="true" />
+      <Association Name="ECOLE_UTILISATEUR" Member="ECOLE" ThisKey="IDECOLE" OtherKey="ID" Type="ECOLE" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ROLE" Member="ROLE">
+    <Type Name="ROLE">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NOM" Type="System.String" DbType="VarChar(45) NOT NULL" CanBeNull="false" />
+      <Association Name="ROLE_UTILISATEUR" Member="UTILISATEUR" ThisKey="ID" OtherKey="IDROLE" Type="UTILISATEUR" />
+      <Association Name="ROLE_ROLEDROIT" Member="ROLEDROIT" ThisKey="ID" OtherKey="IDROLE" Type="ROLEDROIT" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ROLEDROIT" Member="ROLEDROIT">
+    <Type Name="ROLEDROIT">
+      <Column Name="IDROLE" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IDDROIT" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="ROLE_ROLEDROIT" Member="ROLE" ThisKey="IDROLE" OtherKey="ID" Type="ROLE" IsForeignKey="true" />
+      <Association Name="DROIT_ROLEDROIT" Member="DROIT" ThisKey="IDDROIT" OtherKey="ID" Type="DROIT" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DROIT" Member="DROIT">
+    <Type Name="DROIT">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TYPE" Type="System.String" DbType="VarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="DESCRIPTION" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="DROIT_ROLEDROIT" Member="ROLEDROIT" ThisKey="ID" OtherKey="IDDROIT" Type="ROLEDROIT" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ECOLE" Member="ECOLE">
+    <Type Name="ECOLE">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NOM" Type="System.String" DbType="VarChar(60) NOT NULL" CanBeNull="false" />
+      <Column Name="ADRESSE" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="VILLE" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Association Name="ECOLE_UTILISATEUR" Member="UTILISATEUR" ThisKey="ID" OtherKey="IDECOLE" Type="UTILISATEUR" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UTILISATEURSECTEUR" Member="UTILISATEURSECTEUR">
+    <Type Name="UTILISATEURSECTEUR">
+      <Column Name="IDUTILISATEUR" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IDSECTEUR" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DEBUTACCES" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="FINACCES" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="UTILISATEUR_UTILISATEURSECTEUR" Member="UTILISATEUR" ThisKey="IDUTILISATEUR" OtherKey="ID" Type="UTILISATEUR" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="SECTEUR_UTILISATEURSECTEUR" Member="SECTEUR" ThisKey="IDSECTEUR" OtherKey="ID" Type="SECTEUR" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SECTEUR" Member="SECTEUR">
+    <Type Name="SECTEUR">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NOM" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Association Name="SECTEUR_UTILISATEURSECTEUR" Member="UTILISATEURSECTEUR" ThisKey="ID" OtherKey="IDSECTEUR" Type="UTILISATEURSECTEUR" />
+    </Type>
+  </Table>
+</Database>

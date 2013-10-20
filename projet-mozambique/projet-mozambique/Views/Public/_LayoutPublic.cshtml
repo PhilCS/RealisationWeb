@@ -16,17 +16,23 @@
             <div class="connexion">
                 <p class="login">Se connecter</p>
                 <div class="div-login">
-                    <form id="frmConnexion">
-                        <input type="text" placeholder="Nom de l'utilisateur" />
-                        <input type="text" placeholder="Mot de passe" />
-                        <input type="submit" value="Connexion" />
-                    </form>
+                @using (Html.BeginForm("doLogin", "public", FormMethod.Post, new { id = "frmConnexion"}))
+                {
+                    @Html.TextBox("UserString", "", 
+                    new { id = "txtLogin", placeholder = "Nom de l'utilisateur" });
+                    @Html.TextBox("PWString", "",
+                             new { id = "txtPassword", placeholder = "Mot de passe" });
+                    <p>@Html.CheckBox("RememberMe", true, new { id = "chkRemember" });
+                    Se souvenir de moi</p>
+                    <input type="submit" value="Connexion" />
+                }
+                </div>
                     <a href="../admin">Connexion admin</a><br />
                     <a href="../sectoriel">Connexion utilisateur</a>
-                </div>
+                
             </div>
             <div class="titre-header">
-                @Html.ActionLink("Mozambique", "Index", new { controller = "Public" }, new {@class="main-titre"})<br />
+                @Html.ActionLink("Mozambique", "Index", new { controller = "Public" }, new { @class = "main-titre" })<br />
                 @Html.ActionLink("Portail Pédagogique", "Index", new { controller = "Public" }, new { @class = "sous-titre" })
                 <p class="langue">Français</p>
             </div>

@@ -16,7 +16,7 @@
         <header>
             <div class="connexion">
                 <div class="user_name">
-                    <p>Nom de l'utilisateur</p>
+                    <p>@Session["currentUserName"].ToString()</p>
                     <div class="icons">
                         @Html.ActionLink(" ", "Messagerie", new { controller = "Sectoriel" }, new { @class = "msg-img" })
                         @Html.ActionLink(" ", "Profil", new { controller = "Sectoriel" }, new { @class = "profil-img" })
