@@ -1,0 +1,2880 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MVPModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="MVPModelStoreContainer">
+          <EntitySet Name="CATEGORIEEVENEMENT" EntityType="MVPModel.Store.CATEGORIEEVENEMENT" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CHOIXSONDAGE" EntityType="MVPModel.Store.CHOIXSONDAGE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CONFIRMINSCRIPTION" EntityType="MVPModel.Store.CONFIRMINSCRIPTION" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DESTINATAIREMESSAGE" EntityType="MVPModel.Store.DESTINATAIREMESSAGE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DROIT" EntityType="MVPModel.Store.DROIT" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ECOLE" EntityType="MVPModel.Store.ECOLE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ECOLESECTEUR" EntityType="MVPModel.Store.ECOLESECTEUR" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EVENEMENT" EntityType="MVPModel.Store.EVENEMENT" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EVENEMENTSECTEUR" EntityType="MVPModel.Store.EVENEMENTSECTEUR" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FILDISCUSSION" EntityType="MVPModel.Store.FILDISCUSSION" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FORUM" EntityType="MVPModel.Store.FORUM" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MESSAGEFORUM" EntityType="MVPModel.Store.MESSAGEFORUM" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MESSAGEPRIVE" EntityType="MVPModel.Store.MESSAGEPRIVE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MOTCLE" EntityType="MVPModel.Store.MOTCLE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MOTCLEPUBLICATION" EntityType="MVPModel.Store.MOTCLEPUBLICATION" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="NOUVELLE" EntityType="MVPModel.Store.NOUVELLE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PARTENAIRE" EntityType="MVPModel.Store.PARTENAIRE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PIECEJOINTE" EntityType="MVPModel.Store.PIECEJOINTE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PUBLICATION" EntityType="MVPModel.Store.PUBLICATION" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ROLE" EntityType="MVPModel.Store.ROLE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ROLEDROIT" EntityType="MVPModel.Store.ROLEDROIT" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SECTEUR" EntityType="MVPModel.Store.SECTEUR" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SONDAGE" EntityType="MVPModel.Store.SONDAGE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SUJETPUBLICATION" EntityType="MVPModel.Store.SUJETPUBLICATION" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UTILISATEUR" EntityType="MVPModel.Store.UTILISATEUR" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UTILISATEURSECTEUR" EntityType="MVPModel.Store.UTILISATEURSECTEUR" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="VOTESONDAGE" EntityType="MVPModel.Store.VOTESONDAGE" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_CHOIXSOND_SOND" Association="MVPModel.Store.FK_CHOIXSOND_SOND">
+            <End Role="SONDAGE" EntitySet="SONDAGE" />
+            <End Role="CHOIXSONDAGE" EntitySet="CHOIXSONDAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFINSC_UTIL" Association="MVPModel.Store.FK_CONFINSC_UTIL">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+            <End Role="CONFIRMINSCRIPTION" EntitySet="CONFIRMINSCRIPTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DESTMESS_MESSPRIVE" Association="MVPModel.Store.FK_DESTMESS_MESSPRIVE">
+            <End Role="MESSAGEPRIVE" EntitySet="MESSAGEPRIVE" />
+            <End Role="DESTINATAIREMESSAGE" EntitySet="DESTINATAIREMESSAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DESTMESS_UTIL" Association="MVPModel.Store.FK_DESTMESS_UTIL">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+            <End Role="DESTINATAIREMESSAGE" EntitySet="DESTINATAIREMESSAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ECOLESECT_ECOLE" Association="MVPModel.Store.FK_ECOLESECT_ECOLE">
+            <End Role="ECOLE" EntitySet="ECOLE" />
+            <End Role="ECOLESECTEUR" EntitySet="ECOLESECTEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ECOLESECT_SECT" Association="MVPModel.Store.FK_ECOLESECT_SECT">
+            <End Role="SECTEUR" EntitySet="SECTEUR" />
+            <End Role="ECOLESECTEUR" EntitySet="ECOLESECTEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVEN_CATE" Association="MVPModel.Store.FK_EVEN_CATE">
+            <End Role="CATEGORIEEVENEMENT" EntitySet="CATEGORIEEVENEMENT" />
+            <End Role="EVENEMENT" EntitySet="EVENEMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVEN_UTIl" Association="MVPModel.Store.FK_EVEN_UTIl">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+            <End Role="EVENEMENT" EntitySet="EVENEMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVENSECT_EVEN" Association="MVPModel.Store.FK_EVENSECT_EVEN">
+            <End Role="EVENEMENT" EntitySet="EVENEMENT" />
+            <End Role="EVENEMENTSECTEUR" EntitySet="EVENEMENTSECTEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVENSECT_SECT" Association="MVPModel.Store.FK_EVENSECT_SECT">
+            <End Role="SECTEUR" EntitySet="SECTEUR" />
+            <End Role="EVENEMENTSECTEUR" EntitySet="EVENEMENTSECTEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FILDISC_FORUM" Association="MVPModel.Store.FK_FILDISC_FORUM">
+            <End Role="FORUM" EntitySet="FORUM" />
+            <End Role="FILDISCUSSION" EntitySet="FILDISCUSSION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FORUM_SECT" Association="MVPModel.Store.FK_FORUM_SECT">
+            <End Role="SECTEUR" EntitySet="SECTEUR" />
+            <End Role="FORUM" EntitySet="FORUM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MESS_FILDISC" Association="MVPModel.Store.FK_MESS_FILDISC">
+            <End Role="FILDISCUSSION" EntitySet="FILDISCUSSION" />
+            <End Role="MESSAGEFORUM" EntitySet="MESSAGEFORUM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MESS_UTIL" Association="MVPModel.Store.FK_MESS_UTIL">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+            <End Role="MESSAGEFORUM" EntitySet="MESSAGEFORUM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MESSPRIV_EXPED" Association="MVPModel.Store.FK_MESSPRIV_EXPED">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+            <End Role="MESSAGEPRIVE" EntitySet="MESSAGEPRIVE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MOTCLEPUB_MOTCLE" Association="MVPModel.Store.FK_MOTCLEPUB_MOTCLE">
+            <End Role="MOTCLE" EntitySet="MOTCLE" />
+            <End Role="MOTCLEPUBLICATION" EntitySet="MOTCLEPUBLICATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MOTCLEPUB_PUB" Association="MVPModel.Store.FK_MOTCLEPUB_PUB">
+            <End Role="PUBLICATION" EntitySet="PUBLICATION" />
+            <End Role="MOTCLEPUBLICATION" EntitySet="MOTCLEPUBLICATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PIECEJOINTE_MESS" Association="MVPModel.Store.FK_PIECEJOINTE_MESS">
+            <End Role="MESSAGEPRIVE" EntitySet="MESSAGEPRIVE" />
+            <End Role="PIECEJOINTE" EntitySet="PIECEJOINTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PUB_SECT" Association="MVPModel.Store.FK_PUB_SECT">
+            <End Role="SECTEUR" EntitySet="SECTEUR" />
+            <End Role="PUBLICATION" EntitySet="PUBLICATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PUB_SUJET" Association="MVPModel.Store.FK_PUB_SUJET">
+            <End Role="SUJETPUBLICATION" EntitySet="SUJETPUBLICATION" />
+            <End Role="PUBLICATION" EntitySet="PUBLICATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PUB_UTIL" Association="MVPModel.Store.FK_PUB_UTIL">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+            <End Role="PUBLICATION" EntitySet="PUBLICATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ROLEDROIT_DROIT" Association="MVPModel.Store.FK_ROLEDROIT_DROIT">
+            <End Role="DROIT" EntitySet="DROIT" />
+            <End Role="ROLEDROIT" EntitySet="ROLEDROIT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ROLEDROIT_ROLE" Association="MVPModel.Store.FK_ROLEDROIT_ROLE">
+            <End Role="ROLE" EntitySet="ROLE" />
+            <End Role="ROLEDROIT" EntitySet="ROLEDROIT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOND_CREATEUR" Association="MVPModel.Store.FK_SOND_CREATEUR">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+            <End Role="SONDAGE" EntitySet="SONDAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOND_SECT" Association="MVPModel.Store.FK_SOND_SECT">
+            <End Role="SECTEUR" EntitySet="SECTEUR" />
+            <End Role="SONDAGE" EntitySet="SONDAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UTIL_ECOLE" Association="MVPModel.Store.FK_UTIL_ECOLE">
+            <End Role="ECOLE" EntitySet="ECOLE" />
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UTIL_ROLE" Association="MVPModel.Store.FK_UTIL_ROLE">
+            <End Role="ROLE" EntitySet="ROLE" />
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UTILSECT_SECT" Association="MVPModel.Store.FK_UTILSECT_SECT">
+            <End Role="SECTEUR" EntitySet="SECTEUR" />
+            <End Role="UTILISATEURSECTEUR" EntitySet="UTILISATEURSECTEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UTILSECT_UTIL" Association="MVPModel.Store.FK_UTILSECT_UTIL">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+            <End Role="UTILISATEURSECTEUR" EntitySet="UTILISATEURSECTEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VOTESOND_CHOIX" Association="MVPModel.Store.FK_VOTESOND_CHOIX">
+            <End Role="CHOIXSONDAGE" EntitySet="CHOIXSONDAGE" />
+            <End Role="VOTESONDAGE" EntitySet="VOTESONDAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VOTESOND_UTIL" Association="MVPModel.Store.FK_VOTESOND_UTIL">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+            <End Role="VOTESONDAGE" EntitySet="VOTESONDAGE" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CATEGORIEEVENEMENT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOM" Type="varchar" Nullable="false" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="CHOIXSONDAGE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IDSONDAGE" Type="int" Nullable="false" />
+          <Property Name="VALEUR" Type="varchar" Nullable="false" MaxLength="60" />
+        </EntityType>
+        <EntityType Name="CONFIRMINSCRIPTION">
+          <Key>
+            <PropertyRef Name="IDUTILISATEUR" />
+          </Key>
+          <Property Name="IDUTILISATEUR" Type="int" Nullable="false" />
+          <Property Name="DATEENVOI" Type="datetime" Nullable="false" />
+          <Property Name="JETON" Type="varchar" Nullable="false" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="DESTINATAIREMESSAGE">
+          <Key>
+            <PropertyRef Name="IDMESSAGE" />
+            <PropertyRef Name="IDUTILISATEUR" />
+          </Key>
+          <Property Name="IDMESSAGE" Type="int" Nullable="false" />
+          <Property Name="IDUTILISATEUR" Type="int" Nullable="false" />
+          <Property Name="SUPPRIME" Type="bit" Nullable="false" />
+          <Property Name="SUPPRIMEDEFINITIF" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DROIT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TYPE" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="DESCRIPTION" Type="varchar" Nullable="false" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="ECOLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOM" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="PROVINCE" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ECOLESECTEUR">
+          <Key>
+            <PropertyRef Name="IDECOLE" />
+            <PropertyRef Name="IDSECTEUR" />
+          </Key>
+          <Property Name="IDECOLE" Type="int" Nullable="false" />
+          <Property Name="IDSECTEUR" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EVENEMENT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOM" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="DATEEVEN" Type="date" Nullable="false" />
+          <Property Name="HEUREDEBUT" Type="time" />
+          <Property Name="HEUREFIN" Type="time" />
+          <Property Name="IDCATEGORIE" Type="int" Nullable="false" />
+          <Property Name="IDCREATEUR" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EVENEMENTSECTEUR">
+          <Key>
+            <PropertyRef Name="IDEVENEMENT" />
+            <PropertyRef Name="IDSECTEUR" />
+          </Key>
+          <Property Name="IDEVENEMENT" Type="int" Nullable="false" />
+          <Property Name="IDSECTEUR" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FILDISCUSSION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SUJET" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="DATEPUBLICATION" Type="datetime" Nullable="false" />
+          <Property Name="DATEMODIFICATION" Type="datetime" />
+          <Property Name="NBLECTURES" Type="int" Nullable="false" />
+          <Property Name="IDFORUM" Type="int" />
+        </EntityType>
+        <EntityType Name="FORUM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TITRE" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="IDSECTEUR" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MESSAGEFORUM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DATEPUBLICATION" Type="datetime" Nullable="false" />
+          <Property Name="DATEMODIFICATION" Type="datetime" />
+          <Property Name="CONTENU" Type="text" Nullable="false" />
+          <Property Name="IDUTILISATEUR" Type="int" Nullable="false" />
+          <Property Name="IDFILDISCUSSION" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MESSAGEPRIVE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IDEXPEDITEUR" Type="int" Nullable="false" />
+          <Property Name="SUJET" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="CONTENU" Type="text" Nullable="false" />
+          <Property Name="DATEENVOI" Type="datetime" Nullable="false" />
+          <Property Name="SUPPRIME" Type="bit" Nullable="false" />
+          <Property Name="SUPPRIMEDEFINITIF" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MOTCLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="VALEUR" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MOTCLEPUBLICATION">
+          <Key>
+            <PropertyRef Name="IDPUBLICATION" />
+            <PropertyRef Name="IDMOTCLE" />
+          </Key>
+          <Property Name="IDPUBLICATION" Type="int" Nullable="false" />
+          <Property Name="IDMOTCLE" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NOUVELLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TITRE" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="DESCRIPTION" Type="text" Nullable="false" />
+          <Property Name="DATEPUBLICATION" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PARTENAIRE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOM" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="RAISONSOCIALE" Type="text" Nullable="false" />
+          <Property Name="ADRESSE" Type="varchar" MaxLength="65" />
+          <Property Name="VILLE" Type="varchar" MaxLength="65" />
+          <Property Name="PAYS" Type="varchar" MaxLength="60" />
+          <Property Name="TELEPHONE" Type="varchar" MaxLength="20" />
+          <Property Name="SITEWEB" Type="varchar" MaxLength="150" />
+          <Property Name="COURRIEL" Type="varchar" Nullable="false" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="PIECEJOINTE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IDMESSAGE" Type="int" Nullable="false" />
+          <Property Name="PIECESERIALISEE" Type="varbinary(max)" Nullable="false" />
+          <Property Name="TAILLEPIECE" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="NOMPIECE" Type="varchar" Nullable="false" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="PUBLICATION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TITRE" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="DATECREATION" Type="datetime" Nullable="false" />
+          <Property Name="EMPLACEMENTSERVEUR" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="IDPUBLICATEUR" Type="int" Nullable="false" />
+          <Property Name="TYPEMIME" Type="varchar" MaxLength="20" />
+          <Property Name="IDSUJET" Type="int" Nullable="false" />
+          <Property Name="IDSECTEUR" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOM" Type="varchar" Nullable="false" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="ROLEDROIT">
+          <Key>
+            <PropertyRef Name="IDROLE" />
+            <PropertyRef Name="IDDROIT" />
+          </Key>
+          <Property Name="IDROLE" Type="int" Nullable="false" />
+          <Property Name="IDDROIT" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SECTEUR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOM" Type="varchar" Nullable="false" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="SONDAGE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOM" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="QUESTION" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="DATEDEBUT" Type="datetime" Nullable="false" />
+          <Property Name="DATEFIN" Type="datetime" Nullable="false" />
+          <Property Name="IDCREATEUR" Type="int" Nullable="false" />
+          <Property Name="IDSECTEUR" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SUJETPUBLICATION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOM" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UTILISATEUR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOMUTIL" Type="varchar" Nullable="false" MaxLength="25" />
+          <Property Name="MOTPASSE" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="COURRIEL" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="PRENOM" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="NOM" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="ADRESSE" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="VILLE" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="DATENAISSANCE" Type="date" Nullable="false" />
+          <Property Name="DATECREATION" Type="date" Nullable="false" />
+          <Property Name="DERNIERECONNEXION" Type="datetime" />
+          <Property Name="COMPTEACTIF" Type="bit" Nullable="false" />
+          <Property Name="LANGUE" Type="char" Nullable="false" MaxLength="2" />
+          <Property Name="IDROLE" Type="int" Nullable="false" />
+          <Property Name="IDECOLE" Type="int" Nullable="false" />
+          <Property Name="REINITIALISERMOTPASSE" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UTILISATEURSECTEUR">
+          <Key>
+            <PropertyRef Name="IDUTILISATEUR" />
+            <PropertyRef Name="IDSECTEUR" />
+          </Key>
+          <Property Name="IDUTILISATEUR" Type="int" Nullable="false" />
+          <Property Name="IDSECTEUR" Type="int" Nullable="false" />
+          <Property Name="DEBUTACCES" Type="date" Nullable="false" />
+          <Property Name="FINACCES" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VOTESONDAGE">
+          <Key>
+            <PropertyRef Name="IDUTILISATEUR" />
+            <PropertyRef Name="IDCHOIX" />
+          </Key>
+          <Property Name="IDUTILISATEUR" Type="int" Nullable="false" />
+          <Property Name="IDCHOIX" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CHOIXSOND_SOND">
+          <End Role="SONDAGE" Type="MVPModel.Store.SONDAGE" Multiplicity="1" />
+          <End Role="CHOIXSONDAGE" Type="MVPModel.Store.CHOIXSONDAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SONDAGE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CHOIXSONDAGE">
+              <PropertyRef Name="IDSONDAGE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFINSC_UTIL">
+          <End Role="UTILISATEUR" Type="MVPModel.Store.UTILISATEUR" Multiplicity="1" />
+          <End Role="CONFIRMINSCRIPTION" Type="MVPModel.Store.CONFIRMINSCRIPTION" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CONFIRMINSCRIPTION">
+              <PropertyRef Name="IDUTILISATEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DESTMESS_MESSPRIVE">
+          <End Role="MESSAGEPRIVE" Type="MVPModel.Store.MESSAGEPRIVE" Multiplicity="1" />
+          <End Role="DESTINATAIREMESSAGE" Type="MVPModel.Store.DESTINATAIREMESSAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MESSAGEPRIVE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DESTINATAIREMESSAGE">
+              <PropertyRef Name="IDMESSAGE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DESTMESS_UTIL">
+          <End Role="UTILISATEUR" Type="MVPModel.Store.UTILISATEUR" Multiplicity="1" />
+          <End Role="DESTINATAIREMESSAGE" Type="MVPModel.Store.DESTINATAIREMESSAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DESTINATAIREMESSAGE">
+              <PropertyRef Name="IDUTILISATEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ECOLESECT_ECOLE">
+          <End Role="ECOLE" Type="MVPModel.Store.ECOLE" Multiplicity="1" />
+          <End Role="ECOLESECTEUR" Type="MVPModel.Store.ECOLESECTEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ECOLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ECOLESECTEUR">
+              <PropertyRef Name="IDECOLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ECOLESECT_SECT">
+          <End Role="SECTEUR" Type="MVPModel.Store.SECTEUR" Multiplicity="1" />
+          <End Role="ECOLESECTEUR" Type="MVPModel.Store.ECOLESECTEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SECTEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ECOLESECTEUR">
+              <PropertyRef Name="IDSECTEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVEN_CATE">
+          <End Role="CATEGORIEEVENEMENT" Type="MVPModel.Store.CATEGORIEEVENEMENT" Multiplicity="1" />
+          <End Role="EVENEMENT" Type="MVPModel.Store.EVENEMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIEEVENEMENT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EVENEMENT">
+              <PropertyRef Name="IDCATEGORIE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVEN_UTIl">
+          <End Role="UTILISATEUR" Type="MVPModel.Store.UTILISATEUR" Multiplicity="1" />
+          <End Role="EVENEMENT" Type="MVPModel.Store.EVENEMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EVENEMENT">
+              <PropertyRef Name="IDCREATEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVENSECT_EVEN">
+          <End Role="EVENEMENT" Type="MVPModel.Store.EVENEMENT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EVENEMENTSECTEUR" Type="MVPModel.Store.EVENEMENTSECTEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVENEMENT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EVENEMENTSECTEUR">
+              <PropertyRef Name="IDEVENEMENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVENSECT_SECT">
+          <End Role="SECTEUR" Type="MVPModel.Store.SECTEUR" Multiplicity="1" />
+          <End Role="EVENEMENTSECTEUR" Type="MVPModel.Store.EVENEMENTSECTEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SECTEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EVENEMENTSECTEUR">
+              <PropertyRef Name="IDSECTEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FILDISC_FORUM">
+          <End Role="FORUM" Type="MVPModel.Store.FORUM" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FILDISCUSSION" Type="MVPModel.Store.FILDISCUSSION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FORUM">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FILDISCUSSION">
+              <PropertyRef Name="IDFORUM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FORUM_SECT">
+          <End Role="SECTEUR" Type="MVPModel.Store.SECTEUR" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FORUM" Type="MVPModel.Store.FORUM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SECTEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FORUM">
+              <PropertyRef Name="IDSECTEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MESS_FILDISC">
+          <End Role="FILDISCUSSION" Type="MVPModel.Store.FILDISCUSSION" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MESSAGEFORUM" Type="MVPModel.Store.MESSAGEFORUM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FILDISCUSSION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MESSAGEFORUM">
+              <PropertyRef Name="IDFILDISCUSSION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MESS_UTIL">
+          <End Role="UTILISATEUR" Type="MVPModel.Store.UTILISATEUR" Multiplicity="1" />
+          <End Role="MESSAGEFORUM" Type="MVPModel.Store.MESSAGEFORUM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MESSAGEFORUM">
+              <PropertyRef Name="IDUTILISATEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MESSPRIV_EXPED">
+          <End Role="UTILISATEUR" Type="MVPModel.Store.UTILISATEUR" Multiplicity="1" />
+          <End Role="MESSAGEPRIVE" Type="MVPModel.Store.MESSAGEPRIVE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MESSAGEPRIVE">
+              <PropertyRef Name="IDEXPEDITEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MOTCLEPUB_MOTCLE">
+          <End Role="MOTCLE" Type="MVPModel.Store.MOTCLE" Multiplicity="1" />
+          <End Role="MOTCLEPUBLICATION" Type="MVPModel.Store.MOTCLEPUBLICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MOTCLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MOTCLEPUBLICATION">
+              <PropertyRef Name="IDMOTCLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MOTCLEPUB_PUB">
+          <End Role="PUBLICATION" Type="MVPModel.Store.PUBLICATION" Multiplicity="1" />
+          <End Role="MOTCLEPUBLICATION" Type="MVPModel.Store.MOTCLEPUBLICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PUBLICATION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MOTCLEPUBLICATION">
+              <PropertyRef Name="IDPUBLICATION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PIECEJOINTE_MESS">
+          <End Role="MESSAGEPRIVE" Type="MVPModel.Store.MESSAGEPRIVE" Multiplicity="1" />
+          <End Role="PIECEJOINTE" Type="MVPModel.Store.PIECEJOINTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MESSAGEPRIVE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PIECEJOINTE">
+              <PropertyRef Name="IDMESSAGE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PUB_SECT">
+          <End Role="SECTEUR" Type="MVPModel.Store.SECTEUR" Multiplicity="1" />
+          <End Role="PUBLICATION" Type="MVPModel.Store.PUBLICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SECTEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PUBLICATION">
+              <PropertyRef Name="IDSECTEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PUB_SUJET">
+          <End Role="SUJETPUBLICATION" Type="MVPModel.Store.SUJETPUBLICATION" Multiplicity="1" />
+          <End Role="PUBLICATION" Type="MVPModel.Store.PUBLICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUJETPUBLICATION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PUBLICATION">
+              <PropertyRef Name="IDSUJET" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PUB_UTIL">
+          <End Role="UTILISATEUR" Type="MVPModel.Store.UTILISATEUR" Multiplicity="1" />
+          <End Role="PUBLICATION" Type="MVPModel.Store.PUBLICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PUBLICATION">
+              <PropertyRef Name="IDPUBLICATEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ROLEDROIT_DROIT">
+          <End Role="DROIT" Type="MVPModel.Store.DROIT" Multiplicity="1" />
+          <End Role="ROLEDROIT" Type="MVPModel.Store.ROLEDROIT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DROIT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ROLEDROIT">
+              <PropertyRef Name="IDDROIT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ROLEDROIT_ROLE">
+          <End Role="ROLE" Type="MVPModel.Store.ROLE" Multiplicity="1" />
+          <End Role="ROLEDROIT" Type="MVPModel.Store.ROLEDROIT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ROLEDROIT">
+              <PropertyRef Name="IDROLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOND_CREATEUR">
+          <End Role="UTILISATEUR" Type="MVPModel.Store.UTILISATEUR" Multiplicity="1" />
+          <End Role="SONDAGE" Type="MVPModel.Store.SONDAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SONDAGE">
+              <PropertyRef Name="IDCREATEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOND_SECT">
+          <End Role="SECTEUR" Type="MVPModel.Store.SECTEUR" Multiplicity="1" />
+          <End Role="SONDAGE" Type="MVPModel.Store.SONDAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SECTEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SONDAGE">
+              <PropertyRef Name="IDSECTEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UTIL_ECOLE">
+          <End Role="ECOLE" Type="MVPModel.Store.ECOLE" Multiplicity="1" />
+          <End Role="UTILISATEUR" Type="MVPModel.Store.UTILISATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ECOLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UTILISATEUR">
+              <PropertyRef Name="IDECOLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UTIL_ROLE">
+          <End Role="ROLE" Type="MVPModel.Store.ROLE" Multiplicity="1" />
+          <End Role="UTILISATEUR" Type="MVPModel.Store.UTILISATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UTILISATEUR">
+              <PropertyRef Name="IDROLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UTILSECT_SECT">
+          <End Role="SECTEUR" Type="MVPModel.Store.SECTEUR" Multiplicity="1" />
+          <End Role="UTILISATEURSECTEUR" Type="MVPModel.Store.UTILISATEURSECTEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SECTEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UTILISATEURSECTEUR">
+              <PropertyRef Name="IDSECTEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UTILSECT_UTIL">
+          <End Role="UTILISATEUR" Type="MVPModel.Store.UTILISATEUR" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UTILISATEURSECTEUR" Type="MVPModel.Store.UTILISATEURSECTEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UTILISATEURSECTEUR">
+              <PropertyRef Name="IDUTILISATEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VOTESOND_CHOIX">
+          <End Role="CHOIXSONDAGE" Type="MVPModel.Store.CHOIXSONDAGE" Multiplicity="1" />
+          <End Role="VOTESONDAGE" Type="MVPModel.Store.VOTESONDAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHOIXSONDAGE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VOTESONDAGE">
+              <PropertyRef Name="IDCHOIX" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VOTESOND_UTIL">
+          <End Role="UTILISATEUR" Type="MVPModel.Store.UTILISATEUR" Multiplicity="1" />
+          <End Role="VOTESONDAGE" Type="MVPModel.Store.VOTESONDAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VOTESONDAGE">
+              <PropertyRef Name="IDUTILISATEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AjouterChoixSondage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sondage" Type="int" Mode="In" />
+          <Parameter Name="valeur" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AjouterDestinataireMess" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="message" Type="int" Mode="In" />
+          <Parameter Name="destinataire" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AjouterEcole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nom" Type="varchar" Mode="In" />
+          <Parameter Name="adresse" Type="varchar" Mode="In" />
+          <Parameter Name="ville" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AjouterEven" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nomeven" Type="varchar" Mode="In" />
+          <Parameter Name="dateeven" Type="date" Mode="In" />
+          <Parameter Name="debut" Type="time" Mode="In" />
+          <Parameter Name="fin" Type="time" Mode="In" />
+          <Parameter Name="categorie" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AjouterFilDiscussion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sujet" Type="varchar" Mode="In" />
+          <Parameter Name="forum" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AjouterMessageForum" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="contenu" Type="text" Mode="In" />
+          <Parameter Name="util" Type="int" Mode="In" />
+          <Parameter Name="fildiscu" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AjouterMessagePrive" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="expediteur" Type="int" Mode="In" />
+          <Parameter Name="sujet" Type="varchar" Mode="In" />
+          <Parameter Name="contenu" Type="text" Mode="In" />
+        </Function>
+        <Function Name="AjouterMotCle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idpub" Type="int" Mode="In" />
+          <Parameter Name="valeur" Type="varchar" Mode="In" />
+          <Parameter Name="return_value" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="AjouterNouvelle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="titre" Type="varchar" Mode="In" />
+          <Parameter Name="description" Type="text" Mode="In" />
+        </Function>
+        <Function Name="AjouterPartenaire" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nom" Type="varchar" Mode="In" />
+          <Parameter Name="raisonsociale" Type="text" Mode="In" />
+          <Parameter Name="adr" Type="varchar" Mode="In" />
+          <Parameter Name="ville" Type="varchar" Mode="In" />
+          <Parameter Name="pays" Type="varchar" Mode="In" />
+          <Parameter Name="tel" Type="varchar" Mode="In" />
+          <Parameter Name="siteweb" Type="varchar" Mode="In" />
+          <Parameter Name="courriel" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AjouterPieceJointe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="message" Type="int" Mode="In" />
+          <Parameter Name="pieceserialisee" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="taillepiece" Type="varchar" Mode="In" />
+          <Parameter Name="nompiece" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AjouterPublication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="titre" Type="varchar" Mode="In" />
+          <Parameter Name="emplacement" Type="varchar" Mode="In" />
+          <Parameter Name="sujet" Type="int" Mode="In" />
+          <Parameter Name="secteur" Type="int" Mode="In" />
+          <Parameter Name="idpub" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="AjouterRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nom" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AjouterSectEcole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idecole" Type="int" Mode="In" />
+          <Parameter Name="idsecteur" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AjouterSecteur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nom" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AjouterSectEven" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="secteur" Type="int" Mode="In" />
+          <Parameter Name="even" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AjouterSondage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nom" Type="varchar" Mode="In" />
+          <Parameter Name="question" Type="varchar" Mode="In" />
+          <Parameter Name="debut" Type="datetime" Mode="In" />
+          <Parameter Name="fin" Type="datetime" Mode="In" />
+          <Parameter Name="createur" Type="int" Mode="In" />
+          <Parameter Name="secteur" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AjouterSujetPub" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sujet" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AjouterUtilisateur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nomutil" Type="varchar" Mode="In" />
+          <Parameter Name="motpasse" Type="varchar" Mode="In" />
+          <Parameter Name="courriel" Type="varchar" Mode="In" />
+          <Parameter Name="prenom" Type="varchar" Mode="In" />
+          <Parameter Name="nom" Type="varchar" Mode="In" />
+          <Parameter Name="adresse" Type="varchar" Mode="In" />
+          <Parameter Name="ville" Type="varchar" Mode="In" />
+          <Parameter Name="datenaissance" Type="date" Mode="In" />
+          <Parameter Name="langue" Type="char" Mode="In" />
+          <Parameter Name="role" Type="int" Mode="In" />
+          <Parameter Name="ecole" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AjouterUtilSecteur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="secteur" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AjouterVoteSondage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="util" Type="int" Mode="In" />
+          <Parameter Name="choix" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AssocierRoleDroit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idrole" Type="int" Mode="In" />
+          <Parameter Name="iddroit" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AugmenterNbrLectures" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idfildiscussion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeassocierRoleDroit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idrole" Type="int" Mode="In" />
+          <Parameter Name="iddroit" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetEven" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetEvents" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="secteur" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetFilDiscussion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idforum" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetForum" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="secteur" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetMessagesForum" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idfil" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetNouvelles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetPartenaire" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idpar" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetPartenaires" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetPubParMotCle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idsecteur" Type="int" Mode="In" />
+          <Parameter Name="motcle" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetPubParSecteur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idsecteur" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetPubParSujet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idsecteur" Type="int" Mode="In" />
+          <Parameter Name="idsujet" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetResultatsSondage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idsondage" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idrole" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetSecteurs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetSondage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetSondages" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idsecteur" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUtilAcces" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUtilParSecteur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idsecteur" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUtilProfil" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUtils" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="MessagePriveCorbeille" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idmess" Type="int" Mode="In" />
+        </Function>
+        <Function Name="MessagePriveSuppDef" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idmess" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ModiferEven" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ideven" Type="int" Mode="In" />
+          <Parameter Name="nomeven" Type="varchar" Mode="In" />
+          <Parameter Name="dateeven" Type="date" Mode="In" />
+          <Parameter Name="debut" Type="time" Mode="In" />
+          <Parameter Name="fin" Type="time" Mode="In" />
+          <Parameter Name="categorie" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ModifierChoixSondage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="valeur" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ModifierEcole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="nom" Type="varchar" Mode="In" />
+          <Parameter Name="adresse" Type="varchar" Mode="In" />
+          <Parameter Name="ville" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ModifierMessageForum" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="contenu" Type="text" Mode="In" />
+        </Function>
+        <Function Name="ModifierNouvelle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="titre" Type="varchar" Mode="In" />
+          <Parameter Name="description" Type="text" Mode="In" />
+        </Function>
+        <Function Name="ModifierPartenaire" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="nom" Type="varchar" Mode="In" />
+          <Parameter Name="raisonsociale" Type="text" Mode="In" />
+          <Parameter Name="adr" Type="varchar" Mode="In" />
+          <Parameter Name="ville" Type="varchar" Mode="In" />
+          <Parameter Name="pays" Type="varchar" Mode="In" />
+          <Parameter Name="tel" Type="varchar" Mode="In" />
+          <Parameter Name="siteweb" Type="varchar" Mode="In" />
+          <Parameter Name="courriel" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ModifierPublication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="titre" Type="varchar" Mode="In" />
+          <Parameter Name="sujet" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ModifierSondage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="nom" Type="varchar" Mode="In" />
+          <Parameter Name="question" Type="varchar" Mode="In" />
+          <Parameter Name="debut" Type="datetime" Mode="In" />
+          <Parameter Name="fin" Type="datetime" Mode="In" />
+          <Parameter Name="secteur" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ModifierSujetFilDiscussion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="sujet" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ModifierUtilEcole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="ecole" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ModifierUtilMotPasse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="newmp" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ModifierUtilProfil" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="courriel" Type="varchar" Mode="In" />
+          <Parameter Name="nom" Type="varchar" Mode="In" />
+          <Parameter Name="prenom" Type="varchar" Mode="In" />
+          <Parameter Name="adresse" Type="varchar" Mode="In" />
+          <Parameter Name="ville" Type="varchar" Mode="In" />
+          <Parameter Name="langue" Type="char" Mode="In" />
+        </Function>
+        <Function Name="ModifierUtilRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="role" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ReinitMotPasse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SupprimerChoixSondage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SupprimerEcole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SupprimerEven" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SupprimerFilDiscussion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idfil" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SupprimerMessageForum" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idmess" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SupprimerMotClePub" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idpub" Type="int" Mode="In" />
+          <Parameter Name="idmotcle" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SupprimerNouvelle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SupprimerPartenaire" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SupprimerPublication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SupprimerRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SupprimerSectEcole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idecole" Type="int" Mode="In" />
+          <Parameter Name="idsecteur" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SupprimerSecteur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SupprimerSectEven" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="secteur" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SupprimerSondage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SupprimerUtilisateur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nomutil" Type="varchar" Mode="In" />
+          <Parameter Name="permanent" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SupprimerUtilSect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="secteur" Type="int" Mode="In" />
+        </Function>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MVPModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MVPEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="CATEGORIEEVENEMENT" EntityType="MVPModel.CATEGORIEEVENEMENT" />
+          <EntitySet Name="CHOIXSONDAGE" EntityType="MVPModel.CHOIXSONDAGE" />
+          <EntitySet Name="CONFIRMINSCRIPTION" EntityType="MVPModel.CONFIRMINSCRIPTION" />
+          <EntitySet Name="DESTINATAIREMESSAGE" EntityType="MVPModel.DESTINATAIREMESSAGE" />
+          <EntitySet Name="DROIT" EntityType="MVPModel.DROIT" />
+          <EntitySet Name="ECOLE" EntityType="MVPModel.ECOLE" />
+          <EntitySet Name="EVENEMENT" EntityType="MVPModel.EVENEMENT" />
+          <EntitySet Name="FILDISCUSSION" EntityType="MVPModel.FILDISCUSSION" />
+          <EntitySet Name="FORUM" EntityType="MVPModel.FORUM" />
+          <EntitySet Name="MESSAGEFORUM" EntityType="MVPModel.MESSAGEFORUM" />
+          <EntitySet Name="MESSAGEPRIVE" EntityType="MVPModel.MESSAGEPRIVE" />
+          <EntitySet Name="MOTCLE" EntityType="MVPModel.MOTCLE" />
+          <EntitySet Name="NOUVELLE" EntityType="MVPModel.NOUVELLE" />
+          <EntitySet Name="PARTENAIRE" EntityType="MVPModel.PARTENAIRE" />
+          <EntitySet Name="PIECEJOINTE" EntityType="MVPModel.PIECEJOINTE" />
+          <EntitySet Name="PUBLICATION" EntityType="MVPModel.PUBLICATION" />
+          <EntitySet Name="ROLE" EntityType="MVPModel.ROLE" />
+          <EntitySet Name="SECTEUR" EntityType="MVPModel.SECTEUR" />
+          <EntitySet Name="SONDAGE" EntityType="MVPModel.SONDAGE" />
+          <EntitySet Name="SUJETPUBLICATION" EntityType="MVPModel.SUJETPUBLICATION" />
+          <EntitySet Name="UTILISATEUR" EntityType="MVPModel.UTILISATEUR" />
+          <EntitySet Name="UTILISATEURSECTEUR" EntityType="MVPModel.UTILISATEURSECTEUR" />
+          <AssociationSet Name="FK_EVEN_CATE" Association="MVPModel.FK_EVEN_CATE">
+            <End Role="CATEGORIEEVENEMENT" EntitySet="CATEGORIEEVENEMENT" />
+            <End Role="EVENEMENT" EntitySet="EVENEMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHOIXSOND_SOND" Association="MVPModel.FK_CHOIXSOND_SOND">
+            <End Role="SONDAGE" EntitySet="SONDAGE" />
+            <End Role="CHOIXSONDAGE" EntitySet="CHOIXSONDAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONFINSC_UTIL" Association="MVPModel.FK_CONFINSC_UTIL">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+            <End Role="CONFIRMINSCRIPTION" EntitySet="CONFIRMINSCRIPTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DESTMESS_MESSPRIVE" Association="MVPModel.FK_DESTMESS_MESSPRIVE">
+            <End Role="MESSAGEPRIVE" EntitySet="MESSAGEPRIVE" />
+            <End Role="DESTINATAIREMESSAGE" EntitySet="DESTINATAIREMESSAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DESTMESS_UTIL" Association="MVPModel.FK_DESTMESS_UTIL">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+            <End Role="DESTINATAIREMESSAGE" EntitySet="DESTINATAIREMESSAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UTIL_ECOLE" Association="MVPModel.FK_UTIL_ECOLE">
+            <End Role="ECOLE" EntitySet="ECOLE" />
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVEN_UTIl" Association="MVPModel.FK_EVEN_UTIl">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+            <End Role="EVENEMENT" EntitySet="EVENEMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FILDISC_FORUM" Association="MVPModel.FK_FILDISC_FORUM">
+            <End Role="FORUM" EntitySet="FORUM" />
+            <End Role="FILDISCUSSION" EntitySet="FILDISCUSSION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MESS_FILDISC" Association="MVPModel.FK_MESS_FILDISC">
+            <End Role="FILDISCUSSION" EntitySet="FILDISCUSSION" />
+            <End Role="MESSAGEFORUM" EntitySet="MESSAGEFORUM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FORUM_SECT" Association="MVPModel.FK_FORUM_SECT">
+            <End Role="SECTEUR" EntitySet="SECTEUR" />
+            <End Role="FORUM" EntitySet="FORUM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MESS_UTIL" Association="MVPModel.FK_MESS_UTIL">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+            <End Role="MESSAGEFORUM" EntitySet="MESSAGEFORUM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MESSPRIV_EXPED" Association="MVPModel.FK_MESSPRIV_EXPED">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+            <End Role="MESSAGEPRIVE" EntitySet="MESSAGEPRIVE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PIECEJOINTE_MESS" Association="MVPModel.FK_PIECEJOINTE_MESS">
+            <End Role="MESSAGEPRIVE" EntitySet="MESSAGEPRIVE" />
+            <End Role="PIECEJOINTE" EntitySet="PIECEJOINTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PUB_SECT" Association="MVPModel.FK_PUB_SECT">
+            <End Role="SECTEUR" EntitySet="SECTEUR" />
+            <End Role="PUBLICATION" EntitySet="PUBLICATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PUB_SUJET" Association="MVPModel.FK_PUB_SUJET">
+            <End Role="SUJETPUBLICATION" EntitySet="SUJETPUBLICATION" />
+            <End Role="PUBLICATION" EntitySet="PUBLICATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PUB_UTIL" Association="MVPModel.FK_PUB_UTIL">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+            <End Role="PUBLICATION" EntitySet="PUBLICATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UTIL_ROLE" Association="MVPModel.FK_UTIL_ROLE">
+            <End Role="ROLE" EntitySet="ROLE" />
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOND_SECT" Association="MVPModel.FK_SOND_SECT">
+            <End Role="SECTEUR" EntitySet="SECTEUR" />
+            <End Role="SONDAGE" EntitySet="SONDAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UTILSECT_SECT" Association="MVPModel.FK_UTILSECT_SECT">
+            <End Role="SECTEUR" EntitySet="SECTEUR" />
+            <End Role="UTILISATEURSECTEUR" EntitySet="UTILISATEURSECTEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOND_CREATEUR" Association="MVPModel.FK_SOND_CREATEUR">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+            <End Role="SONDAGE" EntitySet="SONDAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UTILSECT_UTIL" Association="MVPModel.FK_UTILSECT_UTIL">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+            <End Role="UTILISATEURSECTEUR" EntitySet="UTILISATEURSECTEUR" />
+          </AssociationSet>
+          <AssociationSet Name="ECOLESECTEUR" Association="MVPModel.ECOLESECTEUR">
+            <End Role="ECOLE" EntitySet="ECOLE" />
+            <End Role="SECTEUR" EntitySet="SECTEUR" />
+          </AssociationSet>
+          <AssociationSet Name="EVENEMENTSECTEUR" Association="MVPModel.EVENEMENTSECTEUR">
+            <End Role="EVENEMENT" EntitySet="EVENEMENT" />
+            <End Role="SECTEUR" EntitySet="SECTEUR" />
+          </AssociationSet>
+          <AssociationSet Name="MOTCLEPUBLICATION" Association="MVPModel.MOTCLEPUBLICATION">
+            <End Role="MOTCLE" EntitySet="MOTCLE" />
+            <End Role="PUBLICATION" EntitySet="PUBLICATION" />
+          </AssociationSet>
+          <AssociationSet Name="ROLEDROIT" Association="MVPModel.ROLEDROIT">
+            <End Role="DROIT" EntitySet="DROIT" />
+            <End Role="ROLE" EntitySet="ROLE" />
+          </AssociationSet>
+          <AssociationSet Name="VOTESONDAGE" Association="MVPModel.VOTESONDAGE">
+            <End Role="CHOIXSONDAGE" EntitySet="CHOIXSONDAGE" />
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+          </AssociationSet>
+          <FunctionImport Name="AjouterChoixSondage">
+            <Parameter Name="sondage" Mode="In" Type="Int32" />
+            <Parameter Name="valeur" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AjouterDestinataireMess">
+            <Parameter Name="message" Mode="In" Type="Int32" />
+            <Parameter Name="destinataire" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AjouterEcole">
+            <Parameter Name="nom" Mode="In" Type="String" />
+            <Parameter Name="adresse" Mode="In" Type="String" />
+            <Parameter Name="ville" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AjouterEven">
+            <Parameter Name="nomeven" Mode="In" Type="String" />
+            <Parameter Name="dateeven" Mode="In" Type="DateTime" />
+            <Parameter Name="debut" Mode="In" Type="Time" />
+            <Parameter Name="fin" Mode="In" Type="Time" />
+            <Parameter Name="categorie" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AjouterFilDiscussion">
+            <Parameter Name="sujet" Mode="In" Type="String" />
+            <Parameter Name="forum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AjouterMessageForum">
+            <Parameter Name="contenu" Mode="In" Type="String" />
+            <Parameter Name="util" Mode="In" Type="Int32" />
+            <Parameter Name="fildiscu" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AjouterMessagePrive">
+            <Parameter Name="expediteur" Mode="In" Type="Int32" />
+            <Parameter Name="sujet" Mode="In" Type="String" />
+            <Parameter Name="contenu" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AjouterMotCle">
+            <Parameter Name="idpub" Mode="In" Type="Int32" />
+            <Parameter Name="valeur" Mode="In" Type="String" />
+            <Parameter Name="return_value" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AjouterNouvelle">
+            <Parameter Name="titre" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AjouterPartenaire">
+            <Parameter Name="nom" Mode="In" Type="String" />
+            <Parameter Name="raisonsociale" Mode="In" Type="String" />
+            <Parameter Name="adr" Mode="In" Type="String" />
+            <Parameter Name="ville" Mode="In" Type="String" />
+            <Parameter Name="pays" Mode="In" Type="String" />
+            <Parameter Name="tel" Mode="In" Type="String" />
+            <Parameter Name="siteweb" Mode="In" Type="String" />
+            <Parameter Name="courriel" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AjouterPieceJointe">
+            <Parameter Name="message" Mode="In" Type="Int32" />
+            <Parameter Name="pieceserialisee" Mode="In" Type="Binary" />
+            <Parameter Name="taillepiece" Mode="In" Type="String" />
+            <Parameter Name="nompiece" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AjouterPublication">
+            <Parameter Name="titre" Mode="In" Type="String" />
+            <Parameter Name="emplacement" Mode="In" Type="String" />
+            <Parameter Name="sujet" Mode="In" Type="Int32" />
+            <Parameter Name="secteur" Mode="In" Type="Int32" />
+            <Parameter Name="idpub" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AjouterRole">
+            <Parameter Name="nom" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AjouterSectEcole">
+            <Parameter Name="idecole" Mode="In" Type="Int32" />
+            <Parameter Name="idsecteur" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AjouterSecteur">
+            <Parameter Name="nom" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AjouterSectEven">
+            <Parameter Name="secteur" Mode="In" Type="Int32" />
+            <Parameter Name="even" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AjouterSondage">
+            <Parameter Name="nom" Mode="In" Type="String" />
+            <Parameter Name="question" Mode="In" Type="String" />
+            <Parameter Name="debut" Mode="In" Type="DateTime" />
+            <Parameter Name="fin" Mode="In" Type="DateTime" />
+            <Parameter Name="createur" Mode="In" Type="Int32" />
+            <Parameter Name="secteur" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AjouterSujetPub">
+            <Parameter Name="sujet" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AjouterUtilisateur">
+            <Parameter Name="nomutil" Mode="In" Type="String" />
+            <Parameter Name="motpasse" Mode="In" Type="String" />
+            <Parameter Name="courriel" Mode="In" Type="String" />
+            <Parameter Name="prenom" Mode="In" Type="String" />
+            <Parameter Name="nom" Mode="In" Type="String" />
+            <Parameter Name="adresse" Mode="In" Type="String" />
+            <Parameter Name="ville" Mode="In" Type="String" />
+            <Parameter Name="datenaissance" Mode="In" Type="DateTime" />
+            <Parameter Name="langue" Mode="In" Type="String" />
+            <Parameter Name="role" Mode="In" Type="Int32" />
+            <Parameter Name="ecole" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AjouterUtilSecteur">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="secteur" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AjouterVoteSondage">
+            <Parameter Name="util" Mode="In" Type="Int32" />
+            <Parameter Name="choix" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AssocierRoleDroit">
+            <Parameter Name="idrole" Mode="In" Type="Int32" />
+            <Parameter Name="iddroit" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AugmenterNbrLectures">
+            <Parameter Name="idfildiscussion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeassocierRoleDroit">
+            <Parameter Name="idrole" Mode="In" Type="Int32" />
+            <Parameter Name="iddroit" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetEven" ReturnType="Collection(MVPModel.GetEven_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetEvents" ReturnType="Collection(MVPModel.GetEvents_Result)">
+            <Parameter Name="secteur" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetFilDiscussion" ReturnType="Collection(MVPModel.GetFilDiscussion_Result)">
+            <Parameter Name="idforum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetForum" ReturnType="Collection(MVPModel.GetForum_Result)">
+            <Parameter Name="secteur" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetMessagesForum" ReturnType="Collection(MVPModel.GetMessagesForum_Result)">
+            <Parameter Name="idfil" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetNouvelles" ReturnType="Collection(MVPModel.GetNouvelles_Result)" />
+          <FunctionImport Name="GetPartenaire" ReturnType="Collection(MVPModel.GetPartenaire_Result)">
+            <Parameter Name="idpar" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetPartenaires" ReturnType="Collection(MVPModel.GetPartenaires_Result)" />
+          <FunctionImport Name="GetPubParMotCle" ReturnType="Collection(MVPModel.GetPubParMotCle_Result)">
+            <Parameter Name="idsecteur" Mode="In" Type="Int32" />
+            <Parameter Name="motcle" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetPubParSecteur" ReturnType="Collection(MVPModel.GetPubParSecteur_Result)">
+            <Parameter Name="idsecteur" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetPubParSujet" ReturnType="Collection(MVPModel.GetPubParSujet_Result)">
+            <Parameter Name="idsecteur" Mode="In" Type="Int32" />
+            <Parameter Name="idsujet" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetResultatsSondage" ReturnType="Collection(MVPModel.GetResultatsSondage_Result)">
+            <Parameter Name="idsondage" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetRole" ReturnType="Collection(MVPModel.GetRole_Result)">
+            <Parameter Name="idrole" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetRoles" ReturnType="Collection(MVPModel.GetRoles_Result)" />
+          <FunctionImport Name="GetSecteurs" ReturnType="Collection(MVPModel.GetSecteurs_Result)" />
+          <FunctionImport Name="GetSondage" ReturnType="Collection(MVPModel.GetSondage_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetSondages" ReturnType="Collection(MVPModel.GetSondages_Result)">
+            <Parameter Name="idsecteur" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUtilAcces" ReturnType="Collection(MVPModel.GetUtilAcces_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUtilParSecteur" ReturnType="Collection(MVPModel.GetUtilParSecteur_Result)">
+            <Parameter Name="idsecteur" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUtilProfil" ReturnType="Collection(MVPModel.GetUtilProfil_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUtils" ReturnType="Collection(MVPModel.GetUtils_Result)" />
+          <FunctionImport Name="MessagePriveCorbeille">
+            <Parameter Name="idmess" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MessagePriveSuppDef">
+            <Parameter Name="idmess" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ModiferEven">
+            <Parameter Name="ideven" Mode="In" Type="Int32" />
+            <Parameter Name="nomeven" Mode="In" Type="String" />
+            <Parameter Name="dateeven" Mode="In" Type="DateTime" />
+            <Parameter Name="debut" Mode="In" Type="Time" />
+            <Parameter Name="fin" Mode="In" Type="Time" />
+            <Parameter Name="categorie" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ModifierChoixSondage">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="valeur" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ModifierEcole">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="nom" Mode="In" Type="String" />
+            <Parameter Name="adresse" Mode="In" Type="String" />
+            <Parameter Name="ville" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ModifierMessageForum">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="contenu" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ModifierNouvelle">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="titre" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ModifierPartenaire">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="nom" Mode="In" Type="String" />
+            <Parameter Name="raisonsociale" Mode="In" Type="String" />
+            <Parameter Name="adr" Mode="In" Type="String" />
+            <Parameter Name="ville" Mode="In" Type="String" />
+            <Parameter Name="pays" Mode="In" Type="String" />
+            <Parameter Name="tel" Mode="In" Type="String" />
+            <Parameter Name="siteweb" Mode="In" Type="String" />
+            <Parameter Name="courriel" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ModifierPublication">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="titre" Mode="In" Type="String" />
+            <Parameter Name="sujet" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ModifierSondage">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="nom" Mode="In" Type="String" />
+            <Parameter Name="question" Mode="In" Type="String" />
+            <Parameter Name="debut" Mode="In" Type="DateTime" />
+            <Parameter Name="fin" Mode="In" Type="DateTime" />
+            <Parameter Name="secteur" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ModifierSujetFilDiscussion">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="sujet" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ModifierUtilEcole">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="ecole" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ModifierUtilMotPasse">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="newmp" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ModifierUtilProfil">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="courriel" Mode="In" Type="String" />
+            <Parameter Name="nom" Mode="In" Type="String" />
+            <Parameter Name="prenom" Mode="In" Type="String" />
+            <Parameter Name="adresse" Mode="In" Type="String" />
+            <Parameter Name="ville" Mode="In" Type="String" />
+            <Parameter Name="langue" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ModifierUtilRole">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="role" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ReinitMotPasse">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SupprimerChoixSondage">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SupprimerEcole">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SupprimerEven">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SupprimerFilDiscussion">
+            <Parameter Name="idfil" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SupprimerMessageForum">
+            <Parameter Name="idmess" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SupprimerMotClePub">
+            <Parameter Name="idpub" Mode="In" Type="Int32" />
+            <Parameter Name="idmotcle" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SupprimerNouvelle">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SupprimerPartenaire">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SupprimerPublication">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SupprimerRole">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SupprimerSectEcole">
+            <Parameter Name="idecole" Mode="In" Type="Int32" />
+            <Parameter Name="idsecteur" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SupprimerSecteur">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SupprimerSectEven">
+            <Parameter Name="secteur" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SupprimerSondage">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SupprimerUtilisateur">
+            <Parameter Name="nomutil" Mode="In" Type="String" />
+            <Parameter Name="permanent" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="SupprimerUtilSect">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="secteur" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="CATEGORIEEVENEMENT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="EVENEMENT" Relationship="MVPModel.FK_EVEN_CATE" FromRole="CATEGORIEEVENEMENT" ToRole="EVENEMENT" />
+        </EntityType>
+        <EntityType Name="CHOIXSONDAGE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="IDSONDAGE" Type="Int32" Nullable="false" />
+          <Property Name="VALEUR" Type="String" Nullable="false" MaxLength="60" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="SONDAGE" Relationship="MVPModel.FK_CHOIXSOND_SOND" FromRole="CHOIXSONDAGE" ToRole="SONDAGE" />
+          <NavigationProperty Name="UTILISATEUR" Relationship="MVPModel.VOTESONDAGE" FromRole="CHOIXSONDAGE" ToRole="UTILISATEUR" />
+        </EntityType>
+        <EntityType Name="CONFIRMINSCRIPTION">
+          <Key>
+            <PropertyRef Name="IDUTILISATEUR" />
+          </Key>
+          <Property Name="IDUTILISATEUR" Type="Int32" Nullable="false" />
+          <Property Name="DATEENVOI" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="JETON" Type="String" Nullable="false" MaxLength="32" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="UTILISATEUR" Relationship="MVPModel.FK_CONFINSC_UTIL" FromRole="CONFIRMINSCRIPTION" ToRole="UTILISATEUR" />
+        </EntityType>
+        <EntityType Name="DESTINATAIREMESSAGE">
+          <Key>
+            <PropertyRef Name="IDMESSAGE" />
+            <PropertyRef Name="IDUTILISATEUR" />
+          </Key>
+          <Property Name="IDMESSAGE" Type="Int32" Nullable="false" />
+          <Property Name="IDUTILISATEUR" Type="Int32" Nullable="false" />
+          <Property Name="SUPPRIME" Type="Boolean" Nullable="false" />
+          <Property Name="SUPPRIMEDEFINITIF" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="MESSAGEPRIVE" Relationship="MVPModel.FK_DESTMESS_MESSPRIVE" FromRole="DESTINATAIREMESSAGE" ToRole="MESSAGEPRIVE" />
+          <NavigationProperty Name="UTILISATEUR" Relationship="MVPModel.FK_DESTMESS_UTIL" FromRole="DESTINATAIREMESSAGE" ToRole="UTILISATEUR" />
+        </EntityType>
+        <EntityType Name="DROIT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="TYPE" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="DESCRIPTION" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="ROLE" Relationship="MVPModel.ROLEDROIT" FromRole="DROIT" ToRole="ROLE" />
+        </EntityType>
+        <EntityType Name="ECOLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM" Type="String" Nullable="false" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="PROVINCE" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="UTILISATEUR" Relationship="MVPModel.FK_UTIL_ECOLE" FromRole="ECOLE" ToRole="UTILISATEUR" />
+          <NavigationProperty Name="SECTEUR" Relationship="MVPModel.ECOLESECTEUR" FromRole="ECOLE" ToRole="SECTEUR" />
+        </EntityType>
+        <EntityType Name="EVENEMENT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="DATEEVEN" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="HEUREDEBUT" Type="Time" Precision="7" />
+          <Property Name="HEUREFIN" Type="Time" Precision="7" />
+          <Property Name="IDCATEGORIE" Type="Int32" Nullable="false" />
+          <Property Name="IDCREATEUR" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CATEGORIEEVENEMENT" Relationship="MVPModel.FK_EVEN_CATE" FromRole="EVENEMENT" ToRole="CATEGORIEEVENEMENT" />
+          <NavigationProperty Name="UTILISATEUR" Relationship="MVPModel.FK_EVEN_UTIl" FromRole="EVENEMENT" ToRole="UTILISATEUR" />
+          <NavigationProperty Name="SECTEUR" Relationship="MVPModel.EVENEMENTSECTEUR" FromRole="EVENEMENT" ToRole="SECTEUR" />
+        </EntityType>
+        <EntityType Name="FILDISCUSSION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="SUJET" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="DATEPUBLICATION" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DATEMODIFICATION" Type="DateTime" Precision="3" />
+          <Property Name="NBLECTURES" Type="Int32" Nullable="false" />
+          <Property Name="IDFORUM" Type="Int32" />
+          <NavigationProperty Name="FORUM" Relationship="MVPModel.FK_FILDISC_FORUM" FromRole="FILDISCUSSION" ToRole="FORUM" />
+          <NavigationProperty Name="MESSAGEFORUM" Relationship="MVPModel.FK_MESS_FILDISC" FromRole="FILDISCUSSION" ToRole="MESSAGEFORUM" />
+        </EntityType>
+        <EntityType Name="FORUM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="TITRE" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="IDSECTEUR" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FILDISCUSSION" Relationship="MVPModel.FK_FILDISC_FORUM" FromRole="FORUM" ToRole="FILDISCUSSION" />
+          <NavigationProperty Name="SECTEUR" Relationship="MVPModel.FK_FORUM_SECT" FromRole="FORUM" ToRole="SECTEUR" />
+        </EntityType>
+        <EntityType Name="MESSAGEFORUM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="DATEPUBLICATION" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DATEMODIFICATION" Type="DateTime" Precision="3" />
+          <Property Name="CONTENU" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="IDUTILISATEUR" Type="Int32" Nullable="false" />
+          <Property Name="IDFILDISCUSSION" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FILDISCUSSION" Relationship="MVPModel.FK_MESS_FILDISC" FromRole="MESSAGEFORUM" ToRole="FILDISCUSSION" />
+          <NavigationProperty Name="UTILISATEUR" Relationship="MVPModel.FK_MESS_UTIL" FromRole="MESSAGEFORUM" ToRole="UTILISATEUR" />
+        </EntityType>
+        <EntityType Name="MESSAGEPRIVE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="IDEXPEDITEUR" Type="Int32" Nullable="false" />
+          <Property Name="SUJET" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="CONTENU" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="DATEENVOI" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SUPPRIME" Type="Boolean" Nullable="false" />
+          <Property Name="SUPPRIMEDEFINITIF" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="DESTINATAIREMESSAGE" Relationship="MVPModel.FK_DESTMESS_MESSPRIVE" FromRole="MESSAGEPRIVE" ToRole="DESTINATAIREMESSAGE" />
+          <NavigationProperty Name="UTILISATEUR" Relationship="MVPModel.FK_MESSPRIV_EXPED" FromRole="MESSAGEPRIVE" ToRole="UTILISATEUR" />
+          <NavigationProperty Name="PIECEJOINTE" Relationship="MVPModel.FK_PIECEJOINTE_MESS" FromRole="MESSAGEPRIVE" ToRole="PIECEJOINTE" />
+        </EntityType>
+        <EntityType Name="MOTCLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="VALEUR" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="PUBLICATION" Relationship="MVPModel.MOTCLEPUBLICATION" FromRole="MOTCLE" ToRole="PUBLICATION" />
+        </EntityType>
+        <EntityType Name="NOUVELLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="TITRE" Type="String" Nullable="false" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="DESCRIPTION" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="DATEPUBLICATION" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="PARTENAIRE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM" Type="String" Nullable="false" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="RAISONSOCIALE" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="ADRESSE" Type="String" MaxLength="65" Unicode="false" FixedLength="false" />
+          <Property Name="VILLE" Type="String" MaxLength="65" Unicode="false" FixedLength="false" />
+          <Property Name="PAYS" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="TELEPHONE" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="SITEWEB" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="COURRIEL" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="PIECEJOINTE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="IDMESSAGE" Type="Int32" Nullable="false" />
+          <Property Name="PIECESERIALISEE" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="TAILLEPIECE" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="NOMPIECE" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="MESSAGEPRIVE" Relationship="MVPModel.FK_PIECEJOINTE_MESS" FromRole="PIECEJOINTE" ToRole="MESSAGEPRIVE" />
+        </EntityType>
+        <EntityType Name="PUBLICATION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="TITRE" Type="String" Nullable="false" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="DATECREATION" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EMPLACEMENTSERVEUR" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="IDPUBLICATEUR" Type="Int32" Nullable="false" />
+          <Property Name="TYPEMIME" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="IDSUJET" Type="Int32" Nullable="false" />
+          <Property Name="IDSECTEUR" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SECTEUR" Relationship="MVPModel.FK_PUB_SECT" FromRole="PUBLICATION" ToRole="SECTEUR" />
+          <NavigationProperty Name="SUJETPUBLICATION" Relationship="MVPModel.FK_PUB_SUJET" FromRole="PUBLICATION" ToRole="SUJETPUBLICATION" />
+          <NavigationProperty Name="UTILISATEUR" Relationship="MVPModel.FK_PUB_UTIL" FromRole="PUBLICATION" ToRole="UTILISATEUR" />
+          <NavigationProperty Name="MOTCLE" Relationship="MVPModel.MOTCLEPUBLICATION" FromRole="PUBLICATION" ToRole="MOTCLE" />
+        </EntityType>
+        <EntityType Name="ROLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="UTILISATEUR" Relationship="MVPModel.FK_UTIL_ROLE" FromRole="ROLE" ToRole="UTILISATEUR" />
+          <NavigationProperty Name="DROIT" Relationship="MVPModel.ROLEDROIT" FromRole="ROLE" ToRole="DROIT" />
+        </EntityType>
+        <EntityType Name="SECTEUR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="FORUM" Relationship="MVPModel.FK_FORUM_SECT" FromRole="SECTEUR" ToRole="FORUM" />
+          <NavigationProperty Name="PUBLICATION" Relationship="MVPModel.FK_PUB_SECT" FromRole="SECTEUR" ToRole="PUBLICATION" />
+          <NavigationProperty Name="SONDAGE" Relationship="MVPModel.FK_SOND_SECT" FromRole="SECTEUR" ToRole="SONDAGE" />
+          <NavigationProperty Name="UTILISATEURSECTEUR" Relationship="MVPModel.FK_UTILSECT_SECT" FromRole="SECTEUR" ToRole="UTILISATEURSECTEUR" />
+          <NavigationProperty Name="ECOLE" Relationship="MVPModel.ECOLESECTEUR" FromRole="SECTEUR" ToRole="ECOLE" />
+          <NavigationProperty Name="EVENEMENT" Relationship="MVPModel.EVENEMENTSECTEUR" FromRole="SECTEUR" ToRole="EVENEMENT" />
+        </EntityType>
+        <EntityType Name="SONDAGE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM" Type="String" Nullable="false" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="QUESTION" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="DATEDEBUT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DATEFIN" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IDCREATEUR" Type="Int32" Nullable="false" />
+          <Property Name="IDSECTEUR" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CHOIXSONDAGE" Relationship="MVPModel.FK_CHOIXSOND_SOND" FromRole="SONDAGE" ToRole="CHOIXSONDAGE" />
+          <NavigationProperty Name="SECTEUR" Relationship="MVPModel.FK_SOND_SECT" FromRole="SONDAGE" ToRole="SECTEUR" />
+          <NavigationProperty Name="UTILISATEUR" Relationship="MVPModel.FK_SOND_CREATEUR" FromRole="SONDAGE" ToRole="UTILISATEUR" />
+        </EntityType>
+        <EntityType Name="SUJETPUBLICATION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="PUBLICATION" Relationship="MVPModel.FK_PUB_SUJET" FromRole="SUJETPUBLICATION" ToRole="PUBLICATION" />
+        </EntityType>
+        <EntityType Name="UTILISATEUR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMUTIL" Type="String" Nullable="false" MaxLength="25" Unicode="false" FixedLength="false" />
+          <Property Name="MOTPASSE" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="COURRIEL" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="PRENOM" Type="String" Nullable="false" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="NOM" Type="String" Nullable="false" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="ADRESSE" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="VILLE" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="DATENAISSANCE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DATECREATION" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DERNIERECONNEXION" Type="DateTime" Precision="3" />
+          <Property Name="COMPTEACTIF" Type="Boolean" Nullable="false" />
+          <Property Name="LANGUE" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="true" />
+          <Property Name="IDROLE" Type="Int32" Nullable="false" />
+          <Property Name="IDECOLE" Type="Int32" Nullable="false" />
+          <Property Name="REINITIALISERMOTPASSE" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CONFIRMINSCRIPTION" Relationship="MVPModel.FK_CONFINSC_UTIL" FromRole="UTILISATEUR" ToRole="CONFIRMINSCRIPTION" />
+          <NavigationProperty Name="DESTINATAIREMESSAGE" Relationship="MVPModel.FK_DESTMESS_UTIL" FromRole="UTILISATEUR" ToRole="DESTINATAIREMESSAGE" />
+          <NavigationProperty Name="ECOLE" Relationship="MVPModel.FK_UTIL_ECOLE" FromRole="UTILISATEUR" ToRole="ECOLE" />
+          <NavigationProperty Name="EVENEMENT" Relationship="MVPModel.FK_EVEN_UTIl" FromRole="UTILISATEUR" ToRole="EVENEMENT" />
+          <NavigationProperty Name="MESSAGEFORUM" Relationship="MVPModel.FK_MESS_UTIL" FromRole="UTILISATEUR" ToRole="MESSAGEFORUM" />
+          <NavigationProperty Name="MESSAGEPRIVE" Relationship="MVPModel.FK_MESSPRIV_EXPED" FromRole="UTILISATEUR" ToRole="MESSAGEPRIVE" />
+          <NavigationProperty Name="PUBLICATION" Relationship="MVPModel.FK_PUB_UTIL" FromRole="UTILISATEUR" ToRole="PUBLICATION" />
+          <NavigationProperty Name="ROLE" Relationship="MVPModel.FK_UTIL_ROLE" FromRole="UTILISATEUR" ToRole="ROLE" />
+          <NavigationProperty Name="SONDAGE" Relationship="MVPModel.FK_SOND_CREATEUR" FromRole="UTILISATEUR" ToRole="SONDAGE" />
+          <NavigationProperty Name="UTILISATEURSECTEUR" Relationship="MVPModel.FK_UTILSECT_UTIL" FromRole="UTILISATEUR" ToRole="UTILISATEURSECTEUR" />
+          <NavigationProperty Name="CHOIXSONDAGE" Relationship="MVPModel.VOTESONDAGE" FromRole="UTILISATEUR" ToRole="CHOIXSONDAGE" />
+        </EntityType>
+        <EntityType Name="UTILISATEURSECTEUR">
+          <Key>
+            <PropertyRef Name="IDUTILISATEUR" />
+            <PropertyRef Name="IDSECTEUR" />
+          </Key>
+          <Property Name="IDUTILISATEUR" Type="Int32" Nullable="false" />
+          <Property Name="IDSECTEUR" Type="Int32" Nullable="false" />
+          <Property Name="DEBUTACCES" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FINACCES" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="SECTEUR" Relationship="MVPModel.FK_UTILSECT_SECT" FromRole="UTILISATEURSECTEUR" ToRole="SECTEUR" />
+          <NavigationProperty Name="UTILISATEUR" Relationship="MVPModel.FK_UTILSECT_UTIL" FromRole="UTILISATEURSECTEUR" ToRole="UTILISATEUR" />
+        </EntityType>
+        <Association Name="FK_EVEN_CATE">
+          <End Role="CATEGORIEEVENEMENT" Type="MVPModel.CATEGORIEEVENEMENT" Multiplicity="1" />
+          <End Role="EVENEMENT" Type="MVPModel.EVENEMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIEEVENEMENT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EVENEMENT">
+              <PropertyRef Name="IDCATEGORIE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHOIXSOND_SOND">
+          <End Role="SONDAGE" Type="MVPModel.SONDAGE" Multiplicity="1" />
+          <End Role="CHOIXSONDAGE" Type="MVPModel.CHOIXSONDAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SONDAGE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CHOIXSONDAGE">
+              <PropertyRef Name="IDSONDAGE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONFINSC_UTIL">
+          <End Role="UTILISATEUR" Type="MVPModel.UTILISATEUR" Multiplicity="1" />
+          <End Role="CONFIRMINSCRIPTION" Type="MVPModel.CONFIRMINSCRIPTION" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CONFIRMINSCRIPTION">
+              <PropertyRef Name="IDUTILISATEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DESTMESS_MESSPRIVE">
+          <End Role="MESSAGEPRIVE" Type="MVPModel.MESSAGEPRIVE" Multiplicity="1" />
+          <End Role="DESTINATAIREMESSAGE" Type="MVPModel.DESTINATAIREMESSAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MESSAGEPRIVE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DESTINATAIREMESSAGE">
+              <PropertyRef Name="IDMESSAGE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DESTMESS_UTIL">
+          <End Role="UTILISATEUR" Type="MVPModel.UTILISATEUR" Multiplicity="1" />
+          <End Role="DESTINATAIREMESSAGE" Type="MVPModel.DESTINATAIREMESSAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DESTINATAIREMESSAGE">
+              <PropertyRef Name="IDUTILISATEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UTIL_ECOLE">
+          <End Role="ECOLE" Type="MVPModel.ECOLE" Multiplicity="1" />
+          <End Role="UTILISATEUR" Type="MVPModel.UTILISATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ECOLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UTILISATEUR">
+              <PropertyRef Name="IDECOLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVEN_UTIl">
+          <End Role="UTILISATEUR" Type="MVPModel.UTILISATEUR" Multiplicity="1" />
+          <End Role="EVENEMENT" Type="MVPModel.EVENEMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EVENEMENT">
+              <PropertyRef Name="IDCREATEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FILDISC_FORUM">
+          <End Role="FORUM" Type="MVPModel.FORUM" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FILDISCUSSION" Type="MVPModel.FILDISCUSSION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FORUM">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FILDISCUSSION">
+              <PropertyRef Name="IDFORUM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MESS_FILDISC">
+          <End Role="FILDISCUSSION" Type="MVPModel.FILDISCUSSION" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MESSAGEFORUM" Type="MVPModel.MESSAGEFORUM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FILDISCUSSION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MESSAGEFORUM">
+              <PropertyRef Name="IDFILDISCUSSION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FORUM_SECT">
+          <End Role="SECTEUR" Type="MVPModel.SECTEUR" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FORUM" Type="MVPModel.FORUM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SECTEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FORUM">
+              <PropertyRef Name="IDSECTEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MESS_UTIL">
+          <End Role="UTILISATEUR" Type="MVPModel.UTILISATEUR" Multiplicity="1" />
+          <End Role="MESSAGEFORUM" Type="MVPModel.MESSAGEFORUM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MESSAGEFORUM">
+              <PropertyRef Name="IDUTILISATEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MESSPRIV_EXPED">
+          <End Role="UTILISATEUR" Type="MVPModel.UTILISATEUR" Multiplicity="1" />
+          <End Role="MESSAGEPRIVE" Type="MVPModel.MESSAGEPRIVE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MESSAGEPRIVE">
+              <PropertyRef Name="IDEXPEDITEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PIECEJOINTE_MESS">
+          <End Role="MESSAGEPRIVE" Type="MVPModel.MESSAGEPRIVE" Multiplicity="1" />
+          <End Role="PIECEJOINTE" Type="MVPModel.PIECEJOINTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MESSAGEPRIVE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PIECEJOINTE">
+              <PropertyRef Name="IDMESSAGE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PUB_SECT">
+          <End Role="SECTEUR" Type="MVPModel.SECTEUR" Multiplicity="1" />
+          <End Role="PUBLICATION" Type="MVPModel.PUBLICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SECTEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PUBLICATION">
+              <PropertyRef Name="IDSECTEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PUB_SUJET">
+          <End Role="SUJETPUBLICATION" Type="MVPModel.SUJETPUBLICATION" Multiplicity="1" />
+          <End Role="PUBLICATION" Type="MVPModel.PUBLICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUJETPUBLICATION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PUBLICATION">
+              <PropertyRef Name="IDSUJET" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PUB_UTIL">
+          <End Role="UTILISATEUR" Type="MVPModel.UTILISATEUR" Multiplicity="1" />
+          <End Role="PUBLICATION" Type="MVPModel.PUBLICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PUBLICATION">
+              <PropertyRef Name="IDPUBLICATEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UTIL_ROLE">
+          <End Role="ROLE" Type="MVPModel.ROLE" Multiplicity="1" />
+          <End Role="UTILISATEUR" Type="MVPModel.UTILISATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UTILISATEUR">
+              <PropertyRef Name="IDROLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOND_SECT">
+          <End Role="SECTEUR" Type="MVPModel.SECTEUR" Multiplicity="1" />
+          <End Role="SONDAGE" Type="MVPModel.SONDAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SECTEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SONDAGE">
+              <PropertyRef Name="IDSECTEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UTILSECT_SECT">
+          <End Role="SECTEUR" Type="MVPModel.SECTEUR" Multiplicity="1" />
+          <End Role="UTILISATEURSECTEUR" Type="MVPModel.UTILISATEURSECTEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SECTEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UTILISATEURSECTEUR">
+              <PropertyRef Name="IDSECTEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOND_CREATEUR">
+          <End Role="UTILISATEUR" Type="MVPModel.UTILISATEUR" Multiplicity="1" />
+          <End Role="SONDAGE" Type="MVPModel.SONDAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SONDAGE">
+              <PropertyRef Name="IDCREATEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UTILSECT_UTIL">
+          <End Role="UTILISATEUR" Type="MVPModel.UTILISATEUR" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UTILISATEURSECTEUR" Type="MVPModel.UTILISATEURSECTEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UTILISATEURSECTEUR">
+              <PropertyRef Name="IDUTILISATEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ECOLESECTEUR">
+          <End Role="ECOLE" Type="MVPModel.ECOLE" Multiplicity="*" />
+          <End Role="SECTEUR" Type="MVPModel.SECTEUR" Multiplicity="*" />
+        </Association>
+        <Association Name="EVENEMENTSECTEUR">
+          <End Role="EVENEMENT" Type="MVPModel.EVENEMENT" Multiplicity="*" />
+          <End Role="SECTEUR" Type="MVPModel.SECTEUR" Multiplicity="*" />
+        </Association>
+        <Association Name="MOTCLEPUBLICATION">
+          <End Role="MOTCLE" Type="MVPModel.MOTCLE" Multiplicity="*" />
+          <End Role="PUBLICATION" Type="MVPModel.PUBLICATION" Multiplicity="*" />
+        </Association>
+        <Association Name="ROLEDROIT">
+          <End Role="DROIT" Type="MVPModel.DROIT" Multiplicity="*" />
+          <End Role="ROLE" Type="MVPModel.ROLE" Multiplicity="*" />
+        </Association>
+        <Association Name="VOTESONDAGE">
+          <End Role="CHOIXSONDAGE" Type="MVPModel.CHOIXSONDAGE" Multiplicity="*" />
+          <End Role="UTILISATEUR" Type="MVPModel.UTILISATEUR" Multiplicity="*" />
+        </Association>
+        <ComplexType Name="GetEven_Result">
+          <Property Type="String" Name="NOM" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="DATEEVEN" Nullable="false" />
+          <Property Type="Time" Name="HEUREDEBUT" Nullable="true" />
+          <Property Type="Time" Name="HEUREFIN" Nullable="true" />
+          <Property Type="String" Name="NOMCATE" Nullable="false" MaxLength="40" />
+        </ComplexType>
+        <ComplexType Name="GetEvents_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="NOM" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="DATEEVEN" Nullable="false" />
+          <Property Type="Time" Name="HEUREDEBUT" Nullable="true" />
+          <Property Type="Time" Name="HEUREFIN" Nullable="true" />
+          <Property Type="Int32" Name="IDCATEGORIE" Nullable="false" />
+          <Property Type="Int32" Name="IDCREATEUR" Nullable="false" />
+          <Property Type="Int32" Name="IDEVENEMENT" Nullable="false" />
+          <Property Type="Int32" Name="IDSECTEUR" Nullable="false" />
+          <Property Type="Int32" Name="ID1" Nullable="false" />
+          <Property Type="String" Name="NOM1" Nullable="false" MaxLength="40" />
+        </ComplexType>
+        <ComplexType Name="GetFilDiscussion_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="SUJET" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="DATEPUBLICATION" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="DATEMODIFICATION" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="NBLECTURES" Nullable="false" />
+          <Property Type="Int32" Name="IDFORUM" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetForum_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="TITRE" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="IDSECTEUR" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetMessagesForum_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="DateTime" Name="DATEPUBLICATION" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="DATEMODIFICATION" Nullable="true" Precision="23" />
+          <Property Type="String" Name="CONTENU" Nullable="false" MaxLength="Max" />
+          <Property Type="Int32" Name="IDUTILISATEUR" Nullable="false" />
+          <Property Type="Int32" Name="IDFILDISCUSSION" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetNouvelles_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="TITRE" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="DESCRIPTION" Nullable="false" MaxLength="Max" />
+          <Property Type="DateTime" Name="DATEPUBLICATION" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="GetPartenaire_Result">
+          <Property Type="String" Name="NOM" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="RAISONSOCIALE" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="ADRESSE" Nullable="true" MaxLength="65" />
+          <Property Type="String" Name="VILLE" Nullable="true" MaxLength="65" />
+          <Property Type="String" Name="PAYS" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="TELEPHONE" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="SITEWEB" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="COURRIEL" Nullable="false" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="GetPartenaires_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="NOM" Nullable="false" MaxLength="60" />
+        </ComplexType>
+        <ComplexType Name="GetPubParMotCle_Result">
+          <Property Type="String" Name="TITRE" Nullable="false" MaxLength="60" />
+          <Property Type="DateTime" Name="DATECREATION" Nullable="false" Precision="23" />
+          <Property Type="String" Name="EMPLACEMENTSERVEUR" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="NOM" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetPubParSecteur_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="TITRE" Nullable="false" MaxLength="60" />
+          <Property Type="DateTime" Name="DATECREATION" Nullable="false" Precision="23" />
+          <Property Type="String" Name="EMPLACEMENTSERVEUR" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="IDPUBLICATEUR" Nullable="false" />
+          <Property Type="String" Name="TYPEMIME" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="IDSUJET" Nullable="false" />
+          <Property Type="Int32" Name="IDSECTEUR" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetPubParSujet_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="TITRE" Nullable="false" MaxLength="60" />
+          <Property Type="DateTime" Name="DATECREATION" Nullable="false" Precision="23" />
+          <Property Type="String" Name="EMPLACEMENTSERVEUR" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="IDPUBLICATEUR" Nullable="false" />
+          <Property Type="String" Name="TYPEMIME" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="IDSUJET" Nullable="false" />
+          <Property Type="Int32" Name="IDSECTEUR" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetResultatsSondage_Result">
+          <Property Type="String" Name="NOMUTIL" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="VALEUR" Nullable="false" MaxLength="60" />
+        </ComplexType>
+        <ComplexType Name="GetRole_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="TYPE" Nullable="false" MaxLength="45" />
+          <Property Type="String" Name="DESCRIPTION" Nullable="false" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="GetRoles_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="NOM" Nullable="false" MaxLength="45" />
+        </ComplexType>
+        <ComplexType Name="GetSecteurs_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="NOM" Nullable="false" MaxLength="40" />
+        </ComplexType>
+        <ComplexType Name="GetSondage_Result">
+          <Property Type="String" Name="NOM" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="QUESTION" Nullable="false" MaxLength="255" />
+          <Property Type="DateTime" Name="DATEDEBUT" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="DATEFIN" Nullable="false" Precision="23" />
+          <Property Type="String" Name="NOMUTIL" Nullable="false" MaxLength="25" />
+        </ComplexType>
+        <ComplexType Name="GetSondages_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="NOM" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="QUESTION" Nullable="false" MaxLength="255" />
+          <Property Type="DateTime" Name="DATEDEBUT" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="DATEFIN" Nullable="false" Precision="23" />
+          <Property Type="String" Name="NOMUTIL" Nullable="false" MaxLength="25" />
+        </ComplexType>
+        <ComplexType Name="GetUtilAcces_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="NOM" Nullable="false" MaxLength="45" />
+          <Property Type="Int32" Name="ID1" Nullable="false" />
+          <Property Type="String" Name="TYPE" Nullable="false" MaxLength="45" />
+          <Property Type="String" Name="DESCRIPTION" Nullable="false" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="GetUtilParSecteur_Result">
+          <Property Type="String" Name="NOMUTIL" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="NOM" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="PRENOM" Nullable="false" MaxLength="60" />
+        </ComplexType>
+        <ComplexType Name="GetUtilProfil_Result">
+          <Property Type="String" Name="COURRIEL" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="NOM" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="PRENOM" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="ADRESSE" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="VILLE" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LANGUE" Nullable="false" MaxLength="2" />
+        </ComplexType>
+        <ComplexType Name="GetUtils_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="NOMUTIL" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="MOTPASSE" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="COURRIEL" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="PRENOM" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="NOM" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="ADRESSE" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="VILLE" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="DATENAISSANCE" Nullable="false" />
+          <Property Type="DateTime" Name="DATECREATION" Nullable="false" />
+          <Property Type="DateTime" Name="DERNIERECONNEXION" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="COMPTEACTIF" Nullable="false" />
+          <Property Type="String" Name="LANGUE" Nullable="false" MaxLength="2" />
+          <Property Type="Int32" Name="IDROLE" Nullable="false" />
+          <Property Type="Int32" Name="IDECOLE" Nullable="false" />
+          <Property Type="Boolean" Name="REINITIALISERMOTPASSE" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MVPModelStoreContainer" CdmEntityContainer="MVPEntities">
+          <EntitySetMapping Name="CATEGORIEEVENEMENT">
+            <EntityTypeMapping TypeName="MVPModel.CATEGORIEEVENEMENT">
+              <MappingFragment StoreEntitySet="CATEGORIEEVENEMENT">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHOIXSONDAGE">
+            <EntityTypeMapping TypeName="MVPModel.CHOIXSONDAGE">
+              <MappingFragment StoreEntitySet="CHOIXSONDAGE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDSONDAGE" ColumnName="IDSONDAGE" />
+                <ScalarProperty Name="VALEUR" ColumnName="VALEUR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONFIRMINSCRIPTION">
+            <EntityTypeMapping TypeName="MVPModel.CONFIRMINSCRIPTION">
+              <MappingFragment StoreEntitySet="CONFIRMINSCRIPTION">
+                <ScalarProperty Name="IDUTILISATEUR" ColumnName="IDUTILISATEUR" />
+                <ScalarProperty Name="DATEENVOI" ColumnName="DATEENVOI" />
+                <ScalarProperty Name="JETON" ColumnName="JETON" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DESTINATAIREMESSAGE">
+            <EntityTypeMapping TypeName="MVPModel.DESTINATAIREMESSAGE">
+              <MappingFragment StoreEntitySet="DESTINATAIREMESSAGE">
+                <ScalarProperty Name="IDMESSAGE" ColumnName="IDMESSAGE" />
+                <ScalarProperty Name="IDUTILISATEUR" ColumnName="IDUTILISATEUR" />
+                <ScalarProperty Name="SUPPRIME" ColumnName="SUPPRIME" />
+                <ScalarProperty Name="SUPPRIMEDEFINITIF" ColumnName="SUPPRIMEDEFINITIF" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DROIT">
+            <EntityTypeMapping TypeName="MVPModel.DROIT">
+              <MappingFragment StoreEntitySet="DROIT">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ECOLE">
+            <EntityTypeMapping TypeName="MVPModel.ECOLE">
+              <MappingFragment StoreEntitySet="ECOLE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="PROVINCE" ColumnName="PROVINCE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EVENEMENT">
+            <EntityTypeMapping TypeName="MVPModel.EVENEMENT">
+              <MappingFragment StoreEntitySet="EVENEMENT">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="DATEEVEN" ColumnName="DATEEVEN" />
+                <ScalarProperty Name="HEUREDEBUT" ColumnName="HEUREDEBUT" />
+                <ScalarProperty Name="HEUREFIN" ColumnName="HEUREFIN" />
+                <ScalarProperty Name="IDCATEGORIE" ColumnName="IDCATEGORIE" />
+                <ScalarProperty Name="IDCREATEUR" ColumnName="IDCREATEUR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FILDISCUSSION">
+            <EntityTypeMapping TypeName="MVPModel.FILDISCUSSION">
+              <MappingFragment StoreEntitySet="FILDISCUSSION">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SUJET" ColumnName="SUJET" />
+                <ScalarProperty Name="DATEPUBLICATION" ColumnName="DATEPUBLICATION" />
+                <ScalarProperty Name="DATEMODIFICATION" ColumnName="DATEMODIFICATION" />
+                <ScalarProperty Name="NBLECTURES" ColumnName="NBLECTURES" />
+                <ScalarProperty Name="IDFORUM" ColumnName="IDFORUM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FORUM">
+            <EntityTypeMapping TypeName="MVPModel.FORUM">
+              <MappingFragment StoreEntitySet="FORUM">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TITRE" ColumnName="TITRE" />
+                <ScalarProperty Name="IDSECTEUR" ColumnName="IDSECTEUR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MESSAGEFORUM">
+            <EntityTypeMapping TypeName="MVPModel.MESSAGEFORUM">
+              <MappingFragment StoreEntitySet="MESSAGEFORUM">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DATEPUBLICATION" ColumnName="DATEPUBLICATION" />
+                <ScalarProperty Name="DATEMODIFICATION" ColumnName="DATEMODIFICATION" />
+                <ScalarProperty Name="CONTENU" ColumnName="CONTENU" />
+                <ScalarProperty Name="IDUTILISATEUR" ColumnName="IDUTILISATEUR" />
+                <ScalarProperty Name="IDFILDISCUSSION" ColumnName="IDFILDISCUSSION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MESSAGEPRIVE">
+            <EntityTypeMapping TypeName="MVPModel.MESSAGEPRIVE">
+              <MappingFragment StoreEntitySet="MESSAGEPRIVE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDEXPEDITEUR" ColumnName="IDEXPEDITEUR" />
+                <ScalarProperty Name="SUJET" ColumnName="SUJET" />
+                <ScalarProperty Name="CONTENU" ColumnName="CONTENU" />
+                <ScalarProperty Name="DATEENVOI" ColumnName="DATEENVOI" />
+                <ScalarProperty Name="SUPPRIME" ColumnName="SUPPRIME" />
+                <ScalarProperty Name="SUPPRIMEDEFINITIF" ColumnName="SUPPRIMEDEFINITIF" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MOTCLE">
+            <EntityTypeMapping TypeName="MVPModel.MOTCLE">
+              <MappingFragment StoreEntitySet="MOTCLE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="VALEUR" ColumnName="VALEUR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NOUVELLE">
+            <EntityTypeMapping TypeName="MVPModel.NOUVELLE">
+              <MappingFragment StoreEntitySet="NOUVELLE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TITRE" ColumnName="TITRE" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="DATEPUBLICATION" ColumnName="DATEPUBLICATION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PARTENAIRE">
+            <EntityTypeMapping TypeName="MVPModel.PARTENAIRE">
+              <MappingFragment StoreEntitySet="PARTENAIRE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="RAISONSOCIALE" ColumnName="RAISONSOCIALE" />
+                <ScalarProperty Name="ADRESSE" ColumnName="ADRESSE" />
+                <ScalarProperty Name="VILLE" ColumnName="VILLE" />
+                <ScalarProperty Name="PAYS" ColumnName="PAYS" />
+                <ScalarProperty Name="TELEPHONE" ColumnName="TELEPHONE" />
+                <ScalarProperty Name="SITEWEB" ColumnName="SITEWEB" />
+                <ScalarProperty Name="COURRIEL" ColumnName="COURRIEL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PIECEJOINTE">
+            <EntityTypeMapping TypeName="MVPModel.PIECEJOINTE">
+              <MappingFragment StoreEntitySet="PIECEJOINTE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDMESSAGE" ColumnName="IDMESSAGE" />
+                <ScalarProperty Name="PIECESERIALISEE" ColumnName="PIECESERIALISEE" />
+                <ScalarProperty Name="TAILLEPIECE" ColumnName="TAILLEPIECE" />
+                <ScalarProperty Name="NOMPIECE" ColumnName="NOMPIECE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PUBLICATION">
+            <EntityTypeMapping TypeName="MVPModel.PUBLICATION">
+              <MappingFragment StoreEntitySet="PUBLICATION">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TITRE" ColumnName="TITRE" />
+                <ScalarProperty Name="DATECREATION" ColumnName="DATECREATION" />
+                <ScalarProperty Name="EMPLACEMENTSERVEUR" ColumnName="EMPLACEMENTSERVEUR" />
+                <ScalarProperty Name="IDPUBLICATEUR" ColumnName="IDPUBLICATEUR" />
+                <ScalarProperty Name="TYPEMIME" ColumnName="TYPEMIME" />
+                <ScalarProperty Name="IDSUJET" ColumnName="IDSUJET" />
+                <ScalarProperty Name="IDSECTEUR" ColumnName="IDSECTEUR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROLE">
+            <EntityTypeMapping TypeName="MVPModel.ROLE">
+              <MappingFragment StoreEntitySet="ROLE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SECTEUR">
+            <EntityTypeMapping TypeName="MVPModel.SECTEUR">
+              <MappingFragment StoreEntitySet="SECTEUR">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SONDAGE">
+            <EntityTypeMapping TypeName="MVPModel.SONDAGE">
+              <MappingFragment StoreEntitySet="SONDAGE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="QUESTION" ColumnName="QUESTION" />
+                <ScalarProperty Name="DATEDEBUT" ColumnName="DATEDEBUT" />
+                <ScalarProperty Name="DATEFIN" ColumnName="DATEFIN" />
+                <ScalarProperty Name="IDCREATEUR" ColumnName="IDCREATEUR" />
+                <ScalarProperty Name="IDSECTEUR" ColumnName="IDSECTEUR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUJETPUBLICATION">
+            <EntityTypeMapping TypeName="MVPModel.SUJETPUBLICATION">
+              <MappingFragment StoreEntitySet="SUJETPUBLICATION">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UTILISATEUR">
+            <EntityTypeMapping TypeName="MVPModel.UTILISATEUR">
+              <MappingFragment StoreEntitySet="UTILISATEUR">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMUTIL" ColumnName="NOMUTIL" />
+                <ScalarProperty Name="MOTPASSE" ColumnName="MOTPASSE" />
+                <ScalarProperty Name="COURRIEL" ColumnName="COURRIEL" />
+                <ScalarProperty Name="PRENOM" ColumnName="PRENOM" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="ADRESSE" ColumnName="ADRESSE" />
+                <ScalarProperty Name="VILLE" ColumnName="VILLE" />
+                <ScalarProperty Name="DATENAISSANCE" ColumnName="DATENAISSANCE" />
+                <ScalarProperty Name="DATECREATION" ColumnName="DATECREATION" />
+                <ScalarProperty Name="DERNIERECONNEXION" ColumnName="DERNIERECONNEXION" />
+                <ScalarProperty Name="COMPTEACTIF" ColumnName="COMPTEACTIF" />
+                <ScalarProperty Name="LANGUE" ColumnName="LANGUE" />
+                <ScalarProperty Name="IDROLE" ColumnName="IDROLE" />
+                <ScalarProperty Name="IDECOLE" ColumnName="IDECOLE" />
+                <ScalarProperty Name="REINITIALISERMOTPASSE" ColumnName="REINITIALISERMOTPASSE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UTILISATEURSECTEUR">
+            <EntityTypeMapping TypeName="MVPModel.UTILISATEURSECTEUR">
+              <MappingFragment StoreEntitySet="UTILISATEURSECTEUR">
+                <ScalarProperty Name="IDUTILISATEUR" ColumnName="IDUTILISATEUR" />
+                <ScalarProperty Name="IDSECTEUR" ColumnName="IDSECTEUR" />
+                <ScalarProperty Name="DEBUTACCES" ColumnName="DEBUTACCES" />
+                <ScalarProperty Name="FINACCES" ColumnName="FINACCES" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ECOLESECTEUR" TypeName="MVPModel.ECOLESECTEUR" StoreEntitySet="ECOLESECTEUR">
+            <EndProperty Name="ECOLE">
+              <ScalarProperty Name="ID" ColumnName="IDECOLE" />
+            </EndProperty>
+            <EndProperty Name="SECTEUR">
+              <ScalarProperty Name="ID" ColumnName="IDSECTEUR" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="EVENEMENTSECTEUR" TypeName="MVPModel.EVENEMENTSECTEUR" StoreEntitySet="EVENEMENTSECTEUR">
+            <EndProperty Name="EVENEMENT">
+              <ScalarProperty Name="ID" ColumnName="IDEVENEMENT" />
+            </EndProperty>
+            <EndProperty Name="SECTEUR">
+              <ScalarProperty Name="ID" ColumnName="IDSECTEUR" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="MOTCLEPUBLICATION" TypeName="MVPModel.MOTCLEPUBLICATION" StoreEntitySet="MOTCLEPUBLICATION">
+            <EndProperty Name="MOTCLE">
+              <ScalarProperty Name="ID" ColumnName="IDMOTCLE" />
+            </EndProperty>
+            <EndProperty Name="PUBLICATION">
+              <ScalarProperty Name="ID" ColumnName="IDPUBLICATION" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ROLEDROIT" TypeName="MVPModel.ROLEDROIT" StoreEntitySet="ROLEDROIT">
+            <EndProperty Name="DROIT">
+              <ScalarProperty Name="ID" ColumnName="IDDROIT" />
+            </EndProperty>
+            <EndProperty Name="ROLE">
+              <ScalarProperty Name="ID" ColumnName="IDROLE" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="VOTESONDAGE" TypeName="MVPModel.VOTESONDAGE" StoreEntitySet="VOTESONDAGE">
+            <EndProperty Name="CHOIXSONDAGE">
+              <ScalarProperty Name="ID" ColumnName="IDCHOIX" />
+            </EndProperty>
+            <EndProperty Name="UTILISATEUR">
+              <ScalarProperty Name="ID" ColumnName="IDUTILISATEUR" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="AjouterChoixSondage" FunctionName="MVPModel.Store.AjouterChoixSondage" />
+          <FunctionImportMapping FunctionImportName="AjouterDestinataireMess" FunctionName="MVPModel.Store.AjouterDestinataireMess" />
+          <FunctionImportMapping FunctionImportName="AjouterEcole" FunctionName="MVPModel.Store.AjouterEcole" />
+          <FunctionImportMapping FunctionImportName="AjouterEven" FunctionName="MVPModel.Store.AjouterEven" />
+          <FunctionImportMapping FunctionImportName="AjouterFilDiscussion" FunctionName="MVPModel.Store.AjouterFilDiscussion" />
+          <FunctionImportMapping FunctionImportName="AjouterMessageForum" FunctionName="MVPModel.Store.AjouterMessageForum" />
+          <FunctionImportMapping FunctionImportName="AjouterMessagePrive" FunctionName="MVPModel.Store.AjouterMessagePrive" />
+          <FunctionImportMapping FunctionImportName="AjouterMotCle" FunctionName="MVPModel.Store.AjouterMotCle" />
+          <FunctionImportMapping FunctionImportName="AjouterNouvelle" FunctionName="MVPModel.Store.AjouterNouvelle" />
+          <FunctionImportMapping FunctionImportName="AjouterPartenaire" FunctionName="MVPModel.Store.AjouterPartenaire" />
+          <FunctionImportMapping FunctionImportName="AjouterPieceJointe" FunctionName="MVPModel.Store.AjouterPieceJointe" />
+          <FunctionImportMapping FunctionImportName="AjouterPublication" FunctionName="MVPModel.Store.AjouterPublication" />
+          <FunctionImportMapping FunctionImportName="AjouterRole" FunctionName="MVPModel.Store.AjouterRole" />
+          <FunctionImportMapping FunctionImportName="AjouterSectEcole" FunctionName="MVPModel.Store.AjouterSectEcole" />
+          <FunctionImportMapping FunctionImportName="AjouterSecteur" FunctionName="MVPModel.Store.AjouterSecteur" />
+          <FunctionImportMapping FunctionImportName="AjouterSectEven" FunctionName="MVPModel.Store.AjouterSectEven" />
+          <FunctionImportMapping FunctionImportName="AjouterSondage" FunctionName="MVPModel.Store.AjouterSondage" />
+          <FunctionImportMapping FunctionImportName="AjouterSujetPub" FunctionName="MVPModel.Store.AjouterSujetPub" />
+          <FunctionImportMapping FunctionImportName="AjouterUtilisateur" FunctionName="MVPModel.Store.AjouterUtilisateur" />
+          <FunctionImportMapping FunctionImportName="AjouterUtilSecteur" FunctionName="MVPModel.Store.AjouterUtilSecteur" />
+          <FunctionImportMapping FunctionImportName="AjouterVoteSondage" FunctionName="MVPModel.Store.AjouterVoteSondage" />
+          <FunctionImportMapping FunctionImportName="AssocierRoleDroit" FunctionName="MVPModel.Store.AssocierRoleDroit" />
+          <FunctionImportMapping FunctionImportName="AugmenterNbrLectures" FunctionName="MVPModel.Store.AugmenterNbrLectures" />
+          <FunctionImportMapping FunctionImportName="DeassocierRoleDroit" FunctionName="MVPModel.Store.DeassocierRoleDroit" />
+          <FunctionImportMapping FunctionImportName="GetEven" FunctionName="MVPModel.Store.GetEven">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetEven_Result">
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="DATEEVEN" ColumnName="DATEEVEN" />
+                <ScalarProperty Name="HEUREDEBUT" ColumnName="HEUREDEBUT" />
+                <ScalarProperty Name="HEUREFIN" ColumnName="HEUREFIN" />
+                <ScalarProperty Name="NOMCATE" ColumnName="NOMCATE" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEvents" FunctionName="MVPModel.Store.GetEvents">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetEvents_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="DATEEVEN" ColumnName="DATEEVEN" />
+                <ScalarProperty Name="HEUREDEBUT" ColumnName="HEUREDEBUT" />
+                <ScalarProperty Name="HEUREFIN" ColumnName="HEUREFIN" />
+                <ScalarProperty Name="IDCATEGORIE" ColumnName="IDCATEGORIE" />
+                <ScalarProperty Name="IDCREATEUR" ColumnName="IDCREATEUR" />
+                <ScalarProperty Name="IDEVENEMENT" ColumnName="IDEVENEMENT" />
+                <ScalarProperty Name="IDSECTEUR" ColumnName="IDSECTEUR" />
+                <ScalarProperty Name="ID1" ColumnName="ID1" />
+                <ScalarProperty Name="NOM1" ColumnName="NOM1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetFilDiscussion" FunctionName="MVPModel.Store.GetFilDiscussion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetFilDiscussion_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SUJET" ColumnName="SUJET" />
+                <ScalarProperty Name="DATEPUBLICATION" ColumnName="DATEPUBLICATION" />
+                <ScalarProperty Name="DATEMODIFICATION" ColumnName="DATEMODIFICATION" />
+                <ScalarProperty Name="NBLECTURES" ColumnName="NBLECTURES" />
+                <ScalarProperty Name="IDFORUM" ColumnName="IDFORUM" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetForum" FunctionName="MVPModel.Store.GetForum">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetForum_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TITRE" ColumnName="TITRE" />
+                <ScalarProperty Name="IDSECTEUR" ColumnName="IDSECTEUR" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetMessagesForum" FunctionName="MVPModel.Store.GetMessagesForum">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetMessagesForum_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DATEPUBLICATION" ColumnName="DATEPUBLICATION" />
+                <ScalarProperty Name="DATEMODIFICATION" ColumnName="DATEMODIFICATION" />
+                <ScalarProperty Name="CONTENU" ColumnName="CONTENU" />
+                <ScalarProperty Name="IDUTILISATEUR" ColumnName="IDUTILISATEUR" />
+                <ScalarProperty Name="IDFILDISCUSSION" ColumnName="IDFILDISCUSSION" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetNouvelles" FunctionName="MVPModel.Store.GetNouvelles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetNouvelles_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TITRE" ColumnName="TITRE" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="DATEPUBLICATION" ColumnName="DATEPUBLICATION" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetPartenaire" FunctionName="MVPModel.Store.GetPartenaire">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetPartenaire_Result">
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="RAISONSOCIALE" ColumnName="RAISONSOCIALE" />
+                <ScalarProperty Name="ADRESSE" ColumnName="ADRESSE" />
+                <ScalarProperty Name="VILLE" ColumnName="VILLE" />
+                <ScalarProperty Name="PAYS" ColumnName="PAYS" />
+                <ScalarProperty Name="TELEPHONE" ColumnName="TELEPHONE" />
+                <ScalarProperty Name="SITEWEB" ColumnName="SITEWEB" />
+                <ScalarProperty Name="COURRIEL" ColumnName="COURRIEL" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetPartenaires" FunctionName="MVPModel.Store.GetPartenaires">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetPartenaires_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetPubParMotCle" FunctionName="MVPModel.Store.GetPubParMotCle">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetPubParMotCle_Result">
+                <ScalarProperty Name="TITRE" ColumnName="TITRE" />
+                <ScalarProperty Name="DATECREATION" ColumnName="DATECREATION" />
+                <ScalarProperty Name="EMPLACEMENTSERVEUR" ColumnName="EMPLACEMENTSERVEUR" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetPubParSecteur" FunctionName="MVPModel.Store.GetPubParSecteur">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetPubParSecteur_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TITRE" ColumnName="TITRE" />
+                <ScalarProperty Name="DATECREATION" ColumnName="DATECREATION" />
+                <ScalarProperty Name="EMPLACEMENTSERVEUR" ColumnName="EMPLACEMENTSERVEUR" />
+                <ScalarProperty Name="IDPUBLICATEUR" ColumnName="IDPUBLICATEUR" />
+                <ScalarProperty Name="TYPEMIME" ColumnName="TYPEMIME" />
+                <ScalarProperty Name="IDSUJET" ColumnName="IDSUJET" />
+                <ScalarProperty Name="IDSECTEUR" ColumnName="IDSECTEUR" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetPubParSujet" FunctionName="MVPModel.Store.GetPubParSujet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetPubParSujet_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TITRE" ColumnName="TITRE" />
+                <ScalarProperty Name="DATECREATION" ColumnName="DATECREATION" />
+                <ScalarProperty Name="EMPLACEMENTSERVEUR" ColumnName="EMPLACEMENTSERVEUR" />
+                <ScalarProperty Name="IDPUBLICATEUR" ColumnName="IDPUBLICATEUR" />
+                <ScalarProperty Name="TYPEMIME" ColumnName="TYPEMIME" />
+                <ScalarProperty Name="IDSUJET" ColumnName="IDSUJET" />
+                <ScalarProperty Name="IDSECTEUR" ColumnName="IDSECTEUR" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetResultatsSondage" FunctionName="MVPModel.Store.GetResultatsSondage">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetResultatsSondage_Result">
+                <ScalarProperty Name="NOMUTIL" ColumnName="NOMUTIL" />
+                <ScalarProperty Name="VALEUR" ColumnName="VALEUR" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetRole" FunctionName="MVPModel.Store.GetRole">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetRole_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetRoles" FunctionName="MVPModel.Store.GetRoles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetRoles_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSecteurs" FunctionName="MVPModel.Store.GetSecteurs">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetSecteurs_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSondage" FunctionName="MVPModel.Store.GetSondage">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetSondage_Result">
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="QUESTION" ColumnName="QUESTION" />
+                <ScalarProperty Name="DATEDEBUT" ColumnName="DATEDEBUT" />
+                <ScalarProperty Name="DATEFIN" ColumnName="DATEFIN" />
+                <ScalarProperty Name="NOMUTIL" ColumnName="NOMUTIL" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSondages" FunctionName="MVPModel.Store.GetSondages">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetSondages_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="QUESTION" ColumnName="QUESTION" />
+                <ScalarProperty Name="DATEDEBUT" ColumnName="DATEDEBUT" />
+                <ScalarProperty Name="DATEFIN" ColumnName="DATEFIN" />
+                <ScalarProperty Name="NOMUTIL" ColumnName="NOMUTIL" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUtilAcces" FunctionName="MVPModel.Store.GetUtilAcces">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetUtilAcces_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="ID1" ColumnName="ID1" />
+                <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUtilParSecteur" FunctionName="MVPModel.Store.GetUtilParSecteur">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetUtilParSecteur_Result">
+                <ScalarProperty Name="NOMUTIL" ColumnName="NOMUTIL" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="PRENOM" ColumnName="PRENOM" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUtilProfil" FunctionName="MVPModel.Store.GetUtilProfil">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetUtilProfil_Result">
+                <ScalarProperty Name="COURRIEL" ColumnName="COURRIEL" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="PRENOM" ColumnName="PRENOM" />
+                <ScalarProperty Name="ADRESSE" ColumnName="ADRESSE" />
+                <ScalarProperty Name="VILLE" ColumnName="VILLE" />
+                <ScalarProperty Name="LANGUE" ColumnName="LANGUE" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUtils" FunctionName="MVPModel.Store.GetUtils">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetUtils_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMUTIL" ColumnName="NOMUTIL" />
+                <ScalarProperty Name="MOTPASSE" ColumnName="MOTPASSE" />
+                <ScalarProperty Name="COURRIEL" ColumnName="COURRIEL" />
+                <ScalarProperty Name="PRENOM" ColumnName="PRENOM" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="ADRESSE" ColumnName="ADRESSE" />
+                <ScalarProperty Name="VILLE" ColumnName="VILLE" />
+                <ScalarProperty Name="DATENAISSANCE" ColumnName="DATENAISSANCE" />
+                <ScalarProperty Name="DATECREATION" ColumnName="DATECREATION" />
+                <ScalarProperty Name="DERNIERECONNEXION" ColumnName="DERNIERECONNEXION" />
+                <ScalarProperty Name="COMPTEACTIF" ColumnName="COMPTEACTIF" />
+                <ScalarProperty Name="LANGUE" ColumnName="LANGUE" />
+                <ScalarProperty Name="IDROLE" ColumnName="IDROLE" />
+                <ScalarProperty Name="IDECOLE" ColumnName="IDECOLE" />
+                <ScalarProperty Name="REINITIALISERMOTPASSE" ColumnName="REINITIALISERMOTPASSE" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="MessagePriveCorbeille" FunctionName="MVPModel.Store.MessagePriveCorbeille" />
+          <FunctionImportMapping FunctionImportName="MessagePriveSuppDef" FunctionName="MVPModel.Store.MessagePriveSuppDef" />
+          <FunctionImportMapping FunctionImportName="ModiferEven" FunctionName="MVPModel.Store.ModiferEven" />
+          <FunctionImportMapping FunctionImportName="ModifierChoixSondage" FunctionName="MVPModel.Store.ModifierChoixSondage" />
+          <FunctionImportMapping FunctionImportName="ModifierEcole" FunctionName="MVPModel.Store.ModifierEcole" />
+          <FunctionImportMapping FunctionImportName="ModifierMessageForum" FunctionName="MVPModel.Store.ModifierMessageForum" />
+          <FunctionImportMapping FunctionImportName="ModifierNouvelle" FunctionName="MVPModel.Store.ModifierNouvelle" />
+          <FunctionImportMapping FunctionImportName="ModifierPartenaire" FunctionName="MVPModel.Store.ModifierPartenaire" />
+          <FunctionImportMapping FunctionImportName="ModifierPublication" FunctionName="MVPModel.Store.ModifierPublication" />
+          <FunctionImportMapping FunctionImportName="ModifierSondage" FunctionName="MVPModel.Store.ModifierSondage" />
+          <FunctionImportMapping FunctionImportName="ModifierSujetFilDiscussion" FunctionName="MVPModel.Store.ModifierSujetFilDiscussion" />
+          <FunctionImportMapping FunctionImportName="ModifierUtilEcole" FunctionName="MVPModel.Store.ModifierUtilEcole" />
+          <FunctionImportMapping FunctionImportName="ModifierUtilMotPasse" FunctionName="MVPModel.Store.ModifierUtilMotPasse" />
+          <FunctionImportMapping FunctionImportName="ModifierUtilProfil" FunctionName="MVPModel.Store.ModifierUtilProfil" />
+          <FunctionImportMapping FunctionImportName="ModifierUtilRole" FunctionName="MVPModel.Store.ModifierUtilRole" />
+          <FunctionImportMapping FunctionImportName="ReinitMotPasse" FunctionName="MVPModel.Store.ReinitMotPasse" />
+          <FunctionImportMapping FunctionImportName="SupprimerChoixSondage" FunctionName="MVPModel.Store.SupprimerChoixSondage" />
+          <FunctionImportMapping FunctionImportName="SupprimerEcole" FunctionName="MVPModel.Store.SupprimerEcole" />
+          <FunctionImportMapping FunctionImportName="SupprimerEven" FunctionName="MVPModel.Store.SupprimerEven" />
+          <FunctionImportMapping FunctionImportName="SupprimerFilDiscussion" FunctionName="MVPModel.Store.SupprimerFilDiscussion" />
+          <FunctionImportMapping FunctionImportName="SupprimerMessageForum" FunctionName="MVPModel.Store.SupprimerMessageForum" />
+          <FunctionImportMapping FunctionImportName="SupprimerMotClePub" FunctionName="MVPModel.Store.SupprimerMotClePub" />
+          <FunctionImportMapping FunctionImportName="SupprimerNouvelle" FunctionName="MVPModel.Store.SupprimerNouvelle" />
+          <FunctionImportMapping FunctionImportName="SupprimerPartenaire" FunctionName="MVPModel.Store.SupprimerPartenaire" />
+          <FunctionImportMapping FunctionImportName="SupprimerPublication" FunctionName="MVPModel.Store.SupprimerPublication" />
+          <FunctionImportMapping FunctionImportName="SupprimerRole" FunctionName="MVPModel.Store.SupprimerRole" />
+          <FunctionImportMapping FunctionImportName="SupprimerSectEcole" FunctionName="MVPModel.Store.SupprimerSectEcole" />
+          <FunctionImportMapping FunctionImportName="SupprimerSecteur" FunctionName="MVPModel.Store.SupprimerSecteur" />
+          <FunctionImportMapping FunctionImportName="SupprimerSectEven" FunctionName="MVPModel.Store.SupprimerSectEven" />
+          <FunctionImportMapping FunctionImportName="SupprimerSondage" FunctionName="MVPModel.Store.SupprimerSondage" />
+          <FunctionImportMapping FunctionImportName="SupprimerUtilisateur" FunctionName="MVPModel.Store.SupprimerUtilisateur" />
+          <FunctionImportMapping FunctionImportName="SupprimerUtilSect" FunctionName="MVPModel.Store.SupprimerUtilSect" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
