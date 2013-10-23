@@ -3,35 +3,49 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <title>Portail Mozambique - @ViewBag.Title</title>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
 </head>
 <body>
-    <header>
-        <div id="connexion">
-            
+    <div id="all">
+        <header>
+            @if (Session["currentUserName"] == null)
+            { 
+                @Html.Partial("~/Views/Public/Header.cshtml");
+            }
+            else
+            {
+                @Html.Partial("~/Views/Sectoriel/Header.cshtml");
+            }
+        </header>
+        <div class="content">
+            @RenderBody()
         </div>
-        <nav class="menu-h">
-            <ul>
-                <li><a class="separateur">Accueil</a></li>
-                <li><a class="separateur">Qui somme-nous ?</a></li>
-                <li><a class="separateur">Nouvelles</a></li>
-                <li><a class="separateur">Partenaires</a></li>
-                <li><a>Nous joindre</a></li>
-            </ul>
-        </nav>
-        <div class="titre-header">
-            <span class="main-titre">Mozambique</span><br />
-            <span class="sous-titre">Portail pédagogique</span>
-        </div>
-    </header>
-    <div class="content">
-        @RenderBody()
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".login").click(function (e) {
+                e.preventDefault();
+                $(".div-login").toggle();
+                $(".login").toggle();
+            });
+            $(".langue").click(function () {
+                var langue = $(".langue").html();
+
+                if (langue == "Français") {
+                    $(".langue").html("Portuguais");
+                }
+                else {
+                    $(".langue").html("Français");
+                }
+
+            });
+        });
+    </script>
 </body>
 </html>

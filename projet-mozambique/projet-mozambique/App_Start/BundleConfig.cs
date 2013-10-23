@@ -23,8 +23,7 @@ namespace projet_mozambique
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css",
-                                                                "~/Content/sectoriel.css",
+            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/sectoriel.css",
                                                                 "~/Content/public.css"));
 
             bundles.Add(new StyleBundle("~/Content/cssPublic").Include("~/Content/public.css"));

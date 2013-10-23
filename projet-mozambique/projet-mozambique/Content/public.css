@@ -91,6 +91,12 @@ p.langue {
 
 .div-login {
     display:none;
+    font-size:11px;
+}
+
+.div-login p
+{
+    margin:0;
 }
 
 header, footer, nav, section {
@@ -308,4 +314,9 @@ footer
 {
     clear:both;
     height:50px;
+}
+
+input
+{
+    padding:3px;
 }

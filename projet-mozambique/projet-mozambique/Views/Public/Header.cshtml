@@ -1,0 +1,32 @@
+﻿<div class="connexion">
+    <p class="login">Se connecter</p>
+    <div class="div-login">
+    @using (Html.BeginForm("doLogin", "public", FormMethod.Post, new { id = "frmConnexion"}))
+    {
+        @Html.TextBox("UserString", "", 
+        new { id = "txtLogin", placeholder = "Nom de l'utilisateur" });
+        @Html.TextBox("PWString", "",
+                    new { id = "txtPassword", placeholder = "Mot de passe", type = "password" });
+        <p>@Html.CheckBox("RememberMe", true, new { id = "chkRemember" })
+        Se souvenir de moi</p>
+        <input type="submit" class="btnForm" value="Connexion" />
+    }
+    </div>
+        <a href="../admin">Connexion admin</a><br />
+        <a href="../sectoriel">Connexion utilisateur</a>
+                
+</div>
+<div class="titre-header">
+    @Html.ActionLink("Mozambique", "Index", new { controller = "Public" }, new { @class = "main-titre" })<br />
+    @Html.ActionLink("Portail Pédagogique", "Index", new { controller = "Public" }, new { @class = "sous-titre" })
+    <p class="langue">Français</p>
+</div>
+<nav>
+    <ul>
+        <li>@Html.ActionLink(StringResources.StringResources.accueil, "Index")</li>
+        <li>@Html.ActionLink(StringResources.StringResources.nouvelles, "nouvelles")</li>
+        <li>@Html.ActionLink(StringResources.StringResources.partenaires, "partenaires")</li>
+        <li>@Html.ActionLink(StringResources.StringResources.apropos, "apropos")</li>
+        <li>@Html.ActionLink(StringResources.StringResources.nousjoindre, "nousjoindre")</li>
+    </ul>
+</nav>

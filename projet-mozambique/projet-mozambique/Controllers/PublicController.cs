@@ -51,32 +51,32 @@ namespace projet_mozambique.Controllers
         [HttpPost]
         public ActionResult doLogin(string UserString, string PWString, bool RememberMe)
         {
-            UtilisateursDataContext tblUtil = new UtilisateursDataContext();
-            if (!String.IsNullOrEmpty(UserString) && !String.IsNullOrEmpty(PWString))
-            {
-                var utilisateur = from u in tblUtil.UTILISATEUR
-                                  where u.NOMUTIL == UserString && u.MOTPASSE == PWString
-                                  select new { UserId = u .ID, UserName = u.NOMUTIL, Secteur = u.UTILISATEURSECTEUR };
-                if (utilisateur.Count() != 0)
-                {
-                    int id = utilisateur.First().UserId;
-                    string name = utilisateur.First().UserName;
+            //UtilisateursDataContext tblUtil = new UtilisateursDataContext();
+            //if (!String.IsNullOrEmpty(UserString) && !String.IsNullOrEmpty(PWString))
+            //{
+            //    //var utilisateur = from u in tblUtil.UTILISATEUR
+            //    //                  where u.NOMUTIL == UserString && u.MOTPASSE == PWString
+            //    //                  select new { UserId = u .ID, UserName = u.NOMUTIL, Secteur = u.UTILISATEURSECTEUR };
+            //    //if (utilisateur.Count() != 0)
+            //    //{
+            //    //    int id = utilisateur.First().UserId;
+            //    //    string name = utilisateur.First().UserName;
 
-                    Session["currentUserName"] = name;
-                    Session["currentUserId"] = id;
+            //    //    Session["currentUserName"] = name;
+            //    //    Session["currentUserId"] = id;
 
-                    int nbSecteur = 0;
+            //    //    int nbSecteur = 0;
 
-                    foreach (var s in utilisateur.First().Secteur)
-                    {
-                        nbSecteur++;
-                        Session["userSector" + nbSecteur.ToString()] = s.SECTEUR.NOM;
-                    }
+            //    //    foreach (var s in utilisateur.First().Secteur)
+            //    //    {
+            //    //        nbSecteur++;
+            //    //        Session["userSector" + nbSecteur.ToString()] = s.SECTEUR.NOM;
+            //    //    }
                     
-                    return RedirectToAction("Index", "sectoriel");
+            //        return RedirectToAction("Index", "sectoriel");
                     
-                }
-            }
+            //    }
+            //}
 
             return View("Index");
         }
