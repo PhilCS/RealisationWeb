@@ -1,0 +1,49 @@
+﻿@using projet_mozambique.Utilitaires;
+@using projet_mozambique.Models;
+@{
+    
+    List<MessageMessagerie> lstM = (ViewData[Constantes.CLE_LISTE_MSG] as List<MessageMessagerie>);
+    
+    <ul>
+        @for (int i = 0; i < lstM.Count; i++)
+        {
+            <li id="@lstM[i].id" class="@(!lstM[i].lu?"nouveau-msg":"") @(i==0?"msg-courant":"")">               
+
+                        <input type="checkbox" />@lstM[i].sujet 
+                        <span class="infos-supp-msg"> | @lstM[i].dateEnvoi.ToString("yyyy/MM/dd HH:mm")
+                            
+                            @if (lstM[i].lstPiecesJointes.Count > 0) 
+                            {
+                                <img class="attachment" src="~/Content/images/icones/icon-attachment.png" alt="Icône pièce jointe" />
+                            }
+                        </span>
+                    
+                </li>
+        }
+    </ul>
+
+}
+
+<script>
+    $(document).ready(function () {
+        $("#messages li").click(function (event) {
+            var lu;
+
+            if ($(this).hasClass("nouveau-msg")) {
+                lu = "false";
+            }
+            else {
+                lu = "true";
+            }
+
+            $(".msg-courant").removeClass("msg-courant");
+            $(this).addClass("msg-courant");
+            $(this).removeClass("nouveau-msg");
+            $("#contenu-message").load("LectureMessage?id=" + event.target.id + "&lu=" + lu);
+            
+        });
+
+        $("#messages li:first").trigger("click");
+    });
+    
+</script>

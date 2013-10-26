@@ -51,7 +51,7 @@ a:hover {
     font-size:1.3em;
 }
  
-p.langue {
+span.langue {
     cursor:pointer;
 }
 
@@ -209,7 +209,7 @@ header nav ul.nav-secondaire li {
 .article p.titre {
     font-size:1.5em;
     border-bottom:1px solid #232323;
-    width:55%;
+    width:60%;
 }
 
 .article p.datepubli {
@@ -220,6 +220,11 @@ header nav ul.nav-secondaire li {
 
 .article p {
     margin:0 0 10px;
+}
+
+.article p:not([class=titre])
+{
+    text-align:justify;
 }
 
 
@@ -258,6 +263,12 @@ header nav ul.nav-secondaire li {
 
 img.modifier {
     
+}
+
+.nouvelle p
+{
+    text-align:justify;
+    width:90%;
 }
 
 /* Styles for basic forms

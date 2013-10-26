@@ -1,77 +1,66 @@
-﻿@{
+﻿@using projet_mozambique.Utilitaires
+@using projet_mozambique.Models
+@{
     ViewBag.Title = "Nouvelles";
-}
-
+    
+    var lesNouvelles = (ViewData[Constantes.CLE_NOUVELLES] as ListePaginee<GetNouvelles_Result>);
+    
 <h1>Nouvelles</h1>
 <div>
-    <form>
-        <input type="text" /><a href="getResultats?resultat=nouvelles" class="btnForm" style="margin-left:10px;">Rechercher</a>
+    <form action="getResultats" method="post">
+        <input type="hidden" name="type" value="@Constantes.RECH_NOUVELLES" />
+        <input type="text" name="recherche" maxlength="100" style="width:300px;"/>
+        <input type="submit" value="Rechercher" class="btnForm" style="margin-left:10px;"/>
     </form>
 </div>
+    
+    for (var i = 0; i<lesNouvelles.Count; i++)
+    {
+        var longMax = Math.Min(lesNouvelles[i].DESCRIPTION.ToString().Length, 300);
+        
+        <div class="article">
+            <p class="titre">@lesNouvelles[i].TITRE</p>
+            <p class="datepubli">
+                @StringResources.StringResources.publieLe 
+                @lesNouvelles[i].DATEPUBLICATION.ToString("yyyy/MM/dd")
+            </p>
 
-<div class="article">
-    <p class="titre">Titre de la nouvelle</p>
-    <p class="datepubli">Publié le : 23 Janvier 2012</p>
-    <p>Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas faucibus mollis interdum. Duis mollis, est non commodo luctus, 
-        nisi erat porttitor ligula, eget lacinia odio sem nec elit. Vestibulum id ligula porta felis euismod semper.</p>
-    <a href="getNouvelle">Lire la suite...</a>
-</div>
-<div class="article">
-    <p class="titre">Titre de la nouvelle</p>
-    <p class="datepubli">Publié le : 23 Janvier 2012</p>
-    <p>Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas faucibus mollis interdum. Duis mollis, est non commodo luctus, 
-        nisi erat porttitor ligula, eget lacinia odio sem nec elit. Vestibulum id ligula porta felis euismod semper.</p>
-    <a href="getNouvelle">Lire la suite...</a>
-</div>
-<div class="article">
-    <p class="titre">Titre de la nouvelle</p>
-    <p class="datepubli">Publié le : 23 Janvier 2012</p>
-    <p>Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas faucibus mollis interdum. Duis mollis, est non commodo luctus, 
-        nisi erat porttitor ligula, eget lacinia odio sem nec elit. Vestibulum id ligula porta felis euismod semper.</p>
-    <a href="getNouvelle">Lire la suite...</a>
-</div>
-<div class="article">
-    <p class="titre">Titre de la nouvelle</p>
-    <p class="datepubli">Publié le : 23 Janvier 2012</p>
-    <p>Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas faucibus mollis interdum. Duis mollis, est non commodo luctus, 
-        nisi erat porttitor ligula, eget lacinia odio sem nec elit. Vestibulum id ligula porta felis euismod semper.</p>
-    <a href="getNouvelle">Lire la suite...</a>
-</div>
-<div class="article">
-    <p class="titre">Titre de la nouvelle</p>
-    <p class="datepubli">Publié le : 23 Janvier 2012</p>
-    <p>Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas faucibus mollis interdum. Duis mollis, est non commodo luctus, 
-        nisi erat porttitor ligula, eget lacinia odio sem nec elit. Vestibulum id ligula porta felis euismod semper.</p>
-    <a href="getNouvelle">Lire la suite...</a>
-</div>
-<div class="article">
-    <p class="titre">Titre de la nouvelle</p>
-    <p class="datepubli">Publié le : 23 Janvier 2012</p>
-    <p>Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas faucibus mollis interdum. Duis mollis, est non commodo luctus, 
-        nisi erat porttitor ligula, eget lacinia odio sem nec elit. Vestibulum id ligula porta felis euismod semper.</p>
-    <a href="getNouvelle">Lire la suite...</a>
-</div>
-<div class="article">
-    <p class="titre">Titre de la nouvelle</p>
-    <p class="datepubli">Publié le : 23 Janvier 2012</p>
-    <p>Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas faucibus mollis interdum. Duis mollis, est non commodo luctus, 
-        nisi erat porttitor ligula, eget lacinia odio sem nec elit. Vestibulum id ligula porta felis euismod semper.</p>
-    <a href="getNouvelle">Lire la suite...</a>
-</div><div class="article">
-    <p class="titre">Titre de la nouvelle</p>
-    <p class="datepubli">Publié le : 23 Janvier 2012</p>
-    <p>Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas faucibus mollis interdum. Duis mollis, est non commodo luctus, 
-        nisi erat porttitor ligula, eget lacinia odio sem nec elit. Vestibulum id ligula porta felis euismod semper.</p>
-    <a href="getNouvelle">Lire la suite...</a>
-</div>
+            @if (longMax < 300) {
+                <p>@Html.Raw(lesNouvelles[i].DESCRIPTION.Replace("<p>", "").Replace("</p>", "").Substring(0, longMax))</p>                
+            }
+            else {
+                <p>@Html.Raw(lesNouvelles[i].DESCRIPTION.Replace("<p>", "").Replace("</p>", "").Substring(0, longMax))...</p>
+                <p>
+                    @Html.ActionLink(StringResources.StringResources.lireSuite, 
+                                     "getNouvelle",
+                                     "Public",
+                                     new { id = lesNouvelles[i].ID },
+                                     new { @class = "gras" })   
+                </p>
+            }
+        </div>
+    }    
+    
+    <ul class="nav-pagination">
+        @if (lesNouvelles.ShowFirstPage)
+        {
+            <li>@Html.ActionLink("<<", "Nouvelles", new { page = 0 })</li>
+            <li>@Html.ActionLink("<", "Nouvelles", new { page = lesNouvelles.PageIndex - 1 })</li>         
+        }
+        else if (lesNouvelles.HasPreviousPage)
+        {
+            <li>@Html.ActionLink("<", "Nouvelles", new { page = lesNouvelles.PageIndex - 1 })</li>
+        }
+    
+        @if (lesNouvelles.ShowLastPage)
+        {
+            <li>@Html.ActionLink(">", "Nouvelles", new { page = lesNouvelles.PageIndex + 1 })</li>
+            <li>@Html.ActionLink(">>", "Nouvelles", new { page = lesNouvelles.TotalPages - 1 })</li>            
+        }
+        else if (lesNouvelles.HasNextPage)
+        {
+            <li>@Html.ActionLink(">", "Nouvelles", new { page = lesNouvelles.PageIndex + 1 })</li>
+        }
+    </ul>
 
-
-<ul class="nav-forum">
-    <li><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">...</a></li>
-    <li><a href="#">Page suivante></a></li>
-    <li><a href="#">Dernière page</a></li>
-</ul>
-
+}

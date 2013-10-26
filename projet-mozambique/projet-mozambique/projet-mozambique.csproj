@@ -135,6 +135,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\PublicController.cs" />
     <Compile Include="Controllers\SectorielController.cs" />
     <Compile Include="Global.asax.cs">
@@ -179,10 +180,25 @@
     <Compile Include="Models\GetForum_Result.cs">
       <DependentUpon>mvpModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetMessagesEnvoyes_Result.cs">
+      <DependentUpon>mvpModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetMessagesForum_Result.cs">
       <DependentUpon>mvpModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetMessagesPrives_Result.cs">
+      <DependentUpon>mvpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetMessagesSupprimes_Result.cs">
+      <DependentUpon>mvpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetMessage_Result.cs">
+      <DependentUpon>mvpModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetNouvelles_Result.cs">
+      <DependentUpon>mvpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetNouvelle_Result.cs">
       <DependentUpon>mvpModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetPartenaires_Result.cs">
@@ -198,6 +214,9 @@
       <DependentUpon>mvpModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetPubParSujet_Result.cs">
+      <DependentUpon>mvpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetRechercheNouvelle_Result.cs">
       <DependentUpon>mvpModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetResultatsSondage_Result.cs">
@@ -230,6 +249,7 @@
     <Compile Include="Models\GetUtils_Result.cs">
       <DependentUpon>mvpModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MessageMessagerie.cs" />
     <Compile Include="Models\MESSAGEFORUM.cs">
       <DependentUpon>mvpModel.tt</DependentUpon>
     </Compile>
@@ -275,7 +295,16 @@
     <Compile Include="Models\SONDAGE.cs">
       <DependentUpon>mvpModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>mvpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>mvpModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SUJETPUBLICATION.cs">
+      <DependentUpon>mvpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>mvpModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UTILISATEUR.cs">
@@ -286,6 +315,8 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilitaires\Constantes.cs" />
+    <Compile Include="Utilitaires\ListePaginee.cs" />
+    <Compile Include="Utilitaires\Message.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\images\Falco2.jpg" />
@@ -410,7 +441,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Public\Index.cshtml" />
     <Content Include="Views\Admin\_ViewStart.cshtml" />
@@ -428,7 +458,6 @@
     <Content Include="Views\Sectoriel\_LayoutSectoriel.cshtml" />
     <Content Include="Views\Sectoriel\Index.cshtml" />
     <Content Include="Views\Sectoriel\Menu.cshtml" />
-    <Content Include="Views\Sectoriel\_ViewStart.cshtml" />
     <Content Include="Views\Sectoriel\IndexAdmin.cshtml" />
     <Content Include="Views\Sectoriel\Messagerie.cshtml" />
     <Content Include="Views\Sectoriel\Documents.cshtml" />
@@ -441,8 +470,6 @@
     <Content Include="Views\Sectoriel\ModifierMotPasseErreur.cshtml" />
     <Content Include="Views\Admin\Role.cshtml" />
     <Content Include="Views\Sectoriel\Forum.cshtml" />
-    <Content Include="Views\Sectoriel\MessagesEnvoyes.cshtml" />
-    <Content Include="Views\Sectoriel\Corbeille.cshtml" />
     <Content Include="Views\Sectoriel\NouveauMessage.cshtml" />
     <Content Include="Views\Sectoriel\MessageEnvoyeOK.cshtml" />
     <Content Include="Views\Sectoriel\MessagePasEnvoye.cshtml" />
@@ -464,7 +491,6 @@
     <Content Include="Views\Admin\PublicationDocument.cshtml" />
     <Content Include="Views\Admin\PublicationErreur.cshtml" />
     <Content Include="Views\Admin\PublicationOK.cshtml" />
-    <Content Include="Views\Sectoriel\MenuMessagerie.cshtml" />
     <Content Include="Views\Sectoriel\Calendrier.cshtml" />
     <Content Include="Views\Sectoriel\Evenement.cshtml" />
     <Content Include="Views\Admin\AjouterEvenement.cshtml" />
@@ -502,6 +528,11 @@
     <Content Include="Views\Shared\_LayoutPublic.cshtml" />
     <Content Include="Views\Public\Header.cshtml" />
     <Content Include="Views\Sectoriel\Header.cshtml" />
+    <Content Include="Views\Shared\AfficherMsg.cshtml" />
+    <Content Include="Views\Error\HttpError404.cshtml" />
+    <Content Include="Views\Sectoriel\ListeMessages.cshtml" />
+    <Content Include="Views\Error\HttpError500.cshtml" />
+    <Content Include="Views\Sectoriel\LectureMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

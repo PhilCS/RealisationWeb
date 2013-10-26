@@ -5,9 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using projet_mozambique.Models;
+using projet_mozambique.Utilitaires;
 
 namespace projet_mozambique.Controllers
 {
+    [AllowAnonymous]
     public class PublicController : Controller
     {
         //
@@ -18,13 +20,26 @@ namespace projet_mozambique.Controllers
             return View();
         }
 
-        public ActionResult nouvelles()
+        public ActionResult nouvelles(int? page)
         {
+            MVPEntities db = new MVPEntities();
+            const int nbParPage = 5;
+
+            List<GetNouvelles_Result> lstN = db.GetNouvelles().ToList();
+            ListePaginee<GetNouvelles_Result> nouvPaginees = 
+                new ListePaginee<GetNouvelles_Result>(lstN, page ?? 0, nbParPage);
+
+            ViewData[Constantes.CLE_NOUVELLES] = nouvPaginees;
+            
             return View("Nouvelles");
         }
 
-        public ActionResult getNouvelle()
+        public ActionResult getNouvelle(int id)
         {
+            MVPEntities db = new MVPEntities();
+            GetNouvelle_Result n = db.GetNouvelle(id).FirstOrDefault();
+            ViewData[Constantes.CLE_NOUVELLE] = n;            
+
             return View("Nouvelle");
         }
 
@@ -43,8 +58,16 @@ namespace projet_mozambique.Controllers
             return View("NousJoindre");
         }
 
-        public ActionResult getResultats()
+        [HttpPost]
+        public ActionResult getResultats(string type, string recherche)
         {
+            MVPEntities db = new MVPEntities();
+            List<GetRechercheNouvelle_Result> lstR = db.GetRechercheNouvelle(recherche.Trim()).ToList();
+
+            ViewData[Constantes.CLE_RESUL_RECH] = lstR;
+            ViewData[Constantes.CLE_TYPE_RECHERCHE] = type;
+            ViewData[Constantes.CLE_RECHERCHE] = type;
+
             return View("PageResultat");
         }
 

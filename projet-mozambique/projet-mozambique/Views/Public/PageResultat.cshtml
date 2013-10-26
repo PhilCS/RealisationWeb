@@ -1,23 +1,33 @@
-﻿@{
-    ViewBag.Title = "PageResultat";
-}
-
-<h1>Résultats de la recherche</h1>
-
+﻿@using projet_mozambique.Models
+@using projet_mozambique.Utilitaires
 @{
-    if(String.IsNullOrEmpty(Request.QueryString["resultat"]) == false)
+    ViewBag.Title = "Résultats de la recherche";
+    string type = (ViewData[Constantes.CLE_TYPE_RECHERCHE] as string);
+    List<GetRechercheNouvelle_Result> lstNouv;
+    
+    <h1>Résultats de la recherche</h1>
+    
+    if(type == Constantes.RECH_NOUVELLES)
     {
-        if(Request.QueryString["resultat"] == "nouvelles")
-        {
+            lstNouv = (ViewData[Constantes.CLE_RESUL_RECH] as List<GetRechercheNouvelle_Result>);
+            
             <ul>
-                <li>Titre de la nouvelle - Publié le 23 janvier 2013</li>
-                <li>Titre de la nouvelle - Publié le 23 janvier 2013</li>
-                <li>Titre de la nouvelle - Publié le 23 janvier 2013</li>
-                <li>Titre de la nouvelle - Publié le 23 janvier 2013</li>
+                @for (int i = 0; i < lstNouv.Count; i++)
+                {
+                    string affiche = lstNouv[i].TITRE + " // " + StringResources.StringResources.publieLe + " " +
+                        lstNouv[i].DATEPUBLICATION.ToString("yyyy/MM/dd");
+                    
+                    <li>@Html.ActionLink(affiche, 
+                                        "getNouvelle",
+                                        "Public",
+                                        new { id = lstNouv[i].ID },
+                                        null)  
+                    </li>
+                }
             </ul>  
-        }
-        else 
-        {
+            
+    }
+    else{
             <ul>
                 <li>Nom de l'entreprise</li>
                 <li>Nom de l'entreprise</li>
@@ -25,8 +35,9 @@
                 <li>Nom de l'entreprise</li>
                 <li>Nom de l'entreprise</li>
             </ul>
-        }
+    
     }
 }
+
 
 

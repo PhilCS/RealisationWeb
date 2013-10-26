@@ -10,17 +10,12 @@
 namespace projet_mozambique.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class DESTINATAIREMESSAGE
+    public partial class GetNouvelle_Result
     {
-        public int IDMESSAGE { get; set; }
-        public int IDUTILISATEUR { get; set; }
-        public bool SUPPRIME { get; set; }
-        public bool SUPPRIMEDEFINITIF { get; set; }
-        public bool LU { get; set; }
-    
-        public virtual MESSAGEPRIVE MESSAGEPRIVE { get; set; }
-        public virtual UTILISATEUR UTILISATEUR { get; set; }
+        public int ID { get; set; }
+        public string TITRE { get; set; }
+        public string DESCRIPTION { get; set; }
+        public System.DateTime DATEPUBLICATION { get; set; }
     }
 }

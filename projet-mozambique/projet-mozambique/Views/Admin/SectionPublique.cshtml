@@ -1,24 +1,29 @@
-﻿@{
+﻿@using projet_mozambique.Utilitaires
+@{
     ViewBag.Title = "Section publique";
-}
+    var msg = (ViewData[Constantes.CLE_MSG_RETOUR] as Message);
 
-<h1>Gestion du contenu de la section publique</h1>
-<p class="msgOk">La section a été mise à jour.</p>
-<ul>
-    <li>Nouvelles
-        <ul>
-            <li><a href="gestionNouvelles?gestion=1">Ajouter une nouvelle</a></li>
-            <li><a href="gestionNouvelles?gestion=2">Modifier/Supprimer une nouvelle</a></li>
-        </ul>
-    </li>
-    <li>Partenaires
-        <ul>
-            <li><a href="gestionPartenaires?gestion=1">Ajouter un partenaire</a></li>
-            <li><a href="gestionPartenaires?gestion=2">Modifier/Supprimer un partenaire</a></li>
-        </ul>
-    </li>
-    <li>@Html.ActionLink("Qui sommes-nous ?", "modifierAPropos")</li>
-</ul>
+    <h1>Gestion du contenu de la section publique</h1>
+    
+    Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
+    
+    <ul>
+        <li>Nouvelles
+            <ul>
+                <li><a href="gestionNouvelles?gestion=1">Ajouter une nouvelle</a></li>
+                <li><a href="gestionNouvelles?gestion=2">Modifier/Supprimer une nouvelle</a></li>
+            </ul>
+        </li>
+        <li>Partenaires
+            <ul>
+                <li><a href="gestionPartenaires?gestion=1">Ajouter un partenaire</a></li>
+                <li><a href="gestionPartenaires?gestion=2">Modifier/Supprimer un partenaire</a></li>
+            </ul>
+        </li>
+        <li>@Html.ActionLink("Qui sommes-nous ?", "modifierAPropos")</li>
+    </ul>
+    
+}
 
 <script type="text/javascript">
     $(document).ready(function () {

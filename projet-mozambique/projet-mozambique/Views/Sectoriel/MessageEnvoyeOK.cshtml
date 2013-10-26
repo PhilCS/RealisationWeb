@@ -6,8 +6,6 @@
 
 <div class="msg succes">Votre message a été envoyé avec succès.</div>
 
-<!--@{Html.RenderPartial("~/Views/Sectoriel/MenuMessagerie.cshtml");}-->
-
 <nav class="menu-messagerie">
     <ul>
         <li class="active">@Html.ActionLink("Boite de réception", "Messagerie", new { controller = "Sectoriel" })</li><li>@Html.ActionLink("Messages envoyés", "MessagesEnvoyes", new { controller = "Sectoriel" })</li><li>@Html.ActionLink("Corbeille", "Corbeille", new { controller = "Sectoriel" })</li>

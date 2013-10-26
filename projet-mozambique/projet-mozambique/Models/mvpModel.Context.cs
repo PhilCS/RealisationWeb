@@ -50,6 +50,7 @@ namespace projet_mozambique.Models
         public DbSet<SUJETPUBLICATION> SUJETPUBLICATION { get; set; }
         public DbSet<UTILISATEUR> UTILISATEUR { get; set; }
         public DbSet<UTILISATEURSECTEUR> UTILISATEURSECTEUR { get; set; }
+        public DbSet<sysdiagrams> sysdiagrams { get; set; }
     
         public virtual int AjouterChoixSondage(Nullable<int> sondage, string valeur)
         {
@@ -1090,6 +1091,185 @@ namespace projet_mozambique.Models
                 new ObjectParameter("secteur", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SupprimerUtilSect", idParameter, secteurParameter);
+        }
+    
+        public virtual ObjectResult<GetNouvelle_Result> GetNouvelle(Nullable<int> idNouvelle)
+        {
+            var idNouvelleParameter = idNouvelle.HasValue ?
+                new ObjectParameter("idNouvelle", idNouvelle) :
+                new ObjectParameter("idNouvelle", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetNouvelle_Result>("GetNouvelle", idNouvelleParameter);
+        }
+    
+        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var new_diagramnameParameter = new_diagramname != null ?
+                new ObjectParameter("new_diagramname", new_diagramname) :
+                new ObjectParameter("new_diagramname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
+        }
+    
+        public virtual int sp_upgraddiagrams()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual ObjectResult<GetRechercheNouvelle_Result> GetRechercheNouvelle(string rech)
+        {
+            var rechParameter = rech != null ?
+                new ObjectParameter("rech", rech) :
+                new ObjectParameter("rech", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRechercheNouvelle_Result>("GetRechercheNouvelle", rechParameter);
+        }
+    
+        public virtual ObjectResult<GetMessagesPrives_Result> GetMessagesPrives(Nullable<int> idUtil)
+        {
+            var idUtilParameter = idUtil.HasValue ?
+                new ObjectParameter("idUtil", idUtil) :
+                new ObjectParameter("idUtil", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMessagesPrives_Result>("GetMessagesPrives", idUtilParameter);
+        }
+    
+        public virtual ObjectResult<GetMessagesSupprimes_Result> GetMessagesSupprimes(Nullable<int> idUtil)
+        {
+            var idUtilParameter = idUtil.HasValue ?
+                new ObjectParameter("idUtil", idUtil) :
+                new ObjectParameter("idUtil", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMessagesSupprimes_Result>("GetMessagesSupprimes", idUtilParameter);
+        }
+    
+        public virtual ObjectResult<GetMessagesEnvoyes_Result> GetMessagesEnvoyes(Nullable<int> idUtil)
+        {
+            var idUtilParameter = idUtil.HasValue ?
+                new ObjectParameter("idUtil", idUtil) :
+                new ObjectParameter("idUtil", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMessagesEnvoyes_Result>("GetMessagesEnvoyes", idUtilParameter);
+        }
+    
+        public virtual ObjectResult<string> GetDestinataires(Nullable<int> idMessage)
+        {
+            var idMessageParameter = idMessage.HasValue ?
+                new ObjectParameter("idMessage", idMessage) :
+                new ObjectParameter("idMessage", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("GetDestinataires", idMessageParameter);
+        }
+    
+        public virtual ObjectResult<GetMessage_Result> GetMessage(Nullable<int> idMessage)
+        {
+            var idMessageParameter = idMessage.HasValue ?
+                new ObjectParameter("idMessage", idMessage) :
+                new ObjectParameter("idMessage", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMessage_Result>("GetMessage", idMessageParameter);
+        }
+    
+        public virtual int LireMessage(Nullable<int> idMessage, Nullable<int> idUtil)
+        {
+            var idMessageParameter = idMessage.HasValue ?
+                new ObjectParameter("idMessage", idMessage) :
+                new ObjectParameter("idMessage", typeof(int));
+    
+            var idUtilParameter = idUtil.HasValue ?
+                new ObjectParameter("idUtil", idUtil) :
+                new ObjectParameter("idUtil", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("LireMessage", idMessageParameter, idUtilParameter);
         }
     }
 }

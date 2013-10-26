@@ -123,6 +123,21 @@
   <data name="apropos" xml:space="preserve">
     <value>Qui sommes-nous ?</value>
   </data>
+  <data name="champsObligatoires" xml:space="preserve">
+    <value>Les champs marqués d'une étoile sont obligatoires.</value>
+  </data>
+  <data name="erreur404msg" xml:space="preserve">
+    <value>La page à laquelle vous tentez d'accéder n'existe pas.</value>
+  </data>
+  <data name="erreur404titre" xml:space="preserve">
+    <value>Erreur 404</value>
+  </data>
+  <data name="erreur500titre" xml:space="preserve">
+    <value>Erreur 500</value>
+  </data>
+  <data name="lireSuite" xml:space="preserve">
+    <value>Lire la suite...</value>
+  </data>
   <data name="nousjoindre" xml:space="preserve">
     <value>Nous joindre</value>
   </data>
@@ -131,5 +146,8 @@
   </data>
   <data name="partenaires" xml:space="preserve">
     <value>Partenaires</value>
+  </data>
+  <data name="publieLe" xml:space="preserve">
+    <value>Publié le :</value>
   </data>
 </root>

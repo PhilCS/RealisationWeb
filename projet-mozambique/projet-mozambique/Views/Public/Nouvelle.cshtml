@@ -1,19 +1,14 @@
-﻿@{
-    ViewBag.Title = "Nouvelle";
+﻿@using projet_mozambique.Utilitaires
+@using projet_mozambique.Models
+@using StringResources
+@{
+    var n =  (ViewData[Constantes.CLE_NOUVELLE] as GetNouvelle_Result);
+    ViewBag.Title = n.TITRE ;
 }
 
-<h1>Titre de la nouvelle</h1>
-<h3>Publié le : 23 janvier 2012</h3>
-<p>Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl 
-    consectetur et. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cum sociis 
-    natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer posuere erat a 
-    ante venenatis dapibus posuere velit aliquet.</p>
+<div class="nouvelle">
+    <h1>@n.TITRE</h1>
+    <h3>@StringResources.publieLe @n.DATEPUBLICATION.ToString("yyyy/MM/dd")</h3>
 
-<p>Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed 
-consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
-
-<p>Aenean lacinia bibendum nulla sed consectetur. Maecenas sed diam eget risus varius blandit sit amet 
-    non magna. Sed posuere consectetur est at lobortis. Cum sociis natoque penatibus et magnis dis parturient 
-    montes, nascetur ridiculus mus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent 
-    commodo cursus magna, vel scelerisque nisl consectetur et. Lorem ipsum dolor sit amet, consectetur 
-    adipiscing elit.</p>
+    <p>@Html.Raw(n.DESCRIPTION)</p>
+</div>

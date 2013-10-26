@@ -1,14 +1,16 @@
-﻿@{
+﻿@using projet_mozambique.Models;
+@using projet_mozambique.Utilitaires
+@{
     ViewBag.Title = "Messagerie";
 }
 
 <h1>Messagerie</h1>
 
-<!--@{Html.RenderPartial("~/Views/Sectoriel/MenuMessagerie.cshtml");}-->
-
 <nav class="menu-messagerie">
     <ul>
-        <li class="active">@Html.ActionLink("Boite de réception", "Messagerie", new { controller = "Sectoriel" })</li><li>@Html.ActionLink("Messages envoyés", "MessagesEnvoyes", new { controller = "Sectoriel" })</li><li>@Html.ActionLink("Corbeille", "Corbeille", new { controller = "Sectoriel" })</li>
+        <li class="active" id="recep">@Ajax.ActionLink("Boite de réception", "BoiteReception", new { controller = "Sectoriel" }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "messages", OnComplete = "naviguerMessagerie('recep')" })</li>
+        <li id="env">@Ajax.ActionLink("Messages envoyés", "MessagesEnvoyes", new { controller = "Sectoriel" }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "messages", OnComplete = "naviguerMessagerie('env')" })</li>
+        <li id="corb">@Ajax.ActionLink("Corbeille", "Corbeille", new { controller = "Sectoriel" }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "messages", OnComplete = "naviguerMessagerie('corb')" })</li>
     </ul>
 </nav>
 
@@ -20,25 +22,9 @@
                 <li><a href="SupprimerMessage">Supprimer</a></li>
             </ul>
         </div>
-        <ul>
-            <li class="msg-courant"><a href="#"><input type="checkbox" />Salut toi! 
-                <span class="infos-supp-msg">
-                    | 2 octobre 2013 14:55
-                    <img class="attachment" src="~/Content/images/icones/icon-attachment.png" alt="Icône pièce jointe" />
-                </span></a></li>
-            <li class="nouveau-msg"><a href="#"><input type="checkbox" />Hey mon ami préféré! 
-                <span class="infos-supp-msg">| 2 octobre 2013 14:55
-                </span></a></li>
-            <li><a href="#"><input type="checkbox" />Salut toi! <span class="infos-supp-msg">| 2 octobre 2013 14:55</span></a></li>
-            <li><a href="#"><input type="checkbox" />Salut toi! <span class="infos-supp-msg">| 2 octobre 2013 14:55</span></a></li>
-            <li><a href="#"><input type="checkbox" />Salut toi! <span class="infos-supp-msg">| 2 octobre 2013 14:55</span></a></li>
-            <li><a href="#"><input type="checkbox" />Salut toi! <span class="infos-supp-msg">| 2 octobre 2013 14:55</span></a></li>
-            <li><a href="#"><input type="checkbox" />Salut toi! <span class="infos-supp-msg">| 2 octobre 2013 14:55</span></a></li>
-            <li><a href="#"><input type="checkbox" />Salut toi! <span class="infos-supp-msg">| 2 octobre 2013 14:55</span></a></li>
-            <li><a href="#"><input type="checkbox" />Salut toi! <span class="infos-supp-msg">| 2 octobre 2013 14:55</span></a></li>
-            <li><a href="#"><input type="checkbox" />Salut toi! <span class="infos-supp-msg">| 2 octobre 2013 14:55</span></a></li>
-
-        </ul>
+        <div id="messages">
+            @{Html.RenderPartial("~/Views/Sectoriel/ListeMessages.cshtml");}
+        </div>
     </div>
     <div id="lecture" class="mess-lecture">
         <div class="actions-messagerie">
@@ -47,28 +33,31 @@
                 <a href="SupprimerMessage"><img src="~/Content/images/icones/icon-trashcan.png" title="Supprimer" alt="Icône supprimer" /></a>
             </div>
         </div>
-        <p>
-            Bonjour Vanessa,
-        </p>
+        <div id="contenu-message">
 
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eu scelerisque risus, nec cursus metus.
-            Vivamus lobortis felis ac turpis fringilla, in convallis risus hendrerit. Phasellus sit amet cursus metus. Sed dictum
-            felis sapien, non venenatis eros ultrices eu. Aenean iaculis facilisis lectus, eu pulvinar quam convallis at. Fusce
-            a mi et turpis eleifend vulputate non iaculis nibh. Vivamus vel fringilla tellus. Ut nisi est, mattis id ipsum et, 
-            congue ornare erat. Nullam ac velit eu purus interdum congue vitae iaculis nibh. In a ultrices nulla. Fusce adipiscing
-            magna at metus eleifend dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
-            egestas. Nullam rhoncus aliquet leo. Suspendisse potenti.
-        </p>
-
-        <p>
-            Nam eget urna condimentum, adipiscing velit ac, fermentum elit. Maecenas volutpat vulputate metus, non convallis
-            nibh cursus nec. In et varius nibh, vitae consequat odio. Ut sed dapibus arcu. Curabitur hendrerit felis eget lorem
-            ultricies, quis accumsan nunc ornare. Maecenas justo risus, sagittis a quam non, lacinia sodales turpis. Aenean
-            dictum augue et faucibus rhoncus. Donec condimentum ante nibh, sit amet ultrices enim tempus nec. Curabitur
-            vestibulum et nulla at porta. Fusce facilisis aliquam molestie.
-        </p>
+        </div>
     </div>
 </div>
 
+
+<script>
+    function naviguerMessagerie(clic) {
+        
+        $(".active").removeClass("active");
+
+        switch (clic)
+        {
+            case "recep":
+                $("#recep").addClass("active");
+                break;
+            case "env":
+                $("#env").addClass("active");
+                break;
+            case "corb":
+                $("#corb").addClass("active");
+                break;                
+        }
+
+    }
+</script>
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>@projet_mozambique.Utilitaires.Constantes.TITLE_COMMUN @ViewBag.Title</title>
+    <title>Portail Mozambique - @ViewBag.Title</title>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     @Styles.Render("~/Content/cssSectoriel")
@@ -29,7 +29,7 @@
             <div class="titre-header">
                 @Html.ActionLink("Mozambique", "Index", new { controller = "Admin" }, new {@class="main-titre"})<br />
                 @Html.ActionLink("Portail Pédagogique", "Index", new { controller = "Admin" }, new { @class = "sous-titre" })
-                <p class="langue">Français</p>
+                <p><span class="langue">Français</span></p>
             </div>
             <nav>
                 <ul>

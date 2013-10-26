@@ -1,0 +1,24 @@
+﻿@using projet_mozambique.Utilitaires
+@{
+    var msg = (TempData[Constantes.CLE_MSG_RETOUR] as Message);
+    
+    if (msg != null)
+    {
+        if (msg.typeMessage == Message.TYPE_MESSAGE.SUCCES)
+        {
+            <p class="msg succes">@msg.ToString()</p>
+        }
+        else
+        {
+            <div class="msg erreur">
+                <p>@msg.ToString()</p>
+                <ul>
+                    @for (int i = 0; i < msg.lstErreurs.Count; i++)
+                    {
+                        <li>@msg.lstErreurs[i]</li>
+                    }
+                </ul>
+            </div>
+        }
+    }
+}

@@ -248,7 +248,7 @@ label[class=cb]
 /*MESSAGES D'ERREURS/SUCCÈS*/
 .msg
 {
-    margin-bottom:35px;
+    margin-bottom:25px;
 }
 
 .erreur
@@ -296,6 +296,12 @@ label[class=cb]
 }
 
 /*MESSAGERIE*/
+#contenu-message h3
+{   
+    margin-top:5px;
+    padding-left:12px;
+    padding-right:8px
+}
 
 .messagerie
 {
@@ -346,6 +352,12 @@ label[class=cb]
     background-color:rgba(0,0,0,0.3);
 }
 
+.mess-reception li:hover
+{
+    cursor:pointer;
+    color:black;
+}
+
 .mess-reception input
 {
     margin-right:10px;
@@ -370,7 +382,7 @@ label[class=cb]
 .infos-supp-msg
 {
     float:right;
-    width:145px;
+    width:130px;
 }
 
 .attachment
@@ -427,7 +439,7 @@ label[class=cb]
 }
 
 /*FORUM*/
-.nav-forum
+.nav-pagination
 {
     float:right;
     margin-bottom:20px;
@@ -435,12 +447,13 @@ label[class=cb]
     padding-right:5px;
 }
 
-.nav-forum li a
+.nav-pagination li a
 {
     text-decoration:underline;
+    font-weight:bold;
 }
 
-.nav-forum li
+.nav-pagination li
 {
     display:inline;
     margin-right:5px;
@@ -705,6 +718,17 @@ label[class=cb]
 .gras
 {
     font-weight:bold;
+}
+
+.lst-options-nouvelles
+{
+    font-size:15px;
+    padding:3px;
+}
+
+.form-nouvelle input:not([type=submit])
+{
+    width:40%;
 }
 
 

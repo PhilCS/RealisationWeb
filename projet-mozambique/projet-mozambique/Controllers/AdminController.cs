@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using projet_mozambique.Models;
+using projet_mozambique.Utilitaires;
 
 namespace projet_mozambique.Controllers
 {
@@ -78,9 +80,102 @@ namespace projet_mozambique.Controllers
             return View("SectionPublique");
         }
 
-        public ActionResult gestionNouvelles()
+        public ActionResult gestionNouvelles(int? gestion)
         {
+            if (gestion == 2)
+            {
+                MVPEntities db = new MVPEntities();
+                List<GetNouvelles_Result> lstN = db.GetNouvelles().ToList();
+                ViewData[Constantes.CLE_NOUVELLES] = lstN;
+            }
+
             return View("GestionNouvelles");
+        }
+
+        [HttpPost]
+        public ActionResult confModifierNouvelle(int id, string titre, string description)
+        {
+            MVPEntities db = new MVPEntities();
+            string desc = description.Replace("\r\n", "<br/>");
+            db.ModifierNouvelle(id, titre, desc);
+
+            TempData[Constantes.CLE_MSG_RETOUR] =
+                new Message(Message.TYPE_MESSAGE.SUCCES, "La nouvelle a bien été modifiée.");
+
+            return RedirectToAction("GestionNouvelles", new { gestion = 2 });
+        }
+
+        [HttpPost]
+        public ActionResult modifierNouvelle(int id)
+        {
+            MVPEntities db = new MVPEntities();
+
+            if (!string.IsNullOrEmpty(Request.Form["modifier"]))
+            {
+                GetNouvelle_Result n = db.GetNouvelle(id).FirstOrDefault();
+                n.DESCRIPTION = n.DESCRIPTION.Replace("<br/>", "\r\n");
+
+                TempData[Constantes.CLE_NOUVELLE] = n;
+
+                return View("GestionNouvelles");
+            }
+            else if (!string.IsNullOrEmpty(Request.Form["supprimer"]))
+            {
+                db.SupprimerNouvelle(id);
+                TempData[Constantes.CLE_MSG_RETOUR] =
+                    new Message(Message.TYPE_MESSAGE.SUCCES, "La nouvelle a bien été supprimée.");
+
+                return RedirectToAction("GestionNouvelles", new { gestion = 2 });
+            }
+            else
+            {
+                return View("GestionNouvelles", new { gestion = 2 });
+            }
+
+            
+        }
+
+        /// <summary>
+        /// Action qui ajoute une nouvelle à la base de données
+        /// </summary>
+        /// <param name="titre">Titre de la nouvelle</param>
+        /// <param name="texte">Texte de la nouvelle</param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult ajouterNouvelle(string titre, string texte)
+        {
+            MVPEntities db = new MVPEntities();
+            string textFormat;
+            Message msg;
+
+            if (!string.IsNullOrEmpty(titre) && !string.IsNullOrEmpty(texte))
+            {
+                textFormat = texte.Replace("\r\n", "<br/>");
+
+                db.AjouterNouvelle(titre, textFormat);
+                msg = new Message(Message.TYPE_MESSAGE.SUCCES, "La nouvelle a bien été ajoutée.");
+
+                TempData[Constantes.CLE_MSG_RETOUR] = msg;
+                return View("SectionPublique");
+            }
+            else
+            {
+                msg = new Message(Message.TYPE_MESSAGE.ERREUR, "La nouvelle n'a pu être ajoutée.");
+
+                if (string.IsNullOrEmpty(titre))
+                {
+                    msg.lstErreurs.Add("Le titre ne peut être vide.");
+                }
+            
+                if (string.IsNullOrEmpty(texte))
+                {
+                    msg.lstErreurs.Add("La description ne peut être vide.");
+                }
+
+                TempData[Constantes.CLE_MSG_RETOUR] = msg;
+                return RedirectToAction("gestionNouvelles", new { gestion = 1 });
+            }
+
         }
 
         public ActionResult gestionPartenaires()

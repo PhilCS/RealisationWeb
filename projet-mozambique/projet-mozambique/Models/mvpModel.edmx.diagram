@@ -53,6 +53,7 @@
         <AssociationConnector Association="MVPModel.MOTCLEPUBLICATION" ManuallyRouted="false" />
         <AssociationConnector Association="MVPModel.ROLEDROIT" ManuallyRouted="false" />
         <AssociationConnector Association="MVPModel.VOTESONDAGE" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MVPModel.sysdiagrams" Width="1.5" PointX="2.3790771692893826" PointY="22.224687914468667" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

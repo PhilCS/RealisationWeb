@@ -27,6 +27,7 @@ namespace projet_mozambique.Models
         public string TYPEMIME { get; set; }
         public int IDSUJET { get; set; }
         public int IDSECTEUR { get; set; }
+        public string DESCRIPTION { get; set; }
     
         public virtual SECTEUR SECTEUR { get; set; }
         public virtual SUJETPUBLICATION SUJETPUBLICATION { get; set; }

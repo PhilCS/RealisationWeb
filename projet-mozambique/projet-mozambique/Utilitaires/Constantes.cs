@@ -10,10 +10,20 @@ namespace projet_mozambique.Utilitaires
         private Constantes()
         { }
 
-        public static string NOM_SITE_WEB = "Portail Mozambique";
-        public static string TITLE_COMMUN = NOM_SITE_WEB + " - ";
+        public const string RECH_NOUVELLES = "nouvelles";
+        public const string RECH_PARTN = "partenaires";
 
-        public static string MESSAGE_CHAMPS_OBLIGATOIRE = "Les champs marqués d'une étoile sont obligatoires.";
+        //CLÉS
+        public const string CLE_NOUVELLE = "nouvelle";
+        public const string CLE_NOUVELLES = "nouvelles";
+        public const string CLE_MSG_RETOUR = "msg";
+        public const string CLE_TYPE_RECHERCHE = "typeRecherche";
+        public const string CLE_RECHERCHE = "recherche";
+        public const string CLE_RESUL_RECH = "resulRech";
+        public const string CLE_LISTE_MSG = "listeMsg";
+        public const string CLE_TYPE_MSG = "typeMsg";
+        public const string CLE_ERREUR = "msgErreur";
+        public const string CLE_MESSAGE = "message";
 
     }
 }
