@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using System.Data.Entity;
 using projet_mozambique.Models;
+using WebMatrix.WebData;
+using WebMatrix.Data;
+using System.Globalization;
 using projet_mozambique.Utilitaires;
 
 namespace projet_mozambique.Controllers
@@ -12,17 +16,22 @@ namespace projet_mozambique.Controllers
     [AllowAnonymous]
     public class PublicController : Controller
     {
+        private Entities db = new Entities();
         //
         // GET: /Public/
-
-        public ActionResult index()
+        public ActionResult Index()
         {
-            return View();
+            /*if (Request.IsAuthenticated)
+                return RedirectToAction("Index", "Sectoriel");*/
+
+            GetContenu_Result contentResult = db.GetContenu("Accueil").FirstOrDefault();
+
+            return View(contentResult);
         }
 
         public ActionResult nouvelles(int? page)
         {
-            MVPEntities db = new MVPEntities();
+            Entities db = new Entities();
             const int nbParPage = 5;
 
             List<GetNouvelles_Result> lstN = db.GetNouvelles().ToList();
@@ -36,7 +45,6 @@ namespace projet_mozambique.Controllers
 
         public ActionResult getNouvelle(int id)
         {
-            MVPEntities db = new MVPEntities();
             GetNouvelle_Result n = db.GetNouvelle(id).FirstOrDefault();
             ViewData[Constantes.CLE_NOUVELLE] = n;            
 
@@ -48,20 +56,23 @@ namespace projet_mozambique.Controllers
             return View("Partenaires");
         }
 
-        public ActionResult apropos()
+        public ActionResult APropos()
         {
-            return View("APropos");
+            GetContenu_Result contentResult = db.GetContenu("About").FirstOrDefault();
+
+            return View(contentResult);
         }
 
-        public ActionResult nousjoindre()
+        public ActionResult NousJoindre()
         {
-            return View("NousJoindre");
+            GetContenu_Result contentResult = db.GetContenu("Contact").FirstOrDefault();
+
+            return View(contentResult);
         }
 
         [HttpPost]
         public ActionResult getResultats(string type, string recherche)
         {
-            MVPEntities db = new MVPEntities();
             List<GetRechercheNouvelle_Result> lstR = db.GetRechercheNouvelle(recherche.Trim()).ToList();
 
             ViewData[Constantes.CLE_RESUL_RECH] = lstR;
@@ -70,39 +81,5 @@ namespace projet_mozambique.Controllers
 
             return View("PageResultat");
         }
-
-        [HttpPost]
-        public ActionResult doLogin(string UserString, string PWString, bool RememberMe)
-        {
-            //UtilisateursDataContext tblUtil = new UtilisateursDataContext();
-            //if (!String.IsNullOrEmpty(UserString) && !String.IsNullOrEmpty(PWString))
-            //{
-            //    //var utilisateur = from u in tblUtil.UTILISATEUR
-            //    //                  where u.NOMUTIL == UserString && u.MOTPASSE == PWString
-            //    //                  select new { UserId = u .ID, UserName = u.NOMUTIL, Secteur = u.UTILISATEURSECTEUR };
-            //    //if (utilisateur.Count() != 0)
-            //    //{
-            //    //    int id = utilisateur.First().UserId;
-            //    //    string name = utilisateur.First().UserName;
-
-            //    //    Session["currentUserName"] = name;
-            //    //    Session["currentUserId"] = id;
-
-            //    //    int nbSecteur = 0;
-
-            //    //    foreach (var s in utilisateur.First().Secteur)
-            //    //    {
-            //    //        nbSecteur++;
-            //    //        Session["userSector" + nbSecteur.ToString()] = s.SECTEUR.NOM;
-            //    //    }
-                    
-            //        return RedirectToAction("Index", "sectoriel");
-                    
-            //    }
-            //}
-
-            return View("Index");
-        }
-
     }
 }

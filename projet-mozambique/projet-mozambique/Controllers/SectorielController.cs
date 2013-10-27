@@ -3,37 +3,65 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using projet_mozambique.Models;
+using WebMatrix.WebData;
+using WebMatrix.Data;
 using projet_mozambique.Utilitaires;
 
 namespace projet_mozambique.Controllers
 {
-
+    [Authorize]
     public class SectorielController : Controller
     {
+        private Entities db = new Entities();
         //
         // GET: /Sectoriel/
         public ActionResult Index()
         {
-            // Si l'utilisateur n'a pas accès à cette section
-            // Faut trouver comment empêcher un utilisateur non connecté d'accéder à 
-            // tout le controller
-            if (Session["currentUserId"] == null)
-            {
-                return Redirect("/public");
-            }
-            else
-            {
-                return View();
-            }
-        }
-
-        public ActionResult Messagerie()
-        {
-            ObtenirMessagesRecus();
             return View();
         }
 
+        [AllowAnonymous]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(LoginModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var utilisateur = from u in db.UTILISATEUR
+                                  where u.NOMUTIL == model.UserName
+                                  select u;
+
+                if (utilisateur.Count() != 0)
+                {
+                    UTILISATEUR currentUser = (UTILISATEUR)utilisateur.First();
+
+                    if (WebSecurity.Login(currentUser.NOMUTIL, model.Password, true))
+                    {
+                        return RedirectToAction("Index", "Sectoriel");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Le mot de passe est incorrect.");
+                    } 
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Le nom d'utilisateur fourni n'existe pas.");
+                }
+            }
+
+            // Si nous sommes arrivés là, quelque chose a échoué, réafficher le formulaire
+            return View(model);
+        }
         /// <summary>
         /// Retourne la vue partielle qui affiche les messages reçus
         /// </summary>
@@ -44,46 +72,18 @@ namespace projet_mozambique.Controllers
             return PartialView("ListeMessages");
         }
 
-        /// <summary>
-        /// Méthode qui va chercher les messages reçus pour pouvoir les passer à la vue
-        /// </summary>
-        private void ObtenirMessagesRecus()
+        public ActionResult LogOut()
         {
-            MVPEntities db = new MVPEntities();
-            List<GetMessagesPrives_Result> lstMbd = db.GetMessagesPrives(1).ToList();
-            List<MessageMessagerie> lstM = new List<MessageMessagerie>();
-            List<PIECEJOINTE> lstPJ;
-            PIECEJOINTE pj;
-            int dernierMess = -1;
-            int posDernierMess = -1;
-
-            foreach (GetMessagesPrives_Result m in lstMbd)
-            {
-                if (m.IDMESSAGE == dernierMess)
-                {
-                    pj = new PIECEJOINTE();
-                    pj.ID = m.IDPIECEJOINTE ?? 0;
-                    lstM[posDernierMess].lstPiecesJointes.Add(pj);
-                }
-                else
-                {
-                    lstPJ = new List<PIECEJOINTE>();
-
-                    if (m.IDPIECEJOINTE != null)
-                    {
-                        pj = new PIECEJOINTE();
-                        pj.ID = m.IDPIECEJOINTE ?? 0;
-                        lstPJ.Add(pj);
-                    }
-
-                    lstM.Add(new MessageMessagerie(m.IDMESSAGE, m.SUJET, m.CONTENU, lstPJ, m.LU, m.DATEENVOI));
-                    dernierMess = m.IDMESSAGE;
-                    posDernierMess++;
-                }
-            }
-
-            ViewData[Constantes.CLE_LISTE_MSG] = lstM;
+            WebSecurity.Logout();
+            return RedirectToAction("Index", "Public");
         }
+
+
+        public ActionResult Profil()
+        {
+            return View();
+        }
+        
 
         /// <summary>
         /// Retourne la vue partielle qui affiche les messages envoyés
@@ -91,8 +91,6 @@ namespace projet_mozambique.Controllers
         /// <returns></returns>
         public PartialViewResult MessagesEnvoyes()
         {
-            MVPEntities db = new MVPEntities();
-
             List<GetMessagesEnvoyes_Result> lstMbd = db.GetMessagesEnvoyes(1).ToList();
             List<MessageMessagerie> lstM = new List<MessageMessagerie>();
             List<PIECEJOINTE> lstPJ;
@@ -131,13 +129,51 @@ namespace projet_mozambique.Controllers
         }
 
         /// <summary>
+        /// Méthode qui va chercher les messages reçus pour pouvoir les passer à la vue
+        /// </summary>
+        private void ObtenirMessagesRecus()
+        {
+            List<GetMessagesPrives_Result> lstMbd = db.GetMessagesPrives(1).ToList();
+            List<MessageMessagerie> lstM = new List<MessageMessagerie>();
+            List<PIECEJOINTE> lstPJ;
+            PIECEJOINTE pj;
+            int dernierMess = -1;
+            int posDernierMess = -1;
+
+            foreach (GetMessagesPrives_Result m in lstMbd)
+            {
+                if (m.IDMESSAGE == dernierMess)
+                {
+                    pj = new PIECEJOINTE();
+                    pj.ID = m.IDPIECEJOINTE ?? 0;
+                    lstM[posDernierMess].lstPiecesJointes.Add(pj);
+                }
+                else
+                {
+                    lstPJ = new List<PIECEJOINTE>();
+
+                    if (m.IDPIECEJOINTE != null)
+                    {
+                        pj = new PIECEJOINTE();
+                        pj.ID = m.IDPIECEJOINTE ?? 0;
+                        lstPJ.Add(pj);
+                    }
+
+                    lstM.Add(new MessageMessagerie(m.IDMESSAGE, m.SUJET, m.CONTENU, lstPJ, m.LU, m.DATEENVOI));
+                    dernierMess = m.IDMESSAGE;
+                    posDernierMess++;
+                }
+            }
+
+            ViewData[Constantes.CLE_LISTE_MSG] = lstM;
+        }
+
+        /// <summary>
         /// Retourne la vue partielle qui affiche les messages supprimés
         /// </summary>
         /// <returns></returns>
         public PartialViewResult Corbeille()
         {
-            MVPEntities db = new MVPEntities();
-
             List<GetMessagesSupprimes_Result> lstMbd = db.GetMessagesSupprimes(1).ToList();
             List<MessageMessagerie> lstM = new List<MessageMessagerie>();
             List<PIECEJOINTE> lstPJ;
@@ -177,8 +213,6 @@ namespace projet_mozambique.Controllers
 
         public PartialViewResult LectureMessage(int id, bool lu)
         {
-            MVPEntities db = new MVPEntities();
-
             if (!lu)
             {
                 db.LireMessage(id, 1);
@@ -211,6 +245,61 @@ namespace projet_mozambique.Controllers
             return View();
         }
 
+        public ActionResult ModifierInfos()
+        {
+            Entities entity = new Entities();
+
+            int userId = WebSecurity.GetUserId(User.Identity.Name);
+            GetUtilProfil_Result profil = db.GetUtilProfil(userId).FirstOrDefault();
+
+            ProfileModel model = new ProfileModel();
+
+            model.courriel = profil.COURRIEL;
+            model.prenom = profil.PRENOM;
+            model.nom = profil.NOM;
+            model.adresse = profil.ADRESSE;
+            model.ville = profil.VILLE;
+
+            return View(model);
+            
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ModifierInfos(ProfileModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                int id = WebSecurity.GetUserId(User.Identity.Name);
+
+                db.ModifierUtilProfil(id, model.courriel, model.nom, model.prenom, model.adresse, model.ville, "fr");
+
+                ViewBag.Success = "Vos informations personnelles ont été mises à jour.";
+                db.SaveChanges();  
+                //ModelState.AddModelError("", "Vos informations personnelles n'ont pas été mises à jour.");
+                
+            }
+            return View(model);
+        }
+
+        public ActionResult ModifierMDP()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ModifierMDP(PasswordModel model)
+        {
+            return View();
+        }
+
+        public ActionResult Messagerie()
+        {
+            ObtenirMessagesRecus();
+            return View();
+        }
+
         public ActionResult MessageEnvoyeOK()
         {
             return View();
@@ -222,41 +311,6 @@ namespace projet_mozambique.Controllers
         }
 
         public ActionResult Documents()
-        {
-            return View();
-        }
-
-        public ActionResult Profil()
-        {
-            return View();
-        }
-
-        public ActionResult ModifierInfos()
-        {
-            return View();
-        }
-
-        public ActionResult ModifierInfosOK()
-        {
-            return View();
-        }
-
-        public ActionResult ModifierInfosErreur()
-        {
-            return View();
-        }
-
-        public ActionResult ModifierMDP()
-        {
-            return View();
-        }
-
-        public ActionResult ModifierMotPasseOK()
-        {
-            return View();
-        }
-
-        public ActionResult ModifierMotPasseErreur()
         {
             return View();
         }
@@ -336,5 +390,16 @@ namespace projet_mozambique.Controllers
             return View();
         }
 
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
     }
 }

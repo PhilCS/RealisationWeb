@@ -8,8 +8,10 @@ using projet_mozambique.Utilitaires;
 
 namespace projet_mozambique.Controllers
 {
+    [Authorize(Roles="admin")]
     public class AdminController : Controller
     {
+        private Entities db = new Entities();
         //
         // GET: /Admin/
 
@@ -38,27 +40,6 @@ namespace projet_mozambique.Controllers
             return View("AjoutUtilisateur");
         }
 
-        public ActionResult roles()
-        {
-            return View("Roles");
-        }
-
-        public ActionResult getRole(string nomRole)
-        {
-            ViewData["role"] = nomRole;
-            return View("Role");
-        }
-
-        public ActionResult ajoutRole()
-        {
-            return View("AjouterRole");
-        }
-
-        public ActionResult ecoles()
-        {
-            return View("Ecoles");
-        }
-
         public ActionResult getEcole(string nomEcole)
         {
             ViewData["ecole"] = nomEcole;
@@ -75,16 +56,15 @@ namespace projet_mozambique.Controllers
             return View("Secteurs");
         }
 
-        public ActionResult publique()
+        public ActionResult SectionPublique()
         {
-            return View("SectionPublique");
+            return View();
         }
 
         public ActionResult gestionNouvelles(int? gestion)
         {
             if (gestion == 2)
             {
-                MVPEntities db = new MVPEntities();
                 List<GetNouvelles_Result> lstN = db.GetNouvelles().ToList();
                 ViewData[Constantes.CLE_NOUVELLES] = lstN;
             }
@@ -95,7 +75,6 @@ namespace projet_mozambique.Controllers
         [HttpPost]
         public ActionResult confModifierNouvelle(int id, string titre, string description)
         {
-            MVPEntities db = new MVPEntities();
             string desc = description.Replace("\r\n", "<br/>");
             db.ModifierNouvelle(id, titre, desc);
 
@@ -108,8 +87,6 @@ namespace projet_mozambique.Controllers
         [HttpPost]
         public ActionResult modifierNouvelle(int id)
         {
-            MVPEntities db = new MVPEntities();
-
             if (!string.IsNullOrEmpty(Request.Form["modifier"]))
             {
                 GetNouvelle_Result n = db.GetNouvelle(id).FirstOrDefault();
@@ -144,7 +121,6 @@ namespace projet_mozambique.Controllers
         [HttpPost]
         public ActionResult ajouterNouvelle(string titre, string texte)
         {
-            MVPEntities db = new MVPEntities();
             string textFormat;
             Message msg;
 
@@ -181,6 +157,33 @@ namespace projet_mozambique.Controllers
         public ActionResult gestionPartenaires()
         {
             return View("GestionPartenaire");
+        }
+
+        public ActionResult ModifAccueil()
+        {
+            GetContenu_Result contentResult = db.GetContenu("Accueil").FirstOrDefault();
+            ContentModel model = new ContentModel();
+
+            model.titre = contentResult.TITRE;
+            model.titreTrad = contentResult.TITRE_TRAD;
+            model.contenu = contentResult.CONTENU;
+            model.contenuTrad = contentResult.CONTENU_TRAD;
+            model.urlImage = contentResult.URLIMAGE;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ModifAccueil(ContentModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                db.ModifierContenu("Accueil", model.titre, model.titreTrad, model.contenu, model.contenuTrad, model.urlImage);
+                db.SaveChanges();
+            }
+            
+            return View(model);
         }
 
         public ActionResult modifierAPropos()
@@ -294,11 +297,6 @@ namespace projet_mozambique.Controllers
         }
 
         public ActionResult AjoutEvenementErreur()
-        {
-            return View();
-        }
-
-        public ActionResult ModifAccueil()
         {
             return View();
         }
