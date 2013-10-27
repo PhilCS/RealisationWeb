@@ -4,13 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MVPModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="MVPModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="MVPModelStoreContainer">
           <EntitySet Name="CATEGORIEEVENEMENT" EntityType="MVPModel.Store.CATEGORIEEVENEMENT" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CHOIXSONDAGE" EntityType="MVPModel.Store.CHOIXSONDAGE" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="CONFIRMINSCRIPTION" EntityType="MVPModel.Store.CONFIRMINSCRIPTION" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CONTENU" EntityType="MVPModel.Store.CONTENU" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="DESTINATAIREMESSAGE" EntityType="MVPModel.Store.DESTINATAIREMESSAGE" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="DROIT" EntityType="MVPModel.Store.DROIT" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ECOLE" EntityType="MVPModel.Store.ECOLE" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ECOLESECTEUR" EntityType="MVPModel.Store.ECOLESECTEUR" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="EVENEMENT" EntityType="MVPModel.Store.EVENEMENT" store:Type="Tables" Schema="dbo" />
@@ -25,8 +24,6 @@
           <EntitySet Name="PARTENAIRE" EntityType="MVPModel.Store.PARTENAIRE" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PIECEJOINTE" EntityType="MVPModel.Store.PIECEJOINTE" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PUBLICATION" EntityType="MVPModel.Store.PUBLICATION" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="ROLE" EntityType="MVPModel.Store.ROLE" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="ROLEDROIT" EntityType="MVPModel.Store.ROLEDROIT" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SECTEUR" EntityType="MVPModel.Store.SECTEUR" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SONDAGE" EntityType="MVPModel.Store.SONDAGE" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SUJETPUBLICATION" EntityType="MVPModel.Store.SUJETPUBLICATION" store:Type="Tables" Schema="dbo" />
@@ -34,13 +31,13 @@
           <EntitySet Name="UTILISATEUR" EntityType="MVPModel.Store.UTILISATEUR" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UTILISATEURSECTEUR" EntityType="MVPModel.Store.UTILISATEURSECTEUR" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="VOTESONDAGE" EntityType="MVPModel.Store.VOTESONDAGE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="webpages_Membership" EntityType="MVPModel.Store.webpages_Membership" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="MVPModel.Store.webpages_OAuthMembership" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="webpages_Roles" EntityType="MVPModel.Store.webpages_Roles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="webpages_UsersInRoles" EntityType="MVPModel.Store.webpages_UsersInRoles" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_CHOIXSOND_SOND" Association="MVPModel.Store.FK_CHOIXSOND_SOND">
             <End Role="SONDAGE" EntitySet="SONDAGE" />
             <End Role="CHOIXSONDAGE" EntitySet="CHOIXSONDAGE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CONFINSC_UTIL" Association="MVPModel.Store.FK_CONFINSC_UTIL">
-            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
-            <End Role="CONFIRMINSCRIPTION" EntitySet="CONFIRMINSCRIPTION" />
           </AssociationSet>
           <AssociationSet Name="FK_DESTMESS_MESSPRIVE" Association="MVPModel.Store.FK_DESTMESS_MESSPRIVE">
             <End Role="MESSAGEPRIVE" EntitySet="MESSAGEPRIVE" />
@@ -118,13 +115,9 @@
             <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
             <End Role="PUBLICATION" EntitySet="PUBLICATION" />
           </AssociationSet>
-          <AssociationSet Name="FK_ROLEDROIT_DROIT" Association="MVPModel.Store.FK_ROLEDROIT_DROIT">
-            <End Role="DROIT" EntitySet="DROIT" />
-            <End Role="ROLEDROIT" EntitySet="ROLEDROIT" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ROLEDROIT_ROLE" Association="MVPModel.Store.FK_ROLEDROIT_ROLE">
-            <End Role="ROLE" EntitySet="ROLE" />
-            <End Role="ROLEDROIT" EntitySet="ROLEDROIT" />
+          <AssociationSet Name="fk_RoleId" Association="MVPModel.Store.fk_RoleId">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
           </AssociationSet>
           <AssociationSet Name="FK_SOND_CREATEUR" Association="MVPModel.Store.FK_SOND_CREATEUR">
             <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
@@ -134,12 +127,12 @@
             <End Role="SECTEUR" EntitySet="SECTEUR" />
             <End Role="SONDAGE" EntitySet="SONDAGE" />
           </AssociationSet>
+          <AssociationSet Name="fk_UserId" Association="MVPModel.Store.fk_UserId">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
           <AssociationSet Name="FK_UTIL_ECOLE" Association="MVPModel.Store.FK_UTIL_ECOLE">
             <End Role="ECOLE" EntitySet="ECOLE" />
-            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UTIL_ROLE" Association="MVPModel.Store.FK_UTIL_ROLE">
-            <End Role="ROLE" EntitySet="ROLE" />
             <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
           </AssociationSet>
           <AssociationSet Name="FK_UTILSECT_SECT" Association="MVPModel.Store.FK_UTILSECT_SECT">
@@ -174,13 +167,17 @@
           <Property Name="IDSONDAGE" Type="int" Nullable="false" />
           <Property Name="VALEUR" Type="varchar" Nullable="false" MaxLength="60" />
         </EntityType>
-        <EntityType Name="CONFIRMINSCRIPTION">
+        <EntityType Name="CONTENU">
           <Key>
-            <PropertyRef Name="IDUTILISATEUR" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="IDUTILISATEUR" Type="int" Nullable="false" />
-          <Property Name="DATEENVOI" Type="datetime" Nullable="false" />
-          <Property Name="JETON" Type="varchar" Nullable="false" MaxLength="32" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PAGE" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="TITRE" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="TITRE_TRAD" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="CONTENU" Type="text" Nullable="false" />
+          <Property Name="CONTENU_TRAD" Type="text" Nullable="false" />
+          <Property Name="URLIMAGE" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="DESTINATAIREMESSAGE">
           <Key>
@@ -192,14 +189,6 @@
           <Property Name="SUPPRIME" Type="bit" Nullable="false" />
           <Property Name="SUPPRIMEDEFINITIF" Type="bit" Nullable="false" />
           <Property Name="LU" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="DROIT">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="TYPE" Type="varchar" Nullable="false" MaxLength="45" />
-          <Property Name="DESCRIPTION" Type="varchar" Nullable="false" MaxLength="255" />
         </EntityType>
         <EntityType Name="ECOLE">
           <Key>
@@ -341,27 +330,15 @@
           <Property Name="IDSUJET" Type="int" Nullable="false" />
           <Property Name="IDSECTEUR" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="ROLE">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="NOM" Type="varchar" Nullable="false" MaxLength="45" />
-        </EntityType>
-        <EntityType Name="ROLEDROIT">
-          <Key>
-            <PropertyRef Name="IDROLE" />
-            <PropertyRef Name="IDDROIT" />
-          </Key>
-          <Property Name="IDROLE" Type="int" Nullable="false" />
-          <Property Name="IDDROIT" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="SECTEUR">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="NOM" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="TITREACCUEIL" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="TEXTEACCUEIL" Type="text" Nullable="false" />
+          <Property Name="URLIMAGEACCUEIL" Type="varchar" Nullable="false" MaxLength="100" />
         </EntityType>
         <EntityType Name="SONDAGE">
           <Key>
@@ -398,20 +375,15 @@
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="NOMUTIL" Type="varchar" Nullable="false" MaxLength="25" />
-          <Property Name="MOTPASSE" Type="varchar" Nullable="false" MaxLength="40" />
           <Property Name="COURRIEL" Type="varchar" Nullable="false" MaxLength="100" />
           <Property Name="PRENOM" Type="varchar" Nullable="false" MaxLength="60" />
           <Property Name="NOM" Type="varchar" Nullable="false" MaxLength="60" />
           <Property Name="ADRESSE" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="VILLE" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="DATENAISSANCE" Type="date" Nullable="false" />
-          <Property Name="DATECREATION" Type="date" Nullable="false" />
           <Property Name="DERNIERECONNEXION" Type="datetime" />
-          <Property Name="COMPTEACTIF" Type="bit" Nullable="false" />
           <Property Name="LANGUE" Type="char" Nullable="false" MaxLength="2" />
-          <Property Name="IDROLE" Type="int" Nullable="false" />
           <Property Name="IDECOLE" Type="int" Nullable="false" />
-          <Property Name="REINITIALISERMOTPASSE" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="UTILISATEURSECTEUR">
           <Key>
@@ -431,6 +403,46 @@
           <Property Name="IDUTILISATEUR" Type="int" Nullable="false" />
           <Property Name="IDCHOIX" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ConfirmationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsConfirmed" Type="bit" />
+          <Property Name="LastPasswordFailureDate" Type="datetime" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="PasswordChangedDate" Type="datetime" />
+          <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="PasswordVerificationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="webpages_OAuthMembership">
+          <Key>
+            <PropertyRef Name="Provider" />
+            <PropertyRef Name="ProviderUserId" />
+          </Key>
+          <Property Name="Provider" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="ProviderUserId" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="webpages_UsersInRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
         <Association Name="FK_CHOIXSOND_SOND">
           <End Role="SONDAGE" Type="MVPModel.Store.SONDAGE" Multiplicity="1" />
           <End Role="CHOIXSONDAGE" Type="MVPModel.Store.CHOIXSONDAGE" Multiplicity="*" />
@@ -440,18 +452,6 @@
             </Principal>
             <Dependent Role="CHOIXSONDAGE">
               <PropertyRef Name="IDSONDAGE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CONFINSC_UTIL">
-          <End Role="UTILISATEUR" Type="MVPModel.Store.UTILISATEUR" Multiplicity="1" />
-          <End Role="CONFIRMINSCRIPTION" Type="MVPModel.Store.CONFIRMINSCRIPTION" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="UTILISATEUR">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CONFIRMINSCRIPTION">
-              <PropertyRef Name="IDUTILISATEUR" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -691,27 +691,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ROLEDROIT_DROIT">
-          <End Role="DROIT" Type="MVPModel.Store.DROIT" Multiplicity="1" />
-          <End Role="ROLEDROIT" Type="MVPModel.Store.ROLEDROIT" Multiplicity="*" />
+        <Association Name="fk_RoleId">
+          <End Role="webpages_Roles" Type="MVPModel.Store.webpages_Roles" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="MVPModel.Store.webpages_UsersInRoles" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="DROIT">
-              <PropertyRef Name="ID" />
+            <Principal Role="webpages_Roles">
+              <PropertyRef Name="RoleId" />
             </Principal>
-            <Dependent Role="ROLEDROIT">
-              <PropertyRef Name="IDDROIT" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ROLEDROIT_ROLE">
-          <End Role="ROLE" Type="MVPModel.Store.ROLE" Multiplicity="1" />
-          <End Role="ROLEDROIT" Type="MVPModel.Store.ROLEDROIT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ROLE">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ROLEDROIT">
-              <PropertyRef Name="IDROLE" />
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="RoleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -739,6 +727,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_UserId">
+          <End Role="UTILISATEUR" Type="MVPModel.Store.UTILISATEUR" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="MVPModel.Store.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UTIL_ECOLE">
           <End Role="ECOLE" Type="MVPModel.Store.ECOLE" Multiplicity="1" />
           <End Role="UTILISATEUR" Type="MVPModel.Store.UTILISATEUR" Multiplicity="*" />
@@ -748,18 +748,6 @@
             </Principal>
             <Dependent Role="UTILISATEUR">
               <PropertyRef Name="IDECOLE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UTIL_ROLE">
-          <End Role="ROLE" Type="MVPModel.Store.ROLE" Multiplicity="1" />
-          <End Role="UTILISATEUR" Type="MVPModel.Store.UTILISATEUR" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ROLE">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UTILISATEUR">
-              <PropertyRef Name="IDROLE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -879,9 +867,6 @@
           <Parameter Name="secteur" Type="int" Mode="In" />
           <Parameter Name="idpub" Type="int" Mode="InOut" />
         </Function>
-        <Function Name="AjouterRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="nom" Type="varchar" Mode="In" />
-        </Function>
         <Function Name="AjouterSectEcole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idecole" Type="int" Mode="In" />
           <Parameter Name="idsecteur" Type="int" Mode="In" />
@@ -904,19 +889,6 @@
         <Function Name="AjouterSujetPub" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="sujet" Type="varchar" Mode="In" />
         </Function>
-        <Function Name="AjouterUtilisateur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="nomutil" Type="varchar" Mode="In" />
-          <Parameter Name="motpasse" Type="varchar" Mode="In" />
-          <Parameter Name="courriel" Type="varchar" Mode="In" />
-          <Parameter Name="prenom" Type="varchar" Mode="In" />
-          <Parameter Name="nom" Type="varchar" Mode="In" />
-          <Parameter Name="adresse" Type="varchar" Mode="In" />
-          <Parameter Name="ville" Type="varchar" Mode="In" />
-          <Parameter Name="datenaissance" Type="date" Mode="In" />
-          <Parameter Name="langue" Type="char" Mode="In" />
-          <Parameter Name="role" Type="int" Mode="In" />
-          <Parameter Name="ecole" Type="int" Mode="In" />
-        </Function>
         <Function Name="AjouterUtilSecteur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
           <Parameter Name="secteur" Type="int" Mode="In" />
@@ -925,18 +897,13 @@
           <Parameter Name="util" Type="int" Mode="In" />
           <Parameter Name="choix" Type="int" Mode="In" />
         </Function>
-        <Function Name="AssocierRoleDroit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="idrole" Type="int" Mode="In" />
-          <Parameter Name="iddroit" Type="int" Mode="In" />
-        </Function>
         <Function Name="AugmenterNbrLectures" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idfildiscussion" Type="int" Mode="In" />
         </Function>
-        <Function Name="DeassocierRoleDroit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="idrole" Type="int" Mode="In" />
-          <Parameter Name="iddroit" Type="int" Mode="In" />
-        </Function>
         <Function Name="fn_diagramobjects" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetContenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nomPage" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="GetDestinataires" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idMessage" Type="int" Mode="In" />
         </Function>
@@ -992,10 +959,6 @@
         <Function Name="GetResultatsSondage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idsondage" Type="int" Mode="In" />
         </Function>
-        <Function Name="GetRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="idrole" Type="int" Mode="In" />
-        </Function>
-        <Function Name="GetRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetSecteurs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetSondage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
@@ -1003,8 +966,8 @@
         <Function Name="GetSondages" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idsecteur" Type="int" Mode="In" />
         </Function>
-        <Function Name="GetUtilAcces" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="id" Type="int" Mode="In" />
+        <Function Name="getUtil" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
         </Function>
         <Function Name="GetUtilParSecteur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idsecteur" Type="int" Mode="In" />
@@ -1034,6 +997,14 @@
         <Function Name="ModifierChoixSondage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
           <Parameter Name="valeur" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ModifierContenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nomPage" Type="varchar" Mode="In" />
+          <Parameter Name="titre" Type="varchar" Mode="In" />
+          <Parameter Name="titre_trad" Type="varchar" Mode="In" />
+          <Parameter Name="cont" Type="text" Mode="In" />
+          <Parameter Name="cont_trad" Type="text" Mode="In" />
+          <Parameter Name="urlImage" Type="varchar" Mode="In" />
         </Function>
         <Function Name="ModifierEcole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
@@ -1082,10 +1053,6 @@
           <Parameter Name="id" Type="int" Mode="In" />
           <Parameter Name="ecole" Type="int" Mode="In" />
         </Function>
-        <Function Name="ModifierUtilMotPasse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="id" Type="int" Mode="In" />
-          <Parameter Name="newmp" Type="varchar" Mode="In" />
-        </Function>
         <Function Name="ModifierUtilProfil" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
           <Parameter Name="courriel" Type="varchar" Mode="In" />
@@ -1094,10 +1061,6 @@
           <Parameter Name="adresse" Type="varchar" Mode="In" />
           <Parameter Name="ville" Type="varchar" Mode="In" />
           <Parameter Name="langue" Type="char" Mode="In" />
-        </Function>
-        <Function Name="ModifierUtilRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="id" Type="int" Mode="In" />
-          <Parameter Name="role" Type="int" Mode="In" />
         </Function>
         <Function Name="ReinitMotPasse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
@@ -1160,9 +1123,6 @@
         <Function Name="SupprimerPublication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
-        <Function Name="SupprimerRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="id" Type="int" Mode="In" />
-        </Function>
         <Function Name="SupprimerSectEcole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idecole" Type="int" Mode="In" />
           <Parameter Name="idsecteur" Type="int" Mode="In" />
@@ -1184,16 +1144,16 @@
           <Parameter Name="id" Type="int" Mode="In" />
           <Parameter Name="secteur" Type="int" Mode="In" />
         </Function>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MVPModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="MVPEntities" p1:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="CATEGORIEEVENEMENT" EntityType="MVPModel.CATEGORIEEVENEMENT" />
           <EntitySet Name="CHOIXSONDAGE" EntityType="MVPModel.CHOIXSONDAGE" />
-          <EntitySet Name="CONFIRMINSCRIPTION" EntityType="MVPModel.CONFIRMINSCRIPTION" />
+          <EntitySet Name="CONTENU" EntityType="MVPModel.CONTENU" />
           <EntitySet Name="DESTINATAIREMESSAGE" EntityType="MVPModel.DESTINATAIREMESSAGE" />
-          <EntitySet Name="DROIT" EntityType="MVPModel.DROIT" />
           <EntitySet Name="ECOLE" EntityType="MVPModel.ECOLE" />
           <EntitySet Name="EVENEMENT" EntityType="MVPModel.EVENEMENT" />
           <EntitySet Name="FILDISCUSSION" EntityType="MVPModel.FILDISCUSSION" />
@@ -1205,12 +1165,15 @@
           <EntitySet Name="PARTENAIRE" EntityType="MVPModel.PARTENAIRE" />
           <EntitySet Name="PIECEJOINTE" EntityType="MVPModel.PIECEJOINTE" />
           <EntitySet Name="PUBLICATION" EntityType="MVPModel.PUBLICATION" />
-          <EntitySet Name="ROLE" EntityType="MVPModel.ROLE" />
           <EntitySet Name="SECTEUR" EntityType="MVPModel.SECTEUR" />
           <EntitySet Name="SONDAGE" EntityType="MVPModel.SONDAGE" />
           <EntitySet Name="SUJETPUBLICATION" EntityType="MVPModel.SUJETPUBLICATION" />
+          <EntitySet Name="sysdiagrams" EntityType="MVPModel.sysdiagrams" />
           <EntitySet Name="UTILISATEUR" EntityType="MVPModel.UTILISATEUR" />
           <EntitySet Name="UTILISATEURSECTEUR" EntityType="MVPModel.UTILISATEURSECTEUR" />
+          <EntitySet Name="webpages_Membership" EntityType="MVPModel.webpages_Membership" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="MVPModel.webpages_OAuthMembership" />
+          <EntitySet Name="webpages_Roles" EntityType="MVPModel.webpages_Roles" />
           <AssociationSet Name="FK_EVEN_CATE" Association="MVPModel.FK_EVEN_CATE">
             <End Role="CATEGORIEEVENEMENT" EntitySet="CATEGORIEEVENEMENT" />
             <End Role="EVENEMENT" EntitySet="EVENEMENT" />
@@ -1218,10 +1181,6 @@
           <AssociationSet Name="FK_CHOIXSOND_SOND" Association="MVPModel.FK_CHOIXSOND_SOND">
             <End Role="SONDAGE" EntitySet="SONDAGE" />
             <End Role="CHOIXSONDAGE" EntitySet="CHOIXSONDAGE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CONFINSC_UTIL" Association="MVPModel.FK_CONFINSC_UTIL">
-            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
-            <End Role="CONFIRMINSCRIPTION" EntitySet="CONFIRMINSCRIPTION" />
           </AssociationSet>
           <AssociationSet Name="FK_DESTMESS_MESSPRIVE" Association="MVPModel.FK_DESTMESS_MESSPRIVE">
             <End Role="MESSAGEPRIVE" EntitySet="MESSAGEPRIVE" />
@@ -1275,10 +1234,6 @@
             <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
             <End Role="PUBLICATION" EntitySet="PUBLICATION" />
           </AssociationSet>
-          <AssociationSet Name="FK_UTIL_ROLE" Association="MVPModel.FK_UTIL_ROLE">
-            <End Role="ROLE" EntitySet="ROLE" />
-            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
-          </AssociationSet>
           <AssociationSet Name="FK_SOND_SECT" Association="MVPModel.FK_SOND_SECT">
             <End Role="SECTEUR" EntitySet="SECTEUR" />
             <End Role="SONDAGE" EntitySet="SONDAGE" />
@@ -1307,12 +1262,12 @@
             <End Role="MOTCLE" EntitySet="MOTCLE" />
             <End Role="PUBLICATION" EntitySet="PUBLICATION" />
           </AssociationSet>
-          <AssociationSet Name="ROLEDROIT" Association="MVPModel.ROLEDROIT">
-            <End Role="DROIT" EntitySet="DROIT" />
-            <End Role="ROLE" EntitySet="ROLE" />
-          </AssociationSet>
           <AssociationSet Name="VOTESONDAGE" Association="MVPModel.VOTESONDAGE">
             <End Role="CHOIXSONDAGE" EntitySet="CHOIXSONDAGE" />
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="webpages_UsersInRoles" Association="MVPModel.webpages_UsersInRoles">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
             <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
           </AssociationSet>
           <FunctionImport Name="AjouterChoixSondage">
@@ -1381,15 +1336,12 @@
             <Parameter Name="secteur" Mode="In" Type="Int32" />
             <Parameter Name="idpub" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="AjouterRole">
-          <Parameter Name="nom" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="AjouterSectEcole">
             <Parameter Name="idecole" Mode="In" Type="Int32" />
             <Parameter Name="idsecteur" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="AjouterSecteur">
-          <Parameter Name="nom" Mode="In" Type="String" />
+            <Parameter Name="nom" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="AjouterSectEven">
             <Parameter Name="secteur" Mode="In" Type="Int32" />
@@ -1404,20 +1356,7 @@
             <Parameter Name="secteur" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="AjouterSujetPub">
-          <Parameter Name="sujet" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="AjouterUtilisateur">
-            <Parameter Name="nomutil" Mode="In" Type="String" />
-            <Parameter Name="motpasse" Mode="In" Type="String" />
-            <Parameter Name="courriel" Mode="In" Type="String" />
-            <Parameter Name="prenom" Mode="In" Type="String" />
-            <Parameter Name="nom" Mode="In" Type="String" />
-            <Parameter Name="adresse" Mode="In" Type="String" />
-            <Parameter Name="ville" Mode="In" Type="String" />
-            <Parameter Name="datenaissance" Mode="In" Type="DateTime" />
-            <Parameter Name="langue" Mode="In" Type="String" />
-            <Parameter Name="role" Mode="In" Type="Int32" />
-            <Parameter Name="ecole" Mode="In" Type="Int32" />
+            <Parameter Name="sujet" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="AjouterUtilSecteur">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1427,35 +1366,48 @@
             <Parameter Name="util" Mode="In" Type="Int32" />
             <Parameter Name="choix" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="AssocierRoleDroit">
-            <Parameter Name="idrole" Mode="In" Type="Int32" />
-            <Parameter Name="iddroit" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="AugmenterNbrLectures">
-          <Parameter Name="idfildiscussion" Mode="In" Type="Int32" />
+            <Parameter Name="idfildiscussion" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="DeassocierRoleDroit">
-            <Parameter Name="idrole" Mode="In" Type="Int32" />
-            <Parameter Name="iddroit" Mode="In" Type="Int32" />
+          <FunctionImport Name="GetContenu" ReturnType="Collection(MVPModel.GetContenu_Result)">
+            <Parameter Name="nomPage" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetDestinataires" ReturnType="Collection(String)">
+            <Parameter Name="idMessage" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetEven" ReturnType="Collection(MVPModel.GetEven_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetEvents" ReturnType="Collection(MVPModel.GetEvents_Result)">
-          <Parameter Name="secteur" Mode="In" Type="Int32" />
+            <Parameter Name="secteur" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetFilDiscussion" ReturnType="Collection(MVPModel.GetFilDiscussion_Result)">
-          <Parameter Name="idforum" Mode="In" Type="Int32" />
+            <Parameter Name="idforum" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetForum" ReturnType="Collection(MVPModel.GetForum_Result)">
-          <Parameter Name="secteur" Mode="In" Type="Int32" />
+            <Parameter Name="secteur" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetMessage" ReturnType="Collection(MVPModel.GetMessage_Result)">
+            <Parameter Name="idMessage" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetMessagesEnvoyes" ReturnType="Collection(MVPModel.GetMessagesEnvoyes_Result)">
+            <Parameter Name="idUtil" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetMessagesForum" ReturnType="Collection(MVPModel.GetMessagesForum_Result)">
-          <Parameter Name="idfil" Mode="In" Type="Int32" />
+            <Parameter Name="idfil" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetMessagesPrives" ReturnType="Collection(MVPModel.GetMessagesPrives_Result)">
+            <Parameter Name="idUtil" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetMessagesSupprimes" ReturnType="Collection(MVPModel.GetMessagesSupprimes_Result)">
+            <Parameter Name="idUtil" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetNouvelle" ReturnType="Collection(MVPModel.GetNouvelle_Result)">
+            <Parameter Name="idNouvelle" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetNouvelles" ReturnType="Collection(MVPModel.GetNouvelles_Result)" />
           <FunctionImport Name="GetPartenaire" ReturnType="Collection(MVPModel.GetPartenaire_Result)">
-          <Parameter Name="idpar" Mode="In" Type="Int32" />
+            <Parameter Name="idpar" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetPartenaires" ReturnType="Collection(MVPModel.GetPartenaires_Result)" />
           <FunctionImport Name="GetPubParMotCle" ReturnType="Collection(MVPModel.GetPubParMotCle_Result)">
@@ -1463,41 +1415,44 @@
             <Parameter Name="motcle" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetPubParSecteur" ReturnType="Collection(MVPModel.GetPubParSecteur_Result)">
-          <Parameter Name="idsecteur" Mode="In" Type="Int32" />
+            <Parameter Name="idsecteur" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetPubParSujet" ReturnType="Collection(MVPModel.GetPubParSujet_Result)">
             <Parameter Name="idsecteur" Mode="In" Type="Int32" />
             <Parameter Name="idsujet" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetRechercheNouvelle" ReturnType="Collection(MVPModel.GetRechercheNouvelle_Result)">
+            <Parameter Name="rech" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="GetResultatsSondage" ReturnType="Collection(MVPModel.GetResultatsSondage_Result)">
-          <Parameter Name="idsondage" Mode="In" Type="Int32" />
+            <Parameter Name="idsondage" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetRole" ReturnType="Collection(MVPModel.GetRole_Result)">
-          <Parameter Name="idrole" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="GetRoles" ReturnType="Collection(MVPModel.GetRoles_Result)" />
           <FunctionImport Name="GetSecteurs" ReturnType="Collection(MVPModel.GetSecteurs_Result)" />
           <FunctionImport Name="GetSondage" ReturnType="Collection(MVPModel.GetSondage_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetSondages" ReturnType="Collection(MVPModel.GetSondages_Result)">
-          <Parameter Name="idsecteur" Mode="In" Type="Int32" />
+            <Parameter Name="idsecteur" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetUtilAcces" ReturnType="Collection(MVPModel.GetUtilAcces_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+          <FunctionImport Name="getUtil" ReturnType="Collection(MVPModel.getUtil_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetUtilParSecteur" ReturnType="Collection(MVPModel.GetUtilParSecteur_Result)">
-          <Parameter Name="idsecteur" Mode="In" Type="Int32" />
+            <Parameter Name="idsecteur" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUtilProfil" ReturnType="Collection(MVPModel.GetUtilProfil_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUtils" ReturnType="Collection(MVPModel.GetUtils_Result)" />
+          <FunctionImport Name="LireMessage">
+            <Parameter Name="idMessage" Mode="In" Type="Int32" />
+            <Parameter Name="idUtil" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="MessagePriveCorbeille">
-          <Parameter Name="idmess" Mode="In" Type="Int32" />
+            <Parameter Name="idmess" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="MessagePriveSuppDef">
-          <Parameter Name="idmess" Mode="In" Type="Int32" />
+            <Parameter Name="idmess" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ModiferEven">
             <Parameter Name="ideven" Mode="In" Type="Int32" />
@@ -1510,6 +1465,14 @@
           <FunctionImport Name="ModifierChoixSondage">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="valeur" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ModifierContenu">
+            <Parameter Name="nomPage" Mode="In" Type="String" />
+            <Parameter Name="titre" Mode="In" Type="String" />
+            <Parameter Name="titre_trad" Mode="In" Type="String" />
+            <Parameter Name="cont" Mode="In" Type="String" />
+            <Parameter Name="cont_trad" Mode="In" Type="String" />
+            <Parameter Name="urlImage" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ModifierEcole">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1558,10 +1521,6 @@
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="ecole" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="ModifierUtilMotPasse">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="newmp" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="ModifierUtilProfil">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="courriel" Mode="In" Type="String" />
@@ -1571,67 +1530,8 @@
             <Parameter Name="ville" Mode="In" Type="String" />
             <Parameter Name="langue" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="ModifierUtilRole">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="role" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="ReinitMotPasse">
-          <Parameter Name="id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="SupprimerChoixSondage">
-          <Parameter Name="id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="SupprimerEcole">
-          <Parameter Name="id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="SupprimerEven">
-          <Parameter Name="id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="SupprimerFilDiscussion">
-          <Parameter Name="idfil" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="SupprimerMessageForum">
-          <Parameter Name="idmess" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="SupprimerMotClePub">
-            <Parameter Name="idpub" Mode="In" Type="Int32" />
-            <Parameter Name="idmotcle" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="SupprimerNouvelle">
-          <Parameter Name="id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="SupprimerPartenaire">
-          <Parameter Name="id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="SupprimerPublication">
-          <Parameter Name="id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="SupprimerRole">
-          <Parameter Name="id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="SupprimerSectEcole">
-            <Parameter Name="idecole" Mode="In" Type="Int32" />
-            <Parameter Name="idsecteur" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="SupprimerSecteur">
-          <Parameter Name="id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="SupprimerSectEven">
-          <Parameter Name="secteur" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="SupprimerSondage">
-          <Parameter Name="id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="SupprimerUtilisateur">
-            <Parameter Name="nomutil" Mode="In" Type="String" />
-            <Parameter Name="permanent" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="SupprimerUtilSect">
             <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="secteur" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="GetNouvelle" ReturnType="Collection(MVPModel.GetNouvelle_Result)">
-          <Parameter Name="idNouvelle" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -1663,28 +1563,54 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-          <FunctionImport Name="GetRechercheNouvelle" ReturnType="Collection(MVPModel.GetRechercheNouvelle_Result)">
-          <Parameter Name="rech" Mode="In" Type="String" />
+          <FunctionImport Name="SupprimerChoixSondage">
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="sysdiagrams" EntityType="MVPModel.sysdiagrams" />
-          <FunctionImport Name="GetMessagesPrives" ReturnType="Collection(MVPModel.GetMessagesPrives_Result)">
-          <Parameter Name="idUtil" Mode="In" Type="Int32" />
+          <FunctionImport Name="SupprimerEcole">
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetMessagesSupprimes" ReturnType="Collection(MVPModel.GetMessagesSupprimes_Result)">
-          <Parameter Name="idUtil" Mode="In" Type="Int32" />
+          <FunctionImport Name="SupprimerEven">
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetMessagesEnvoyes" ReturnType="Collection(MVPModel.GetMessagesEnvoyes_Result)">
-          <Parameter Name="idUtil" Mode="In" Type="Int32" />
+          <FunctionImport Name="SupprimerFilDiscussion">
+            <Parameter Name="idfil" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetDestinataires" ReturnType="Collection(String)">
-          <Parameter Name="idMessage" Mode="In" Type="Int32" />
+          <FunctionImport Name="SupprimerMessageForum">
+            <Parameter Name="idmess" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetMessage" ReturnType="Collection(MVPModel.GetMessage_Result)">
-          <Parameter Name="idMessage" Mode="In" Type="Int32" />
+          <FunctionImport Name="SupprimerMotClePub">
+            <Parameter Name="idpub" Mode="In" Type="Int32" />
+            <Parameter Name="idmotcle" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="LireMessage">
-            <Parameter Name="idMessage" Mode="In" Type="Int32" />
-            <Parameter Name="idUtil" Mode="In" Type="Int32" />
+          <FunctionImport Name="SupprimerNouvelle">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SupprimerPartenaire">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SupprimerPublication">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SupprimerSectEcole">
+            <Parameter Name="idecole" Mode="In" Type="Int32" />
+            <Parameter Name="idsecteur" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SupprimerSecteur">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SupprimerSectEven">
+            <Parameter Name="secteur" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SupprimerSondage">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SupprimerUtilisateur">
+            <Parameter Name="nomutil" Mode="In" Type="String" />
+            <Parameter Name="permanent" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="SupprimerUtilSect">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="secteur" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="CATEGORIEEVENEMENT">
@@ -1705,14 +1631,17 @@
           <NavigationProperty Name="SONDAGE" Relationship="MVPModel.FK_CHOIXSOND_SOND" FromRole="CHOIXSONDAGE" ToRole="SONDAGE" />
           <NavigationProperty Name="UTILISATEUR" Relationship="MVPModel.VOTESONDAGE" FromRole="CHOIXSONDAGE" ToRole="UTILISATEUR" />
         </EntityType>
-        <EntityType Name="CONFIRMINSCRIPTION">
+        <EntityType Name="CONTENU">
           <Key>
-            <PropertyRef Name="IDUTILISATEUR" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="IDUTILISATEUR" Type="Int32" Nullable="false" />
-          <Property Name="DATEENVOI" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="JETON" Type="String" Nullable="false" MaxLength="32" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="UTILISATEUR" Relationship="MVPModel.FK_CONFINSC_UTIL" FromRole="CONFIRMINSCRIPTION" ToRole="UTILISATEUR" />
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="PAGE" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="TITRE" Type="String" Nullable="false" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="TITRE_TRAD" Type="String" Nullable="false" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="CONTENU1" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="CONTENU_TRAD" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="URLIMAGE" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
         </EntityType>
         <EntityType Name="DESTINATAIREMESSAGE">
           <Key>
@@ -1723,18 +1652,9 @@
           <Property Name="IDUTILISATEUR" Type="Int32" Nullable="false" />
           <Property Name="SUPPRIME" Type="Boolean" Nullable="false" />
           <Property Name="SUPPRIMEDEFINITIF" Type="Boolean" Nullable="false" />
+          <Property Name="LU" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="MESSAGEPRIVE" Relationship="MVPModel.FK_DESTMESS_MESSPRIVE" FromRole="DESTINATAIREMESSAGE" ToRole="MESSAGEPRIVE" />
           <NavigationProperty Name="UTILISATEUR" Relationship="MVPModel.FK_DESTMESS_UTIL" FromRole="DESTINATAIREMESSAGE" ToRole="UTILISATEUR" />
-          <Property Type="Boolean" Name="LU" Nullable="false" />
-        </EntityType>
-        <EntityType Name="DROIT">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="TYPE" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="DESCRIPTION" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="ROLE" Relationship="MVPModel.ROLEDROIT" FromRole="DROIT" ToRole="ROLE" />
         </EntityType>
         <EntityType Name="ECOLE">
           <Key>
@@ -1861,25 +1781,16 @@
           <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="TITRE" Type="String" Nullable="false" MaxLength="60" Unicode="false" FixedLength="false" />
           <Property Name="DATECREATION" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DESCRIPTION" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="EMPLACEMENTSERVEUR" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
           <Property Name="IDPUBLICATEUR" Type="Int32" Nullable="false" />
-          <Property Name="TYPEMIME" Type="String" MaxLength="20" Unicode="false" FixedLength="false" Nullable="false" />
+          <Property Name="TYPEMIME" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="IDSUJET" Type="Int32" Nullable="false" />
           <Property Name="IDSECTEUR" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SECTEUR" Relationship="MVPModel.FK_PUB_SECT" FromRole="PUBLICATION" ToRole="SECTEUR" />
           <NavigationProperty Name="SUJETPUBLICATION" Relationship="MVPModel.FK_PUB_SUJET" FromRole="PUBLICATION" ToRole="SUJETPUBLICATION" />
           <NavigationProperty Name="UTILISATEUR" Relationship="MVPModel.FK_PUB_UTIL" FromRole="PUBLICATION" ToRole="UTILISATEUR" />
           <NavigationProperty Name="MOTCLE" Relationship="MVPModel.MOTCLEPUBLICATION" FromRole="PUBLICATION" ToRole="MOTCLE" />
-          <Property Type="String" Name="DESCRIPTION" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="ROLE">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="NOM" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="UTILISATEUR" Relationship="MVPModel.FK_UTIL_ROLE" FromRole="ROLE" ToRole="UTILISATEUR" />
-          <NavigationProperty Name="DROIT" Relationship="MVPModel.ROLEDROIT" FromRole="ROLE" ToRole="DROIT" />
         </EntityType>
         <EntityType Name="SECTEUR">
           <Key>
@@ -1887,6 +1798,9 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="NOM" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="TITREACCUEIL" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="TEXTEACCUEIL" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="URLIMAGEACCUEIL" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="FORUM" Relationship="MVPModel.FK_FORUM_SECT" FromRole="SECTEUR" ToRole="FORUM" />
           <NavigationProperty Name="PUBLICATION" Relationship="MVPModel.FK_PUB_SECT" FromRole="SECTEUR" ToRole="PUBLICATION" />
           <NavigationProperty Name="SONDAGE" Relationship="MVPModel.FK_SOND_SECT" FromRole="SECTEUR" ToRole="SONDAGE" />
@@ -1917,37 +1831,41 @@
           <Property Name="NOM" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="PUBLICATION" Relationship="MVPModel.FK_PUB_SUJET" FromRole="SUJETPUBLICATION" ToRole="PUBLICATION" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="UTILISATEUR">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="NOMUTIL" Type="String" Nullable="false" MaxLength="25" Unicode="false" FixedLength="false" />
-          <Property Name="MOTPASSE" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
           <Property Name="COURRIEL" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="PRENOM" Type="String" Nullable="false" MaxLength="60" Unicode="false" FixedLength="false" />
           <Property Name="NOM" Type="String" Nullable="false" MaxLength="60" Unicode="false" FixedLength="false" />
           <Property Name="ADRESSE" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="VILLE" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="DATENAISSANCE" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="DATECREATION" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="DERNIERECONNEXION" Type="DateTime" Precision="3" />
-          <Property Name="COMPTEACTIF" Type="Boolean" Nullable="false" />
           <Property Name="LANGUE" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="true" />
-          <Property Name="IDROLE" Type="Int32" Nullable="false" />
           <Property Name="IDECOLE" Type="Int32" Nullable="false" />
-          <Property Name="REINITIALISERMOTPASSE" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="CONFIRMINSCRIPTION" Relationship="MVPModel.FK_CONFINSC_UTIL" FromRole="UTILISATEUR" ToRole="CONFIRMINSCRIPTION" />
           <NavigationProperty Name="DESTINATAIREMESSAGE" Relationship="MVPModel.FK_DESTMESS_UTIL" FromRole="UTILISATEUR" ToRole="DESTINATAIREMESSAGE" />
           <NavigationProperty Name="ECOLE" Relationship="MVPModel.FK_UTIL_ECOLE" FromRole="UTILISATEUR" ToRole="ECOLE" />
           <NavigationProperty Name="EVENEMENT" Relationship="MVPModel.FK_EVEN_UTIl" FromRole="UTILISATEUR" ToRole="EVENEMENT" />
           <NavigationProperty Name="MESSAGEFORUM" Relationship="MVPModel.FK_MESS_UTIL" FromRole="UTILISATEUR" ToRole="MESSAGEFORUM" />
           <NavigationProperty Name="MESSAGEPRIVE" Relationship="MVPModel.FK_MESSPRIV_EXPED" FromRole="UTILISATEUR" ToRole="MESSAGEPRIVE" />
           <NavigationProperty Name="PUBLICATION" Relationship="MVPModel.FK_PUB_UTIL" FromRole="UTILISATEUR" ToRole="PUBLICATION" />
-          <NavigationProperty Name="ROLE" Relationship="MVPModel.FK_UTIL_ROLE" FromRole="UTILISATEUR" ToRole="ROLE" />
           <NavigationProperty Name="SONDAGE" Relationship="MVPModel.FK_SOND_CREATEUR" FromRole="UTILISATEUR" ToRole="SONDAGE" />
           <NavigationProperty Name="UTILISATEURSECTEUR" Relationship="MVPModel.FK_UTILSECT_UTIL" FromRole="UTILISATEUR" ToRole="UTILISATEURSECTEUR" />
           <NavigationProperty Name="CHOIXSONDAGE" Relationship="MVPModel.VOTESONDAGE" FromRole="UTILISATEUR" ToRole="CHOIXSONDAGE" />
+          <NavigationProperty Name="webpages_Roles" Relationship="MVPModel.webpages_UsersInRoles" FromRole="UTILISATEUR" ToRole="webpages_Roles" />
         </EntityType>
         <EntityType Name="UTILISATEURSECTEUR">
           <Key>
@@ -1960,6 +1878,39 @@
           <Property Name="FINACCES" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="SECTEUR" Relationship="MVPModel.FK_UTILSECT_SECT" FromRole="UTILISATEURSECTEUR" ToRole="SECTEUR" />
           <NavigationProperty Name="UTILISATEUR" Relationship="MVPModel.FK_UTILSECT_UTIL" FromRole="UTILISATEURSECTEUR" ToRole="UTILISATEUR" />
+        </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ConfirmationToken" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="IsConfirmed" Type="Boolean" />
+          <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="webpages_OAuthMembership">
+          <Key>
+            <PropertyRef Name="Provider" />
+            <PropertyRef Name="ProviderUserId" />
+          </Key>
+          <Property Name="Provider" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="ProviderUserId" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="UTILISATEUR" Relationship="MVPModel.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="UTILISATEUR" />
         </EntityType>
         <Association Name="FK_EVEN_CATE">
           <End Role="CATEGORIEEVENEMENT" Type="MVPModel.CATEGORIEEVENEMENT" Multiplicity="1" />
@@ -1982,18 +1933,6 @@
             </Principal>
             <Dependent Role="CHOIXSONDAGE">
               <PropertyRef Name="IDSONDAGE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CONFINSC_UTIL">
-          <End Role="UTILISATEUR" Type="MVPModel.UTILISATEUR" Multiplicity="1" />
-          <End Role="CONFIRMINSCRIPTION" Type="MVPModel.CONFIRMINSCRIPTION" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="UTILISATEUR">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CONFIRMINSCRIPTION">
-              <PropertyRef Name="IDUTILISATEUR" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2159,18 +2098,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UTIL_ROLE">
-          <End Role="ROLE" Type="MVPModel.ROLE" Multiplicity="1" />
-          <End Role="UTILISATEUR" Type="MVPModel.UTILISATEUR" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ROLE">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UTILISATEUR">
-              <PropertyRef Name="IDROLE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SOND_SECT">
           <End Role="SECTEUR" Type="MVPModel.SECTEUR" Multiplicity="1" />
           <End Role="SONDAGE" Type="MVPModel.SONDAGE" Multiplicity="*" />
@@ -2233,14 +2160,23 @@
           <End Role="MOTCLE" Type="MVPModel.MOTCLE" Multiplicity="*" />
           <End Role="PUBLICATION" Type="MVPModel.PUBLICATION" Multiplicity="*" />
         </Association>
-        <Association Name="ROLEDROIT">
-          <End Role="DROIT" Type="MVPModel.DROIT" Multiplicity="*" />
-          <End Role="ROLE" Type="MVPModel.ROLE" Multiplicity="*" />
-        </Association>
         <Association Name="VOTESONDAGE">
           <End Role="CHOIXSONDAGE" Type="MVPModel.CHOIXSONDAGE" Multiplicity="*" />
           <End Role="UTILISATEUR" Type="MVPModel.UTILISATEUR" Multiplicity="*" />
         </Association>
+        <Association Name="webpages_UsersInRoles">
+          <End Role="webpages_Roles" Type="MVPModel.webpages_Roles" Multiplicity="*" />
+          <End Role="UTILISATEUR" Type="MVPModel.UTILISATEUR" Multiplicity="*" />
+        </Association>
+        <ComplexType Name="GetContenu_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="PAGE" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="TITRE" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="TITRE_TRAD" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="CONTENU" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="CONTENU_TRAD" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="URLIMAGE" Nullable="true" MaxLength="100" />
+        </ComplexType>
         <ComplexType Name="GetEven_Result">
           <Property Type="String" Name="NOM" Nullable="false" MaxLength="50" />
           <Property Type="DateTime" Name="DATEEVEN" Nullable="false" />
@@ -2274,6 +2210,22 @@
           <Property Type="String" Name="TITRE" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="IDSECTEUR" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="GetMessage_Result">
+          <Property Type="String" Name="SUJET" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CONTENU" Nullable="false" MaxLength="Max" />
+          <Property Type="DateTime" Name="DATEENVOI" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IDPIECE" Nullable="true" />
+          <Property Type="String" Name="NOMPIECE" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="TAILLEPIECE" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="NOMEXPED" Nullable="false" MaxLength="121" />
+        </ComplexType>
+        <ComplexType Name="GetMessagesEnvoyes_Result">
+          <Property Type="Int32" Name="IDMESSAGE" Nullable="false" />
+          <Property Type="String" Name="CONTENU" Nullable="false" MaxLength="Max" />
+          <Property Type="DateTime" Name="DATEENVOI" Nullable="false" Precision="23" />
+          <Property Type="String" Name="SUJET" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="IDPIECE" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="GetMessagesForum_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="DateTime" Name="DATEPUBLICATION" Nullable="false" Precision="23" />
@@ -2282,9 +2234,33 @@
           <Property Type="Int32" Name="IDUTILISATEUR" Nullable="false" />
           <Property Type="Int32" Name="IDFILDISCUSSION" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="GetMessagesPrives_Result">
+          <Property Type="Int32" Name="IDMESSAGE" Nullable="false" />
+          <Property Type="String" Name="CONTENU" Nullable="false" MaxLength="Max" />
+          <Property Type="DateTime" Name="DATEENVOI" Nullable="false" Precision="23" />
+          <Property Type="String" Name="SUJET" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="LU" Nullable="false" />
+          <Property Type="Int32" Name="IDPIECEJOINTE" Nullable="true" />
+          <Property Type="String" Name="NOMEXPED" Nullable="false" MaxLength="121" />
+        </ComplexType>
+        <ComplexType Name="GetMessagesSupprimes_Result">
+          <Property Type="Int32" Name="IDMESSAGE" Nullable="false" />
+          <Property Type="String" Name="CONTENU" Nullable="false" MaxLength="Max" />
+          <Property Type="DateTime" Name="DATEENVOI" Nullable="false" Precision="23" />
+          <Property Type="String" Name="SUJET" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="LU" Nullable="true" />
+          <Property Type="Int32" Name="IDPIECE" Nullable="true" />
+          <Property Type="String" Name="NOMEXPED" Nullable="false" MaxLength="121" />
+        </ComplexType>
+        <ComplexType Name="GetNouvelle_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="TITRE" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="DESCRIPTION" Nullable="false" MaxLength="Max" />
+          <Property Type="DateTime" Name="DATEPUBLICATION" Nullable="false" Precision="23" />
+        </ComplexType>
         <ComplexType Name="GetNouvelles_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="TITRE" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="TITRE" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="DESCRIPTION" Nullable="false" MaxLength="Max" />
           <Property Type="DateTime" Name="DATEPUBLICATION" Nullable="false" Precision="23" />
         </ComplexType>
@@ -2312,9 +2288,10 @@
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="TITRE" Nullable="false" MaxLength="60" />
           <Property Type="DateTime" Name="DATECREATION" Nullable="false" Precision="23" />
+          <Property Type="String" Name="DESCRIPTION" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="EMPLACEMENTSERVEUR" Nullable="false" MaxLength="200" />
           <Property Type="Int32" Name="IDPUBLICATEUR" Nullable="false" />
-          <Property Type="String" Name="TYPEMIME" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="TYPEMIME" Nullable="false" MaxLength="20" />
           <Property Type="Int32" Name="IDSUJET" Nullable="false" />
           <Property Type="Int32" Name="IDSECTEUR" Nullable="false" />
         </ComplexType>
@@ -2322,28 +2299,29 @@
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="TITRE" Nullable="false" MaxLength="60" />
           <Property Type="DateTime" Name="DATECREATION" Nullable="false" Precision="23" />
+          <Property Type="String" Name="DESCRIPTION" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="EMPLACEMENTSERVEUR" Nullable="false" MaxLength="200" />
           <Property Type="Int32" Name="IDPUBLICATEUR" Nullable="false" />
-          <Property Type="String" Name="TYPEMIME" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="TYPEMIME" Nullable="false" MaxLength="20" />
           <Property Type="Int32" Name="IDSUJET" Nullable="false" />
           <Property Type="Int32" Name="IDSECTEUR" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetRechercheNouvelle_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="TITRE" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="DESCRIPTION" Nullable="false" MaxLength="Max" />
+          <Property Type="DateTime" Name="DATEPUBLICATION" Nullable="false" Precision="23" />
         </ComplexType>
         <ComplexType Name="GetResultatsSondage_Result">
           <Property Type="String" Name="NOMUTIL" Nullable="false" MaxLength="25" />
           <Property Type="String" Name="VALEUR" Nullable="false" MaxLength="60" />
         </ComplexType>
-        <ComplexType Name="GetRole_Result">
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="TYPE" Nullable="false" MaxLength="45" />
-          <Property Type="String" Name="DESCRIPTION" Nullable="false" MaxLength="255" />
-        </ComplexType>
-        <ComplexType Name="GetRoles_Result">
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="NOM" Nullable="false" MaxLength="45" />
-        </ComplexType>
         <ComplexType Name="GetSecteurs_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="NOM" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="TITREACCUEIL" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="TEXTEACCUEIL" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="URLIMAGEACCUEIL" Nullable="false" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="GetSondage_Result">
           <Property Type="String" Name="NOM" Nullable="false" MaxLength="60" />
@@ -2360,12 +2338,18 @@
           <Property Type="DateTime" Name="DATEFIN" Nullable="false" Precision="23" />
           <Property Type="String" Name="NOMUTIL" Nullable="false" MaxLength="25" />
         </ComplexType>
-        <ComplexType Name="GetUtilAcces_Result">
+        <ComplexType Name="getUtil_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="NOM" Nullable="false" MaxLength="45" />
-          <Property Type="Int32" Name="ID1" Nullable="false" />
-          <Property Type="String" Name="TYPE" Nullable="false" MaxLength="45" />
-          <Property Type="String" Name="DESCRIPTION" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="NOMUTIL" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="COURRIEL" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="PRENOM" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="NOM" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="ADRESSE" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="VILLE" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="DATENAISSANCE" Nullable="false" />
+          <Property Type="DateTime" Name="DERNIERECONNEXION" Nullable="true" Precision="23" />
+          <Property Type="String" Name="LANGUE" Nullable="false" MaxLength="2" />
+          <Property Type="Int32" Name="IDECOLE" Nullable="false" />
         </ComplexType>
         <ComplexType Name="GetUtilParSecteur_Result">
           <Property Type="String" Name="NOMUTIL" Nullable="false" MaxLength="25" />
@@ -2378,31 +2362,21 @@
           <Property Type="String" Name="PRENOM" Nullable="false" MaxLength="60" />
           <Property Type="String" Name="ADRESSE" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="VILLE" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="DATENAISSANCE" Nullable="false" />
           <Property Type="String" Name="LANGUE" Nullable="false" MaxLength="2" />
         </ComplexType>
         <ComplexType Name="GetUtils_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="NOMUTIL" Nullable="false" MaxLength="25" />
-          <Property Type="String" Name="MOTPASSE" Nullable="false" MaxLength="40" />
           <Property Type="String" Name="COURRIEL" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="PRENOM" Nullable="false" MaxLength="60" />
           <Property Type="String" Name="NOM" Nullable="false" MaxLength="60" />
           <Property Type="String" Name="ADRESSE" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="VILLE" Nullable="false" MaxLength="50" />
           <Property Type="DateTime" Name="DATENAISSANCE" Nullable="false" />
-          <Property Type="DateTime" Name="DATECREATION" Nullable="false" />
           <Property Type="DateTime" Name="DERNIERECONNEXION" Nullable="true" Precision="23" />
-          <Property Type="Boolean" Name="COMPTEACTIF" Nullable="false" />
           <Property Type="String" Name="LANGUE" Nullable="false" MaxLength="2" />
-          <Property Type="Int32" Name="IDROLE" Nullable="false" />
           <Property Type="Int32" Name="IDECOLE" Nullable="false" />
-          <Property Type="Boolean" Name="REINITIALISERMOTPASSE" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="GetNouvelle_Result">
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="TITRE" Nullable="false" MaxLength="60" />
-          <Property Type="String" Name="DESCRIPTION" Nullable="false" MaxLength="Max" />
-          <Property Type="DateTime" Name="DATEPUBLICATION" Nullable="false" Precision="23" />
         </ComplexType>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -2415,62 +2389,12 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
-        <ComplexType Name="GetRechercheNouvelle_Result">
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="TITRE" Nullable="false" MaxLength="60" />
-          <Property Type="String" Name="DESCRIPTION" Nullable="false" MaxLength="Max" />
-          <Property Type="DateTime" Name="DATEPUBLICATION" Nullable="false" Precision="23" />
-        </ComplexType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="principal_id" Nullable="false" />
-          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="version" />
-          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <ComplexType Name="GetMessagesPrives_Result">
-          <Property Type="Int32" Name="IDMESSAGE" Nullable="false" />
-          <Property Type="String" Name="CONTENU" Nullable="false" MaxLength="Max" />
-          <Property Type="DateTime" Name="DATEENVOI" Nullable="false" Precision="23" />
-          <Property Type="String" Name="SUJET" Nullable="false" MaxLength="50" />
-          <Property Type="Boolean" Name="LU" Nullable="false" />
-          <Property Type="Int32" Name="IDPIECEJOINTE" Nullable="true" />
-          <Property Type="String" Name="NOMEXPED" Nullable="false" MaxLength="121" />
-        </ComplexType>
-        <ComplexType Name="GetMessagesSupprimes_Result">
-          <Property Type="Int32" Name="IDMESSAGE" Nullable="false" />
-          <Property Type="String" Name="CONTENU" Nullable="false" MaxLength="Max" />
-          <Property Type="DateTime" Name="DATEENVOI" Nullable="false" Precision="23" />
-          <Property Type="String" Name="SUJET" Nullable="false" MaxLength="50" />
-          <Property Type="Boolean" Name="LU" Nullable="true" />
-          <Property Type="Int32" Name="IDPIECE" Nullable="true" />
-          <Property Type="String" Name="NOMEXPED" Nullable="false" MaxLength="121" />
-        </ComplexType>
-        <ComplexType Name="GetMessagesEnvoyes_Result">
-          <Property Type="Int32" Name="IDMESSAGE" Nullable="false" />
-          <Property Type="String" Name="CONTENU" Nullable="false" MaxLength="Max" />
-          <Property Type="DateTime" Name="DATEENVOI" Nullable="false" Precision="23" />
-          <Property Type="String" Name="SUJET" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="IDPIECE" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="GetMessage_Result">
-          <Property Type="String" Name="SUJET" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="CONTENU" Nullable="false" MaxLength="Max" />
-          <Property Type="DateTime" Name="DATEENVOI" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="IDPIECE" Nullable="true" />
-          <Property Type="String" Name="NOMPIECE" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="TAILLEPIECE" Nullable="true" MaxLength="40" />
-          <Property Type="String" Name="NOMEXPED" Nullable="false" MaxLength="121" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MVPModelStoreContainer" CdmEntityContainer="MVPEntities">
+        <EntityContainerMapping StorageEntityContainer="MVPModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="CATEGORIEEVENEMENT">
             <EntityTypeMapping TypeName="MVPModel.CATEGORIEEVENEMENT">
               <MappingFragment StoreEntitySet="CATEGORIEEVENEMENT">
@@ -2488,32 +2412,27 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CONFIRMINSCRIPTION">
-            <EntityTypeMapping TypeName="MVPModel.CONFIRMINSCRIPTION">
-              <MappingFragment StoreEntitySet="CONFIRMINSCRIPTION">
-                <ScalarProperty Name="IDUTILISATEUR" ColumnName="IDUTILISATEUR" />
-                <ScalarProperty Name="DATEENVOI" ColumnName="DATEENVOI" />
-                <ScalarProperty Name="JETON" ColumnName="JETON" />
+          <EntitySetMapping Name="CONTENU">
+            <EntityTypeMapping TypeName="MVPModel.CONTENU">
+              <MappingFragment StoreEntitySet="CONTENU">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PAGE" ColumnName="PAGE" />
+                <ScalarProperty Name="TITRE" ColumnName="TITRE" />
+                <ScalarProperty Name="TITRE_TRAD" ColumnName="TITRE_TRAD" />
+                <ScalarProperty Name="CONTENU1" ColumnName="CONTENU" />
+                <ScalarProperty Name="CONTENU_TRAD" ColumnName="CONTENU_TRAD" />
+                <ScalarProperty Name="URLIMAGE" ColumnName="URLIMAGE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DESTINATAIREMESSAGE">
             <EntityTypeMapping TypeName="MVPModel.DESTINATAIREMESSAGE">
               <MappingFragment StoreEntitySet="DESTINATAIREMESSAGE">
-                <ScalarProperty Name="LU" ColumnName="LU" />
                 <ScalarProperty Name="IDMESSAGE" ColumnName="IDMESSAGE" />
                 <ScalarProperty Name="IDUTILISATEUR" ColumnName="IDUTILISATEUR" />
                 <ScalarProperty Name="SUPPRIME" ColumnName="SUPPRIME" />
                 <ScalarProperty Name="SUPPRIMEDEFINITIF" ColumnName="SUPPRIMEDEFINITIF" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DROIT">
-            <EntityTypeMapping TypeName="MVPModel.DROIT">
-              <MappingFragment StoreEntitySet="DROIT">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="TYPE" ColumnName="TYPE" />
-                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2632,10 +2551,10 @@
           <EntitySetMapping Name="PUBLICATION">
             <EntityTypeMapping TypeName="MVPModel.PUBLICATION">
               <MappingFragment StoreEntitySet="PUBLICATION">
-                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="TITRE" ColumnName="TITRE" />
                 <ScalarProperty Name="DATECREATION" ColumnName="DATECREATION" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
                 <ScalarProperty Name="EMPLACEMENTSERVEUR" ColumnName="EMPLACEMENTSERVEUR" />
                 <ScalarProperty Name="IDPUBLICATEUR" ColumnName="IDPUBLICATEUR" />
                 <ScalarProperty Name="TYPEMIME" ColumnName="TYPEMIME" />
@@ -2644,19 +2563,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ROLE">
-            <EntityTypeMapping TypeName="MVPModel.ROLE">
-              <MappingFragment StoreEntitySet="ROLE">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="NOM" ColumnName="NOM" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="SECTEUR">
             <EntityTypeMapping TypeName="MVPModel.SECTEUR">
               <MappingFragment StoreEntitySet="SECTEUR">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="TITREACCUEIL" ColumnName="TITREACCUEIL" />
+                <ScalarProperty Name="TEXTEACCUEIL" ColumnName="TEXTEACCUEIL" />
+                <ScalarProperty Name="URLIMAGEACCUEIL" ColumnName="URLIMAGEACCUEIL" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2681,25 +2595,31 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MVPModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="UTILISATEUR">
             <EntityTypeMapping TypeName="MVPModel.UTILISATEUR">
               <MappingFragment StoreEntitySet="UTILISATEUR">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NOMUTIL" ColumnName="NOMUTIL" />
-                <ScalarProperty Name="MOTPASSE" ColumnName="MOTPASSE" />
                 <ScalarProperty Name="COURRIEL" ColumnName="COURRIEL" />
                 <ScalarProperty Name="PRENOM" ColumnName="PRENOM" />
                 <ScalarProperty Name="NOM" ColumnName="NOM" />
                 <ScalarProperty Name="ADRESSE" ColumnName="ADRESSE" />
                 <ScalarProperty Name="VILLE" ColumnName="VILLE" />
                 <ScalarProperty Name="DATENAISSANCE" ColumnName="DATENAISSANCE" />
-                <ScalarProperty Name="DATECREATION" ColumnName="DATECREATION" />
                 <ScalarProperty Name="DERNIERECONNEXION" ColumnName="DERNIERECONNEXION" />
-                <ScalarProperty Name="COMPTEACTIF" ColumnName="COMPTEACTIF" />
                 <ScalarProperty Name="LANGUE" ColumnName="LANGUE" />
-                <ScalarProperty Name="IDROLE" ColumnName="IDROLE" />
                 <ScalarProperty Name="IDECOLE" ColumnName="IDECOLE" />
-                <ScalarProperty Name="REINITIALISERMOTPASSE" ColumnName="REINITIALISERMOTPASSE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2710,6 +2630,40 @@
                 <ScalarProperty Name="IDSECTEUR" ColumnName="IDSECTEUR" />
                 <ScalarProperty Name="DEBUTACCES" ColumnName="DEBUTACCES" />
                 <ScalarProperty Name="FINACCES" ColumnName="FINACCES" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Membership">
+            <EntityTypeMapping TypeName="MVPModel.webpages_Membership">
+              <MappingFragment StoreEntitySet="webpages_Membership">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
+                <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
+                <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_OAuthMembership">
+            <EntityTypeMapping TypeName="MVPModel.webpages_OAuthMembership">
+              <MappingFragment StoreEntitySet="webpages_OAuthMembership">
+                <ScalarProperty Name="Provider" ColumnName="Provider" />
+                <ScalarProperty Name="ProviderUserId" ColumnName="ProviderUserId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Roles">
+            <EntityTypeMapping TypeName="MVPModel.webpages_Roles">
+              <MappingFragment StoreEntitySet="webpages_Roles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2737,20 +2691,20 @@
               <ScalarProperty Name="ID" ColumnName="IDPUBLICATION" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="ROLEDROIT" TypeName="MVPModel.ROLEDROIT" StoreEntitySet="ROLEDROIT">
-            <EndProperty Name="DROIT">
-              <ScalarProperty Name="ID" ColumnName="IDDROIT" />
-            </EndProperty>
-            <EndProperty Name="ROLE">
-              <ScalarProperty Name="ID" ColumnName="IDROLE" />
-            </EndProperty>
-          </AssociationSetMapping>
           <AssociationSetMapping Name="VOTESONDAGE" TypeName="MVPModel.VOTESONDAGE" StoreEntitySet="VOTESONDAGE">
             <EndProperty Name="CHOIXSONDAGE">
               <ScalarProperty Name="ID" ColumnName="IDCHOIX" />
             </EndProperty>
             <EndProperty Name="UTILISATEUR">
               <ScalarProperty Name="ID" ColumnName="IDUTILISATEUR" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="webpages_UsersInRoles" TypeName="MVPModel.webpages_UsersInRoles" StoreEntitySet="webpages_UsersInRoles">
+            <EndProperty Name="webpages_Roles">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="UTILISATEUR">
+              <ScalarProperty Name="ID" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="AjouterChoixSondage" FunctionName="MVPModel.Store.AjouterChoixSondage" />
@@ -2765,18 +2719,28 @@
           <FunctionImportMapping FunctionImportName="AjouterPartenaire" FunctionName="MVPModel.Store.AjouterPartenaire" />
           <FunctionImportMapping FunctionImportName="AjouterPieceJointe" FunctionName="MVPModel.Store.AjouterPieceJointe" />
           <FunctionImportMapping FunctionImportName="AjouterPublication" FunctionName="MVPModel.Store.AjouterPublication" />
-          <FunctionImportMapping FunctionImportName="AjouterRole" FunctionName="MVPModel.Store.AjouterRole" />
           <FunctionImportMapping FunctionImportName="AjouterSectEcole" FunctionName="MVPModel.Store.AjouterSectEcole" />
           <FunctionImportMapping FunctionImportName="AjouterSecteur" FunctionName="MVPModel.Store.AjouterSecteur" />
           <FunctionImportMapping FunctionImportName="AjouterSectEven" FunctionName="MVPModel.Store.AjouterSectEven" />
           <FunctionImportMapping FunctionImportName="AjouterSondage" FunctionName="MVPModel.Store.AjouterSondage" />
           <FunctionImportMapping FunctionImportName="AjouterSujetPub" FunctionName="MVPModel.Store.AjouterSujetPub" />
-          <FunctionImportMapping FunctionImportName="AjouterUtilisateur" FunctionName="MVPModel.Store.AjouterUtilisateur" />
           <FunctionImportMapping FunctionImportName="AjouterUtilSecteur" FunctionName="MVPModel.Store.AjouterUtilSecteur" />
           <FunctionImportMapping FunctionImportName="AjouterVoteSondage" FunctionName="MVPModel.Store.AjouterVoteSondage" />
-          <FunctionImportMapping FunctionImportName="AssocierRoleDroit" FunctionName="MVPModel.Store.AssocierRoleDroit" />
           <FunctionImportMapping FunctionImportName="AugmenterNbrLectures" FunctionName="MVPModel.Store.AugmenterNbrLectures" />
-          <FunctionImportMapping FunctionImportName="DeassocierRoleDroit" FunctionName="MVPModel.Store.DeassocierRoleDroit" />
+          <FunctionImportMapping FunctionImportName="GetContenu" FunctionName="MVPModel.Store.GetContenu">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetContenu_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PAGE" ColumnName="PAGE" />
+                <ScalarProperty Name="TITRE" ColumnName="TITRE" />
+                <ScalarProperty Name="TITRE_TRAD" ColumnName="TITRE_TRAD" />
+                <ScalarProperty Name="CONTENU" ColumnName="CONTENU" />
+                <ScalarProperty Name="CONTENU_TRAD" ColumnName="CONTENU_TRAD" />
+                <ScalarProperty Name="URLIMAGE" ColumnName="URLIMAGE" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetDestinataires" FunctionName="MVPModel.Store.GetDestinataires" />
           <FunctionImportMapping FunctionImportName="GetEven" FunctionName="MVPModel.Store.GetEven">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MVPModel.GetEven_Result">
@@ -2826,6 +2790,30 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetMessage" FunctionName="MVPModel.Store.GetMessage">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetMessage_Result">
+                <ScalarProperty Name="SUJET" ColumnName="SUJET" />
+                <ScalarProperty Name="CONTENU" ColumnName="CONTENU" />
+                <ScalarProperty Name="DATEENVOI" ColumnName="DATEENVOI" />
+                <ScalarProperty Name="IDPIECE" ColumnName="IDPIECE" />
+                <ScalarProperty Name="NOMPIECE" ColumnName="NOMPIECE" />
+                <ScalarProperty Name="TAILLEPIECE" ColumnName="TAILLEPIECE" />
+                <ScalarProperty Name="NOMEXPED" ColumnName="NOMEXPED" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetMessagesEnvoyes" FunctionName="MVPModel.Store.GetMessagesEnvoyes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetMessagesEnvoyes_Result">
+                <ScalarProperty Name="IDMESSAGE" ColumnName="IDMESSAGE" />
+                <ScalarProperty Name="CONTENU" ColumnName="CONTENU" />
+                <ScalarProperty Name="DATEENVOI" ColumnName="DATEENVOI" />
+                <ScalarProperty Name="SUJET" ColumnName="SUJET" />
+                <ScalarProperty Name="IDPIECE" ColumnName="IDPIECE" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetMessagesForum" FunctionName="MVPModel.Store.GetMessagesForum">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MVPModel.GetMessagesForum_Result">
@@ -2835,6 +2823,42 @@
                 <ScalarProperty Name="CONTENU" ColumnName="CONTENU" />
                 <ScalarProperty Name="IDUTILISATEUR" ColumnName="IDUTILISATEUR" />
                 <ScalarProperty Name="IDFILDISCUSSION" ColumnName="IDFILDISCUSSION" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetMessagesPrives" FunctionName="MVPModel.Store.GetMessagesPrives">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetMessagesPrives_Result">
+                <ScalarProperty Name="IDMESSAGE" ColumnName="IDMESSAGE" />
+                <ScalarProperty Name="CONTENU" ColumnName="CONTENU" />
+                <ScalarProperty Name="DATEENVOI" ColumnName="DATEENVOI" />
+                <ScalarProperty Name="SUJET" ColumnName="SUJET" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="IDPIECEJOINTE" ColumnName="IDPIECEJOINTE" />
+                <ScalarProperty Name="NOMEXPED" ColumnName="NOMEXPED" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetMessagesSupprimes" FunctionName="MVPModel.Store.GetMessagesSupprimes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetMessagesSupprimes_Result">
+                <ScalarProperty Name="IDMESSAGE" ColumnName="IDMESSAGE" />
+                <ScalarProperty Name="CONTENU" ColumnName="CONTENU" />
+                <ScalarProperty Name="DATEENVOI" ColumnName="DATEENVOI" />
+                <ScalarProperty Name="SUJET" ColumnName="SUJET" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="IDPIECE" ColumnName="IDPIECE" />
+                <ScalarProperty Name="NOMEXPED" ColumnName="NOMEXPED" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetNouvelle" FunctionName="MVPModel.Store.GetNouvelle">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetNouvelle_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TITRE" ColumnName="TITRE" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="DATEPUBLICATION" ColumnName="DATEPUBLICATION" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -2886,6 +2910,7 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="TITRE" ColumnName="TITRE" />
                 <ScalarProperty Name="DATECREATION" ColumnName="DATECREATION" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
                 <ScalarProperty Name="EMPLACEMENTSERVEUR" ColumnName="EMPLACEMENTSERVEUR" />
                 <ScalarProperty Name="IDPUBLICATEUR" ColumnName="IDPUBLICATEUR" />
                 <ScalarProperty Name="TYPEMIME" ColumnName="TYPEMIME" />
@@ -2900,11 +2925,22 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="TITRE" ColumnName="TITRE" />
                 <ScalarProperty Name="DATECREATION" ColumnName="DATECREATION" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
                 <ScalarProperty Name="EMPLACEMENTSERVEUR" ColumnName="EMPLACEMENTSERVEUR" />
                 <ScalarProperty Name="IDPUBLICATEUR" ColumnName="IDPUBLICATEUR" />
                 <ScalarProperty Name="TYPEMIME" ColumnName="TYPEMIME" />
                 <ScalarProperty Name="IDSUJET" ColumnName="IDSUJET" />
                 <ScalarProperty Name="IDSECTEUR" ColumnName="IDSECTEUR" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetRechercheNouvelle" FunctionName="MVPModel.Store.GetRechercheNouvelle">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetRechercheNouvelle_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TITRE" ColumnName="TITRE" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="DATEPUBLICATION" ColumnName="DATEPUBLICATION" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -2916,28 +2952,14 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetRole" FunctionName="MVPModel.Store.GetRole">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MVPModel.GetRole_Result">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="TYPE" ColumnName="TYPE" />
-                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetRoles" FunctionName="MVPModel.Store.GetRoles">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MVPModel.GetRoles_Result">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="NOM" ColumnName="NOM" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetSecteurs" FunctionName="MVPModel.Store.GetSecteurs">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MVPModel.GetSecteurs_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="TITREACCUEIL" ColumnName="TITREACCUEIL" />
+                <ScalarProperty Name="TEXTEACCUEIL" ColumnName="TEXTEACCUEIL" />
+                <ScalarProperty Name="URLIMAGEACCUEIL" ColumnName="URLIMAGEACCUEIL" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -2964,14 +2986,20 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetUtilAcces" FunctionName="MVPModel.Store.GetUtilAcces">
+          <FunctionImportMapping FunctionImportName="getUtil" FunctionName="MVPModel.Store.getUtil">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="MVPModel.GetUtilAcces_Result">
+              <ComplexTypeMapping TypeName="MVPModel.getUtil_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMUTIL" ColumnName="NOMUTIL" />
+                <ScalarProperty Name="COURRIEL" ColumnName="COURRIEL" />
+                <ScalarProperty Name="PRENOM" ColumnName="PRENOM" />
                 <ScalarProperty Name="NOM" ColumnName="NOM" />
-                <ScalarProperty Name="ID1" ColumnName="ID1" />
-                <ScalarProperty Name="TYPE" ColumnName="TYPE" />
-                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="ADRESSE" ColumnName="ADRESSE" />
+                <ScalarProperty Name="VILLE" ColumnName="VILLE" />
+                <ScalarProperty Name="DATENAISSANCE" ColumnName="DATENAISSANCE" />
+                <ScalarProperty Name="DERNIERECONNEXION" ColumnName="DERNIERECONNEXION" />
+                <ScalarProperty Name="LANGUE" ColumnName="LANGUE" />
+                <ScalarProperty Name="IDECOLE" ColumnName="IDECOLE" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -2992,6 +3020,7 @@
                 <ScalarProperty Name="PRENOM" ColumnName="PRENOM" />
                 <ScalarProperty Name="ADRESSE" ColumnName="ADRESSE" />
                 <ScalarProperty Name="VILLE" ColumnName="VILLE" />
+                <ScalarProperty Name="DATENAISSANCE" ColumnName="DATENAISSANCE" />
                 <ScalarProperty Name="LANGUE" ColumnName="LANGUE" />
               </ComplexTypeMapping>
             </ResultMapping>
@@ -3001,27 +3030,24 @@
               <ComplexTypeMapping TypeName="MVPModel.GetUtils_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NOMUTIL" ColumnName="NOMUTIL" />
-                <ScalarProperty Name="MOTPASSE" ColumnName="MOTPASSE" />
                 <ScalarProperty Name="COURRIEL" ColumnName="COURRIEL" />
                 <ScalarProperty Name="PRENOM" ColumnName="PRENOM" />
                 <ScalarProperty Name="NOM" ColumnName="NOM" />
                 <ScalarProperty Name="ADRESSE" ColumnName="ADRESSE" />
                 <ScalarProperty Name="VILLE" ColumnName="VILLE" />
                 <ScalarProperty Name="DATENAISSANCE" ColumnName="DATENAISSANCE" />
-                <ScalarProperty Name="DATECREATION" ColumnName="DATECREATION" />
                 <ScalarProperty Name="DERNIERECONNEXION" ColumnName="DERNIERECONNEXION" />
-                <ScalarProperty Name="COMPTEACTIF" ColumnName="COMPTEACTIF" />
                 <ScalarProperty Name="LANGUE" ColumnName="LANGUE" />
-                <ScalarProperty Name="IDROLE" ColumnName="IDROLE" />
                 <ScalarProperty Name="IDECOLE" ColumnName="IDECOLE" />
-                <ScalarProperty Name="REINITIALISERMOTPASSE" ColumnName="REINITIALISERMOTPASSE" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LireMessage" FunctionName="MVPModel.Store.LireMessage" />
           <FunctionImportMapping FunctionImportName="MessagePriveCorbeille" FunctionName="MVPModel.Store.MessagePriveCorbeille" />
           <FunctionImportMapping FunctionImportName="MessagePriveSuppDef" FunctionName="MVPModel.Store.MessagePriveSuppDef" />
           <FunctionImportMapping FunctionImportName="ModiferEven" FunctionName="MVPModel.Store.ModiferEven" />
           <FunctionImportMapping FunctionImportName="ModifierChoixSondage" FunctionName="MVPModel.Store.ModifierChoixSondage" />
+          <FunctionImportMapping FunctionImportName="ModifierContenu" FunctionName="MVPModel.Store.ModifierContenu" />
           <FunctionImportMapping FunctionImportName="ModifierEcole" FunctionName="MVPModel.Store.ModifierEcole" />
           <FunctionImportMapping FunctionImportName="ModifierMessageForum" FunctionName="MVPModel.Store.ModifierMessageForum" />
           <FunctionImportMapping FunctionImportName="ModifierNouvelle" FunctionName="MVPModel.Store.ModifierNouvelle" />
@@ -3030,36 +3056,8 @@
           <FunctionImportMapping FunctionImportName="ModifierSondage" FunctionName="MVPModel.Store.ModifierSondage" />
           <FunctionImportMapping FunctionImportName="ModifierSujetFilDiscussion" FunctionName="MVPModel.Store.ModifierSujetFilDiscussion" />
           <FunctionImportMapping FunctionImportName="ModifierUtilEcole" FunctionName="MVPModel.Store.ModifierUtilEcole" />
-          <FunctionImportMapping FunctionImportName="ModifierUtilMotPasse" FunctionName="MVPModel.Store.ModifierUtilMotPasse" />
           <FunctionImportMapping FunctionImportName="ModifierUtilProfil" FunctionName="MVPModel.Store.ModifierUtilProfil" />
-          <FunctionImportMapping FunctionImportName="ModifierUtilRole" FunctionName="MVPModel.Store.ModifierUtilRole" />
           <FunctionImportMapping FunctionImportName="ReinitMotPasse" FunctionName="MVPModel.Store.ReinitMotPasse" />
-          <FunctionImportMapping FunctionImportName="SupprimerChoixSondage" FunctionName="MVPModel.Store.SupprimerChoixSondage" />
-          <FunctionImportMapping FunctionImportName="SupprimerEcole" FunctionName="MVPModel.Store.SupprimerEcole" />
-          <FunctionImportMapping FunctionImportName="SupprimerEven" FunctionName="MVPModel.Store.SupprimerEven" />
-          <FunctionImportMapping FunctionImportName="SupprimerFilDiscussion" FunctionName="MVPModel.Store.SupprimerFilDiscussion" />
-          <FunctionImportMapping FunctionImportName="SupprimerMessageForum" FunctionName="MVPModel.Store.SupprimerMessageForum" />
-          <FunctionImportMapping FunctionImportName="SupprimerMotClePub" FunctionName="MVPModel.Store.SupprimerMotClePub" />
-          <FunctionImportMapping FunctionImportName="SupprimerNouvelle" FunctionName="MVPModel.Store.SupprimerNouvelle" />
-          <FunctionImportMapping FunctionImportName="SupprimerPartenaire" FunctionName="MVPModel.Store.SupprimerPartenaire" />
-          <FunctionImportMapping FunctionImportName="SupprimerPublication" FunctionName="MVPModel.Store.SupprimerPublication" />
-          <FunctionImportMapping FunctionImportName="SupprimerRole" FunctionName="MVPModel.Store.SupprimerRole" />
-          <FunctionImportMapping FunctionImportName="SupprimerSectEcole" FunctionName="MVPModel.Store.SupprimerSectEcole" />
-          <FunctionImportMapping FunctionImportName="SupprimerSecteur" FunctionName="MVPModel.Store.SupprimerSecteur" />
-          <FunctionImportMapping FunctionImportName="SupprimerSectEven" FunctionName="MVPModel.Store.SupprimerSectEven" />
-          <FunctionImportMapping FunctionImportName="SupprimerSondage" FunctionName="MVPModel.Store.SupprimerSondage" />
-          <FunctionImportMapping FunctionImportName="SupprimerUtilisateur" FunctionName="MVPModel.Store.SupprimerUtilisateur" />
-          <FunctionImportMapping FunctionImportName="SupprimerUtilSect" FunctionName="MVPModel.Store.SupprimerUtilSect" />
-          <FunctionImportMapping FunctionImportName="GetNouvelle" FunctionName="MVPModel.Store.GetNouvelle">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MVPModel.GetNouvelle_Result">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="TITRE" ColumnName="TITRE" />
-                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
-                <ScalarProperty Name="DATEPUBLICATION" ColumnName="DATEPUBLICATION" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="MVPModel.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="MVPModel.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="MVPModel.Store.sp_dropdiagram" />
@@ -3084,79 +3082,21 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="MVPModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="MVPModel.Store.sp_upgraddiagrams" />
-          <FunctionImportMapping FunctionImportName="GetRechercheNouvelle" FunctionName="MVPModel.Store.GetRechercheNouvelle">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MVPModel.GetRechercheNouvelle_Result">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="TITRE" ColumnName="TITRE" />
-                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
-                <ScalarProperty Name="DATEPUBLICATION" ColumnName="DATEPUBLICATION" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="MVPModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GetMessagesPrives" FunctionName="MVPModel.Store.GetMessagesPrives">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MVPModel.GetMessagesPrives_Result">
-                <ScalarProperty Name="IDMESSAGE" ColumnName="IDMESSAGE" />
-                <ScalarProperty Name="CONTENU" ColumnName="CONTENU" />
-                <ScalarProperty Name="DATEENVOI" ColumnName="DATEENVOI" />
-                <ScalarProperty Name="SUJET" ColumnName="SUJET" />
-                <ScalarProperty Name="LU" ColumnName="LU" />
-                <ScalarProperty Name="IDPIECEJOINTE" ColumnName="IDPIECEJOINTE" />
-                <ScalarProperty Name="NOMEXPED" ColumnName="NOMEXPED" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetMessagesSupprimes" FunctionName="MVPModel.Store.GetMessagesSupprimes">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MVPModel.GetMessagesSupprimes_Result">
-                <ScalarProperty Name="IDMESSAGE" ColumnName="IDMESSAGE" />
-                <ScalarProperty Name="CONTENU" ColumnName="CONTENU" />
-                <ScalarProperty Name="DATEENVOI" ColumnName="DATEENVOI" />
-                <ScalarProperty Name="SUJET" ColumnName="SUJET" />
-                <ScalarProperty Name="LU" ColumnName="LU" />
-                <ScalarProperty Name="IDPIECE" ColumnName="IDPIECE" />
-                <ScalarProperty Name="NOMEXPED" ColumnName="NOMEXPED" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetMessagesEnvoyes" FunctionName="MVPModel.Store.GetMessagesEnvoyes">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MVPModel.GetMessagesEnvoyes_Result">
-                <ScalarProperty Name="IDMESSAGE" ColumnName="IDMESSAGE" />
-                <ScalarProperty Name="CONTENU" ColumnName="CONTENU" />
-                <ScalarProperty Name="DATEENVOI" ColumnName="DATEENVOI" />
-                <ScalarProperty Name="SUJET" ColumnName="SUJET" />
-                <ScalarProperty Name="IDPIECE" ColumnName="IDPIECE" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetDestinataires" FunctionName="MVPModel.Store.GetDestinataires" />
-          <FunctionImportMapping FunctionImportName="GetMessage" FunctionName="MVPModel.Store.GetMessage">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MVPModel.GetMessage_Result">
-                <ScalarProperty Name="SUJET" ColumnName="SUJET" />
-                <ScalarProperty Name="CONTENU" ColumnName="CONTENU" />
-                <ScalarProperty Name="DATEENVOI" ColumnName="DATEENVOI" />
-                <ScalarProperty Name="IDPIECE" ColumnName="IDPIECE" />
-                <ScalarProperty Name="NOMPIECE" ColumnName="NOMPIECE" />
-                <ScalarProperty Name="TAILLEPIECE" ColumnName="TAILLEPIECE" />
-                <ScalarProperty Name="NOMEXPED" ColumnName="NOMEXPED" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="LireMessage" FunctionName="MVPModel.Store.LireMessage" />
+          <FunctionImportMapping FunctionImportName="SupprimerChoixSondage" FunctionName="MVPModel.Store.SupprimerChoixSondage" />
+          <FunctionImportMapping FunctionImportName="SupprimerEcole" FunctionName="MVPModel.Store.SupprimerEcole" />
+          <FunctionImportMapping FunctionImportName="SupprimerEven" FunctionName="MVPModel.Store.SupprimerEven" />
+          <FunctionImportMapping FunctionImportName="SupprimerFilDiscussion" FunctionName="MVPModel.Store.SupprimerFilDiscussion" />
+          <FunctionImportMapping FunctionImportName="SupprimerMessageForum" FunctionName="MVPModel.Store.SupprimerMessageForum" />
+          <FunctionImportMapping FunctionImportName="SupprimerMotClePub" FunctionName="MVPModel.Store.SupprimerMotClePub" />
+          <FunctionImportMapping FunctionImportName="SupprimerNouvelle" FunctionName="MVPModel.Store.SupprimerNouvelle" />
+          <FunctionImportMapping FunctionImportName="SupprimerPartenaire" FunctionName="MVPModel.Store.SupprimerPartenaire" />
+          <FunctionImportMapping FunctionImportName="SupprimerPublication" FunctionName="MVPModel.Store.SupprimerPublication" />
+          <FunctionImportMapping FunctionImportName="SupprimerSectEcole" FunctionName="MVPModel.Store.SupprimerSectEcole" />
+          <FunctionImportMapping FunctionImportName="SupprimerSecteur" FunctionName="MVPModel.Store.SupprimerSecteur" />
+          <FunctionImportMapping FunctionImportName="SupprimerSectEven" FunctionName="MVPModel.Store.SupprimerSectEven" />
+          <FunctionImportMapping FunctionImportName="SupprimerSondage" FunctionName="MVPModel.Store.SupprimerSondage" />
+          <FunctionImportMapping FunctionImportName="SupprimerUtilisateur" FunctionName="MVPModel.Store.SupprimerUtilisateur" />
+          <FunctionImportMapping FunctionImportName="SupprimerUtilSect" FunctionName="MVPModel.Store.SupprimerUtilSect" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
