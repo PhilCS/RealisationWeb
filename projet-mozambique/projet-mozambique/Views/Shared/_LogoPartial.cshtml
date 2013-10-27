@@ -1,0 +1,12 @@
+﻿@if (!Request.IsAuthenticated)
+{
+    @Html.ActionLink("Mozambique", "Index", "Public", null, new {@class="main-titre"})<br />
+    @Html.ActionLink("Portail Pédagogique", "Index", "Public", null, new { @class = "sous-titre" })
+}
+else 
+{
+    @Html.ActionLink("Mozambique", "Index", "Sectoriel", null, new {@class="main-titre"})<br />
+    @Html.ActionLink("Portail Pédagogique", "Index", "Sectoriel", null, new { @class = "sous-titre" })
+}
+
+

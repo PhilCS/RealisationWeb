@@ -1,0 +1,29 @@
+﻿@model projet_mozambique.Models.LoginModel
+@{
+    ViewBag.Title = "Se connecter";
+}
+
+<h1>Se connecter</h1>
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <ul>
+        <li>
+            @Html.LabelFor(m => m.UserName)
+            @Html.TextBoxFor(m => m.UserName)
+            @Html.ValidationMessageFor(m => m.UserName)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.Password)
+            @Html.PasswordFor(m => m.Password)
+            @Html.ValidationMessageFor(m => m.Password)
+        </li>
+        <li>
+            @Html.CheckBoxFor(m => m.RememberMe)
+            @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+        </li>
+    </ul>
+    <input type="submit" value="Se connecter" class="btnForm" />
+    <br />
+    @Html.ActionLink("Mot de passe oublié?", "Index")
+}

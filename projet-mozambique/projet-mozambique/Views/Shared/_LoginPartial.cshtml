@@ -1,0 +1,15 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <div class="user_name">
+        <p>Bonjour, @User.Identity.Name</p>
+        <div class="icons">
+            @Html.ActionLink(" ", "Messagerie", new { controller = "Sectoriel" }, new { @class = "msg-img", title="Messagerie" })
+            @Html.ActionLink(" ", "Profil", "Sectoriel", routeValues: null, htmlAttributes: new { @class = "profil-img", title="Profil" })
+        </div>
+        @*@Html.ActionLink(Resources.Resources.langue, "SetCulture", new { culture = "pt" })*@
+        @Html.ActionLink("Se déconnecter", "LogOut", "Sectoriel", null, new { @class = "logout" }) 
+    </div>
+} else {
+    @*Html.ActionLink(Resources.Resources.langue, "SetCulture", new { culture = "en-us" })*@
+    @Html.ActionLink("Se connecter", "Login", "Sectoriel", routeValues: null, htmlAttributes: new { @class = "login" })
+}

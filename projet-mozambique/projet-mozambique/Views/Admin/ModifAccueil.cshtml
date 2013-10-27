@@ -1,34 +1,40 @@
-﻿@{
-    ViewBag.Title = "Secteur Agriculture";
+﻿@model projet_mozambique.Models.ContentModel
+@{
+    ViewBag.Title = "Page d'accueil publique";
 }
 
-<form method="post" action="IndexModifie">
+<h2>@ViewBag.Title</h2>
 
-    
-    <h1 class="modif-cms"><input type="submit" class="btnForm" value="Modifier" /><input type="text" id="titre" name="titre" value="Bienvenue" class="modif-titre" /></h1>
-
-    <div class="modif-image">
-        <img class="img-accueil img-sous" src="~/Content/images/photos/moz-agriculture.jpg" alt="Photo Agriculture" />
-        <img class="img-sur" src="~/Content/images/icones/icone-pen.png" title="Modifier" alt="Icône Modifier" />
-    </div>
-
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dictum quam nec lectus faucibus ultricies. Aliquam turpis purus,
-        porta a tellus et, ornare elementum lorem. Phasellus vitae enim dui. Mauris tortor purus, dictum nec gravida nec, dapibus sit
-        amet augue. Quisque pretium vitae arcu ac tincidunt. Aliquam lobortis, quam quis eleifend pretium, neque enim facilisis tortor,
-        non suscipit velit eros in nisi. Mauris lacinia posuere orci, quis gravida tortor hendrerit vitae. Donec luctus et massa non
-        vulputate. Quisque vestibulum tellus eu felis eleifend consequat. Phasellus at ipsum hendrerit, elementum quam sed, feugiat velit.
-        Sed vehicula eu dolor quis feugiat. Fusce at mauris eros. Integer vitae risus dignissim, ornare erat a, lacinia massa.
-    </p>
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dictum quam nec lectus faucibus ultricies. Aliquam turpis purus,
-        porta a tellus et, ornare elementum lorem. Phasellus vitae enim dui. Mauris tortor purus, dictum nec gravida nec, dapibus sit
-        amet augue. Quisque pretium vitae arcu ac tincidunt. Aliquam lobortis, quam quis eleifend pretium, neque enim facilisis tortor,
-        non suscipit velit eros in nisi. Mauris lacinia posuere orci, quis gravida tortor hendrerit vitae. Donec luctus et massa non
-        vulputate. Quisque vestibulum tellus eu felis eleifend consequat. Phasellus at ipsum hendrerit, elementum quam sed, feugiat velit.
-        Sed vehicula eu dolor quis feugiat. Fusce at mauris eros. Integer vitae risus dignissim, ornare erat a, lacinia massa.
-        <img src="~/Content/images/icones/icone-pen.png" title="Modifier" alt="Icône Modifier" />
-    </p>
-
-</form>
-
+@using (Html.BeginForm()){
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <ul>
+        <li>
+            @Html.LabelFor(m => m.titre)
+            @Html.TextBoxFor(m => m.titre)
+            @Html.ValidationMessageFor(m => m.titre)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.titreTrad)
+            @Html.TextBoxFor(m => m.titreTrad)
+            @Html.ValidationMessageFor(m => m.titreTrad)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.contenu)
+            @Html.TextAreaFor(m => m.contenu)
+            @Html.ValidationMessageFor(m => m.contenu)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.contenuTrad)
+            @Html.TextAreaFor(m => m.contenuTrad)
+            @Html.ValidationMessageFor(m => m.contenuTrad)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.urlImage)
+            @Html.TextBoxFor(m => m.urlImage)
+            @Html.ValidationMessageFor(m => m.urlImage)
+        </li>
+    </ul>
+    <input type="submit" value="Modifier" class="btnForm" />
+}
+  

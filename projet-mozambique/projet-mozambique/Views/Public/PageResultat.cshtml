@@ -14,7 +14,7 @@
             <ul>
                 @for (int i = 0; i < lstNouv.Count; i++)
                 {
-                    string affiche = lstNouv[i].TITRE + " // " + StringResources.StringResources.publieLe + " " +
+                    string affiche = lstNouv[i].TITRE + " // " + " publié le " +
                         lstNouv[i].DATEPUBLICATION.ToString("yyyy/MM/dd");
                     
                     <li>@Html.ActionLink(affiche, 

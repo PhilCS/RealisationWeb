@@ -21,7 +21,7 @@
         <div class="article">
             <p class="titre">@lesNouvelles[i].TITRE</p>
             <p class="datepubli">
-                @StringResources.StringResources.publieLe 
+               Publié le 
                 @lesNouvelles[i].DATEPUBLICATION.ToString("yyyy/MM/dd")
             </p>
 
@@ -31,7 +31,7 @@
             else {
                 <p>@Html.Raw(lesNouvelles[i].DESCRIPTION.Replace("<p>", "").Replace("</p>", "").Substring(0, longMax))...</p>
                 <p>
-                    @Html.ActionLink(StringResources.StringResources.lireSuite, 
+                    @Html.ActionLink("Lire la suite...", 
                                      "getNouvelle",
                                      "Public",
                                      new { id = lesNouvelles[i].ID },

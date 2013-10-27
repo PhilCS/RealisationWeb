@@ -1,30 +1,45 @@
-﻿@{
-    ViewBag.Title = "Modifier informations personnelles";
+﻿@model projet_mozambique.Models.ProfileModel
+@{
+    ViewBag.Title = "Modifier vos informations personnelles";
 }
 
-<h1>Modifier vos infos personnelles</h1>
+<h1>@ViewBag.Title</h1>
+<p class="msgOk">
+    @if (!string.IsNullOrWhiteSpace(ViewBag.Success))
+    {
+        @ViewBag.Success
+    }
+</p>
 
-<div class="msg">
-    <p>@projet_mozambique.Utilitaires.Constantes.MESSAGE_CHAMPS_OBLIGATOIRE</p>
-</div>
-
-<form method="post" action="ModifierInfosOK" class="formulaire">
-
-    <div>
-        <label for="adresse">Adresse : *</label>
-        <input type="text" id="adresse" name="adresse" value="5185 rue Massue"/>
-    </div>
-
-    <div>
-        <label for="ville">Ville : *</label>
-        <input type="text" id="ville" name="ville" value="Québec"/>
-    </div>
-
-    <div>
-        <label for="courriel">Courriel : *</label>
-        <input type="email" id="courriel" name="courriel" value="trepanier.vanessa@gmail.com"/>
-    </div>
-
-    <input type="submit" class="btnForm" value="Modifier" />
-    <p><a href="ModifierInfosErreur">ERREUR</a></p>
-</form>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <ul>
+        <li>
+            @Html.LabelFor(m => m.courriel)
+            @Html.TextBoxFor(m => m.courriel)
+            @Html.ValidationMessageFor(m => m.courriel)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.prenom)
+            @Html.TextBoxFor(m => m.prenom)
+            @Html.ValidationMessageFor(m => m.prenom)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.nom)
+            @Html.TextBoxFor(m => m.nom)
+            @Html.ValidationMessageFor(m => m.nom)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.adresse)
+            @Html.TextBoxFor(m => m.adresse)
+            @Html.ValidationMessageFor(m => m.adresse)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.ville)
+            @Html.TextBoxFor(m => m.ville)
+            @Html.ValidationMessageFor(m => m.ville)
+        </li>
+    </ul>
+    <input type="submit" value="Modifier" class="btnForm" />
+}

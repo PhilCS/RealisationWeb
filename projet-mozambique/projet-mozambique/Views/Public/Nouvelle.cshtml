@@ -1,6 +1,5 @@
 ﻿@using projet_mozambique.Utilitaires
 @using projet_mozambique.Models
-@using StringResources
 @{
     var n =  (ViewData[Constantes.CLE_NOUVELLE] as GetNouvelle_Result);
     ViewBag.Title = n.TITRE ;
@@ -8,7 +7,7 @@
 
 <div class="nouvelle">
     <h1>@n.TITRE</h1>
-    <h3>@StringResources.publieLe @n.DATEPUBLICATION.ToString("yyyy/MM/dd")</h3>
+    <h3>Publié le @n.DATEPUBLICATION.ToString("yyyy/MM/dd")</h3>
 
     <p>@Html.Raw(n.DESCRIPTION)</p>
 </div>

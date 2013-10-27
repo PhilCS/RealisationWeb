@@ -1,0 +1,22 @@
+﻿@if (!Request.IsAuthenticated)
+{
+    <ul>
+        <li>@Html.ActionLink("Accueil", "Index", "Public")</li>
+        <li>@Html.ActionLink("Nouvelles", "Nouvelles", "Public")</li>
+        <li>@Html.ActionLink("Partenaires", "partenaires", "Public")</li>
+        <li>@Html.ActionLink("Qui sommes-nous?", "APropos", "Public")</li>
+        <li>@Html.ActionLink("Nous joindre", "NousJoindre", "Public")</li>
+    </ul>
+} else {
+    <ul>
+        <li>@Html.ActionLink("Accueil", "Index", "Sectoriel")</li>
+        <li>@Html.ActionLink("Calendrier", "Index", "Sectoriel")</li>
+        <li>@Html.ActionLink("Documents", "Index", "Sectoriel")</li>
+        <li>@Html.ActionLink("Forums", "Index", "Sectoriel")</li>
+        <li>@Html.ActionLink("Sondages", "Index", "Sectoriel")</li>
+        @if (User.IsInRole("admin"))
+        {
+            <li>@Html.ActionLink("Administration", "SectionPublique", "Admin")</li>
+        }
+    </ul>
+}

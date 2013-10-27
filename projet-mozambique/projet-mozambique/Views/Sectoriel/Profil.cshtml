@@ -1,15 +1,22 @@
 ﻿@{
     ViewBag.Title = "Profil";
+    /*string message = "";
+    if (ViewData["msgOK"] != null)
+    {
+        message = ViewData["msgOk"].ToString();
+    }*/
 }
 
-<h1>Profil</h1>
+<h1>Profil de @User.Identity.Name</h1>
+
+@*<p class="msgOk">@message</p>*@
 
 <ul class="liste-fleche">
     <li>
-        <a href="ModifierInfos">Modifier vos informations personnelles</a>
+        @Html.ActionLink("Modifier vos informations personnelles", "ModifierInfos")
     </li>
     <li>
-        <a href="ModifierMDP">Modifier votre mot de passe</a>
+        @Html.ActionLink("Modifier votre mot de passe", "ModifierMDP")
     </li>
 </ul>
 

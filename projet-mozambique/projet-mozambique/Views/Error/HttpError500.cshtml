@@ -1,8 +1,8 @@
 ﻿@{
-    ViewBag.Title = StringResources.StringResources.erreur500titre;
+    ViewBag.Title = "Erreur 500"
 }
 
-<h1>@StringResources.StringResources.erreur500titre</h1>
+<h1>@ViewBag.Title</h1>
 
 <p>
     @Request.QueryString["message"];
