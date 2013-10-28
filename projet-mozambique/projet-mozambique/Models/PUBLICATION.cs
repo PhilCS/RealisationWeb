@@ -23,11 +23,12 @@ namespace projet_mozambique.Models
         public string TITRE { get; set; }
         public System.DateTime DATECREATION { get; set; }
         public string DESCRIPTION { get; set; }
-        public string EMPLACEMENTSERVEUR { get; set; }
         public int IDPUBLICATEUR { get; set; }
-        public string TYPEMIME { get; set; }
         public int IDSUJET { get; set; }
         public int IDSECTEUR { get; set; }
+        public string MIMETYPE { get; set; }
+        public string NOMFICHIERORIGINAL { get; set; }
+        public string NOMFICHIERSERVEUR { get; set; }
     
         public virtual SECTEUR SECTEUR { get; set; }
         public virtual SUJETPUBLICATION SUJETPUBLICATION { get; set; }
