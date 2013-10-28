@@ -23,7 +23,6 @@
         <EntityTypeShape EntityType="MVPModel.SECTEUR" Width="1.5" PointX="7.5" PointY="9.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MVPModel.SONDAGE" Width="1.5" PointX="12.75" PointY="14.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MVPModel.SUJETPUBLICATION" Width="1.5" PointX="7.5" PointY="21.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MVPModel.sysdiagrams" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MVPModel.UTILISATEUR" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MVPModel.UTILISATEURSECTEUR" Width="1.5" PointX="9.75" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="MVPModel.webpages_Membership" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />

@@ -24,6 +24,10 @@ namespace projet_mozambique.Utilitaires
         public const string CLE_TYPE_MSG = "typeMsg";
         public const string CLE_ERREUR = "msgErreur";
         public const string CLE_MESSAGE = "message";
+        public const string CLE_PUBLICATION = "publication";
+        public const string CLE_PUBLICATIONS = "publications";
+        public const string CLE_SECTEURS = "secteurs";
+        public const string CLE_SUJETSPUBLICATION = "sujetsPublication";
 
     }
 }

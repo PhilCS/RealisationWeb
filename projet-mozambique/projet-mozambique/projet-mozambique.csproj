@@ -152,6 +152,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AjoutPublication.cs" />
     <Compile Include="Models\CATEGORIEEVENEMENT.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
@@ -258,6 +259,9 @@
     <Compile Include="Models\GetSondage_Result.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetSujetsPublication_Result.cs">
+      <DependentUpon>dbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetUtilParSecteur_Result.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
@@ -307,9 +311,6 @@
     <Compile Include="Models\SUJETPUBLICATION.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>dbContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UTILISATEUR.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
@@ -328,6 +329,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilitaires\Constantes.cs" />
+    <Compile Include="Utilitaires\Fichiers.cs" />
     <Compile Include="Utilitaires\ListePaginee.cs" />
     <Compile Include="Utilitaires\Message.cs" />
   </ItemGroup>

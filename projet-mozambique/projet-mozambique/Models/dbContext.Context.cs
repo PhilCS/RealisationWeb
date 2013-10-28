@@ -46,7 +46,6 @@ namespace projet_mozambique.Models
         public DbSet<SECTEUR> SECTEUR { get; set; }
         public DbSet<SONDAGE> SONDAGE { get; set; }
         public DbSet<SUJETPUBLICATION> SUJETPUBLICATION { get; set; }
-        public DbSet<sysdiagrams> sysdiagrams { get; set; }
         public DbSet<UTILISATEUR> UTILISATEUR { get; set; }
         public DbSet<UTILISATEURSECTEUR> UTILISATEURSECTEUR { get; set; }
         public DbSet<webpages_Membership> webpages_Membership { get; set; }
@@ -252,25 +251,41 @@ namespace projet_mozambique.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AjouterPieceJointe", messageParameter, pieceserialiseeParameter, taillepieceParameter, nompieceParameter);
         }
     
-        public virtual int AjouterPublication(string titre, string emplacement, Nullable<int> sujet, Nullable<int> secteur, ObjectParameter idpub)
+        public virtual int AjouterPublication(string titre, string description, Nullable<int> secteur, Nullable<int> sujet, string nomfichieroriginal, string nomfichierserveur, string mimetype, Nullable<int> idpublicateur, ObjectParameter idpub)
         {
             var titreParameter = titre != null ?
                 new ObjectParameter("titre", titre) :
                 new ObjectParameter("titre", typeof(string));
     
-            var emplacementParameter = emplacement != null ?
-                new ObjectParameter("emplacement", emplacement) :
-                new ObjectParameter("emplacement", typeof(string));
-    
-            var sujetParameter = sujet.HasValue ?
-                new ObjectParameter("sujet", sujet) :
-                new ObjectParameter("sujet", typeof(int));
+            var descriptionParameter = description != null ?
+                new ObjectParameter("description", description) :
+                new ObjectParameter("description", typeof(string));
     
             var secteurParameter = secteur.HasValue ?
                 new ObjectParameter("secteur", secteur) :
                 new ObjectParameter("secteur", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AjouterPublication", titreParameter, emplacementParameter, sujetParameter, secteurParameter, idpub);
+            var sujetParameter = sujet.HasValue ?
+                new ObjectParameter("sujet", sujet) :
+                new ObjectParameter("sujet", typeof(int));
+    
+            var nomfichieroriginalParameter = nomfichieroriginal != null ?
+                new ObjectParameter("nomfichieroriginal", nomfichieroriginal) :
+                new ObjectParameter("nomfichieroriginal", typeof(string));
+    
+            var nomfichierserveurParameter = nomfichierserveur != null ?
+                new ObjectParameter("nomfichierserveur", nomfichierserveur) :
+                new ObjectParameter("nomfichierserveur", typeof(string));
+    
+            var mimetypeParameter = mimetype != null ?
+                new ObjectParameter("mimetype", mimetype) :
+                new ObjectParameter("mimetype", typeof(string));
+    
+            var idpublicateurParameter = idpublicateur.HasValue ?
+                new ObjectParameter("idpublicateur", idpublicateur) :
+                new ObjectParameter("idpublicateur", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AjouterPublication", titreParameter, descriptionParameter, secteurParameter, sujetParameter, nomfichieroriginalParameter, nomfichierserveurParameter, mimetypeParameter, idpublicateurParameter, idpub);
         }
     
         public virtual int AjouterSectEcole(Nullable<int> idecole, Nullable<int> idsecteur)
@@ -508,7 +523,7 @@ namespace projet_mozambique.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPartenaires_Result>("GetPartenaires");
         }
     
-        public virtual ObjectResult<GetPubParMotCle_Result> GetPubParMotCle(Nullable<int> idsecteur, string motcle)
+        public virtual ObjectResult<PUBLICATION> GetPubParMotCle(Nullable<int> idsecteur, string motcle)
         {
             var idsecteurParameter = idsecteur.HasValue ?
                 new ObjectParameter("idsecteur", idsecteur) :
@@ -518,19 +533,41 @@ namespace projet_mozambique.Models
                 new ObjectParameter("motcle", motcle) :
                 new ObjectParameter("motcle", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPubParMotCle_Result>("GetPubParMotCle", idsecteurParameter, motcleParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PUBLICATION>("GetPubParMotCle", idsecteurParameter, motcleParameter);
         }
     
-        public virtual ObjectResult<GetPubParSecteur_Result> GetPubParSecteur(Nullable<int> idsecteur)
+        public virtual ObjectResult<PUBLICATION> GetPubParMotCle(Nullable<int> idsecteur, string motcle, MergeOption mergeOption)
         {
             var idsecteurParameter = idsecteur.HasValue ?
                 new ObjectParameter("idsecteur", idsecteur) :
                 new ObjectParameter("idsecteur", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPubParSecteur_Result>("GetPubParSecteur", idsecteurParameter);
+            var motcleParameter = motcle != null ?
+                new ObjectParameter("motcle", motcle) :
+                new ObjectParameter("motcle", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PUBLICATION>("GetPubParMotCle", mergeOption, idsecteurParameter, motcleParameter);
         }
     
-        public virtual ObjectResult<GetPubParSujet_Result> GetPubParSujet(Nullable<int> idsecteur, Nullable<int> idsujet)
+        public virtual ObjectResult<PUBLICATION> GetPubParSecteur(Nullable<int> idsecteur)
+        {
+            var idsecteurParameter = idsecteur.HasValue ?
+                new ObjectParameter("idsecteur", idsecteur) :
+                new ObjectParameter("idsecteur", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PUBLICATION>("GetPubParSecteur", idsecteurParameter);
+        }
+    
+        public virtual ObjectResult<PUBLICATION> GetPubParSecteur(Nullable<int> idsecteur, MergeOption mergeOption)
+        {
+            var idsecteurParameter = idsecteur.HasValue ?
+                new ObjectParameter("idsecteur", idsecteur) :
+                new ObjectParameter("idsecteur", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PUBLICATION>("GetPubParSecteur", mergeOption, idsecteurParameter);
+        }
+    
+        public virtual ObjectResult<PUBLICATION> GetPubParSujet(Nullable<int> idsecteur, Nullable<int> idsujet)
         {
             var idsecteurParameter = idsecteur.HasValue ?
                 new ObjectParameter("idsecteur", idsecteur) :
@@ -540,7 +577,20 @@ namespace projet_mozambique.Models
                 new ObjectParameter("idsujet", idsujet) :
                 new ObjectParameter("idsujet", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPubParSujet_Result>("GetPubParSujet", idsecteurParameter, idsujetParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PUBLICATION>("GetPubParSujet", idsecteurParameter, idsujetParameter);
+        }
+    
+        public virtual ObjectResult<PUBLICATION> GetPubParSujet(Nullable<int> idsecteur, Nullable<int> idsujet, MergeOption mergeOption)
+        {
+            var idsecteurParameter = idsecteur.HasValue ?
+                new ObjectParameter("idsecteur", idsecteur) :
+                new ObjectParameter("idsecteur", typeof(int));
+    
+            var idsujetParameter = idsujet.HasValue ?
+                new ObjectParameter("idsujet", idsujet) :
+                new ObjectParameter("idsujet", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PUBLICATION>("GetPubParSujet", mergeOption, idsecteurParameter, idsujetParameter);
         }
     
         public virtual ObjectResult<GetRechercheNouvelle_Result> GetRechercheNouvelle(string rech)
@@ -924,109 +974,6 @@ namespace projet_mozambique.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ReinitMotPasse", idParameter);
         }
     
-        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
-        }
-    
-        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
-        }
-    
-        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var new_diagramnameParameter = new_diagramname != null ?
-                new ObjectParameter("new_diagramname", new_diagramname) :
-                new ObjectParameter("new_diagramname", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
-        }
-    
-        public virtual int sp_upgraddiagrams()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
-        }
-    
         public virtual int SupprimerChoixSondage(Nullable<int> id)
         {
             var idParameter = id.HasValue ?
@@ -1176,6 +1123,11 @@ namespace projet_mozambique.Models
                 new ObjectParameter("secteur", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SupprimerUtilSect", idParameter, secteurParameter);
+        }
+    
+        public virtual ObjectResult<GetSujetsPublication_Result> GetSujetsPublication()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSujetsPublication_Result>("GetSujetsPublication");
         }
     }
 }
