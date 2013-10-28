@@ -1,22 +1,22 @@
 ﻿@if (!Request.IsAuthenticated)
 {
     <ul>
-        <li>@Html.ActionLink("Accueil", "Index", "Public")</li>
-        <li>@Html.ActionLink("Nouvelles", "Nouvelles", "Public")</li>
-        <li>@Html.ActionLink("Partenaires", "partenaires", "Public")</li>
-        <li>@Html.ActionLink("Qui sommes-nous?", "APropos", "Public")</li>
-        <li>@Html.ActionLink("Nous joindre", "NousJoindre", "Public")</li>
+        <li>@Html.ActionLink(@Resources.StringResources.accueil, "Index", "Public")</li>
+        <li>@Html.ActionLink(@Resources.StringResources.nouvelles, "Nouvelles", "Public")</li>
+        <li>@Html.ActionLink(@Resources.StringResources.partenaires, "partenaires", "Public")</li>
+        <li>@Html.ActionLink(@Resources.StringResources.apropos, "APropos", "Public")</li>
+        <li>@Html.ActionLink(@Resources.StringResources.nousjoindre, "NousJoindre", "Public")</li>
     </ul>
 } else {
     <ul>
-        <li>@Html.ActionLink("Accueil", "Index", "Sectoriel")</li>
-        <li>@Html.ActionLink("Calendrier", "Index", "Sectoriel")</li>
-        <li>@Html.ActionLink("Documents", "Index", "Sectoriel")</li>
-        <li>@Html.ActionLink("Forums", "Index", "Sectoriel")</li>
-        <li>@Html.ActionLink("Sondages", "Index", "Sectoriel")</li>
+        <li>@Html.ActionLink(@Resources.StringResources.accueil, "Index", "Sectoriel")</li>
+        <li>@Html.ActionLink(@Resources.StringResources.calendrier, "Index", "Sectoriel")</li>
+        <li>@Html.ActionLink(@Resources.StringResources.documents, "Index", "Sectoriel")</li>
+        <li>@Html.ActionLink(@Resources.StringResources.forums, "Index", "Sectoriel")</li>
+        <li>@Html.ActionLink(@Resources.StringResources.sondages, "Index", "Sectoriel")</li>
         @if (User.IsInRole("admin"))
         {
-            <li>@Html.ActionLink("Administration", "SectionPublique", "Admin")</li>
+            <li>@Html.ActionLink(@Resources.StringResources.admin, "SectionPublique", "Admin")</li>
         }
     </ul>
 }

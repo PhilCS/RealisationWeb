@@ -1,23 +1,10 @@
-﻿@{
-    ViewBag.Title = "Secteur Agriculture";
+﻿@model projet_mozambique.Models.SECTEUR
+@{
+    ViewBag.Title = "Accueil";
 }
 
-<h1>Bienvenue</h1>
-<img class="img-accueil" src="~/Content/images/photos/moz-agriculture.jpg" alt="Photo Agriculture" />
-<p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dictum quam nec lectus faucibus ultricies. Aliquam turpis purus,
-    porta a tellus et, ornare elementum lorem. Phasellus vitae enim dui. Mauris tortor purus, dictum nec gravida nec, dapibus sit
-    amet augue. Quisque pretium vitae arcu ac tincidunt. Aliquam lobortis, quam quis eleifend pretium, neque enim facilisis tortor,
-    non suscipit velit eros in nisi. Mauris lacinia posuere orci, quis gravida tortor hendrerit vitae. Donec luctus et massa non
-    vulputate. Quisque vestibulum tellus eu felis eleifend consequat. Phasellus at ipsum hendrerit, elementum quam sed, feugiat velit.
-    Sed vehicula eu dolor quis feugiat. Fusce at mauris eros. Integer vitae risus dignissim, ornare erat a, lacinia massa.
-</p>
-<p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dictum quam nec lectus faucibus ultricies. Aliquam turpis purus,
-    porta a tellus et, ornare elementum lorem. Phasellus vitae enim dui. Mauris tortor purus, dictum nec gravida nec, dapibus sit
-    amet augue. Quisque pretium vitae arcu ac tincidunt. Aliquam lobortis, quam quis eleifend pretium, neque enim facilisis tortor,
-    non suscipit velit eros in nisi. Mauris lacinia posuere orci, quis gravida tortor hendrerit vitae. Donec luctus et massa non
-    vulputate. Quisque vestibulum tellus eu felis eleifend consequat. Phasellus at ipsum hendrerit, elementum quam sed, feugiat velit.
-    Sed vehicula eu dolor quis feugiat. Fusce at mauris eros. Integer vitae risus dignissim, ornare erat a, lacinia massa.
-</p>
+<h1>@Model.TITREACCUEIL - Secteur @Model.NOM</h1>
+<img class="img-accueil" src="@Model.URLIMAGEACCUEIL" alt="Photo" />
+<p>@Model.TEXTEACCUEIL</p>
+
 

@@ -7,9 +7,9 @@
             @Html.ActionLink(" ", "Profil", "Sectoriel", routeValues: null, htmlAttributes: new { @class = "profil-img", title="Profil" })
         </div>
         @*@Html.ActionLink(Resources.Resources.langue, "SetCulture", new { culture = "pt" })*@
-        @Html.ActionLink("Se déconnecter", "LogOut", "Sectoriel", null, new { @class = "logout" }) 
+        @Html.ActionLink(@Resources.StringResources.logout, "LogOut", "Sectoriel", null, new { @class = "logout" }) 
     </div>
 } else {
     @*Html.ActionLink(Resources.Resources.langue, "SetCulture", new { culture = "en-us" })*@
-    @Html.ActionLink("Se connecter", "Login", "Sectoriel", routeValues: null, htmlAttributes: new { @class = "login" })
+    @Html.ActionLink(@Resources.StringResources.login, "Login", "Sectoriel", routeValues: null, htmlAttributes: new { @class = "login" })
 }

@@ -21,8 +21,8 @@ namespace projet_mozambique.Controllers
         // GET: /Public/
         public ActionResult Index()
         {
-            /*if (Request.IsAuthenticated)
-                return RedirectToAction("Index", "Sectoriel");*/
+            if (Request.IsAuthenticated)
+                return RedirectToAction("Index", "Sectoriel");
 
             GetContenu_Result contentResult = db.GetContenu("Accueil").FirstOrDefault();
 

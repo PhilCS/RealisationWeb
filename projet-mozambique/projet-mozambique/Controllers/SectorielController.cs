@@ -19,7 +19,13 @@ namespace projet_mozambique.Controllers
         // GET: /Sectoriel/
         public ActionResult Index()
         {
-            return View();
+            var secteur = from s in db.SECTEUR
+                      where s.NOM.ToLower() == "agriculture"
+                      select s;
+
+            SECTEUR unSECTEUR = secteur.FirstOrDefault();
+             
+            return View(unSECTEUR);
         }
 
         [AllowAnonymous]

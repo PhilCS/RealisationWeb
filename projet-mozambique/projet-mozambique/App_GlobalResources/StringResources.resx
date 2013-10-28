@@ -120,11 +120,20 @@
   <data name="accueil" xml:space="preserve">
     <value>Accueil</value>
   </data>
+  <data name="admin" xml:space="preserve">
+    <value>Administration</value>
+  </data>
   <data name="apropos" xml:space="preserve">
     <value>Qui sommes-nous ?</value>
   </data>
+  <data name="calendrier" xml:space="preserve">
+    <value>Calendrier</value>
+  </data>
   <data name="champsObligatoires" xml:space="preserve">
     <value>Les champs marqués d'une étoile sont obligatoires.</value>
+  </data>
+  <data name="documents" xml:space="preserve">
+    <value>Documents</value>
   </data>
   <data name="erreur404msg" xml:space="preserve">
     <value>La page à laquelle vous tentez d'accéder n'existe pas.</value>
@@ -135,8 +144,17 @@
   <data name="erreur500titre" xml:space="preserve">
     <value>Erreur 500</value>
   </data>
+  <data name="forums" xml:space="preserve">
+    <value>Forums</value>
+  </data>
   <data name="lireSuite" xml:space="preserve">
     <value>Lire la suite...</value>
+  </data>
+  <data name="login" xml:space="preserve">
+    <value>Se connecter</value>
+  </data>
+  <data name="logout" xml:space="preserve">
+    <value>Se déconnecter</value>
   </data>
   <data name="nousjoindre" xml:space="preserve">
     <value>Nous joindre</value>
@@ -149,5 +167,11 @@
   </data>
   <data name="publieLe" xml:space="preserve">
     <value>Publié le :</value>
+  </data>
+  <data name="selectLanguage" xml:space="preserve">
+    <value>Sélectionner une langue</value>
+  </data>
+  <data name="sondages" xml:space="preserve">
+    <value>Sondages</value>
   </data>
 </root>
