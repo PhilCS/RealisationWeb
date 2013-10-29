@@ -24,9 +24,9 @@ namespace projet_mozambique.Controllers
             return View();
         }
 
-        public ActionResult utilisateurs()
+        public ActionResult Utilisateurs()
         {
-            return View("Utilisateurs");
+            return View();
         }
 
         public ActionResult rechUtil()
@@ -44,10 +44,10 @@ namespace projet_mozambique.Controllers
             return View("AjoutUtilisateur");
         }
 
-        public ActionResult getEcole(string nomEcole)
+        public ActionResult Ecoles()
         {
-            ViewData["ecole"] = nomEcole;
-            return View("Ecole");
+            //ViewData["ecole"] = nomEcole;
+            return View();
         }
 
         public ActionResult ajoutEcole()
@@ -55,7 +55,7 @@ namespace projet_mozambique.Controllers
             return View("AjoutEcole");
         }
 
-        public ActionResult secteurs()
+        public ActionResult Secteurs()
         {
             return View("Secteurs");
         }
@@ -163,34 +163,69 @@ namespace projet_mozambique.Controllers
             return View("GestionPartenaire");
         }
 
-        public ActionResult ModifAccueil()
+        public ActionResult ModifPagePublique(string nomPage)
         {
-            GetContenu_Result contentResult = db.GetContenu("Accueil").FirstOrDefault();
-            ContentModel model = new ContentModel();
+            if (nomPage != null)
+            {
+                nomPage = nomPage.ToLower();
 
-            model.titre = contentResult.TITRE;
-            model.titreTrad = contentResult.TITRE_TRAD;
-            model.contenu = contentResult.CONTENU;
-            model.contenuTrad = contentResult.CONTENU_TRAD;
-            model.urlImage = contentResult.URLIMAGE;
+                GetContenu_Result contentResult = db.GetContenu(nomPage.ToLower()).FirstOrDefault();
 
-            return View(model);
+                if (contentResult != null)
+                {
+                    ContentModel model = new ContentModel();
+
+                    model.nomPage = contentResult.PAGE;
+                    model.titre = contentResult.TITRE;
+                    model.titreTrad = contentResult.TITRE_TRAD;
+                    model.contenu = contentResult.CONTENU;
+                    model.contenuTrad = contentResult.CONTENU_TRAD;
+                    model.urlImage = contentResult.URLIMAGE;
+
+                    return View(model);
+                }
+            }
+
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ModifAccueil(ContentModel model)
+        public ActionResult ModifPagePublique(ContentModel model, string nomPage)
         {
             if (ModelState.IsValid)
             {
-                db.ModifierContenu("Accueil", model.titre, model.titreTrad, model.contenu, model.contenuTrad, model.urlImage);
-                db.SaveChanges();
+                if (nomPage != null)
+                {
+                    try
+                    {
+                        db.ModifierContenu(nomPage, model.titre, model.titreTrad, model.contenu, model.contenuTrad, model.urlImage);
+                        db.SaveChanges();
+
+                        if(nomPage.Equals("about"))
+                        {
+                            return RedirectToAction("APropos", "Public");
+                        }
+                        else if (nomPage.Equals("contact"))
+                        {
+                            return RedirectToAction("NousJoindre", "Public");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Public");
+                        }
+                    }
+                    catch
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
             }
             
             return View(model);
         }
 
-        public ActionResult modifierAPropos()
+        public ActionResult ModifAPropos()
         {
             return View("ModifierAPropos");
         }

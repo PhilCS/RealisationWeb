@@ -9,6 +9,7 @@ using System.Web.Routing;
 using projet_mozambique.Utilitaires;
 using WebMatrix.WebData;
 using WebMatrix.Data;
+using System.Globalization;
 
 namespace projet_mozambique
 {
@@ -30,7 +31,7 @@ namespace projet_mozambique
 
         }
 
-        /*protected void Application_AcquireRequestState(object sender, EventArgs e)
+        protected void Application_AcquireRequestState(object sender, EventArgs e)
         {
             //It's important to check whether session object is ready
             if (HttpContext.Current.Session != null)
@@ -42,7 +43,7 @@ namespace projet_mozambique
                 if (ci == null)
                 {
                     //Sets default culture to english invariant
-                    string langName = "en";
+                    string langName = "fr";
 
                     //Try to get values from Accept lang HTTP header
                     if (HttpContext.Current.Request.UserLanguages != null &&
@@ -51,6 +52,7 @@ namespace projet_mozambique
                         //Gets accepted list 
                         langName = HttpContext.Current.Request.UserLanguages[0].Substring(0, 2);
                     }
+
                     ci = new CultureInfo(langName);
                     this.Session["Culture"] = ci;
                 }
@@ -58,7 +60,7 @@ namespace projet_mozambique
                 System.Threading.Thread.CurrentThread.CurrentUICulture = ci;
                 System.Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(ci.Name);
             }
-        }*/
+        }
 
         protected void Application_Error(object sender, EventArgs e)
         {

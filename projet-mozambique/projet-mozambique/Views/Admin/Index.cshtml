@@ -1,29 +1,15 @@
 ﻿@{
-    ViewBag.Title = "Secteur Agriculture";
+    ViewBag.Title = "Administration";
 }
 
-<h1>Bienvenue <a href="Admin/ModifAccueil"><img src="~/Content/images/icones/icone-pen.png" title="Modifier" alt="Icône Modifier" /></a></h1>
+<h1>Bienvenue dans l'administration du site</h1>
 
-<div class="modif-image">
-    <img class="img-accueil img-sous" src="~/Content/images/photos/moz-agriculture.jpg" alt="Photo Agriculture" />
-    <img class="img-sur" src="~/Content/images/icones/icone-pen.png" title="Modifier" alt="Icône Modifier" />
-</div>
+<ul>
+    <li>@Html.ActionLink(@Resources.Admin.menuCalendrier, "Calendrier", "Admin")</li>
+    <li>@Html.ActionLink(@Resources.Admin.menuUtil, "Utilisateurs", "Admin")</li>
+    <li>@Html.ActionLink(@Resources.Admin.menuSecteurs, "Ecoles", "Admin")</li>
+    <li>@Html.ActionLink(@Resources.Admin.menuEcoles, "Ecoles", "Admin")</li>
+    <li>@Html.ActionLink(@Resources.Admin.menuPublique, "SectionPublique", "Admin")</li>
+</ul>
 
-<p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dictum quam nec lectus faucibus ultricies. Aliquam turpis purus,
-    porta a tellus et, ornare elementum lorem. Phasellus vitae enim dui. Mauris tortor purus, dictum nec gravida nec, dapibus sit
-    amet augue. Quisque pretium vitae arcu ac tincidunt. Aliquam lobortis, quam quis eleifend pretium, neque enim facilisis tortor,
-    non suscipit velit eros in nisi. Mauris lacinia posuere orci, quis gravida tortor hendrerit vitae. Donec luctus et massa non
-    vulputate. Quisque vestibulum tellus eu felis eleifend consequat. Phasellus at ipsum hendrerit, elementum quam sed, feugiat velit.
-    Sed vehicula eu dolor quis feugiat. Fusce at mauris eros. Integer vitae risus dignissim, ornare erat a, lacinia massa.
-</p>
-<p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dictum quam nec lectus faucibus ultricies. Aliquam turpis purus,
-    porta a tellus et, ornare elementum lorem. Phasellus vitae enim dui. Mauris tortor purus, dictum nec gravida nec, dapibus sit
-    amet augue. Quisque pretium vitae arcu ac tincidunt. Aliquam lobortis, quam quis eleifend pretium, neque enim facilisis tortor,
-    non suscipit velit eros in nisi. Mauris lacinia posuere orci, quis gravida tortor hendrerit vitae. Donec luctus et massa non
-    vulputate. Quisque vestibulum tellus eu felis eleifend consequat. Phasellus at ipsum hendrerit, elementum quam sed, feugiat velit.
-    Sed vehicula eu dolor quis feugiat. Fusce at mauris eros. Integer vitae risus dignissim, ornare erat a, lacinia massa.
-    <a href="Admin/ModifAccueil"><img src="~/Content/images/icones/icone-pen.png" title="Modifier" alt="Icône Modifier" /></a>
-</p>
 

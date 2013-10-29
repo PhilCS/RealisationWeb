@@ -1,15 +1,17 @@
 ﻿@if (Request.IsAuthenticated)
 {
     <div class="user_name">
-        <p>Bonjour, @User.Identity.Name</p>
+        <p>@Resources.Shared.loginUser : @User.Identity.Name</p>
         <div class="icons">
-            @Html.ActionLink(" ", "Messagerie", new { controller = "Sectoriel" }, new { @class = "msg-img", title="Messagerie" })
-            @Html.ActionLink(" ", "Profil", "Sectoriel", routeValues: null, htmlAttributes: new { @class = "profil-img", title="Profil" })
+            @Html.ActionLink(" ", "Messagerie", new { controller = "Sectoriel" }, new { @class = "msg-img", title=@Resources.Shared.messagerie })
+            @Html.ActionLink(" ", "Profil", "Sectoriel", routeValues: null, htmlAttributes: new { @class = "profil-img", title=@Resources.Shared.profil })
         </div>
-        @*@Html.ActionLink(Resources.Resources.langue, "SetCulture", new { culture = "pt" })*@
-        @Html.ActionLink(@Resources.StringResources.logout, "LogOut", "Sectoriel", null, new { @class = "logout" }) 
+        @Html.ActionLink(@Resources.Shared.logout, "LogOut", "Sectoriel", null, new { @class = "logout" })
+        @Html.ActionLink(@Resources.Shared.langue, "ChangeCulture", "Public", new { lang = @Resources.Shared.ci, returnUrl = this.Request.RawUrl }, null)
+
     </div>
 } else {
-    @*Html.ActionLink(Resources.Resources.langue, "SetCulture", new { culture = "en-us" })*@
-    @Html.ActionLink(@Resources.StringResources.login, "Login", "Sectoriel", routeValues: null, htmlAttributes: new { @class = "login" })
+    @Html.ActionLink(@Resources.Shared.login, "Login", "Sectoriel", routeValues: null, htmlAttributes: new { @class = "login" })
+    @Html.ActionLink(@Resources.Shared.langue, "ChangeCulture", "Public", new { lang = @Resources.Shared.ci, returnUrl = this.Request.RawUrl }, null)
+
 }
