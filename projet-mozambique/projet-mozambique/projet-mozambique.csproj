@@ -131,6 +131,66 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_GlobalResources\Admin.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Admin.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Admin.pt.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Admin.pt.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\DisplayName.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DisplayName.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\DisplayName.pt.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DisplayName.pt.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Messages.pt.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.pt.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Public.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Public.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Public.pt.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Public.pt.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Sectoriel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sectoriel.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Sectoriel.pt.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sectoriel.pt.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Shared.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Shared.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Shared.pt.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Shared.pt.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_GlobalResources\StringResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -331,6 +391,7 @@
     <Compile Include="Utilitaires\Constantes.cs" />
     <Compile Include="Utilitaires\Fichiers.cs" />
     <Compile Include="Utilitaires\ListePaginee.cs" />
+    <Compile Include="Utilitaires\LocalizedDisplayNameAttribute.cs" />
     <Compile Include="Utilitaires\Message.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -509,14 +570,12 @@
     <Content Include="Views\Public\PageResultat.cshtml" />
     <Content Include="Views\Admin\GestionNouvelles.cshtml" />
     <Content Include="Views\Admin\GestionPartenaire.cshtml" />
-    <Content Include="Views\Admin\ModifierAPropos.cshtml" />
     <Content Include="Views\Admin\ModifierEvenement.cshtml" />
     <Content Include="Views\Admin\ModifEvenementOK.cshtml" />
     <Content Include="Views\Admin\ModifEvenementErreur.cshtml" />
     <Content Include="Views\Admin\AjoutEvenementOK.cshtml" />
     <Content Include="Views\Admin\AjoutEvenementErreur.cshtml" />
-    <Content Include="Views\Admin\ModifAccueil.cshtml" />
-    <Content Include="Views\Admin\IndexModifie.cshtml" />
+    <Content Include="Views\Admin\ModifPagePublique.cshtml" />
     <Content Include="Views\Sectoriel\ResultRechDoc.cshtml" />
     <Content Include="Views\Admin\NouveauFil.cshtml" />
     <Content Include="Views\Admin\FilAjouteOK.cshtml" />
@@ -537,7 +596,7 @@
     <Content Include="Views\Shared\_LogoPartial.cshtml" />
     <Content Include="Views\Shared\_MenuPartial.cshtml" />
     <Content Include="Views\Sectoriel\Login.cshtml" />
-    <Content Include="Views\Shared\_LanguagePartial.cshtml" />
+    <Content Include="Views\Shared\_SectorPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -550,6 +609,56 @@
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>StringResources.pt.designer.cs</LastGenOutput>
     </Content>
+    <Content Include="App_GlobalResources\Shared.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Shared.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Shared.pt.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Shared.pt.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Messages.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Messages.pt.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Messages.pt.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Public.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Public.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Public.pt.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Public.pt.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Sectoriel.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Sectoriel.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Sectoriel.pt.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Sectoriel.pt.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Admin.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Admin.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Admin.pt.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Admin.pt.designer.cs</LastGenOutput>
+    </Content>
+    <EmbeddedResource Include="App_GlobalResources\DisplayName.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DisplayName.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Names</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_GlobalResources\DisplayName.pt.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DisplayName.pt.designer.cs</LastGenOutput>
+      <CustomToolNamespace>Names</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="App_GlobalResources\StringResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>StringResources.Designer.cs</LastGenOutput>

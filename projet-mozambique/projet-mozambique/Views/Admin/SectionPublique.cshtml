@@ -20,9 +20,9 @@
                 <li><a href="gestionPartenaires?gestion=2">Modifier/Supprimer un partenaire</a></li>
             </ul>
         </li>
-        <li>@Html.ActionLink("Page d'accueil", "ModifAccueil", "Admin")</li>
-        <li>@Html.ActionLink("Qui sommes-nous?", "modifierAPropos")</li>
-        <li>@Html.ActionLink("Nous Joindre", "modifierAPropos")</li>
+        <li>@Html.ActionLink("Page d'accueil", "ModifPagePublique", "Admin", new { nomPage = "accueil" }, null)</li>
+        <li>@Html.ActionLink("Qui sommes-nous?", "ModifPagePublique", "Admin", new { nomPage = "about" }, null)</li>
+        <li>@Html.ActionLink("Nous Joindre", "ModifPagePublique", "Admin", new { nomPage = "contact" }, null)</li>
     </ul>
     
 }

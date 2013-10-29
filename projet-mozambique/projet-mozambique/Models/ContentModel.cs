@@ -9,12 +9,14 @@ namespace projet_mozambique.Models
 {
     public class ContentModel
     {
+        public string nomPage { get; set; }
+
         [Required]
-        [Display(Name = "Titre de la page")]
+        [Display(Name = "PageTitle", ResourceType = typeof(@Names.DisplayName))] 
         public string titre { get; set; }
 
         [Required]
-        [Display(Name = "Titre traduit de la page")]
+        [Display(Name = "PageTitleTrad", ResourceType = typeof(@Names.DisplayName))] 
         public string titreTrad { get; set; }
 
         [Required]

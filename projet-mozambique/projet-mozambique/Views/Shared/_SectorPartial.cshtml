@@ -1,0 +1,13 @@
+﻿<!-- N'est pas fonctionnel, seulement un exemple -->
+@if (Request.IsAuthenticated)
+{
+    <!--onchange="this.form.submit()"-->
+    <form method="post">
+        <select id="selectSector" name="sector">
+            <option value="agriculture" @(Culture == "fr" ? "selected=\"selected\"" : "")>Agriculture</option>
+            <option value="construction" @(Culture == "pt" ? "selected=\"selected\"" : "")>Construction civile</option>
+            <option value="tourisme" @(Culture == "pt" ? "selected=\"selected\"" : "")>Tourisme</option>
+            <option value="comptabilité" @(Culture == "pt" ? "selected=\"selected\"" : "")>Comptabilité</option>
+        </select>
+    </form>
+}

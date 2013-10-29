@@ -1,7 +1,0 @@
-﻿<form method="post">
-    @Resources.StringResources.selectLanguage
-    <select onchange="this.form.submit()" id="selectLang" name="lang">
-        <option value="fr" @(Culture == "fr" ? "selected=\"selected\"" : "")>French</option>
-        <option value="pt" @(Culture == "pt" ? "selected=\"selected\"" : "")>Portuguese</option>
-    </select>
-</form>

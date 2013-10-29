@@ -1,22 +1,22 @@
 ﻿@if (!Request.IsAuthenticated)
 {
     <ul>
-        <li>@Html.ActionLink(@Resources.StringResources.accueil, "Index", "Public")</li>
-        <li>@Html.ActionLink(@Resources.StringResources.nouvelles, "Nouvelles", "Public")</li>
-        <li>@Html.ActionLink(@Resources.StringResources.partenaires, "partenaires", "Public")</li>
-        <li>@Html.ActionLink(@Resources.StringResources.apropos, "APropos", "Public")</li>
-        <li>@Html.ActionLink(@Resources.StringResources.nousjoindre, "NousJoindre", "Public")</li>
+        <li>@Html.ActionLink(@Resources.Shared.accueil, "Index", "Public")</li>
+        <li>@Html.ActionLink(@Resources.Shared.nouvelles, "Nouvelles", "Public")</li>
+        <li>@Html.ActionLink(@Resources.Shared.partenaires, "partenaires", "Public")</li>
+        <li>@Html.ActionLink(@Resources.Shared.apropos, "APropos", "Public")</li>
+        <li>@Html.ActionLink(@Resources.Shared.nousjoindre, "NousJoindre", "Public")</li>
     </ul>
 } else {
     <ul>
-        <li>@Html.ActionLink(@Resources.StringResources.accueil, "Index", "Sectoriel")</li>
-        <li>@Html.ActionLink(@Resources.StringResources.calendrier, "Index", "Sectoriel")</li>
-        <li>@Html.ActionLink(@Resources.StringResources.documents, "Index", "Sectoriel")</li>
-        <li>@Html.ActionLink(@Resources.StringResources.forums, "Index", "Sectoriel")</li>
-        <li>@Html.ActionLink(@Resources.StringResources.sondages, "Index", "Sectoriel")</li>
+        <li>@Html.ActionLink(@Resources.Shared.accueil, "Index", "Sectoriel")</li>
+        <li>@Html.ActionLink(@Resources.Shared.calendrier, "Index", "Sectoriel")</li>
+        <li>@Html.ActionLink(@Resources.Shared.documents, "Index", "Sectoriel")</li>
+        <li>@Html.ActionLink(@Resources.Shared.forums, "Index", "Sectoriel")</li>
+        <li>@Html.ActionLink(@Resources.Shared.sondages, "Index", "Sectoriel")</li>
         @if (User.IsInRole("admin"))
         {
-            <li>@Html.ActionLink(@Resources.StringResources.admin, "SectionPublique", "Admin")</li>
+            <li>@Html.ActionLink(@Resources.Shared.admin, "Index", "Admin")</li>
         }
     </ul>
 }
