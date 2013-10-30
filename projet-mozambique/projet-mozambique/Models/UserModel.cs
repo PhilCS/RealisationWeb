@@ -6,62 +6,93 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace projet_mozambique.Models
-{
+{  
     public class LoginModel
     {
         [Required]
-        [Display(Name = "Nom d'utilisateur")]
+        [Display(Name = "UserName", ResourceType = typeof(Names.DisplayName))]
         public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Mot de passe")]
+        [Display(Name = "Password", ResourceType = typeof(Names.DisplayName))]
         public string Password { get; set; }
 
-        [Display(Name = "Mémoriser le mot de passe ?")]
+        [Display(Name = "RememberMe", ResourceType = typeof(Names.DisplayName))]
         public bool RememberMe { get; set; }
     }
 
     public class ProfileModel
     {
         [Required]
-        [Display(Name = "Courriel")]
         [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email", ResourceType = typeof(Names.DisplayName))]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         public string courriel { get; set; }
 
         [Required]
-        [Display(Name = "Prénom")]
+        [Display(Name = "FirstName", ResourceType = typeof(Names.DisplayName))]
         public string prenom { get; set; }
 
         [Required]
-        [Display(Name = "Nom")]
+        [Display(Name = "LastName", ResourceType = typeof(Names.DisplayName))]
         public string nom { get; set; }
 
         [Required]
-        [Display(Name = "Adresse")]
+        [Display(Name = "Adress", ResourceType = typeof(Names.DisplayName))]
         public string adresse { get; set; }
 
         [Required]
-        [Display(Name = "Ville")]
+        [Display(Name = "City", ResourceType = typeof(Names.DisplayName))]
         public string ville { get; set; }
+
+        [Required]
+        [Display(Name = "Language", ResourceType = typeof(Names.DisplayName))]
+        [StringLength(2)]
+        public string langue { get; set; }
     }
 
     public class PasswordModel
     {
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Mot de passe actuel")]
+        [Display(Name = "OldPassword", ResourceType = typeof(Names.DisplayName))]
         public string OldPassword { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Nouveau mot de passe")]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "NewPassword", ResourceType = typeof(Names.DisplayName))]
         public string NewPassword { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Confirmation du nouveau mot de passe")]
+        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Display(Name = "ConfirmPassword", ResourceType = typeof(Names.DisplayName))]
         public string ConfirmPassword { get; set; }
     }
 
+    public class ResetPassword
+    {
+        [Required]
+        [Display(Name = "UserName", ResourceType = typeof(Names.DisplayName))]
+        public string UserName { get; set; }
+    }
+
+    public class ResetPasswordConfirmModel
+    {
+        public string Token { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "NewPassword", ResourceType = typeof(Names.DisplayName))]
+        public string NewPassword { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "ConfirmPassword", ResourceType = typeof(Names.DisplayName))]
+        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+    }
 }

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>Microsoft.AspNet.Razor.fr</id>
-    <version>2.0.20715.0</version>
+    <version>2.0.30506.0</version>
     <title>Ressources en français pour Microsoft ASP.NET Razor 2</title>
     <authors>Microsoft</authors>
     <owners>Microsoft</owners>
@@ -14,7 +14,7 @@
     <language>fr</language>
     <tags>Microsoft AspNet WebPages AspNetWebPages Razor</tags>
     <dependencies>
-      <dependency id="Microsoft.AspNet.Razor" version="[2.0.20715.0]" />
+      <dependency id="Microsoft.AspNet.Razor" version="[2.0.30506.0]" />
     </dependencies>
     <references />
   </metadata>

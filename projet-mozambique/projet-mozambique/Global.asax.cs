@@ -33,29 +33,58 @@ namespace projet_mozambique
 
         protected void Application_AcquireRequestState(object sender, EventArgs e)
         {
+            CultureInfo ci;
+            CultureInfo ciCookie;
+            string langName;
             //It's important to check whether session object is ready
             if (HttpContext.Current.Session != null)
             {
-                CultureInfo ci = (CultureInfo)this.Session["Culture"];
-                //Checking first if there is no value in session 
-                //and set default language 
-                //this can happen for first user's request
-                if (ci == null)
+                ci = (CultureInfo)this.Session["Culture"];
+
+                if (HttpContext.Current.Request.Cookies.AllKeys.Contains("lang"))
                 {
-                    //Sets default culture to english invariant
-                    string langName = "fr";
+                    langName = HttpContext.Current.Request.Cookies.Get("lang").Value;
+                    ciCookie = new CultureInfo(langName);
 
-                    //Try to get values from Accept lang HTTP header
-                    if (HttpContext.Current.Request.UserLanguages != null &&
-                    HttpContext.Current.Request.UserLanguages.Length != 0)
-                    {
-                        //Gets accepted list 
-                        langName = HttpContext.Current.Request.UserLanguages[0].Substring(0, 2);
-                    }
+                    if (ci != null && langName.Equals(ci.Name))
+                        ci = ciCookie;
 
-                    ci = new CultureInfo(langName);
+                    if (ci == null)
+                        ci = ciCookie;
+
+                    HttpContext.Current.Request.Cookies.Get("lang").Value = ci.Name;
+
+
                     this.Session["Culture"] = ci;
                 }
+                else
+                {
+                    //Checking first if there is no value in session 
+                    //and set default language 
+                    //this can happen for first user's request
+                    if (ci == null || ci.Name.Equals("fr") == false || ci.Name.Equals("pt") == false)
+                    {
+                        //Sets default culture to french
+                        langName = "fr";
+
+                        //Try to get values from Accept lang HTTP header
+                        /*if (HttpContext.Current.Request.UserLanguages != null &&
+                        HttpContext.Current.Request.UserLanguages.Length != 0)
+                        {
+                            //Gets accepted list 
+                            langName = HttpContext.Current.Request.UserLanguages[0].Substring(0, 2);
+                        }*/
+
+                        ci = new CultureInfo(langName);
+                        this.Session["Culture"] = ci;
+                    }
+
+                    HttpCookie cookie = new HttpCookie("lang");
+                    cookie.Expires = DateTime.Now.AddMonths(3);
+                    cookie.Value = ci.Name;
+                    HttpContext.Current.Request.Cookies.Add(cookie);
+                }
+
                 //Finally setting culture for each request
                 System.Threading.Thread.CurrentThread.CurrentUICulture = ci;
                 System.Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(ci.Name);

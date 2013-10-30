@@ -1,15 +1,10 @@
 ﻿@{
-    ViewBag.Title = "Profil";
-    /*string message = "";
-    if (ViewData["msgOK"] != null)
-    {
-        message = ViewData["msgOk"].ToString();
-    }*/
+    ViewBag.Title = @Resources.Shared.profil;
 }
 
-<h1>Profil de @User.Identity.Name</h1>
+<h1>@ViewBag.Title : @User.Identity.Name</h1>
 
-@*<p class="msgOk">@message</p>*@
+@Html.Partial("~/Views/Shared/AfficherMsg.cshtml")
 
 <ul class="liste-fleche">
     <li>

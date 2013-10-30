@@ -1,0 +1,24 @@
+﻿@model projet_mozambique.Models.ResetPasswordConfirmModel
+@{
+    ViewBag.Title = @Resources.Shared.forgotPassword;
+}
+
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <ul>
+        @Html.HiddenFor(m => m.Token)
+        <li>
+            @Html.LabelFor(m => m.NewPassword)
+            @Html.PasswordFor(m => m.NewPassword)
+            @Html.ValidationMessageFor(m => m.NewPassword)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.ConfirmPassword)
+            @Html.PasswordFor(m => m.ConfirmPassword)
+            @Html.ValidationMessageFor(m => m.ConfirmPassword)
+        </li>
+    </ul>
+    <input type="submit" value="ok" class="btnForm" />
+}

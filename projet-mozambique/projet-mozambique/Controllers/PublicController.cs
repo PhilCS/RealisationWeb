@@ -31,7 +31,9 @@ namespace projet_mozambique.Controllers
 
         public ActionResult ChangeCulture(string lang, string returnUrl)
         {
-            Session["Culture"] = new CultureInfo(lang);
+            CultureInfo ci = new CultureInfo(lang);
+            Session["Culture"] = ci;
+            
             //return Redirect(returnUrl);
             if (Url.IsLocalUrl(returnUrl))
             {
