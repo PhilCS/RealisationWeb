@@ -16,17 +16,17 @@
     @Html.ValidationSummary(true)
     <ul>
         <li>
-            @Html.LabelFor(m => m.courriel)
+            @Html.LabelFor(m => m.courriel) 
             @Html.TextBoxFor(m => m.courriel)
             @Html.ValidationMessageFor(m => m.courriel)
         </li>
         <li>
-            @Html.LabelFor(m => m.prenom)
+            @Html.LabelFor(m => m.prenom) 
             @Html.TextBoxFor(m => m.prenom)
             @Html.ValidationMessageFor(m => m.prenom)
         </li>
         <li>
-            @Html.LabelFor(m => m.nom)
+            @Html.LabelFor(m => m.nom) 
             @Html.TextBoxFor(m => m.nom)
             @Html.ValidationMessageFor(m => m.nom)
         </li>
@@ -39,6 +39,12 @@
             @Html.LabelFor(m => m.ville)
             @Html.TextBoxFor(m => m.ville)
             @Html.ValidationMessageFor(m => m.ville)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.langue)
+            @Html.RadioButtonFor(m => m.langue, "fr")@Resources.Shared.choixLangueFR
+            @Html.RadioButtonFor(m => m.langue, "pt")@Resources.Shared.choixLanguePT
+            @Html.ValidationMessageFor(m => m.langue)
         </li>
     </ul>
     <input type="submit" value="Modifier" class="btnForm" />

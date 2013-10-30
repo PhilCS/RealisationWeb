@@ -12,22 +12,23 @@ namespace projet_mozambique.Models
         public string nomPage { get; set; }
 
         [Required]
-        [Display(Name = "PageTitle", ResourceType = typeof(@Names.DisplayName))] 
+        [Display(Name = "PageTitle", ResourceType = typeof(Names.DisplayName))] 
         public string titre { get; set; }
 
         [Required]
-        [Display(Name = "PageTitleTrad", ResourceType = typeof(@Names.DisplayName))] 
+        [Display(Name = "PageTitleTrad", ResourceType = typeof(Names.DisplayName))] 
         public string titreTrad { get; set; }
 
         [Required]
-        [Display(Name = "Contenu de la page")]
+        [Display(Name = "PageContent", ResourceType = typeof(Names.DisplayName))]
         public string contenu { get; set; }
 
         [Required]
-        [Display(Name = "Contenu traduit de la page")]
+        [Display(Name = "PageContentTrad", ResourceType = typeof(Names.DisplayName))]
         public string contenuTrad { get; set; }
 
-        [Display(Name = "Url de l'image (facultatif)")]
+        [Display(Name = "UrlImage", ResourceType = typeof(Names.DisplayName))]
         public string urlImage { get; set; }
+        
     }
 }

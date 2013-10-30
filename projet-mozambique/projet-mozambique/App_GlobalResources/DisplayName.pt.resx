@@ -117,10 +117,72 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Adress" xml:space="preserve">
+    <value>Adress</value>
+    <comment>UserModel</comment>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>City</value>
+    <comment>UserModel</comment>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm new password</value>
+    <comment>UserModel</comment>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+    <comment>UserModel</comment>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First name</value>
+    <comment>UserModel</comment>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Prefered Language</value>
+    <comment>UserModel</comment>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last name</value>
+    <comment>UserModel</comment>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New password</value>
+    <comment>UserModel</comment>
+  </data>
+  <data name="OldPassword" xml:space="preserve">
+    <value>Current password</value>
+    <comment>UserModel</comment>
+  </data>
+  <data name="PageContent" xml:space="preserve">
+    <value>Content of the page *</value>
+    <comment>ContentModel</comment>
+  </data>
+  <data name="PageContentTrad" xml:space="preserve">
+    <value>Content of the page (Portuguese) *</value>
+    <comment>ContentModel</comment>
+  </data>
   <data name="PageTitle" xml:space="preserve">
-    <value>Title of the page</value>
+    <value>Title of the page *</value>
+    <comment>ContentModel</comment>
   </data>
   <data name="PageTitleTrad" xml:space="preserve">
-    <value>Translated title of the page</value>
+    <value>Title of the page (Portuguese) *</value>
+    <comment>ContentModel</comment>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+    <comment>UserModel</comment>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Remember me</value>
+    <comment>UserModel</comment>
+  </data>
+  <data name="UrlImage" xml:space="preserve">
+    <value>Image url (optional)</value>
+    <comment>ContentModel</comment>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Username</value>
+    <comment>UserModel</comment>
   </data>
 </root>

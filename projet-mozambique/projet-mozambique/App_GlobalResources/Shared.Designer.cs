@@ -97,6 +97,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Français.
+        /// </summary>
+        internal static string choixLangueFR {
+            get {
+                return ResourceManager.GetString("choixLangueFR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Portuguais.
+        /// </summary>
+        internal static string choixLanguePT {
+            get {
+                return ResourceManager.GetString("choixLanguePT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à pt.
         /// </summary>
         internal static string ci {
@@ -111,6 +129,15 @@ namespace Resources {
         internal static string documents {
             get {
                 return ResourceManager.GetString("documents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Mot de passe oublié?.
+        /// </summary>
+        internal static string forgotPassword {
+            get {
+                return ResourceManager.GetString("forgotPassword", resourceCulture);
             }
         }
         

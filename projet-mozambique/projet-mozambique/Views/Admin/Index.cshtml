@@ -1,13 +1,13 @@
 ﻿@{
-    ViewBag.Title = "Administration";
+    ViewBag.Title = @Resources.Shared.admin;
 }
 
-<h1>Bienvenue dans l'administration du site</h1>
+<h1>@ViewBag.Title</h1>
 
 <ul>
     <li>@Html.ActionLink(@Resources.Admin.menuCalendrier, "Calendrier", "Admin")</li>
     <li>@Html.ActionLink(@Resources.Admin.menuUtil, "Utilisateurs", "Admin")</li>
-    <li>@Html.ActionLink(@Resources.Admin.menuSecteurs, "Ecoles", "Admin")</li>
+    <li>@Html.ActionLink(@Resources.Admin.menuSecteurs, "Secteurs", "Admin")</li>
     <li>@Html.ActionLink(@Resources.Admin.menuEcoles, "Ecoles", "Admin")</li>
     <li>@Html.ActionLink(@Resources.Admin.menuPublique, "SectionPublique", "Admin")</li>
 </ul>

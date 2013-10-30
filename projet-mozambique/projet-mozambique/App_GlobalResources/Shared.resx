@@ -129,11 +129,20 @@
   <data name="calendrier" xml:space="preserve">
     <value>Calendrier</value>
   </data>
+  <data name="choixLangueFR" xml:space="preserve">
+    <value>Français</value>
+  </data>
+  <data name="choixLanguePT" xml:space="preserve">
+    <value>Portuguais</value>
+  </data>
   <data name="ci" xml:space="preserve">
     <value>pt</value>
   </data>
   <data name="documents" xml:space="preserve">
     <value>Documents</value>
+  </data>
+  <data name="forgotPassword" xml:space="preserve">
+    <value>Mot de passe oublié?</value>
   </data>
   <data name="forums" xml:space="preserve">
     <value>Forums</value>

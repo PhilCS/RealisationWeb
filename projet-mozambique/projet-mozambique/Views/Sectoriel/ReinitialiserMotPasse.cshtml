@@ -1,0 +1,16 @@
+﻿@model projet_mozambique.Models.ResetPassword
+@{
+    ViewBag.Title = @Resources.Shared.forgotPassword;
+}
+
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div>
+        @Html.LabelFor(m => m.UserName)
+        @Html.TextBoxFor(m => m.UserName)
+        @Html.ValidationMessageFor(m => m.UserName)
+    </div>
+    <input type="submit" value="ok" class="btnForm" />
+}

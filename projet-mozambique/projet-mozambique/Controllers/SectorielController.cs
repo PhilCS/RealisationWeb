@@ -9,6 +9,7 @@ using WebMatrix.WebData;
 using WebMatrix.Data;
 using projet_mozambique.Utilitaires;
 using System.Globalization;
+using Postal;
 
 namespace projet_mozambique.Controllers
 {
@@ -18,6 +19,10 @@ namespace projet_mozambique.Controllers
         private Entities db = new Entities();
         //
         // GET: /Sectoriel/
+        /// <summary>
+        /// Page d'accueil sectoriel selon un secteur sélectionné
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             var secteur = from s in db.SECTEUR
@@ -29,12 +34,21 @@ namespace projet_mozambique.Controllers
             return View(unSECTEUR);
         }
 
+        /// <summary>
+        /// Page de connexion 
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult Login()
         {
             return View();
         }
 
+        /// <summary>
+        /// Page de connexion [POST]
+        /// </summary>
+        /// <param name="model">Informations requises</param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -42,7 +56,6 @@ namespace projet_mozambique.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 var utilisateur = from u in db.UTILISATEUR
                                   where u.NOMUTIL == model.UserName
                                   select u;
@@ -53,6 +66,9 @@ namespace projet_mozambique.Controllers
 
                     if (WebSecurity.Login(currentUser.NOMUTIL, model.Password, true))
                     {
+                        CultureInfo ci = new CultureInfo(currentUser.LANGUE.ToLower());
+                        Session["Culture"] = ci;
+
                         return RedirectToAction("Index", "Sectoriel");
                     }
                     else
@@ -69,6 +85,114 @@ namespace projet_mozambique.Controllers
             // Si nous sommes arrivés là, quelque chose a échoué, réafficher le formulaire
             return View(model);
         }
+
+        /// <summary>
+        /// Déconnexion de l'utilisateur
+        /// </summary>
+        /// <returns>Page d'accueil publique</returns>
+        public ActionResult LogOut()
+        {
+            WebSecurity.Logout();
+
+            if (Request.Cookies.AllKeys.Contains("lang"))
+                Request.Cookies.Remove("lang");
+
+            return RedirectToAction("Index", "Public");
+        }
+
+        /// <summary>
+        /// Réinitialisation du mot de passe
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        public ActionResult ReinitialiserMotPasse()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Réinitialisation du mot de passe [POST]
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult ReinitialiserMotPasse(ResetPassword model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = db.UTILISATEUR.FirstOrDefault(u => u.NOMUTIL == model.UserName);
+
+                if (user != null)
+                {
+                    string emailAddress = user.COURRIEL;
+                    if (!string.IsNullOrEmpty(emailAddress))
+                    {
+                        string confirmationToken =
+                            WebSecurity.GeneratePasswordResetToken(model.UserName);
+                        dynamic email = new Email("ResetPassword");
+                        email.To = emailAddress;
+                        email.UserName = model.UserName;
+                        email.ConfirmationToken = confirmationToken;
+                        email.Send();
+
+                        return RedirectToAction("ConfirmationCourriel");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid user name");
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// Confirmation de l'envoi du courriel pour la réinitialisation du mot de passe
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        public ActionResult ConfirmationCourriel()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Confirmer la réinitialisation du mot de passe
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        public ActionResult ConfirmationReinitialMotPasse(string Id)
+        {
+            ResetPasswordConfirmModel model = new ResetPasswordConfirmModel() { Token = Id };
+            return View(model);
+        }
+        
+        /// <summary>
+        /// Confirmer la réinitialisation du mot de passe [POST]
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult ConfirmationReinitialMotPasse(ResetPasswordConfirmModel model)
+        {
+            if (WebSecurity.ResetPassword(model.Token, model.NewPassword))
+            {
+                TempData[Constantes.CLE_MSG_RETOUR] =
+                new Message(Message.TYPE_MESSAGE.SUCCES, "Votre mot de passe a bien été réinitialisé.");
+            }
+            else
+            {
+                TempData[Constantes.CLE_MSG_RETOUR] =
+                new Message(Message.TYPE_MESSAGE.ERREUR, "Votre mot de passe n'a pas été réinitialisé.");
+            }
+              
+            return RedirectToAction("Login", "Sectoriel");
+        }
+
         /// <summary>
         /// Retourne la vue partielle qui affiche les messages reçus
         /// </summary>
@@ -78,15 +202,79 @@ namespace projet_mozambique.Controllers
             ObtenirMessagesRecus();
             return PartialView("ListeMessages");
         }
-
-        public ActionResult LogOut()
+        
+        /// <summary>
+        /// Profil de l'utilisateur (infos persos + mot de passe)
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Profil()
         {
-            WebSecurity.Logout();
-            return RedirectToAction("Index", "Public");
+            return View();
         }
 
+        /// <summary>
+        /// Modifcation des informations personnelles de l'utilisateur
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ModifierInfos()
+        {
+            Entities entity = new Entities();
 
-        public ActionResult Profil()
+            int userId = WebSecurity.GetUserId(User.Identity.Name);
+            GetUtilProfil_Result profil = db.GetUtilProfil(userId).FirstOrDefault();
+
+            ProfileModel model = new ProfileModel();
+
+            model.courriel = profil.COURRIEL;
+            model.prenom = profil.PRENOM;
+            model.nom = profil.NOM;
+            model.adresse = profil.ADRESSE;
+            model.ville = profil.VILLE;
+            model.langue = profil.LANGUE.ToLower();
+
+            return View(model);
+
+        }
+
+        /// <summary>
+        /// Modifcation des informations personnelles de l'utilisateur [POST]
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ModifierInfos(ProfileModel model)
+        {
+            if (ModelState.IsValid && (model.langue.ToLower().Equals("fr") || model.langue.ToLower().Equals("pt")))
+            {
+                int id = WebSecurity.GetUserId(User.Identity.Name);
+
+                CultureInfo ci = new CultureInfo(model.langue.ToLower());
+                Session["Culture"] = ci;
+
+                db.ModifierUtilProfil(id, model.courriel, model.nom, model.prenom, model.adresse, model.ville, model.langue);
+                db.SaveChanges();
+                TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, "Vos informations personnelles ont été mises à jour.");
+                return RedirectToAction("Profil", "Sectoriel");
+            }
+            return View(model);
+        }
+
+        /// <summary>
+        /// Modification du mot de passe
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ModifierMDP()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Modification du mot de passe [POST]
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ModifierMDP(PasswordModel model)
         {
             return View();
         }
@@ -248,55 +436,6 @@ namespace projet_mozambique.Controllers
         }
 
         public ActionResult NouveauMessage()
-        {
-            return View();
-        }
-
-        public ActionResult ModifierInfos()
-        {
-            Entities entity = new Entities();
-
-            int userId = WebSecurity.GetUserId(User.Identity.Name);
-            GetUtilProfil_Result profil = db.GetUtilProfil(userId).FirstOrDefault();
-
-            ProfileModel model = new ProfileModel();
-
-            model.courriel = profil.COURRIEL;
-            model.prenom = profil.PRENOM;
-            model.nom = profil.NOM;
-            model.adresse = profil.ADRESSE;
-            model.ville = profil.VILLE;
-
-            return View(model);
-            
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult ModifierInfos(ProfileModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                int id = WebSecurity.GetUserId(User.Identity.Name);
-
-                db.ModifierUtilProfil(id, model.courriel, model.nom, model.prenom, model.adresse, model.ville, "fr");
-
-                ViewBag.Success = "Vos informations personnelles ont été mises à jour.";
-                db.SaveChanges();  
-                //ModelState.AddModelError("", "Vos informations personnelles n'ont pas été mises à jour.");
-                
-            }
-            return View(model);
-        }
-
-        public ActionResult ModifierMDP()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult ModifierMDP(PasswordModel model)
         {
             return View();
         }

@@ -6,12 +6,14 @@
             @Html.ActionLink(" ", "Messagerie", new { controller = "Sectoriel" }, new { @class = "msg-img", title=@Resources.Shared.messagerie })
             @Html.ActionLink(" ", "Profil", "Sectoriel", routeValues: null, htmlAttributes: new { @class = "profil-img", title=@Resources.Shared.profil })
         </div>
-        @Html.ActionLink(@Resources.Shared.logout, "LogOut", "Sectoriel", null, new { @class = "logout" })
-        @Html.ActionLink(@Resources.Shared.langue, "ChangeCulture", "Public", new { lang = @Resources.Shared.ci, returnUrl = this.Request.RawUrl }, null)
-
+        <div class="change">
+            @Html.ActionLink(@Resources.Shared.langue, "ChangeCulture", "Public", new { lang = @Resources.Shared.ci, returnUrl = this.Request.RawUrl }, null)
+            @Html.ActionLink(@Resources.Shared.logout, "LogOut", "Sectoriel", null, new { @class = "log" })
+        </div>
     </div>
 } else {
-    @Html.ActionLink(@Resources.Shared.login, "Login", "Sectoriel", routeValues: null, htmlAttributes: new { @class = "login" })
-    @Html.ActionLink(@Resources.Shared.langue, "ChangeCulture", "Public", new { lang = @Resources.Shared.ci, returnUrl = this.Request.RawUrl }, null)
-
+    <div class="change">
+        @Html.ActionLink(@Resources.Shared.login, "Login", "Sectoriel", null, null)
+        @Html.ActionLink(@Resources.Shared.langue, "ChangeCulture", "Public", new { lang = @Resources.Shared.ci, returnUrl = this.Request.RawUrl }, new { @class = "log" })
+    </div>
 }
