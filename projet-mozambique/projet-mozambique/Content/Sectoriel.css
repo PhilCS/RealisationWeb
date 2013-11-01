@@ -436,6 +436,7 @@ input:read-only
 
 .actions-boite-reception li:hover
 {
+    padding:8px 5px;
     background-color:rgba(0,0,0,0);
 }
 
@@ -465,6 +466,16 @@ input:read-only
 .nouveau-msg:hover
 {
     background-color:rgba(83,141,18,0.7);
+}
+
+#messages
+{
+    min-height:200px;
+}
+
+.label-message
+{
+    font-weight:bold;
 }
 
 /*FORUM*/
