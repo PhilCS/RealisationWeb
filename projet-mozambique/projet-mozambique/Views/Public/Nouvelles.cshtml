@@ -10,7 +10,7 @@
     <form action="getResultats" method="post">
         <input type="hidden" name="type" value="@Constantes.RECH_NOUVELLES" />
         <input type="text" name="recherche" maxlength="100" style="width:300px;"/>
-        <input type="submit" value="Rechercher" class="btnForm" style="margin-left:10px;"/>
+        <input type="submit" value="@Resources.Shared.rechercher" class="btnForm" style="margin-left:10px;"/>
     </form>
 </div>
     
@@ -21,8 +21,7 @@
         <div class="article">
             <p class="titre">@lesNouvelles[i].TITRE</p>
             <p class="datepubli">
-               Publié le 
-                @lesNouvelles[i].DATEPUBLICATION.ToString("yyyy/MM/dd")
+               @Resources.Shared.publieLe @lesNouvelles[i].DATEPUBLICATION.ToString("yyyy/MM/dd")
             </p>
 
             @if (longMax < 300) {
@@ -31,7 +30,7 @@
             else {
                 <p>@Html.Raw(lesNouvelles[i].DESCRIPTION.Replace("<p>", "").Replace("</p>", "").Substring(0, longMax))...</p>
                 <p>
-                    @Html.ActionLink("Lire la suite...", 
+                    @Html.ActionLink(Resources.Shared.lirePlus, 
                                      "getNouvelle",
                                      "Public",
                                      new { id = lesNouvelles[i].ID },

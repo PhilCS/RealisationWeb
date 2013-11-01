@@ -83,7 +83,7 @@ namespace projet_mozambique.Controllers
             db.ModifierNouvelle(id, titre, desc);
 
             TempData[Constantes.CLE_MSG_RETOUR] =
-                new Message(Message.TYPE_MESSAGE.SUCCES, "La nouvelle a bien été modifiée.");
+                new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.nouvelleModifiee);
 
             return RedirectToAction("GestionNouvelles", new { gestion = 2 });
         }
@@ -104,7 +104,7 @@ namespace projet_mozambique.Controllers
             {
                 db.SupprimerNouvelle(id);
                 TempData[Constantes.CLE_MSG_RETOUR] =
-                    new Message(Message.TYPE_MESSAGE.SUCCES, "La nouvelle a bien été supprimée.");
+                    new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.nouvelleSupprimee);
 
                 return RedirectToAction("GestionNouvelles", new { gestion = 2 });
             }
@@ -133,23 +133,23 @@ namespace projet_mozambique.Controllers
                 textFormat = texte.Replace("\r\n", "<br/>");
 
                 db.AjouterNouvelle(titre, textFormat);
-                msg = new Message(Message.TYPE_MESSAGE.SUCCES, "La nouvelle a bien été ajoutée.");
+                msg = new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.nouvelleAjoutee);
 
                 TempData[Constantes.CLE_MSG_RETOUR] = msg;
                 return View("SectionPublique");
             }
             else
             {
-                msg = new Message(Message.TYPE_MESSAGE.ERREUR, "La nouvelle n'a pu être ajoutée.");
+                msg = new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Messages.nouvellePasAjoutee);
 
                 if (string.IsNullOrEmpty(titre))
                 {
-                    msg.lstErreurs.Add("Le titre ne peut être vide.");
+                    msg.lstErreurs.Add(Resources.Messages.titreVide);
                 }
             
                 if (string.IsNullOrEmpty(texte))
                 {
-                    msg.lstErreurs.Add("La description ne peut être vide.");
+                    msg.lstErreurs.Add(Resources.Messages.descriptionVide);
                 }
 
                 TempData[Constantes.CLE_MSG_RETOUR] = msg;

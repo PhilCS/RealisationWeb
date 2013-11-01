@@ -96,8 +96,37 @@ label[class=cb]
 
 .nouveau-message textarea
 {
-    width:80%;
+    width:60%;
     height:300px;
+}
+
+.selection-dest
+{
+    padding:10px;
+    float:right;
+    background-color:rgba(0,0,0,0.2);
+    width:35%;
+    min-height:425px;
+}
+
+.selection-dest h3
+{
+    margin:0 0 5px 0;
+}
+
+input:read-only
+{
+    background-color: #E6E6E6;
+}
+
+#liste-dest li
+{
+    cursor:pointer;
+}
+
+.date-envoi
+{
+    font-size:12px;
 }
 
 

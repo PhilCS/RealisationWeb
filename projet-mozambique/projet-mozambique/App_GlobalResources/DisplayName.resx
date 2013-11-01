@@ -129,6 +129,10 @@
     <value>Confirmation du nouveau mot de passe</value>
     <comment>UserModel</comment>
   </data>
+  <data name="Contenu" xml:space="preserve">
+    <value>Contenu</value>
+    <comment>MessageModel</comment>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>Courriel</value>
     <comment>UserModel</comment>
@@ -148,6 +152,10 @@
   <data name="NewPassword" xml:space="preserve">
     <value>Nouveau mot de passe</value>
     <comment>UserModel</comment>
+  </data>
+  <data name="NomsDest" xml:space="preserve">
+    <value>Destinataires</value>
+    <comment>MessageModel</comment>
   </data>
   <data name="OldPassword" xml:space="preserve">
     <value>Mot de passe actuel</value>
@@ -173,9 +181,17 @@
     <value>Mot de passe </value>
     <comment>UserModel</comment>
   </data>
+  <data name="PiecesJointes" xml:space="preserve">
+    <value>Pièces jointes</value>
+    <comment>MessageModel</comment>
+  </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Se souvenir de moi</value>
     <comment>UserModel</comment>
+  </data>
+  <data name="Sujet" xml:space="preserve">
+    <value>Sujet</value>
+    <comment>MessageModel</comment>
   </data>
   <data name="UrlImage" xml:space="preserve">
     <value>Url de l'image (facultatif)</value>

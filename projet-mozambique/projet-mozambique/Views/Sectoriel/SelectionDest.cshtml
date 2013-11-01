@@ -1,0 +1,20 @@
+﻿@using projet_mozambique.Utilitaires;
+@{
+    List<string> lst = (ViewData[Constantes.CLE_LISTE_UTILISATEURS] as List<string>);
+    
+    <ul>
+        @for (int i = 0; i < lst.Count; i++)
+        {
+            <li id="@i" class="user">@lst[i]</li>
+        }
+    </ul>
+    
+    <script>
+    $(function()
+    {
+        
+    })
+
+</script>
+}
+

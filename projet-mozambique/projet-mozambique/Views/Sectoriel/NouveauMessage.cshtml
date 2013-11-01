@@ -1,33 +1,85 @@
-﻿@{
-    ViewBag.Title = "Messagerie";
+﻿@model projet_mozambique.Models.MessageModel
+@{
+    ViewBag.Title = Resources.Sectoriel.nouveauMessage;
 }
 
-<h1>Messagerie</h1>
+<h1>@Resources.Sectoriel.nouveauMessage</h1>
 
-<form method="post" action="MessageEnvoyeOK" class="formulaire nouveau-message">
+@using (Html.BeginForm("NouveauMessage", "Sectoriel", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "formulaire nouveau-message", @id = "nouveau-message"}))
+{
+    @Html.ValidationSummary(false)
 
-    <div>
-        <label for="destinataire">Destinataires : </label>
-        <input type="text" name="destinataire" id="destinataire" readonly="true" /> 
-        <input type="button" id="btnDestinataires" value="Sélectionner" class="btnForm"/>  
+    <div class="selection-dest">
+        <h3>@Resources.Sectoriel.selectionDestinataires</h3>
+        <input type="text" name="rech" id="rech" placeholder="@Resources.Sectoriel.nom" /> 
+        <a href="#" id="rechercher" class="btnForm">@Resources.Shared.rechercher</a>
+        <div id="liste-dest"></div>
     </div>
 
     <div>
-        <label for="sujet">Sujet du message : </label>
-        <input autofocus type="text" name="sujet" id="sujet" placeholder="Sujet" />
+        @Html.LabelFor(x => x.destinataires) @Html.TextBoxFor(x => x.destinataires, new { @id = "dest" })
     </div>
-
+    
     <div>
-        <label for="piecejointe">Ajouter une pièce jointe : </label>
-        <input  type="file" name="piecejointe" id="piecejointe"  />
+        @Html.LabelFor(x => x.sujet) @Html.EditorFor(x => x.sujet)
     </div>
+    
+    <div>
+        @Html.EditorFor(x => x.piecesJointes[0]) @Html.LabelFor(x => x.piecesJointes) 
+    </div>
+    
+    @Html.TextAreaFor(x => x.contenu) <br />
+    
+    <input type="submit" value="@Resources.Sectoriel.envoyer" class="btnForm" />
+}
 
-    <textarea></textarea><br />
+<script type="text/javascript">
+    $(function () {
 
-    <input type="submit" class="btnForm" value="Envoyer" />
-    <a href="MessagePasEnvoye">ERREUR</a>
-</form>
+        $("#rechercher").click(function () {
+            var nameEntered = $("#rech").val()
+
+            $.ajax({
+                url:"/Sectoriel/SelectionDest?rech=" + nameEntered,
+                success: function (data, textStatus, jqXHR) {
+                    $("#liste-dest").html(data);
+                    $('#liste-dest li').click(function (event) {
+                        var username = this.innerText;
+                        username = username.substring(username.indexOf("(", 0) + 1, username.length -1);
+
+                        $("#dest").val($("#dest").val() + username + "; ");
+                    });
+                }
+            });
+        });
+
+        $('#rech').keypress(function (event) {
+
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if (keycode == '13') {
+                $("#rechercher").click();
+            }
+
+        });
+
+        $(window).keydown(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        $('#list-dest').delegate('li', 'click', function () {
+            var username = e.toString();
+            username.substring(username.indexOf("(", 0) + 1, username.length);
+
+            $("#dest").val($("#dest").valueOf() + username + "; ");
+        });
+
+        
+    })
 
 
+</script>
 
 

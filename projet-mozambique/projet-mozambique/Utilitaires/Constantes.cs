@@ -28,6 +28,7 @@ namespace projet_mozambique.Utilitaires
         public const string CLE_PUBLICATIONS = "publications";
         public const string CLE_SECTEURS = "secteurs";
         public const string CLE_SUJETSPUBLICATION = "sujetsPublication";
+        public const string CLE_LISTE_UTILISATEURS = "listeUtilisateurs";
 
     }
 }
