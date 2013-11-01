@@ -427,17 +427,75 @@ namespace projet_mozambique.Controllers
                 lstPJ.Add(pj);
 	        }
 
-            MessageMessagerie mess = new MessageMessagerie(0, lstMess[0].SUJET, lstMess[0].CONTENU,
+            MessageMessagerie mess = new MessageMessagerie(id, lstMess[0].SUJET, lstMess[0].CONTENU,
                                      lstPJ, true, lstMess[0].DATEENVOI);
+
+            List<string> lstDest = new List<string>();
+
+            var dest = from dm in db.DESTINATAIREMESSAGE
+                       join u in db.UTILISATEUR on dm.IDUTILISATEUR equals u.ID
+                       where dm.IDMESSAGE == mess.id
+                       select new { u.NOMUTIL };
+
+            foreach (var d in dest)
+            {
+                lstDest.Add(d.NOMUTIL);
+            }
+
+            mess.lstDestinataires = lstDest;
 
             ViewData[Constantes.CLE_MESSAGE] = mess;    
 
             return PartialView();
         }
 
+        
         public ActionResult NouveauMessage()
         {
             return View();
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult NouveauMessage(MessageModel message)
+        {
+            List<int> lstDest = new List<int>();
+            string[] dest = message.destinataires.Split(new Char[] {' '});
+            int idNouveau;
+
+            foreach (string d in dest)
+            {
+                var util = from u in db.UTILISATEUR
+                           where u.NOMUTIL == d
+                           select u.ID;
+
+                lstDest.Add(util.FirstOrDefault());
+            }
+
+            idNouveau = db.AjouterMessagePrive(WebSecurity.GetUserId(User.Identity.Name), message.sujet, message.contenu);
+
+            
+
+            return View();
+        }
+
+        public ContentResult SelectionDest(string rech)
+        {
+            List<string> lst = new List<string>();
+            string html = string.Empty;
+            
+            var utils = from u in db.UTILISATEUR
+                        where u.NOM.ToUpper().StartsWith(rech.ToUpper()) || u.PRENOM.ToUpper().StartsWith(rech.ToUpper())
+                        select u;
+
+            foreach (var u in utils)
+            {
+                html += "<li>" + u.PRENOM + " " + u.NOM + " (" + u.NOMUTIL + ")</li>";
+            }
+
+            ViewData[Constantes.CLE_LISTE_UTILISATEURS] = lst;
+
+            return Content(html);
         }
 
         public ActionResult Messagerie()

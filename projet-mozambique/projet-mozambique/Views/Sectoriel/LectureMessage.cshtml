@@ -2,6 +2,20 @@
 @using projet_mozambique.Models
 @{
     MessageMessagerie mess = (ViewData[Constantes.CLE_MESSAGE] as MessageMessagerie);
-        <h3>@mess.sujet</h3>
+    <h3>@mess.sujet <span class="date-envoi">(@Resources.Shared.recuLe @mess.dateEnvoi.ToString("yyyy/MM/dd hh:MM"))</span></h3>
+    
+    <p>@Resources.Shared.envoyeA : 
+        @foreach (var d in mess.lstDestinataires)
+        {
+            @d;
+        }
+    </p>
+    
+    <p>@Names.DisplayName.PiecesJointes : </p>
+    
+    <p>@Names.DisplayName.Sujet : @mess.sujet</p>
+    
+    <p>@mess.message</p>
+    
 
 }

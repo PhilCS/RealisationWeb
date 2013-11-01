@@ -256,6 +256,7 @@
     <Compile Include="Models\FILDISCUSSION.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FileViewModel.cs" />
     <Compile Include="Models\FORUM.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
@@ -344,6 +345,7 @@
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MessageMessagerie.cs" />
+    <Compile Include="Models\MessageModel.cs" />
     <Compile Include="Models\MESSAGEPRIVE.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
@@ -397,7 +399,6 @@
     <Compile Include="Utilitaires\Constantes.cs" />
     <Compile Include="Utilitaires\Fichiers.cs" />
     <Compile Include="Utilitaires\ListePaginee.cs" />
-    <Compile Include="Utilitaires\LocalizedDisplayNameAttribute.cs" />
     <Compile Include="Utilitaires\Message.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -608,6 +609,10 @@
     <Content Include="Views\Emails\ResetPassword.cshtml" />
     <Content Include="Views\Sectoriel\ConfirmationCourriel.cshtml" />
     <Content Include="Views\Sectoriel\ConfirmationReinitialMotPasse.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\FileViewModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Copie de FileViewModel.cshtml" />
+    <Content Include="Views\Sectoriel\SelectionDest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -669,6 +674,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DisplayName.pt.designer.cs</LastGenOutput>
       <CustomToolNamespace>Names</CustomToolNamespace>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="App_GlobalResources\StringResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

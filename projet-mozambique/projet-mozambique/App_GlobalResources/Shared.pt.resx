@@ -141,6 +141,9 @@
   <data name="documents" xml:space="preserve">
     <value>Documents</value>
   </data>
+  <data name="envoyeA" xml:space="preserve">
+    <value>Sent to</value>
+  </data>
   <data name="forgotPassword" xml:space="preserve">
     <value>Forgot your password?</value>
   </data>
@@ -149,6 +152,9 @@
   </data>
   <data name="langue" xml:space="preserve">
     <value>Français</value>
+  </data>
+  <data name="lirePlus" xml:space="preserve">
+    <value>Read more...</value>
   </data>
   <data name="login" xml:space="preserve">
     <value>Log In</value>
@@ -173,6 +179,15 @@
   </data>
   <data name="profil" xml:space="preserve">
     <value>Profile</value>
+  </data>
+  <data name="publieLe" xml:space="preserve">
+    <value>Published on</value>
+  </data>
+  <data name="rechercher" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="recuLe" xml:space="preserve">
+    <value>Received on</value>
   </data>
   <data name="selectlanguage" xml:space="preserve">
     <value>Select a language</value>
