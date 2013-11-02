@@ -1,15 +1,9 @@
 ﻿@model projet_mozambique.Models.ProfileModel
 @{
-    ViewBag.Title = "Modifier vos informations personnelles";
+    ViewBag.Title = @Resources.Sectoriel.ModifierInfos;
 }
 
 <h1>@ViewBag.Title</h1>
-<p class="msgOk">
-    @if (!string.IsNullOrWhiteSpace(ViewBag.Success))
-    {
-        @ViewBag.Success
-    }
-</p>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
@@ -31,7 +25,7 @@
             @Html.ValidationMessageFor(m => m.nom)
         </li>
         <li>
-            @Html.LabelFor(m => m.adresse)
+            @Html.LabelFor(m => m.adresse) 
             @Html.TextBoxFor(m => m.adresse)
             @Html.ValidationMessageFor(m => m.adresse)
         </li>

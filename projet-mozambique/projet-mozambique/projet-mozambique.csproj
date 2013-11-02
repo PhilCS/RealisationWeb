@@ -398,6 +398,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilitaires\Constantes.cs" />
+    <Compile Include="Utilitaires\AccessDeniedAuthorizeAttribute.cs" />
     <Compile Include="Utilitaires\Fichiers.cs" />
     <Compile Include="Utilitaires\ListePaginee.cs" />
     <Compile Include="Utilitaires\Message.cs" />
@@ -418,6 +419,7 @@
     <Content Include="Content\images\icones\icone-pdf.png" />
     <Content Include="Content\images\icones\icone-text.png" />
     <Content Include="Content\images\mail.png" />
+    <Content Include="Content\images\photos\test.jpg" />
     <Content Include="Content\images\profile.png" />
     <Content Include="Content\images\pw_maze_white.png" />
     <Content Include="Content\images\pw_maze_white_%402X.png" />
@@ -606,6 +608,8 @@
     <Content Include="Views\Emails\ResetPassword.cshtml" />
     <Content Include="Views\Sectoriel\ConfirmationCourriel.cshtml" />
     <Content Include="Views\Sectoriel\ConfirmationReinitialMotPasse.cshtml" />
+    <Content Include="Views\Error\HttpError403.cshtml" />
+
     <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
     <Content Include="Views\Sectoriel\SelectionDest.cshtml" />
     <Content Include="Views\Admin\ModifierNouvelle.cshtml" />

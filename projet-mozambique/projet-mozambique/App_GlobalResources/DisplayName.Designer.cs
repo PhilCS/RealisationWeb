@@ -79,7 +79,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Confirmation du nouveau mot de passe.
+        ///   Recherche une chaîne localisée semblable à Confirmation du nouveau mot de passe .
         /// </summary>
         public static string ConfirmPassword {
             get {
@@ -120,6 +120,15 @@ namespace Names {
         public static string Email {
             get {
                 return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Image.
+        /// </summary>
+        public static string File {
+            get {
+                return ResourceManager.GetString("File", resourceCulture);
             }
         }
         

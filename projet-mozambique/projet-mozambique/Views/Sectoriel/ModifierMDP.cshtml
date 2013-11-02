@@ -1,26 +1,29 @@
-﻿@{
-    ViewBag.Title = "Modifier mot de passe";
+﻿@model projet_mozambique.Models.PasswordModel
+@{
+    ViewBag.Title = @Resources.Sectoriel.ModifierMDP;
 }
 
-<h1>Modifier votre mot de passe</h1>
+<h1>@ViewBag.Title</h1>
 
-<form method="post" action="ModifierMotPasseOK" class="formulaire">
-
-    <div>
-        <label for="courantpwd">Mot de passe actuel : *</label>
-        <input type="password" id="courantpwd" name="courantpwd" autofocus/>
-    </div>
-
-    <div>
-        <label for="nouveaupwd">Nouveau mot de passe : *</label>
-        <input type="password" id="nouveaupwd" name="nouveaupwd"/>
-    </div>
-
-    <div>
-        <label for="confirmpwd">Répétez le nouveau mot de passe : *</label>
-        <input type="password" id="confirmpwd" name="confirmpwd"/>
-    </div>
-
-    <input type="submit" class="btnForm" value="Modifier" />
-    <p><a href="ModifierMotPasseErreur">ERREUR</a></p>
-</form>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <ul>
+        <li>
+            @Html.LabelFor(m => m.OldPassword)
+            @Html.PasswordFor(m => m.OldPassword)
+            @Html.ValidationMessageFor(m => m.OldPassword)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.NewPassword)
+            @Html.PasswordFor(m => m.NewPassword)
+            @Html.ValidationMessageFor(m => m.NewPassword)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.ConfirmPassword)
+            @Html.PasswordFor(m => m.ConfirmPassword)
+            @Html.ValidationMessageFor(m => m.ConfirmPassword)
+        </li>
+    </ul>
+    <input type="submit" value="Modifier" class="btnForm" />
+}

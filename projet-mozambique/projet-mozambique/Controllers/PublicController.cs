@@ -33,6 +33,11 @@ namespace projet_mozambique.Controllers
         {
             CultureInfo ci = new CultureInfo(lang);
             Session["Culture"] = ci;
+
+            /*if (Request.Cookies.AllKeys.Contains("lang"))
+            {
+                Request.Cookies["lang"].Value = ci.Name;
+            }*/
             
             //return Redirect(returnUrl);
             if (Url.IsLocalUrl(returnUrl))

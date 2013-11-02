@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="fieldRequired" xml:space="preserve">
+    <value>Le champ {0} est obligatoire.</value>
+  </data>
+  <data name="fieldStringLength" xml:space="preserve">
+    <value>Le champ {0} doit comprendre au moins {2} caractères.</value>
+  </data>
+  <data name="NewPasswordMatch" xml:space="preserve">
+    <value>Le nouveau mot de passe et la confirmation ne correspondent pas.</value>
+  </data>
   <data name="contenuObligatoire" xml:space="preserve">
     <value>Le contenu du message ne peut être vide.</value>
   </data>
@@ -139,7 +148,13 @@
     <value>Le message a bien été supprimé.</value>
   </data>
   <data name="nonEditable" xml:space="preserve">
-    <value>Cet élément ne peut être modifié.</value>
+    <value>Ce champ ne peut pas être modifié.</value>
+  </data>
+  <data name="PasswordResetConfirm" xml:space="preserve">
+    <value>Un courriel vous a été envoyé pour confirmer la réinitialisation de votre mot de passe.</value>
+  </data>
+  <data name="AccessDenied" xml:space="preserve">
+    <value>Vous n'avez pas accès à cette section.</value>
   </data>
   <data name="nouvelleAjoutee" xml:space="preserve">
     <value>La nouvelle a bien été ajoutée.</value>
@@ -153,13 +168,13 @@
   <data name="nouvelleSupprimee" xml:space="preserve">
     <value>La nouvelle a bien été supprimée.</value>
   </data>
-  <data name="pieceTropLourde" xml:space="preserve">
-    <value>La pièce jointe dépasse la taille limite qui est de {0} MB.</value>
-  </data>
   <data name="sujetObligatoire" xml:space="preserve">
     <value>Le sujet du message ne peut être vide.</value>
   </data>
   <data name="titreVide" xml:space="preserve">
     <value>Le titre ne peut être vide.</value>
+  </data>
+  <data name="pieceTropLourde" xml:space="preserve">
+    <value>La pièce jointe dépasse la taille limite qui est de {0} MB.</value>
   </data>
 </root>

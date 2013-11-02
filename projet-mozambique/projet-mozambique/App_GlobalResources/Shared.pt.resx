@@ -201,6 +201,9 @@
   <data name="sondages" xml:space="preserve">
     <value>Polls</value>
   </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
   <data name="supprimer" xml:space="preserve">
     <value>Delete</value>
   </data>

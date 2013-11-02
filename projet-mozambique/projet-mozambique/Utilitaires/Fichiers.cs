@@ -15,6 +15,11 @@ namespace projet_mozambique.Utilitaires
             return HttpContext.Current.Server.MapPath(@"..\uploads\" + nomFichier);
         }
 
+        public static string CheminEnvoisImages(string nomFichier)
+        {
+            return HttpContext.Current.Server.MapPath(@"..\Content\images\photos\" + nomFichier);
+        }
+
         public static string GetNomOriginal(string nomComplet)
         {
             nomComplet = nomComplet.Trim();
