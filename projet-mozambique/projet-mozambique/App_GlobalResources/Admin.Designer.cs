@@ -79,6 +79,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Image actuelle.
+        /// </summary>
+        internal static string CurrentImage {
+            get {
+                return ResourceManager.GetString("CurrentImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Gestion du calendrier.
         /// </summary>
         internal static string menuCalendrier {

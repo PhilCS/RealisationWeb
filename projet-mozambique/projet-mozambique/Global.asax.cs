@@ -34,56 +34,73 @@ namespace projet_mozambique
         protected void Application_AcquireRequestState(object sender, EventArgs e)
         {
             CultureInfo ci;
-            CultureInfo ciCookie;
             string langName;
             //It's important to check whether session object is ready
             if (HttpContext.Current.Session != null)
             {
                 ci = (CultureInfo)this.Session["Culture"];
 
-                if (HttpContext.Current.Request.Cookies.AllKeys.Contains("lang"))
+                /*langName = HttpContext.Current.Request.Cookies.Get("lang").Value;
+                ci = new CultureInfo(langName);
+
+                if (ci != null && langName.Equals(ci.Name))
+                    ci = ciCookie;
+
+                if (ci == null)
+                    ci = ciCookie;
+
+                HttpContext.Current.Request.Cookies.Get("lang").Value = ci.Name;
+
+                this.Session["Culture"] = ci;*/
+                
+                //Checking first if there is no value in session 
+                //and set default language 
+                //this can happen for first user's request
+                if (ci == null)
                 {
-                    langName = HttpContext.Current.Request.Cookies.Get("lang").Value;
-                    ciCookie = new CultureInfo(langName);
-
-                    if (ci != null && langName.Equals(ci.Name))
-                        ci = ciCookie;
-
-                    if (ci == null)
-                        ci = ciCookie;
-
-                    HttpContext.Current.Request.Cookies.Get("lang").Value = ci.Name;
-
-
-                    this.Session["Culture"] = ci;
-                }
-                else
-                {
-                    //Checking first if there is no value in session 
-                    //and set default language 
-                    //this can happen for first user's request
-                    if (ci == null || ci.Name.Equals("fr") == false || ci.Name.Equals("pt") == false)
+                    /*if (HttpContext.Current.Request.Cookies.AllKeys.Contains("lang"))
                     {
+                        langName = HttpContext.Current.Request.Cookies["lang"].Value;
+                    }
+                    else
+                    {*/
                         //Sets default culture to french
                         langName = "fr";
 
-                        //Try to get values from Accept lang HTTP header
-                        /*if (HttpContext.Current.Request.UserLanguages != null &&
-                        HttpContext.Current.Request.UserLanguages.Length != 0)
-                        {
-                            //Gets accepted list 
-                            langName = HttpContext.Current.Request.UserLanguages[0].Substring(0, 2);
-                        }*/
+                        /*HttpCookie cookie = new HttpCookie("lang");
+                        cookie.Expires = DateTime.Now.AddMonths(3);
+                        cookie.Value = ci.Name;
+                        HttpContext.Current.Response.AppendCookie(cookie);*/
+                    //}
+                    
+                    //Try to get values from Accept lang HTTP header
+                    /*if (HttpContext.Current.Request.UserLanguages != null &&
+                    HttpContext.Current.Request.UserLanguages.Length != 0)
+                    {
+                        //Gets accepted list 
+                        langName = HttpContext.Current.Request.UserLanguages[0].Substring(0, 2);
+                    }*/
 
-                        ci = new CultureInfo(langName);
-                        this.Session["Culture"] = ci;
+                    ci = new CultureInfo(langName);
+                    this.Session["Culture"] = ci;
+                /*}
+                else
+                {
+                    if (HttpContext.Current.Request.Cookies.AllKeys.Contains("lang"))
+                    {
+                        HttpCookie c = HttpContext.Current.Request.Cookies["lang"];
+                        c.Value = ci.Name;
+                        HttpContext.Current.Response.SetCookie(c);
                     }
-
-                    HttpCookie cookie = new HttpCookie("lang");
-                    cookie.Expires = DateTime.Now.AddMonths(3);
-                    cookie.Value = ci.Name;
-                    HttpContext.Current.Request.Cookies.Add(cookie);
+                    */
+                    
                 }
+
+                /*HttpCookie cookie = new HttpCookie("lang");
+                cookie.Expires = DateTime.Now.AddMonths(3);
+                cookie.Value = ci.Name;
+                HttpContext.Current.Request.Cookies.Add(cookie);*/
+                
 
                 //Finally setting culture for each request
                 System.Threading.Thread.CurrentThread.CurrentUICulture = ci;
@@ -104,6 +121,10 @@ namespace projet_mozambique
 
                 switch (httpException.GetHttpCode())
                 {
+                    case 403:
+                        // access denied
+                        action = "HttpError403";
+                        break;
                     case 404:
                         // page not found
                         action = "HttpError404";

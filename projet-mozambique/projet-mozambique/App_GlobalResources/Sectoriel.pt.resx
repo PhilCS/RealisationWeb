@@ -120,6 +120,10 @@
   <data name="boiteReception" xml:space="preserve">
     <value>Inbox</value>
   </data>
+  <data name="ConfirmResetPassword" xml:space="preserve">
+    <value>Confirm</value>
+    <comment>ConfirmationReinitialMotPasse</comment>
+  </data>
   <data name="corbeille" xml:space="preserve">
     <value>Trash</value>
   </data>
@@ -138,6 +142,14 @@
   <data name="messagesEnvoyes" xml:space="preserve">
     <value>Sent Mail</value>
   </data>
+  <data name="ModifierInfos" xml:space="preserve">
+    <value>Change your profile information</value>
+    <comment>Profil</comment>
+  </data>
+  <data name="ModifierMDP" xml:space="preserve">
+    <value>Change your password</value>
+    <comment>Profil</comment>
+  </data>
   <data name="nom" xml:space="preserve">
     <value>Name</value>
   </data>
@@ -152,6 +164,10 @@
   </data>
   <data name="repondreMessage" xml:space="preserve">
     <value>Reply to mail</value>
+  </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>Reset</value>
+    <comment>ReinitialiserMotPasse</comment>
   </data>
   <data name="selectionDestinataires" xml:space="preserve">
     <value>Recipients selection (by name/surname)</value>

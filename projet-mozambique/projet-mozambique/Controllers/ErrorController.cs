@@ -27,5 +27,9 @@ namespace projet_mozambique.Controllers
             return View();
         }
 
+        public ActionResult HttpError403()
+        {
+            return View();
+        }
     }
 }

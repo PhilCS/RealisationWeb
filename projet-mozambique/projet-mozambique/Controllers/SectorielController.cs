@@ -67,9 +67,21 @@ namespace projet_mozambique.Controllers
                 {
                     UTILISATEUR currentUser = (UTILISATEUR)utilisateur.First();
 
-                    if (WebSecurity.Login(currentUser.NOMUTIL, model.Password, true))
+                    if (WebSecurity.Login(currentUser.NOMUTIL, model.Password, model.RememberMe))
                     {
                         CultureInfo ci = new CultureInfo(currentUser.LANGUE.ToLower());
+
+                        if (model.RememberMe)
+                        {
+                            HttpCookie cookie = new HttpCookie("lang");
+                            cookie.Expires = DateTime.Now.AddMonths(3);
+                            cookie.Value = ci.Name;
+                            Response.AppendCookie(cookie);
+                        }
+
+                        /*if (Request.Cookies.AllKeys.Contains("lang"))
+                            Request.Cookies["lang"].Value = ci.Name;*/
+
                         Session["Culture"] = ci;
 
                         return RedirectToAction("Index", "Sectoriel");
@@ -98,7 +110,7 @@ namespace projet_mozambique.Controllers
             WebSecurity.Logout();
 
             if (Request.Cookies.AllKeys.Contains("lang"))
-                Request.Cookies.Remove("lang");
+                Response.Cookies.Remove("lang");
 
             return RedirectToAction("Index", "Public");
         }
@@ -254,6 +266,13 @@ namespace projet_mozambique.Controllers
                 CultureInfo ci = new CultureInfo(model.langue.ToLower());
                 Session["Culture"] = ci;
 
+                if (Request.Cookies.AllKeys.Contains("lang"))
+                {
+                    HttpCookie cookie = Request.Cookies["lang"];
+                    cookie.Value = ci.Name;
+                    Response.Cookies.Set(cookie);
+                }
+
                 db.ModifierUtilProfil(id, model.courriel, model.nom, model.prenom, model.adresse, model.ville, model.langue);
                 db.SaveChanges();
                 TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, "Vos informations personnelles ont été mises à jour.");
@@ -279,7 +298,20 @@ namespace projet_mozambique.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ModifierMDP(PasswordModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                if (WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword))
+                {
+                    TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, "Votre mot de passe a été changé.");
+                    return RedirectToAction("Profil", "Sectoriel");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Votre mot de passe n'a pu être changé");
+                }
+                
+            }
+            return View(model);
         }
         
 

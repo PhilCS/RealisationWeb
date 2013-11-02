@@ -2,12 +2,13 @@
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm()){
+@using (Html.BeginForm("ModifPagePublique", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" })) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     <ul>
+            @Html.HiddenFor(m => m.nomPage)
           <li>
-            @Html.LabelFor(m => m.titre)
+            @Html.LabelFor(m => m.titre) 
             @if (Model.nomPage.ToLower().Equals("accueil"))
             {
                 @Html.TextBoxFor(m => m.titre)
@@ -20,7 +21,7 @@
             @Html.ValidationMessageFor(m => m.titre)
         </li>
         <li>
-            @Html.LabelFor(m => m.titreTrad)
+            @Html.LabelFor(m => m.titreTrad) 
             @if (Model.nomPage.ToLower().Equals("accueil"))
             {
                 @Html.TextBoxFor(m => m.titreTrad)
@@ -33,21 +34,26 @@
             @Html.ValidationMessageFor(m => m.titreTrad)
         </li>  
         <li>
-            @Html.LabelFor(m => m.contenu)
+            @Html.LabelFor(m => m.contenu) 
             @Html.TextAreaFor(m => m.contenu)
             @Html.ValidationMessageFor(m => m.contenu)
         </li>
         <li>
-            @Html.LabelFor(m => m.contenuTrad)
+            @Html.LabelFor(m => m.contenuTrad) 
             @Html.TextAreaFor(m => m.contenuTrad)
             @Html.ValidationMessageFor(m => m.contenuTrad)
         </li>
         @if(!Model.nomPage.ToLower().Equals("contact"))
         {
             <li>
-                @Html.LabelFor(m => m.urlImage) 
-                @Html.TextBoxFor(m => m.urlImage)
-                @Html.ValidationMessageFor(m => m.urlImage)
+                @Html.LabelFor(m => m.File)
+                @if (ViewBag.UrlImage != null)
+                {
+                    string currImg = Resources.Admin.CurrentImage + " : " + ViewBag.UrlImage;
+                    <p>@currImg</p>
+                }
+                <input type="file" name="file"/>
+                @Html.ValidationMessageFor(m => m.File)
             </li>
         }
     </ul>

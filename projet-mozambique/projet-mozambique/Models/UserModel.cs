@@ -9,11 +9,13 @@ namespace projet_mozambique.Models
 {  
     public class LoginModel
     {
-        [Required]
+        [Required(AllowEmptyStrings=false, ErrorMessageResourceName = "fieldRequired", 
+            ErrorMessageResourceType = typeof(@Resources.Messages))]
         [Display(Name = "UserName", ResourceType = typeof(Names.DisplayName))]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
+            ErrorMessageResourceType = typeof(@Resources.Messages))]
         [DataType(DataType.Password)]
         [Display(Name = "Password", ResourceType = typeof(Names.DisplayName))]
         public string Password { get; set; }
@@ -24,29 +26,36 @@ namespace projet_mozambique.Models
 
     public class ProfileModel
     {
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
+            ErrorMessageResourceType = typeof(@Resources.Messages))]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email", ResourceType = typeof(Names.DisplayName))]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessageResourceName = "fieldStringLength",
+            ErrorMessageResourceType = typeof(@Resources.Messages), MinimumLength = 6)]
         public string courriel { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
+            ErrorMessageResourceType = typeof(@Resources.Messages))]
         [Display(Name = "FirstName", ResourceType = typeof(Names.DisplayName))]
         public string prenom { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
+            ErrorMessageResourceType = typeof(@Resources.Messages))]
         [Display(Name = "LastName", ResourceType = typeof(Names.DisplayName))]
         public string nom { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
+            ErrorMessageResourceType = typeof(@Resources.Messages))]
         [Display(Name = "Adress", ResourceType = typeof(Names.DisplayName))]
         public string adresse { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
+            ErrorMessageResourceType = typeof(@Resources.Messages))]
         [Display(Name = "City", ResourceType = typeof(Names.DisplayName))]
         public string ville { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
+            ErrorMessageResourceType = typeof(@Resources.Messages))]
         [Display(Name = "Language", ResourceType = typeof(Names.DisplayName))]
         [StringLength(2)]
         public string langue { get; set; }
@@ -54,27 +63,33 @@ namespace projet_mozambique.Models
 
     public class PasswordModel
     {
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
+            ErrorMessageResourceType = typeof(@Resources.Messages))]
         [DataType(DataType.Password)]
         [Display(Name = "OldPassword", ResourceType = typeof(Names.DisplayName))]
         public string OldPassword { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
+            ErrorMessageResourceType = typeof(@Resources.Messages))]
         [DataType(DataType.Password)]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessageResourceName = "fieldStringLength",
+            ErrorMessageResourceType = typeof(@Resources.Messages), MinimumLength = 6)]
         [Display(Name = "NewPassword", ResourceType = typeof(Names.DisplayName))]
         public string NewPassword { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
+            ErrorMessageResourceType = typeof(@Resources.Messages))]
         [DataType(DataType.Password)]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Compare("NewPassword", ErrorMessageResourceName = "NewPasswordMatch",
+            ErrorMessageResourceType = typeof(@Resources.Messages))]
         [Display(Name = "ConfirmPassword", ResourceType = typeof(Names.DisplayName))]
         public string ConfirmPassword { get; set; }
     }
 
     public class ResetPassword
     {
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
+            ErrorMessageResourceType = typeof(@Resources.Messages))]
         [Display(Name = "UserName", ResourceType = typeof(Names.DisplayName))]
         public string UserName { get; set; }
     }
@@ -83,16 +98,20 @@ namespace projet_mozambique.Models
     {
         public string Token { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
+            ErrorMessageResourceType = typeof(@Resources.Messages))]
+        [StringLength(100, ErrorMessageResourceName = "fieldStringLength", 
+            ErrorMessageResourceType = typeof(@Resources.Messages), MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "NewPassword", ResourceType = typeof(Names.DisplayName))]
         public string NewPassword { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
+            ErrorMessageResourceType = typeof(@Resources.Messages))]
         [DataType(DataType.Password)]
         [Display(Name = "ConfirmPassword", ResourceType = typeof(Names.DisplayName))]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Compare("NewPassword", ErrorMessageResourceName = "NewPasswordMatch",
+            ErrorMessageResourceType = typeof(@Resources.Messages))]
         public string ConfirmPassword { get; set; }
     }
 }

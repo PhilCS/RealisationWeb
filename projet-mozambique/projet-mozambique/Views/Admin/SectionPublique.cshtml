@@ -1,9 +1,9 @@
 ﻿@using projet_mozambique.Utilitaires
 @{
-    ViewBag.Title = Resources.Admin.sectionPublique;
+    ViewBag.Title = @Resources.Admin.menuPublique;
     var msg = (ViewData[Constantes.CLE_MSG_RETOUR] as Message);
 
-    <h1>@Resources.Admin.gestionSectionPublique</h1>
+    <h1>@ViewBag.Title</h1>
     
     Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
     
@@ -20,9 +20,9 @@
                 <li><a href="gestionPartenaires?gestion=2">Modifier/Supprimer un partenaire</a></li>
             </ul>
         </li>
-        <li>@Html.ActionLink("Page d'accueil", "ModifPagePublique", "Admin", new { nomPage = "accueil" }, null)</li>
-        <li>@Html.ActionLink("Qui sommes-nous?", "ModifPagePublique", "Admin", new { nomPage = "about" }, null)</li>
-        <li>@Html.ActionLink("Nous Joindre", "ModifPagePublique", "Admin", new { nomPage = "contact" }, null)</li>
+        <li>@Html.ActionLink(@Resources.Shared.accueil, "ModifPagePublique", "Admin", new { nomPage = "accueil" }, null)</li>
+        <li>@Html.ActionLink(@Resources.Shared.apropos, "ModifPagePublique", "Admin", new { nomPage = "about" }, null)</li>
+        <li>@Html.ActionLink(@Resources.Shared.nousjoindre, "ModifPagePublique", "Admin", new { nomPage = "contact" }, null)</li>
     </ul>
     
 }

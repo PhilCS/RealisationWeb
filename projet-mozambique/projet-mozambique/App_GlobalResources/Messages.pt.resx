@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="fieldRequired" xml:space="preserve">
+    <value>The field {0} is required.</value>
+  </data>
+  <data name="fieldStringLength" xml:space="preserve">
+    <value>The field {0} must be at least {2} characters long.</value>
+  </data>
+  <data name="NewPasswordMatch" xml:space="preserve">
+    <value>The new password and confirmation password do not match.</value>
+  </data>
   <data name="contenuObligatoire" xml:space="preserve">
     <value>The message content cannot be empty.</value>
   </data>
@@ -139,7 +148,13 @@
     <value>The message has been deleted.</value>
   </data>
   <data name="nonEditable" xml:space="preserve">
-    <value>This element can't be modified.</value>
+    <value>This field can't be modified.</value>
+  </data>
+  <data name="PasswordResetConfirm" xml:space="preserve">
+    <value>An email has been send to your email address to reset your password.</value>
+  </data>
+  <data name="AccessDenied" xml:space="preserve">
+    <value>You're not allowed in this section.</value>
   </data>
   <data name="nouvelleAjoutee" xml:space="preserve">
     <value>The news has been added.</value>
@@ -153,13 +168,13 @@
   <data name="nouvelleSupprimee" xml:space="preserve">
     <value>The news has been deleted.</value>
   </data>
-  <data name="pieceTropLourde" xml:space="preserve">
-    <value>The attachment is too large, maximum size is {0} MB.</value>
-  </data>
   <data name="sujetObligatoire" xml:space="preserve">
     <value>The message subject cannot be empty.</value>
   </data>
   <data name="titreVide" xml:space="preserve">
     <value>The title cannot be empty.</value>
+  </data>
+  <data name="pieceTropLourde" xml:space="preserve">
+    <value>The attachment is too large, maximum size is {0} MB.</value>
   </data>
 </root>

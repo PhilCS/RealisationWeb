@@ -12,7 +12,7 @@ using projet_mozambique.ViewModels;
 
 namespace projet_mozambique.Controllers
 {
-    [Authorize(Roles="admin")]
+    [AccessDeniedAuthorize(Roles = "admin")]
     public class AdminController : Controller
     {
         private Entities db = new Entities();
@@ -178,7 +178,7 @@ namespace projet_mozambique.Controllers
                     model.titreTrad = contentResult.TITRE_TRAD;
                     model.contenu = contentResult.CONTENU;
                     model.contenuTrad = contentResult.CONTENU_TRAD;
-                    model.urlImage = contentResult.URLIMAGE;
+                    ViewBag.UrlImage = contentResult.URLIMAGE;
 
                     return View(model);
                 }
@@ -189,33 +189,58 @@ namespace projet_mozambique.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ModifPagePublique(ContentModel model, string nomPage)
+        public ActionResult ModifPagePublique(ContentModel model)
         {
             if (ModelState.IsValid)
             {
-                if (nomPage != null)
+                if (model.nomPage != null && (model.nomPage.Equals("accueil") || model.nomPage.Equals("about") || model.nomPage.Equals("contact")))
                 {
-                    try
+                    if (model.File != null)
                     {
-                        db.ModifierContenu(nomPage, model.titre, model.titreTrad, model.contenu, model.contenuTrad, model.urlImage);
-                        db.SaveChanges();
+                        HttpPostedFileBase fichier = model.File;
 
-                        if(nomPage.Equals("about"))
+                        int MaxContentLength = 1024 * 1024 * 2; //2 MB
+                        string[] AllowedFileExtensions = new string[] { ".jpg", ".jpeg" };
+
+                        if (!AllowedFileExtensions.Contains(fichier.FileName.Substring(fichier.FileName.LastIndexOf('.'))))
                         {
-                            return RedirectToAction("APropos", "Public");
+                            ModelState.AddModelError("", "Please upload Your Photo of type: " + string.Join(", ", AllowedFileExtensions));
                         }
-                        else if (nomPage.Equals("contact"))
+                        else if (fichier.ContentLength > MaxContentLength)
                         {
-                            return RedirectToAction("NousJoindre", "Public");
+                            ModelState.AddModelError("", "Your Photo is too large, maximum allowed size is : " + (MaxContentLength / 1024).ToString() + "MB");
                         }
                         else
                         {
-                            return RedirectToAction("Index", "Public");
+                            //HttpPostedFileBase file = Request.Files.Get(0);
+
+                            //string url = Fichiers.CheminEnvoisImages(fichier.FileName);
+                            var fileName = Path.GetFileName(fichier.FileName);
+                            var path = Path.Combine(Server.MapPath("~/Content/images/photos"), fileName);
+
+                            fichier.SaveAs(path);
+
+                            db.ModifierContenu(model.nomPage, model.titre, model.titreTrad, model.contenu, model.contenuTrad, fileName);
                         }
                     }
-                    catch
+                    else
                     {
-                        return RedirectToAction("Index");
+                        db.ModifierContenu(model.nomPage, model.titre, model.titreTrad, model.contenu, model.contenuTrad, null);
+                    }
+
+                    db.SaveChanges();
+
+                    if (model.nomPage.Equals("about"))
+                    {
+                        return RedirectToAction("APropos", "Public");
+                    }
+                    else if (model.nomPage.Equals("contact"))
+                    {
+                        return RedirectToAction("NousJoindre", "Public");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Public");
                     }
                 }
             }

@@ -1,8 +1,30 @@
 ﻿@model projet_mozambique.Models.GetContenu_Result
 @{
-    ViewBag.Title = "APropos";
+    ViewBag.Title = @Resources.Shared.apropos;
 }
+ 
+@if(Session["Culture"].ToString().Equals("fr"))
+{
+    <h1>@Model.TITRE</h1>
 
-<h1>@Model.TITRE</h1>
-<p>@Model.CONTENU</p>
+    <div>
+        @if(Model.URLIMAGE != null)
+        {
+            <img class="img-accueil img-sous" src="~/Content/images/photos/@Model.URLIMAGE" alt="Photo Agriculture" />
+        }
+    </div>
+    <p>@Model.CONTENU</p> 
+}
+else
+{
+    <h1>@Model.TITRE_TRAD</h1>
+
+    <div>
+        @if(Model.URLIMAGE != null)
+        {
+            <img class="img-accueil img-sous" src="~/Content/images/photos/@Model.URLIMAGE" alt="Photo Agriculture" />
+        }
+    </div>
+    <p>@Model.CONTENU_TRAD</p>
+}
 
