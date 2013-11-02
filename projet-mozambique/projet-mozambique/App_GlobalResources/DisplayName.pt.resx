@@ -133,6 +133,9 @@
     <value>Content</value>
     <comment>MessageModel</comment>
   </data>
+  <data name="de" xml:space="preserve">
+    <value>From</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
     <comment>UserModel</comment>
@@ -154,7 +157,7 @@
     <comment>UserModel</comment>
   </data>
   <data name="NomsDest" xml:space="preserve">
-    <value>Recipients</value>
+    <value>Recipients (usernames)</value>
     <comment>MessageModel</comment>
   </data>
   <data name="OldPassword" xml:space="preserve">
@@ -200,5 +203,13 @@
   <data name="UserName" xml:space="preserve">
     <value>Username</value>
     <comment>UserModel</comment>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>News description</value>
+    <comment>NouvelleModel</comment>
+  </data>
+  <data name="Titre" xml:space="preserve">
+    <value>News title</value>
+    <comment>NouvelleModel</comment>
   </data>
 </root>

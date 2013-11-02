@@ -1,6 +1,0 @@
-﻿@model projet_mozambique.Models.FileViewModel
-
-<h4>@Model.Name</h4>
-@Html.HiddenFor(x => x.ExistingUrl)
-
-<input @( "name=" + ViewData.TemplateInfo.HtmlFieldPrefix + ".FileBase") type="file" />

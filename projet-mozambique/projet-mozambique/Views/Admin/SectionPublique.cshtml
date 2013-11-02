@@ -1,17 +1,17 @@
 ﻿@using projet_mozambique.Utilitaires
 @{
-    ViewBag.Title = "Section publique";
+    ViewBag.Title = Resources.Admin.sectionPublique;
     var msg = (ViewData[Constantes.CLE_MSG_RETOUR] as Message);
 
-    <h1>Gestion du contenu de la section publique</h1>
+    <h1>@Resources.Admin.gestionSectionPublique</h1>
     
     Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
     
     <ul>
         <li>Nouvelles
             <ul>
-                <li><a href="gestionNouvelles?gestion=1">Ajouter une nouvelle</a></li>
-                <li><a href="gestionNouvelles?gestion=2">Modifier/Supprimer une nouvelle</a></li>
+                <li><a href="AjouterNouvelle">@Resources.Admin.ajouterNouvelle</a></li>
+                <li><a href="GestionNouvelles">@Resources.Admin.modifierSupprimerNouvelle</a></li>
             </ul>
         </li>
         <li>Partenaires

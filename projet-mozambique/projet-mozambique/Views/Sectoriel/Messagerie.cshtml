@@ -4,13 +4,27 @@
     ViewBag.Title = Resources.Sectoriel.messagerie;
 }
 
-<h1>Messagerie</h1>
+<h1>@Resources.Sectoriel.messagerie</h1>
+
+@if(TempData[Constantes.CLE_MESSAGE] != null || Session[Constantes.CLE_MESSAGE] != null)
+{
+    if (TempData[Constantes.CLE_MESSAGE] != null)
+    {
+        <div class="msg succes">@TempData[Constantes.CLE_MESSAGE].ToString()</div>
+    }
+    else if (Session[Constantes.CLE_MESSAGE] != null)
+    {
+        <div class="msg succes">@Session[Constantes.CLE_MESSAGE].ToString()</div>
+        Session[Constantes.CLE_MESSAGE] = null;
+    }
+    
+}
 
 <nav class="menu-messagerie">
     <ul>
-        <li class="active" id="recep">@Ajax.ActionLink(Resources.Sectoriel.boiteReception, "BoiteReception", new { controller = "Sectoriel" }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "messages", OnComplete = "naviguerMessagerie('recep')" })</li>
-        <li id="env">@Ajax.ActionLink(Resources.Sectoriel.messagesEnvoyes, "MessagesEnvoyes", new { controller = "Sectoriel" }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "messages", OnComplete = "naviguerMessagerie('env')" })</li>
-        <li id="corb">@Ajax.ActionLink(Resources.Sectoriel.corbeille, "Corbeille", new { controller = "Sectoriel" }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "messages", OnComplete = "naviguerMessagerie('corb')" })</li>
+        <li class="active" id="recep">@Ajax.ActionLink(Resources.Sectoriel.boiteReception, "Messagerie", "Sectoriel", new { @location = 1  }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "messages", OnComplete = "naviguerMessagerie('recep')" }, null)</li>
+        <li id="env">@Ajax.ActionLink(Resources.Sectoriel.messagesEnvoyes, "Messagerie", "Sectoriel", new { @location = 2 }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "messages", OnComplete = "naviguerMessagerie('env')" })</li>
+        <li id="corb">@Ajax.ActionLink(Resources.Sectoriel.corbeille, "Corbeille", "Sectoriel", new { @location = 3  }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "messages", OnComplete = "naviguerMessagerie('corb')" })</li>
     </ul>
 </nav>
 
@@ -18,8 +32,8 @@
     <div id="reception" class="mess-reception">
         <div class="actions-boite-reception">
             <ul>
-                <li id="nouveau-message">@Html.ActionLink(@Resources.Sectoriel.nouveau, "NouveauMessage", "Sectoriel")</li>
-                <li id="supprimer-message">@Html.ActionLink(@Resources.Sectoriel.supprimer, "SupprimerMessage", "Sectoriel")</li>
+                <li id="nouveau-message">@Html.ActionLink(Resources.Sectoriel.nouveau, "NouveauMessage", "Sectoriel")</li>
+                <li id="supprimer-message">@Resources.Sectoriel.supprimer</li>
             </ul>
         </div>
         <div id="messages">
@@ -29,8 +43,8 @@
     <div id="lecture" class="mess-lecture">
         <div class="actions-messagerie">
             <div class="icones-actions">        
-                <a href="RepondreMessage"><img src="~/Content/images/icones/icon-reply.png" title="@Resources.Sectoriel.repondre" alt="Icône répondre" /></a>
-                <a href="SupprimerMessage"><img src="~/Content/images/icones/icon-trashcan.png" title="@Resources.Sectoriel.supprimer" alt="Icône supprimer" /></a>
+                <a href="RepondreMessage" id="repondre-icone"><img src="~/Content/images/icones/icon-reply.png" title="@Resources.Sectoriel.repondre" alt="Icône répondre" /></a>
+                <a href="SupprimerMessage" id="supprimer-icone"><img src="~/Content/images/icones/icon-trashcan.png" title="@Resources.Sectoriel.supprimer" alt="Icône supprimer" /></a>
             </div>
         </div>
         <div id="contenu-message">
@@ -42,7 +56,8 @@
 
 <script>
     function naviguerMessagerie(clic) {
-        
+        $(".msg").text("");
+
         $(".active").removeClass("active");
 
         switch (clic)
@@ -50,14 +65,17 @@
             case "recep":
                 $("#recep").addClass("active");
                 $("#nouveau-message").show();
+                $("#repondre-icone").show();
                 break;
             case "env":
+                $("#repondre-icone").hide();
                 $("#env").addClass("active");
                 $("#nouveau-message").hide();
                 break;
             case "corb":
                 $("#corb").addClass("active");
                 $("#nouveau-message").hide();
+                $("#repondre-icone").hide();
                 break;                
         }
 

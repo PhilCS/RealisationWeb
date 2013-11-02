@@ -61,11 +61,65 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Le contenu du message ne peut être vide..
+        /// </summary>
+        internal static string contenuObligatoire {
+            get {
+                return ResourceManager.GetString("contenuObligatoire", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à La description ne peut être vide..
         /// </summary>
         internal static string descriptionVide {
             get {
                 return ResourceManager.GetString("descriptionVide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à La liste des destinataires ne peut être vide..
+        /// </summary>
+        internal static string destObligatoire {
+            get {
+                return ResourceManager.GetString("destObligatoire", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Le message bien été envoyé..
+        /// </summary>
+        internal static string messageEnvoye {
+            get {
+                return ResourceManager.GetString("messageEnvoye", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Le message n&apos;a pu être envoyé, une erreur est survenue..
+        /// </summary>
+        internal static string messagePasEnvoye {
+            get {
+                return ResourceManager.GetString("messagePasEnvoye", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Les messages ont bien été supprimés..
+        /// </summary>
+        internal static string messagesSupprimes {
+            get {
+                return ResourceManager.GetString("messagesSupprimes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Le message a bien été supprimé..
+        /// </summary>
+        internal static string messageSupprime {
+            get {
+                return ResourceManager.GetString("messageSupprime", resourceCulture);
             }
         }
         
@@ -111,6 +165,24 @@ namespace Resources {
         internal static string nouvelleSupprimee {
             get {
                 return ResourceManager.GetString("nouvelleSupprimee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à La pièce jointe dépasse la taille limite qui est de {0} MB..
+        /// </summary>
+        internal static string pieceTropLourde {
+            get {
+                return ResourceManager.GetString("pieceTropLourde", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Le sujet du message ne peut être vide..
+        /// </summary>
+        internal static string sujetObligatoire {
+            get {
+                return ResourceManager.GetString("sujetObligatoire", resourceCulture);
             }
         }
         

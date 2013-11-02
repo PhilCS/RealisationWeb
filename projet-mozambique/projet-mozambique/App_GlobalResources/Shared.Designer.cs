@@ -79,6 +79,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Ajouter.
+        /// </summary>
+        internal static string ajouter {
+            get {
+                return ResourceManager.GetString("ajouter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Qui sommes-nous?.
         /// </summary>
         internal static string apropos {
@@ -214,6 +223,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Modifier.
+        /// </summary>
+        internal static string modifier {
+            get {
+                return ResourceManager.GetString("modifier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Nous joindre.
         /// </summary>
         internal static string nousjoindre {
@@ -277,6 +295,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Résultats de la recherche.
+        /// </summary>
+        internal static string resultatsRecherche {
+            get {
+                return ResourceManager.GetString("resultatsRecherche", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Sélectionner une langue.
         /// </summary>
         internal static string selectLanguage {
@@ -291,6 +318,15 @@ namespace Resources {
         internal static string sondages {
             get {
                 return ResourceManager.GetString("sondages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Supprimer.
+        /// </summary>
+        internal static string supprimer {
+            get {
+                return ResourceManager.GetString("supprimer", resourceCulture);
             }
         }
     }

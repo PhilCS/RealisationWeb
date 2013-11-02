@@ -1,66 +1,26 @@
 ﻿@using projet_mozambique.Utilitaires;
 @using projet_mozambique.Models;
 @{
-    ViewBag.Title = "Gestion des nouvelles";
+    ViewBag.Title = Resources.Admin.modifierSupprimerNouvelle;
 
-    if(String.IsNullOrEmpty(Request.QueryString["gestion"]) == false)
-    {
-        if(Request.QueryString["gestion"] == "1")
-        {
-            <h1>Ajouter une nouvelle</h1>
+    <h1>@Resources.Admin.modifierSupprimerNouvelle</h1>
             
-            Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
+    List<GetNouvelles_Result> lstN = (ViewData[Constantes.CLE_NOUVELLES] as List<GetNouvelles_Result>);
+    Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
             
-            <form action="ajouterNouvelle" method="post" class="form-nouvelle">
-                <label for="titre">Titre de la nouvelle : *</label>
-                <input type="text" name="titre" id="titre" maxlength="100" />
-                <br />
-                <label for="texte">Description de la nouvfelle : *</label>
-                <br />
-                <textarea name="texte" id="texte"></textarea>
-                <br />
-                <input type="submit" class="btnForm" value="Ajouter"/>
-                <a href="publique" class="btnForm">Annuler</a>
-            </form>
-        }
-        else
-        {
-            <h1>Modifier/Supprimer une nouvelle</h1>
-            
-            List<GetNouvelles_Result> lstN = (ViewData[Constantes.CLE_NOUVELLES] as List<GetNouvelles_Result>);
-            Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
-            
-            <form action="modifierNouvelle" method="post">
-                <select name="id" class="lst-options-nouvelles">
-                     @for (int i = 0; i < lstN.Count; i++)
-                    {
-                        <option value="@lstN[i].ID">@lstN[i].TITRE (@lstN[i].DATEPUBLICATION.ToString("yyyy/MM/dd"))</option>
-                    }
-                </select>
+    <form action="ActionNouvelle" method="post">
+        <select name="id" class="lst-options-nouvelles">
+                @for (int i = 0; i < lstN.Count; i++)
+            {
+                <option value="@lstN[i].ID">@lstN[i].TITRE (@lstN[i].DATEPUBLICATION.ToString("yyyy/MM/dd"))</option>
+            }
+        </select>
 
-                <input type="submit" value="Modifier" name="modifier" class="btnForm" /> 
-                <input type="submit" name="supprimer" value="Supprimer" class="btnForm" />
-            </form>
+        <input type="submit" value="@Resources.Shared.modifier" name="modifier" id="btnModif" class="btnForm" /> 
+        <input type="submit" name="supprimer" value="@Resources.Shared.supprimer" id="btnSupp" class="btnForm" />
+    </form>
             
-        }
-    }
-    else
-    {
-        <h1>Modifier une nouvelle</h1>
-
-        Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
-        GetNouvelle_Result n = (TempData[Constantes.CLE_NOUVELLE] as GetNouvelle_Result);
-
-            <form class="form-nouvelle" action="confModifierNouvelle" method="post">
-                <input type="hidden" name="id" value="@n.ID" />
-                <label for="titre">Titre de la nouvelle : </label>
-                <input type="text" name="titre" value="@n.TITRE" maxlength="100"/>
-                <br />
-                <label for="description">Description de la nouvelle :</label>
-                <br />
-                <textarea name="description">@n.DESCRIPTION</textarea>
-                <br />
-                <input type="submit" class="btnForm" value="Modifier" />
-            </form>
-    }
 }
+
+
+

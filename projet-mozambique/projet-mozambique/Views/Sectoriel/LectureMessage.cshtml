@@ -2,20 +2,43 @@
 @using projet_mozambique.Models
 @{
     MessageMessagerie mess = (ViewData[Constantes.CLE_MESSAGE] as MessageMessagerie);
-    <h3>@mess.sujet <span class="date-envoi">(@Resources.Shared.recuLe @mess.dateEnvoi.ToString("yyyy/MM/dd hh:MM"))</span></h3>
     
-    <p>@Resources.Shared.envoyeA : 
-        @foreach (var d in mess.lstDestinataires)
+    <h3>@mess.sujet <span class="date-envoi">(@mess.dateEnvoi.ToString("yyyy/MM/dd hh:MM"))</span></h3>
+    
+    <p><span class="label-message">@Names.DisplayName.de : </span> @mess.nomExped (@mess.usernameExped)</p>    
+    
+    <p><span class="label-message">@Resources.Shared.envoyeA :</span>
+        @for (int i = 0; i < mess.lstDestinataires.Count; i++)
         {
-            @d;
+            @mess.lstDestinataires[i];
+
+            if(i != mess.lstDestinataires.Count -1)
+            {
+                @:,
+            }
+        }
+        
+    </p>
+    
+    <p><span class="label-message">@Names.DisplayName.PiecesJointes : </span>
+        @foreach (var pj in mess.lstPiecesJointes)
+        {
+            int taille = int.Parse(pj.TAILLEPIECE) / 1024;
+            <a href="/Sectoriel/Download?id=@pj.ID">@pj.NOMPIECE (@taille ko)</a>
         }
     </p>
     
-    <p>@Names.DisplayName.PiecesJointes : </p>
+    <p>@Html.Raw(mess.message)</p>
     
-    <p>@Names.DisplayName.Sujet : @mess.sujet</p>
     
-    <p>@mess.message</p>
+    <script>
+        $(function () {
+            if ('@mess' != '@WebSecurity.GetUserId(User.Identity.Name)')
+            {
+                
+            }
+        })
+    </script>
     
 
 }

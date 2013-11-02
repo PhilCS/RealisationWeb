@@ -1,33 +1,40 @@
-﻿@model projet_mozambique.Models.MessageModel
+﻿@using projet_mozambique.Utilitaires;
+@model projet_mozambique.Models.MessageModel
 @{
     ViewBag.Title = Resources.Sectoriel.nouveauMessage;
 }
 
-<h1>@Resources.Sectoriel.nouveauMessage</h1>
+<h1>@ViewData[Constantes.CLE_TITRE]</h1>
 
 @using (Html.BeginForm("NouveauMessage", "Sectoriel", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "formulaire nouveau-message", @id = "nouveau-message"}))
 {
-    @Html.ValidationSummary(false)
-
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    
     <div class="selection-dest">
         <h3>@Resources.Sectoriel.selectionDestinataires</h3>
         <input type="text" name="rech" id="rech" placeholder="@Resources.Sectoriel.nom" /> 
-        <a href="#" id="rechercher" class="btnForm">@Resources.Shared.rechercher</a>
+        <button id="rechercher" class="btnForm">@Resources.Shared.rechercher</button>
         <div id="liste-dest"></div>
     </div>
 
     <div>
-        @Html.LabelFor(x => x.destinataires) @Html.TextBoxFor(x => x.destinataires, new { @id = "dest" })
+        @Html.LabelFor(x => x.destinataires)
+        @Html.TextBoxFor(x => x.destinataires, new { @id = "dest"})
+        @Html.ValidationMessageFor(x =>x.destinataires)
     </div>
     
     <div>
-        @Html.LabelFor(x => x.sujet) @Html.EditorFor(x => x.sujet)
+        @Html.LabelFor(x => x.sujet) 
+        @Html.TextBoxFor(x => x.sujet, new { @maxlength = "50"})
+        @Html.ValidationMessageFor(x =>x.sujet)
     </div>
     
     <div>
-        @Html.EditorFor(x => x.piecesJointes[0]) @Html.LabelFor(x => x.piecesJointes) 
+        @Html.LabelFor(x => x.piecesJointes) <input type="file" name="piecesjointes" />
     </div>
     
+    @Html.ValidationMessageFor(x =>x.contenu)
     @Html.TextAreaFor(x => x.contenu) <br />
     
     <input type="submit" value="@Resources.Sectoriel.envoyer" class="btnForm" />
@@ -36,7 +43,8 @@
 <script type="text/javascript">
     $(function () {
 
-        $("#rechercher").click(function () {
+        $("#rechercher").click(function (e) {
+            e.preventDefault();
             var nameEntered = $("#rech").val()
 
             $.ajax({
@@ -53,16 +61,7 @@
             });
         });
 
-        $('#rech').keypress(function (event) {
-
-            var keycode = (event.keyCode ? event.keyCode : event.which);
-            if (keycode == '13') {
-                $("#rechercher").click();
-            }
-
-        });
-
-        $(window).keydown(function (event) {
+        $("#rech").keydown(function (event) {
             if (event.keyCode == 13) {
                 event.preventDefault();
                 return false;
@@ -78,7 +77,6 @@
 
         
     })
-
 
 </script>
 

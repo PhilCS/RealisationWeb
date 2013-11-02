@@ -123,6 +123,12 @@
   <data name="corbeille" xml:space="preserve">
     <value>Trash</value>
   </data>
+  <data name="destinataireInexistant" xml:space="preserve">
+    <value>The user {0} doesn't exist.</value>
+  </data>
+  <data name="envoyeA" xml:space="preserve">
+    <value>Sent to</value>
+  </data>
   <data name="envoyer" xml:space="preserve">
     <value>Send</value>
   </data>
@@ -144,8 +150,11 @@
   <data name="repondre" xml:space="preserve">
     <value>Reply</value>
   </data>
+  <data name="repondreMessage" xml:space="preserve">
+    <value>Reply to mail</value>
+  </data>
   <data name="selectionDestinataires" xml:space="preserve">
-    <value>Recipients selection</value>
+    <value>Recipients selection (by name/surname)</value>
   </data>
   <data name="supprimer" xml:space="preserve">
     <value>Delete</value>

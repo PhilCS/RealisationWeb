@@ -10,6 +10,8 @@ namespace projet_mozambique.Utilitaires
         private Constantes()
         { }
 
+        public const string BR = "<br/>";
+
         public const string RECH_NOUVELLES = "nouvelles";
         public const string RECH_PARTN = "partenaires";
 
@@ -29,6 +31,10 @@ namespace projet_mozambique.Utilitaires
         public const string CLE_SECTEURS = "secteurs";
         public const string CLE_SUJETSPUBLICATION = "sujetsPublication";
         public const string CLE_LISTE_UTILISATEURS = "listeUtilisateurs";
+        public const string CLE_TITRE = "titre";
+        public const string CLE_CORBEILLE = "corbeille";
+        public const string CLE_ACTION = "action";
+        public const string CLE_BOUTON = "bouton";
 
     }
 }

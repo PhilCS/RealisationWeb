@@ -2,23 +2,24 @@
 @using projet_mozambique.Models;
 @{
     
+    bool corbeille = ((ViewData[Constantes.CLE_CORBEILLE] as bool?) ?? false);
+
     List<MessageMessagerie> lstM = (ViewData[Constantes.CLE_LISTE_MSG] as List<MessageMessagerie>);
     
-    <ul>
+    <ul id="ulMessages">
         @for (int i = 0; i < lstM.Count; i++)
         {
-            <li id="@lstM[i].id" class="@(!lstM[i].lu?"nouveau-msg":"") @(i==0?"msg-courant":"")">               
+            <li id="@lstM[i].id" class="@(!lstM[i].lu ? "nouveau-msg" : "") @(i == 0 ? "msg-courant" : "")">               
 
-                        <input type="checkbox" />@lstM[i].sujet 
-                        <span class="infos-supp-msg"> | @lstM[i].dateEnvoi.ToString("yyyy/MM/dd HH:mm")
+                    <input type="checkbox" id="@lstM[i].id" />@lstM[i].sujet 
+                    <span class="infos-supp-msg"> | @lstM[i].dateEnvoi.ToString("yyyy/MM/dd HH:mm")
                             
-                            @if (lstM[i].lstPiecesJointes.Count > 0) 
-                            {
-                                <img class="attachment" src="~/Content/images/icones/icon-attachment.png" alt="Icône pièce jointe" />
-                            }
-                        </span>
-                    
-                </li>
+                    @if (lstM[i].lstPiecesJointes.Count > 0)
+                    {
+                        <img class="attachment" src="~/Content/images/icones/icon-attachment.png" alt="Icône pièce jointe" />
+                    }
+                    </span>
+            </li>
         }
     </ul>
 
@@ -26,6 +27,31 @@
 
 <script>
     $(document).ready(function () {
+        $("#supprimer-message").click(function (e) {
+            e.preventDefault();
+            var arrayId = [];
+
+            $('#ulMessages li input[type=checkbox]').each(function (idx, ck) {
+                if ($(ck).prop('checked'))
+                    arrayId.push(ck.id);
+            });
+
+            var def; 
+            if ('@corbeille' == 'False')
+                def = 0;
+            else
+                def = 1;
+
+            if (arrayId.length > 0) {
+                $.ajax({
+                    url: "/Sectoriel/SupprimerMessages",
+                    traditional: true,
+                    data: { lstId: arrayId, definitif: def },
+                    success: function () { window.location.href = "/Sectoriel/Messagerie" }
+                });
+            }
+        });
+
         $("#messages li").click(function (event) {
             var lu;
 
@@ -40,10 +66,32 @@
             $(this).addClass("msg-courant");
             $(this).removeClass("nouveau-msg");
             $("#contenu-message").load("LectureMessage?id=" + event.target.id + "&lu=" + lu);
+
+            $("#repondre-icone").attr("href", "RepondreMessage?id=" + event.target.id);
+
+            if ('@corbeille' == 'False')
+                $("#supprimer-icone").attr("href", "SupprimerMessage?id=" + event.target.id + "&definitif=0");
+            else
+                $("#supprimer-icone").attr("href", "SupprimerMessage?id=" + event.target.id + "&definitif=1");
+
             
         });
 
+        if (isEmpty($("#messages ul")))
+        {
+            $(".icones-actions").hide();
+            $("#contenu-message").text("");
+        }
+        else
+            $(".icones-actions").show();
+
         $("#messages li:first").trigger("click");
     });
+
+
+    function isEmpty(el)
+    {
+        return !$.trim(el.html());
+    }
     
 </script>
