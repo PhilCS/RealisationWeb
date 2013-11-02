@@ -117,8 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="contenuObligatoire" xml:space="preserve">
+    <value>Le contenu du message ne peut être vide.</value>
+  </data>
   <data name="descriptionVide" xml:space="preserve">
     <value>La description ne peut être vide.</value>
+  </data>
+  <data name="destObligatoire" xml:space="preserve">
+    <value>La liste des destinataires ne peut être vide.</value>
+  </data>
+  <data name="messageEnvoye" xml:space="preserve">
+    <value>Le message bien été envoyé.</value>
+  </data>
+  <data name="messagePasEnvoye" xml:space="preserve">
+    <value>Le message n'a pu être envoyé, une erreur est survenue.</value>
+  </data>
+  <data name="messagesSupprimes" xml:space="preserve">
+    <value>Les messages ont bien été supprimés.</value>
+  </data>
+  <data name="messageSupprime" xml:space="preserve">
+    <value>Le message a bien été supprimé.</value>
   </data>
   <data name="nonEditable" xml:space="preserve">
     <value>Cet élément ne peut être modifié.</value>
@@ -134,6 +152,12 @@
   </data>
   <data name="nouvelleSupprimee" xml:space="preserve">
     <value>La nouvelle a bien été supprimée.</value>
+  </data>
+  <data name="pieceTropLourde" xml:space="preserve">
+    <value>La pièce jointe dépasse la taille limite qui est de {0} MB.</value>
+  </data>
+  <data name="sujetObligatoire" xml:space="preserve">
+    <value>Le sujet du message ne peut être vide.</value>
   </data>
   <data name="titreVide" xml:space="preserve">
     <value>Le titre ne peut être vide.</value>

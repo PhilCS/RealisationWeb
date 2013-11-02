@@ -1,11 +1,11 @@
 ﻿@using projet_mozambique.Models
 @using projet_mozambique.Utilitaires
 @{
-    ViewBag.Title = "Résultats de la recherche";
+    ViewBag.Title = Resources.Shared.resultatsRecherche;
     string type = (ViewData[Constantes.CLE_TYPE_RECHERCHE] as string);
     List<GetRechercheNouvelle_Result> lstNouv;
     
-    <h1>Résultats de la recherche</h1>
+    <h1>@Resources.Shared.resultatsRecherche</h1>
     
     if(type == Constantes.RECH_NOUVELLES)
     {
@@ -14,7 +14,7 @@
             <ul>
                 @for (int i = 0; i < lstNouv.Count; i++)
                 {
-                    string affiche = lstNouv[i].TITRE + " // " + " publié le " +
+                    string affiche = lstNouv[i].TITRE + " // " + " " + Resources.Shared.publieLe + " " +
                         lstNouv[i].DATEPUBLICATION.ToString("yyyy/MM/dd");
                     
                     <li>@Html.ActionLink(affiche, 

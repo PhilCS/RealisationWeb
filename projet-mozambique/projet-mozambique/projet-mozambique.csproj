@@ -53,6 +53,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -256,7 +257,6 @@
     <Compile Include="Models\FILDISCUSSION.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\FileViewModel.cs" />
     <Compile Include="Models\FORUM.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
@@ -355,6 +355,7 @@
     <Compile Include="Models\NOUVELLE.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\NouvelleModel.cs" />
     <Compile Include="Models\PARTENAIRE.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
@@ -543,8 +544,6 @@
     <Content Include="Views\Sectoriel\ModifierMDP.cshtml" />
     <Content Include="Views\Sectoriel\Forum.cshtml" />
     <Content Include="Views\Sectoriel\NouveauMessage.cshtml" />
-    <Content Include="Views\Sectoriel\MessageEnvoyeOK.cshtml" />
-    <Content Include="Views\Sectoriel\MessagePasEnvoye.cshtml" />
     <Content Include="Views\Sectoriel\NouveauFil.cshtml" />
     <Content Include="Views\Sectoriel\FilPasAjoute.cshtml" />
     <Content Include="Views\Sectoriel\FilAjouteOK.cshtml" />
@@ -589,8 +588,6 @@
     <Content Include="Views\Admin\FilPasAjoute.cshtml" />
     <Content Include="Views\Admin\FilModifieOK.cshtml" />
     <Content Include="Views\Admin\SupprimerSondage.cshtml" />
-    <Content Include="Views\Sectoriel\SupprimerMessage.cshtml" />
-    <Content Include="Views\Sectoriel\RepondreMessage.cshtml" />
     <Content Include="Views\Admin\AjouterSondage.cshtml" />
     <Content Include="Views\Admin\AjoutSondageOK.cshtml" />
     <Content Include="Views\Admin\AjoutSondageErreur.cshtml" />
@@ -609,10 +606,10 @@
     <Content Include="Views\Emails\ResetPassword.cshtml" />
     <Content Include="Views\Sectoriel\ConfirmationCourriel.cshtml" />
     <Content Include="Views\Sectoriel\ConfirmationReinitialMotPasse.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\FileViewModel.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Copie de FileViewModel.cshtml" />
     <Content Include="Views\Sectoriel\SelectionDest.cshtml" />
+    <Content Include="Views\Admin\ModifierNouvelle.cshtml" />
+    <Content Include="Views\Admin\AjouterNouvelle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

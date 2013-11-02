@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ajouterNouvelle" xml:space="preserve">
+    <value>Ajouter une nouvelle</value>
+  </data>
+  <data name="gestionSectionPublique" xml:space="preserve">
+    <value>Gestion du contenu de la section publique</value>
+  </data>
   <data name="menuCalendrier" xml:space="preserve">
     <value>Gestion du calendrier</value>
   </data>
@@ -131,5 +137,14 @@
   </data>
   <data name="menuUtil" xml:space="preserve">
     <value>Gestion des utilisateurs</value>
+  </data>
+  <data name="modifierNouvelle" xml:space="preserve">
+    <value>Modifier une nouvelle</value>
+  </data>
+  <data name="modifierSupprimerNouvelle" xml:space="preserve">
+    <value>Modifier/Supprimer une nouvelle</value>
+  </data>
+  <data name="sectionPublique" xml:space="preserve">
+    <value>Section publique</value>
   </data>
 </root>

@@ -67,95 +67,93 @@ namespace projet_mozambique.Controllers
 
         public ActionResult gestionNouvelles(int? gestion)
         {
-            if (gestion == 2)
+            if (gestion != null)
             {
-                List<GetNouvelles_Result> lstN = db.GetNouvelles().ToList();
-                ViewData[Constantes.CLE_NOUVELLES] = lstN;
+                if (gestion == 2)
+                {
+                    List<GetNouvelles_Result> lstN = db.GetNouvelles().ToList();
+                    ViewData[Constantes.CLE_NOUVELLES] = lstN;
+                }
+
+                return View("GestionNouvelles");
             }
 
-            return View("GestionNouvelles");
+            return RedirectToAction("SectionPublique");
         }
 
         [HttpPost]
-        public ActionResult confModifierNouvelle(int id, string titre, string description)
-        {
-            string desc = description.Replace("\r\n", "<br/>");
-            db.ModifierNouvelle(id, titre, desc);
-
-            TempData[Constantes.CLE_MSG_RETOUR] =
-                new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.nouvelleModifiee);
-
-            return RedirectToAction("GestionNouvelles", new { gestion = 2 });
-        }
-
-        [HttpPost]
-        public ActionResult modifierNouvelle(int id)
+        public ActionResult ActionNouvelle(int id)
         {
             if (!string.IsNullOrEmpty(Request.Form["modifier"]))
             {
-                GetNouvelle_Result n = db.GetNouvelle(id).FirstOrDefault();
-                n.DESCRIPTION = n.DESCRIPTION.Replace("<br/>", "\r\n");
-
-                TempData[Constantes.CLE_NOUVELLE] = n;
-
-                return View("GestionNouvelles");
+                return RedirectToAction("ModifierNouvelle", "Admin", new { @id = id });
             }
             else if (!string.IsNullOrEmpty(Request.Form["supprimer"]))
             {
                 db.SupprimerNouvelle(id);
                 TempData[Constantes.CLE_MSG_RETOUR] =
-                    new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.nouvelleSupprimee);
+                            new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.nouvelleSupprimee);
 
                 return RedirectToAction("GestionNouvelles", new { gestion = 2 });
             }
-            else
-            {
-                return View("GestionNouvelles", new { gestion = 2 });
-            }
 
-            
+            return RedirectToAction("SectionPublique");
         }
 
-        /// <summary>
-        /// Action qui ajoute une nouvelle à la base de données
-        /// </summary>
-        /// <param name="titre">Titre de la nouvelle</param>
-        /// <param name="texte">Texte de la nouvelle</param>
-        /// <returns></returns>
         [HttpPost]
-        public ActionResult ajouterNouvelle(string titre, string texte)
+        [ValidateAntiForgeryToken]
+        public ActionResult ModifierNouvelle(NouvelleModel model)
         {
-            string textFormat;
-            Message msg;
-
-            if (!string.IsNullOrEmpty(titre) && !string.IsNullOrEmpty(texte))
+            if (ModelState.IsValid)
             {
-                textFormat = texte.Replace("\r\n", "<br/>");
+                string desc = model.description.Replace("\r\n", Constantes.BR);
+                db.ModifierNouvelle(model.id, model.titre, model.description);
+            
+                TempData[Constantes.CLE_MSG_RETOUR] =
+                    new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.nouvelleModifiee);
 
-                db.AjouterNouvelle(titre, textFormat);
-                msg = new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.nouvelleAjoutee);
+                return RedirectToAction("GestionNouvelles", new { gestion = 2 });
+            }
 
-                TempData[Constantes.CLE_MSG_RETOUR] = msg;
+            return View(model);
+        }
+
+        public ActionResult ModifierNouvelle(int id)
+        {
+            GetNouvelle_Result n = db.GetNouvelle(id).FirstOrDefault();
+            NouvelleModel nouvelle = new NouvelleModel();
+
+            nouvelle.id = n.ID;
+            nouvelle.datePublication = n.DATEPUBLICATION;
+            nouvelle.titre = n.TITRE;
+            nouvelle.description = n.DESCRIPTION.Replace(Constantes.BR, "\r\n");
+
+            return View(nouvelle);
+        }
+
+        public ActionResult AjouterNouvelle()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AjouterNouvelle(NouvelleModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                string desc = model.description.Replace("\r\n", Constantes.BR);
+
+                db.AjouterNouvelle(model.titre, desc);
+
+                TempData[Constantes.CLE_MSG_RETOUR] =
+                    new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.nouvelleAjoutee);
+
                 return View("SectionPublique");
             }
-            else
-            {
-                msg = new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Messages.nouvellePasAjoutee);
 
-                if (string.IsNullOrEmpty(titre))
-                {
-                    msg.lstErreurs.Add(Resources.Messages.titreVide);
-                }
-            
-                if (string.IsNullOrEmpty(texte))
-                {
-                    msg.lstErreurs.Add(Resources.Messages.descriptionVide);
-                }
-
-                TempData[Constantes.CLE_MSG_RETOUR] = msg;
-                return RedirectToAction("gestionNouvelles", new { gestion = 1 });
-            }
-
+            return View(model);
+        
         }
 
         public ActionResult gestionPartenaires()

@@ -123,6 +123,9 @@
   <data name="admin" xml:space="preserve">
     <value>Administration</value>
   </data>
+  <data name="ajouter" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
   <data name="apropos" xml:space="preserve">
     <value>Qui sommes-nous?</value>
   </data>
@@ -168,6 +171,9 @@
   <data name="messagerie" xml:space="preserve">
     <value>Messagerie</value>
   </data>
+  <data name="modifier" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
   <data name="nousjoindre" xml:space="preserve">
     <value>Nous joindre</value>
   </data>
@@ -189,10 +195,16 @@
   <data name="recuLe" xml:space="preserve">
     <value>Reçu le</value>
   </data>
+  <data name="resultatsRecherche" xml:space="preserve">
+    <value>Résultats de la recherche</value>
+  </data>
   <data name="selectLanguage" xml:space="preserve">
     <value>Sélectionner une langue</value>
   </data>
   <data name="sondages" xml:space="preserve">
     <value>Sondages</value>
+  </data>
+  <data name="supprimer" xml:space="preserve">
+    <value>Supprimer</value>
   </data>
 </root>

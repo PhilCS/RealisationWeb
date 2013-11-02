@@ -10,6 +10,9 @@ using WebMatrix.Data;
 using projet_mozambique.Utilitaires;
 using System.Globalization;
 using Postal;
+using System.IO;
+using System.Data.Common;
+using System.Transactions;
 
 namespace projet_mozambique.Controllers
 {
@@ -286,7 +289,8 @@ namespace projet_mozambique.Controllers
         /// <returns></returns>
         public PartialViewResult MessagesEnvoyes()
         {
-            List<GetMessagesEnvoyes_Result> lstMbd = db.GetMessagesEnvoyes(1).ToList();
+            int userId = WebSecurity.GetUserId(User.Identity.Name);
+            List<GetMessagesEnvoyes_Result> lstMbd = db.GetMessagesEnvoyes(userId).ToList();
             List<MessageMessagerie> lstM = new List<MessageMessagerie>();
             List<PIECEJOINTE> lstPJ;
             PIECEJOINTE pj;
@@ -328,7 +332,8 @@ namespace projet_mozambique.Controllers
         /// </summary>
         private void ObtenirMessagesRecus()
         {
-            List<GetMessagesPrives_Result> lstMbd = db.GetMessagesPrives(1).ToList();
+            int userId = WebSecurity.GetUserId(User.Identity.Name);
+            List<GetMessagesPrives_Result> lstMbd = db.GetMessagesPrives(userId).ToList();
             List<MessageMessagerie> lstM = new List<MessageMessagerie>();
             List<PIECEJOINTE> lstPJ;
             PIECEJOINTE pj;
@@ -369,7 +374,9 @@ namespace projet_mozambique.Controllers
         /// <returns></returns>
         public PartialViewResult Corbeille()
         {
-            List<GetMessagesSupprimes_Result> lstMbd = db.GetMessagesSupprimes(1).ToList();
+            int userId = WebSecurity.GetUserId(User.Identity.Name);
+
+            List<GetMessagesSupprimes_Result> lstMbd = db.GetMessagesSupprimes(userId).ToList();
             List<MessageMessagerie> lstM = new List<MessageMessagerie>();
             List<PIECEJOINTE> lstPJ;
             PIECEJOINTE pj;
@@ -395,22 +402,24 @@ namespace projet_mozambique.Controllers
                         lstPJ.Add(pj);
                     }
 
-                    lstM.Add(new MessageMessagerie(m.IDMESSAGE, m.SUJET, m.CONTENU, lstPJ, m.LU ?? false, m.DATEENVOI));
+                    lstM.Add(new MessageMessagerie(m.IDMESSAGE, m.SUJET, m.CONTENU, lstPJ, true, m.DATEENVOI));
                     dernierMess = m.IDMESSAGE;
                     posDernierMess++;
                 }
             }
 
             ViewData[Constantes.CLE_LISTE_MSG] = lstM;
-
+            ViewData[Constantes.CLE_CORBEILLE] = true;
             return PartialView("ListeMessages");
         }
 
         public PartialViewResult LectureMessage(int id, bool lu)
         {
+            int userId = WebSecurity.GetUserId(User.Identity.Name);
+
             if (!lu)
             {
-                db.LireMessage(id, 1);
+                db.LireMessage(id, userId);
             }
 
             List<GetMessage_Result> lstMess = db.GetMessage(id).ToList();
@@ -418,17 +427,25 @@ namespace projet_mozambique.Controllers
             PIECEJOINTE pj;
 
             foreach (GetMessage_Result item in lstMess)
-	        {
-		        pj = new PIECEJOINTE();
-                pj.ID = item.IDPIECE ?? 0;
-                pj.NOMPIECE = item.NOMPIECE;
-                pj.TAILLEPIECE = item.TAILLEPIECE;
+            {
+                if (item.IDPIECE != null)
+                {
+                    pj = new PIECEJOINTE();
+                    pj.ID = item.IDPIECE ?? 0;
+                    pj.NOMPIECE = item.NOMPIECE;
+                    pj.TAILLEPIECE = item.TAILLEPIECE;
 
-                lstPJ.Add(pj);
-	        }
+                    lstPJ.Add(pj);
+                }
+            }
+
+            var nom = from u in db.UTILISATEUR
+                      join mp in db.MESSAGEPRIVE on u.ID equals mp.IDEXPEDITEUR
+                      where mp.ID == id
+                      select new { u.NOMUTIL, nom = u.PRENOM + " " + u.NOM };
 
             MessageMessagerie mess = new MessageMessagerie(id, lstMess[0].SUJET, lstMess[0].CONTENU,
-                                     lstPJ, true, lstMess[0].DATEENVOI);
+                                     lstPJ, true, lstMess[0].DATEENVOI, nom.FirstOrDefault().nom, nom.FirstOrDefault().NOMUTIL);
 
             List<string> lstDest = new List<string>();
 
@@ -449,34 +466,125 @@ namespace projet_mozambique.Controllers
             return PartialView();
         }
 
+
+        public ActionResult Download(int id)
+        {
+            var query = from pj in db.PIECEJOINTE
+                        where pj.ID == id
+                        select new { pj.PIECESERIALISEE, pj.NOMPIECE };
+
+            return File(
+                query.FirstOrDefault().PIECESERIALISEE, 
+                System.Net.Mime.MediaTypeNames.Application.Octet, 
+                query.FirstOrDefault().NOMPIECE);
+        }
+
         
         public ActionResult NouveauMessage()
         {
-            return View();
+            MessageModel mess = new MessageModel();
+
+            if (TempData[Constantes.CLE_MESSAGE] != null)
+            {
+                MessageModel messOrigine = (TempData[Constantes.CLE_MESSAGE] as MessageModel);
+                mess.contenu = "\r\n\r\n******************************\r\n\r\n" + messOrigine.contenu;
+                mess.destinataires = messOrigine.destinataires;
+                mess.sujet = "RE: " + messOrigine.sujet;
+                ViewData[Constantes.CLE_TITRE] = Resources.Sectoriel.repondreMessage;
+            }
+            else
+                ViewData[Constantes.CLE_TITRE] = Resources.Sectoriel.nouveauMessage;
+
+
+            return View(mess);
         }
 
         [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult NouveauMessage(MessageModel message)
         {
-            List<int> lstDest = new List<int>();
-            string[] dest = message.destinataires.Split(new Char[] {' '});
-            int idNouveau;
-
-            foreach (string d in dest)
+            if (ModelState.IsValid)
             {
-                var util = from u in db.UTILISATEUR
-                           where u.NOMUTIL == d
-                           select u.ID;
+                List<int> lstDest = new List<int>();
+                string[] dest = message.destinataires.Split(new Char[] { ';' });
+                int idNouveau;
 
-                lstDest.Add(util.FirstOrDefault());
+                //PIÈCE JOINTE 
+                HttpPostedFileBase pj;
+                int MaxContentLength = 1024 * 1024 * 15;
+                string taillePiece = string.Empty;
+                string nomPiece = string.Empty;
+                byte[] dataPiece = null;
+
+
+                foreach (string d in dest)
+                {
+                    if (d.Trim() != string.Empty)
+                    {
+                        var util = from u in db.UTILISATEUR
+                                   where u.NOMUTIL.ToUpper() == d.Trim().ToUpper()
+                                   select u.ID;
+
+                        if (util.FirstOrDefault() != 0 && !lstDest.Contains(util.FirstOrDefault()))
+                            lstDest.Add(util.FirstOrDefault());
+                        else if (util.FirstOrDefault() == 0)
+                            ModelState.AddModelError("", String.Format(Resources.Sectoriel.destinataireInexistant, d));
+                    }
+                }
+
+                //PIÈCE JOINTE
+                if (message.piecesJointes != null)
+                {
+                    pj = message.piecesJointes;
+
+                    if (pj.ContentLength > MaxContentLength)
+                    {
+                        ModelState.AddModelError("", string.Format(Resources.Messages.pieceTropLourde, (MaxContentLength / 1024).ToString()));
+                    }
+                    else
+                    {
+                        taillePiece = pj.ContentLength.ToString();
+                        nomPiece = pj.FileName;
+
+                        MemoryStream target = new MemoryStream();
+                        pj.InputStream.CopyTo(target);
+                        dataPiece = target.ToArray();
+                    }
+ 
+                }
+
+                if (!ModelState.IsValid)
+                    return View(message);
+
+                //AJOUT DU MESSAGE
+                db.AjouterMessagePrive(WebSecurity.GetUserId(User.Identity.Name),
+                                        message.sujet,
+                                        message.contenu.Replace("\r\n", Constantes.BR));
+
+                var id = (from mp in db.MESSAGEPRIVE
+                            orderby mp.ID descending
+                            select mp.ID).Take(1);
+
+                idNouveau = id.FirstOrDefault();
+
+                //AJOUT DES DESTINATAIRES
+                foreach (var u in lstDest)
+                {
+                    db.AjouterDestinataireMess(idNouveau, u);
+                }
+
+                //AJOUT PIÈCE JOINTE
+                if (message.piecesJointes != null)
+                {
+                    db.AjouterPieceJointe(idNouveau, dataPiece, taillePiece, nomPiece);
+                }
+
+                TempData[Constantes.CLE_MESSAGE] = Resources.Messages.messageEnvoye;
+                        
+                return RedirectToAction("Messagerie");
             }
 
-            idNouveau = db.AjouterMessagePrive(WebSecurity.GetUserId(User.Identity.Name), message.sujet, message.contenu);
-
-            
-
-            return View();
+            return View(message);
         }
 
         public ContentResult SelectionDest(string rech)
@@ -498,20 +606,25 @@ namespace projet_mozambique.Controllers
             return Content(html);
         }
 
-        public ActionResult Messagerie()
+        public ActionResult Messagerie(int? location)
         {
-            ObtenirMessagesRecus();
-            return View();
-        }
-
-        public ActionResult MessageEnvoyeOK()
-        {
-            return View();
-        }
-
-        public ActionResult MessagePasEnvoye()
-        {
-            return View();
+            if (location == 1)
+            {
+                return BoiteReception();
+            }
+            if (location == 2)
+            {
+                return MessagesEnvoyes();
+            }
+            else if (location == 2)
+            {
+                return Corbeille();
+            }
+            else
+            {
+                ObtenirMessagesRecus();
+                return View();
+            }
         }
 
         public ActionResult Documents()
@@ -584,14 +697,68 @@ namespace projet_mozambique.Controllers
             return View();
         }
 
-        public ActionResult SupprimerMessage()
+        public ActionResult SupprimerMessages(int[] lstId, int definitif)
         {
-            return View();
+            if (lstId != null)
+            {
+                int idUser = WebSecurity.GetUserId(User.Identity.Name);
+
+                foreach (var id in lstId)
+                {
+                    var query = from mp in db.MESSAGEPRIVE
+                                where mp.IDEXPEDITEUR == idUser && mp.ID == id
+                                select mp;
+
+                    if (query.FirstOrDefault() != null)
+                    {
+                        if (definitif == 1)
+                            query.FirstOrDefault().SUPPRIMEDEFINITIF = true;
+                        else
+                            query.FirstOrDefault().SUPPRIME = true;
+                    }
+                    else
+                    {
+                        var query2 = from dm in db.DESTINATAIREMESSAGE
+                                     where dm.IDUTILISATEUR == idUser && dm.IDMESSAGE == id
+                                     select dm;
+                        if (definitif == 1)
+                            query2.FirstOrDefault().SUPPRIMEDEFINITIF = true;
+                        else
+                            query2.FirstOrDefault().SUPPRIME = true;
+                    }
+
+                    db.SaveChanges();
+                }
+
+                if (lstId.Length > 1)
+                    Session[Constantes.CLE_MESSAGE] = Resources.Messages.messagesSupprimes;
+                else
+                    Session[Constantes.CLE_MESSAGE] = Resources.Messages.messageSupprime;
+            }
+
+            return RedirectToAction("Messagerie");
         }
 
-        public ActionResult RepondreMessage()
+        public ActionResult SupprimerMessage(int id, int definitif)
         {
-            return View();
+            return SupprimerMessages(new int[1] { id }, definitif);
+        }
+
+        public ActionResult RepondreMessage(int id)
+        {
+            var messOrigine = from u in db.UTILISATEUR
+                           join mp in db.MESSAGEPRIVE on u.ID equals mp.IDEXPEDITEUR
+                           where mp.ID == id
+                           select new { u.NOMUTIL, mp.CONTENU, mp.SUJET };
+
+            MessageModel mess = new MessageModel();
+            mess.destinataires = messOrigine.FirstOrDefault().NOMUTIL;
+            mess.sujet = messOrigine.FirstOrDefault().SUJET;
+            mess.contenu = messOrigine.FirstOrDefault().CONTENU;
+
+            TempData[Constantes.CLE_MESSAGE] = mess;
+
+            return RedirectToAction("NouveauMessage");
         }
 
         private ActionResult RedirectToLocal(string returnUrl)

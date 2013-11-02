@@ -79,6 +79,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à L&apos;utilisateur {0} n&apos;existe pas..
+        /// </summary>
+        internal static string destinataireInexistant {
+            get {
+                return ResourceManager.GetString("destinataireInexistant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Envoyé a.
+        /// </summary>
+        internal static string envoyeA {
+            get {
+                return ResourceManager.GetString("envoyeA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Envoyer.
         /// </summary>
         internal static string envoyer {
@@ -142,7 +160,16 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Sélection des destinataires.
+        ///   Recherche une chaîne localisée semblable à Répondre à un message.
+        /// </summary>
+        internal static string repondreMessage {
+            get {
+                return ResourceManager.GetString("repondreMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sélection des destinataires (par nom/prénom).
         /// </summary>
         internal static string selectionDestinataires {
             get {

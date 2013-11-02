@@ -97,6 +97,24 @@ namespace Names {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à De.
+        /// </summary>
+        public static string de {
+            get {
+                return ResourceManager.GetString("de", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Description de la nouvelle.
+        /// </summary>
+        public static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Courriel.
         /// </summary>
         public static string Email {
@@ -142,7 +160,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Destinataires.
+        ///   Recherche une chaîne localisée semblable à Destinataires (noms d&apos;utilisateurs).
         /// </summary>
         public static string NomsDest {
             get {
@@ -228,6 +246,15 @@ namespace Names {
         public static string Sujet {
             get {
                 return ResourceManager.GetString("Sujet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Titre de la nouvelle.
+        /// </summary>
+        public static string Titre {
+            get {
+                return ResourceManager.GetString("Titre", resourceCulture);
             }
         }
         
