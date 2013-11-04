@@ -88,12 +88,12 @@ namespace projet_mozambique.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Le mot de passe est incorrect.");
+                        ModelState.AddModelError("", @Resources.Messages.PasswordInvalid);
                     } 
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Le nom d'utilisateur fourni n'existe pas.");
+                    ModelState.AddModelError("", @Resources.Messages.UsernameInvalid);
                 }
             }
 
@@ -156,7 +156,7 @@ namespace projet_mozambique.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid user name");
+                    ModelState.AddModelError("", @Resources.Messages.UsernameInvalid);
                 }
             }
 
@@ -197,12 +197,12 @@ namespace projet_mozambique.Controllers
             if (WebSecurity.ResetPassword(model.Token, model.NewPassword))
             {
                 TempData[Constantes.CLE_MSG_RETOUR] =
-                new Message(Message.TYPE_MESSAGE.SUCCES, "Votre mot de passe a bien été réinitialisé.");
+                new Message(Message.TYPE_MESSAGE.SUCCES, @Resources.Messages.ResetPasswordOK);
             }
             else
             {
                 TempData[Constantes.CLE_MSG_RETOUR] =
-                new Message(Message.TYPE_MESSAGE.ERREUR, "Votre mot de passe n'a pas été réinitialisé.");
+                new Message(Message.TYPE_MESSAGE.ERREUR, @Resources.Messages.ResetPasswortInvalid);
             }
               
             return RedirectToAction("Login", "Sectoriel");
@@ -275,7 +275,7 @@ namespace projet_mozambique.Controllers
 
                 db.ModifierUtilProfil(id, model.courriel, model.nom, model.prenom, model.adresse, model.ville, model.langue);
                 db.SaveChanges();
-                TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, "Vos informations personnelles ont été mises à jour.");
+                TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, @Resources.Messages.ModifierInfosOK);
                 return RedirectToAction("Profil", "Sectoriel");
             }
             return View(model);
@@ -302,12 +302,13 @@ namespace projet_mozambique.Controllers
             {
                 if (WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword))
                 {
-                    TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, "Votre mot de passe a été changé.");
+                    TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, @Resources.Messages.PasswordChangeOK);
                     return RedirectToAction("Profil", "Sectoriel");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Votre mot de passe n'a pu être changé");
+                    ModelState.AddModelError("", @Resources.Messages.ErrorMessage + " " +
+                        @Resources.Messages.PasswordChangeNotOK);
                 }
                 
             }

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace projet_mozambique.Utilitaires
 {
-    /*[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
     public class AccessDeniedAuthorizeAttribute : AuthorizeAttribute
     {
          protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
@@ -15,16 +15,16 @@ namespace projet_mozambique.Utilitaires
              {
                  //filterContext.Result = new HttpStatusCodeResult((int)System.Net.HttpStatusCode.Forbidden);
                  UrlHelper urlHelper = new UrlHelper(filterContext.RequestContext);
-                 filterContext.Result = new RedirectResult(urlHelper.Action("Error", "HttpError403"));
+                 filterContext.Result = new RedirectResult(urlHelper.Action("HttpError403", "Error"));
              }
              else
              {
                  base.HandleUnauthorizedRequest(filterContext);
              }
          }
-     }*/
+     }
 
-    public class AccessDeniedAuthorizeAttribute : AuthorizeAttribute
+    /*public class AccessDeniedAuthorizeAttribute : AuthorizeAttribute
     {
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
@@ -36,5 +36,5 @@ namespace projet_mozambique.Utilitaires
                 filterContext.Result = new RedirectResult(urlHelper.Action("HttpError403", "Error"));
             }
         }
-    }
+    }*/
 }
