@@ -14,7 +14,7 @@ using projet_mozambique.Utilitaires;
 namespace projet_mozambique.Controllers
 {
     [AllowAnonymous]
-    public class PublicController : Controller
+    public partial class PublicController : Controller
     {
         private Entities db = new Entities();
         //
@@ -70,11 +70,6 @@ namespace projet_mozambique.Controllers
             ViewData[Constantes.CLE_NOUVELLE] = n;            
 
             return View("Nouvelle");
-        }
-
-        public ActionResult partenaires()
-        {
-            return View("Partenaires");
         }
 
         public ActionResult APropos()

@@ -117,61 +117,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="accueil" xml:space="preserve">
-    <value>Home</value>
+  <data name="ajouterPublication" xml:space="preserve">
+    <value>Ajouter une publication</value>
   </data>
-  <data name="admin" xml:space="preserve">
-    <value>Administration</value>
+  <data name="ajoutPublication" xml:space="preserve">
+    <value>Publication d'un document</value>
   </data>
-  <data name="apropos" xml:space="preserve">
-    <value>Qui sommes-nous?</value>
+  <data name="categorie" xml:space="preserve">
+    <value>Catégorie</value>
   </data>
-  <data name="calendrier" xml:space="preserve">
-    <value>Calendar</value>
+  <data name="categorieRequise" xml:space="preserve">
+    <value>La catégorie est requise</value>
   </data>
-  <data name="champsObligatoires" xml:space="preserve">
-    <value>* sont obligatoires</value>
+  <data name="description" xml:space="preserve">
+    <value>Description</value>
   </data>
-  <data name="documents" xml:space="preserve">
-    <value>Documents</value>
+  <data name="descriptionLongueur" xml:space="preserve">
+    <value>La description ne peut comporter plus de 100 caractères</value>
   </data>
-  <data name="erreur404msg" xml:space="preserve">
-    <value>Error 404</value>
+  <data name="descriptionRequise" xml:space="preserve">
+    <value>La description est requise</value>
   </data>
-  <data name="erreur404titre" xml:space="preserve">
-    <value>Error 404 Title</value>
+  <data name="fichier" xml:space="preserve">
+    <value>Fichier</value>
   </data>
-  <data name="erreur500titre" xml:space="preserve">
-    <value>Error 500</value>
+  <data name="fichierRequis" xml:space="preserve">
+    <value>Le fichier est requis</value>
   </data>
-  <data name="forums" xml:space="preserve">
-    <value>Forums</value>
+  <data name="fichierType" xml:space="preserve">
+    <value>Ce type de fichier n'est pas permis</value>
   </data>
-  <data name="lireSuite" xml:space="preserve">
-    <value>Next</value>
+  <data name="motsCles" xml:space="preserve">
+    <value>Mots-clés</value>
   </data>
-  <data name="login" xml:space="preserve">
-    <value>Log In</value>
+  <data name="publicationAjoutee" xml:space="preserve">
+    <value>La publication a bien été ajoutée.</value>
   </data>
-  <data name="logout" xml:space="preserve">
-    <value>Log Out</value>
+  <data name="publicationErreur" xml:space="preserve">
+    <value>Une erreur s'est produite lors de l'ajout de la publication.</value>
   </data>
-  <data name="nousjoindre" xml:space="preserve">
-    <value>Contact</value>
+  <data name="secteur" xml:space="preserve">
+    <value>Secteur</value>
   </data>
-  <data name="nouvelles" xml:space="preserve">
-    <value>News</value>
+  <data name="secteurRequis" xml:space="preserve">
+    <value>Le secteur est requis</value>
   </data>
-  <data name="partenaires" xml:space="preserve">
-    <value>Partenaires</value>
+  <data name="titre" xml:space="preserve">
+    <value>Titre</value>
   </data>
-  <data name="publieLe" xml:space="preserve">
-    <value>Published date  :</value>
+  <data name="titreLongeur" xml:space="preserve">
+    <value>Le titre ne peut comporter plus de 60 caractères</value>
   </data>
-  <data name="selectLanguage" xml:space="preserve">
-    <value>Select a language</value>
-  </data>
-  <data name="sondages" xml:space="preserve">
-    <value>Polls</value>
+  <data name="titreRequis" xml:space="preserve">
+    <value>Le titre est requis</value>
   </data>
 </root>

@@ -10,10 +10,10 @@
 } else {
     <ul>
         <li>@Html.ActionLink(@Resources.Shared.accueil, "Index", "Sectoriel")</li>
-        <li>@Html.ActionLink(@Resources.Shared.calendrier, "Index", "Sectoriel")</li>
-        <li>@Html.ActionLink(@Resources.Shared.documents, "Index", "Sectoriel")</li>
-        <li>@Html.ActionLink(@Resources.Shared.forums, "Index", "Sectoriel")</li>
-        <li>@Html.ActionLink(@Resources.Shared.sondages, "Index", "Sectoriel")</li>
+        <li>@Html.ActionLink(@Resources.Shared.calendrier, "Calendrier", "Sectoriel")</li>
+        <li>@Html.ActionLink(@Resources.Shared.publications, "Publications", "Sectoriel")</li>
+        <li>@Html.ActionLink(@Resources.Shared.forums, "Forum", "Sectoriel")</li>
+        <li>@Html.ActionLink(@Resources.Shared.sondages, "Sondages", "Sectoriel")</li>
         @if (User.IsInRole("admin"))
         {
             <li>@Html.ActionLink(@Resources.Shared.admin, "Index", "Admin")</li>

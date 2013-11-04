@@ -12,26 +12,26 @@ namespace projet_mozambique.Models
         public string nomPage { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
-            ErrorMessageResourceType = typeof(@Resources.Messages))]
-        [Display(Name = "PageTitle", ResourceType = typeof(Names.DisplayName))] 
+            ErrorMessageResourceType = typeof(Resources.Messages))]
+        [Display(Name = "PageTitle", ResourceType = typeof(Resources.DisplayName))] 
         public string titre { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
-            ErrorMessageResourceType = typeof(@Resources.Messages))]
-        [Display(Name = "PageTitleTrad", ResourceType = typeof(Names.DisplayName))] 
+            ErrorMessageResourceType = typeof(Resources.Messages))]
+        [Display(Name = "PageTitleTrad", ResourceType = typeof(Resources.DisplayName))] 
         public string titreTrad { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
-            ErrorMessageResourceType = typeof(@Resources.Messages))]
-        [Display(Name = "PageContent", ResourceType = typeof(Names.DisplayName))]
+            ErrorMessageResourceType = typeof(Resources.Messages))]
+        [Display(Name = "PageContent", ResourceType = typeof(Resources.DisplayName))]
         public string contenu { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
-            ErrorMessageResourceType = typeof(@Resources.Messages))]
-        [Display(Name = "PageContentTrad", ResourceType = typeof(Names.DisplayName))]
+            ErrorMessageResourceType = typeof(Resources.Messages))]
+        [Display(Name = "PageContentTrad", ResourceType = typeof(Resources.DisplayName))]
         public string contenuTrad { get; set; }
 
-        [Display(Name = "File", ResourceType = typeof(Names.DisplayName))]
+        [Display(Name = "File", ResourceType = typeof(Resources.DisplayName))]
         public HttpPostedFileBase File { get; set; }
         
     }

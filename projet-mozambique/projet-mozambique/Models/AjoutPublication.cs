@@ -4,34 +4,37 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace projet_mozambique.ViewModels
+namespace projet_mozambique.Models
 {
-    public class AjoutPublication
+    [MetadataType(typeof(ValidationPublication))]
+    public partial class PUBLICATION
     {
-        [Display(Name = "Titre : *")]
-        [Required(ErrorMessage = "Le titre est requis")]
-        [StringLength(60, ErrorMessage = "Le titre ne peut comporter plus de 60 caractères")]
-        public string titre { get; set; }
-
-        [Display(Name = "Description : *")]
-        [Required(ErrorMessage = "La description est requise")]
-        [StringLength(60, ErrorMessage = "Le titre ne peut comporter plus de 60 caractères")]
-        public string description { get; set; }
-
-        [Display(Name = "Fichier : *")]
-        [Required(ErrorMessage = "Le fichier est requis")]
+        [Display(ResourceType = typeof(Resources.Publication), Name = "fichier")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Publication), ErrorMessageResourceName = "fichierRequis")]
         public HttpPostedFileBase fichier { get; set; }
 
-        [Display(Name = "Secteur : *")]
-        [Required(ErrorMessage = "Le secteur est requis")]
-        public int secteur { get; set; }
-
-        [Display(Name = "Catégorie : *")]
-        [Required(ErrorMessage = "La catégorie est requise")]
-        public int categorie { get; set; }
-
-        [Display(Name = "Mot clés : *")]
-        [Required(ErrorMessage = "Un ou des mot-clé(s) sont requis")]
+        [Display(ResourceType = typeof(Resources.Publication), Name = "motsCles")]
         public string motcles { get; set; }
+
+        private class ValidationPublication
+        {
+            [Display(ResourceType = typeof(Resources.Publication), Name = "titre")]
+            [Required]
+            [StringLength(60)]
+            public string TITRE { get; set; }
+
+            [Display(ResourceType = typeof(Resources.Publication), Name = "description")]
+            [Required]
+            [StringLength(100)]
+            public string DESCRIPTION { get; set; }
+
+            [Display(ResourceType = typeof(Resources.Publication), Name = "secteur")]
+            [Required]
+            public int IDSECTEUR { get; set; }
+
+            [Display(ResourceType = typeof(Resources.Publication), Name = "categorie")]
+            [Required]
+            public int IDSUJET { get; set; }
+        }
     }
 }

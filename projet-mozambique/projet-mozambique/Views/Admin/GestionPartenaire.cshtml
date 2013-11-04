@@ -1,75 +1,80 @@
-﻿@{
-    ViewBag.Title = "Gestion des partenaires";
-}
+﻿@model projet_mozambique.Models.PARTENAIRE
 
 @{
-    if(String.IsNullOrEmpty(Request.QueryString["gestion"]) == false)
+    ViewBag.Title = "GestionPartenaire";
+
+    Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
+    
+    string postAction;
+
+    if (Model != null && Model.ID > 0)
     {
-        if(Request.QueryString["gestion"] == "1")
-        {
-            <h1>Ajouter un partenaire</h1>
-            <p class="msgErreur">Tous les champs doivent être complétés.</p>
-            <form>
-                <label for="nom">Nom de l'entreprise : </label>
-                <input type="text" name="nom" />
-                <br />
-                <label for="raison">Raison sociale : </label>
-                <br />
-                <textarea name="raison"></textarea>
-                <br />
-                <label for="adr">Adresse : </label>
-                <input type="text" name="adr" />
-                <br />
-                <label for="tel">Téléphone : </label>
-                <input type="text" name="tel" value="xx xxx xxxxx" />
-                <br />
-                <label for="site">Site web : </label>
-                <input type="text" name="site" value="http://www.exemple.com" />
-                <br />
-                <label for="courriel">Courriel : </label>
-                <input type="text" name="courriel" value="exemple@site.com" />
-                <br />
-                <a href="publique" class="btnForm">Ajouter</a>
-            </form>
-        }
-        else
-        {
-            <h1>Modifier/Supprimer un partenaire</h1>
-            <p class="msgOk">Le partenaire a été modifié.</p>
-            <ul>
-                <li><a href="gestionPartenaires">Partenaire 1</a></li>
-                <li><a href="gestionPartenaires">Partenaire 2</a></li>
-                <li><a href="gestionPartenaires">Partenaire 3</a></li>
-            </ul>
-        }
+        <h1>@Resources.Partenaire.modifPartenaire</h1>
+        postAction = "ModifierPartenaire";
     }
     else
     {
-        <h1>Modifier un partenaire</h1>
-        <p class="msgErreur">Tous les champs doivent être complétés.</p>
-            <form>
-                <label for="nom">Nom de l'entreprise : </label>
-                <input type="text" name="nom" value="Entreprise 1"/>
-                <br />
-                <label for="raison">Raison sociale : </label>
-                <br />
-                <textarea name="raison">Cras mattis consectetur purus sit amet fermentum. 
-                    Nulla vitae elit libero, a pharetra augue.</textarea>
-                <br />
-                <label for="adr">Adresse : </label>
-                <input type="text" name="adr" value="555 avenue blablah, Maputo, Mozambique" />
-                <br />
-                <label for="tel">Téléphone : </label>
-                <input type="text" name="tel" value="21 555 12345" />
-                <br />
-                <label for="site">Site web : </label>
-                <input type="text" name="site" value="http://www.chose.com" />
-                <br />
-                <label for="courriel">Courriel : </label>
-                <input type="text" name="courriel" value="chose@site.com" />
-                <br />
-                <a href="gestionPartenaires?gestion=2" class="btnForm">Modifier</a>
-            </form>
+        <h1>@Resources.Partenaire.ajoutPartenaire</h1>
+        postAction = "AjouterPartenaire";
+    }
+
+    using (Html.BeginForm(postAction, "Admin", FormMethod.Post, new { @class = "formulaire" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        @Html.HiddenFor(model => model.ID)
+
+        <div>
+            @Html.LabelFor(model => model.NOM)
+            @Html.TextBoxFor(model => model.NOM)
+            @Html.ValidationMessageFor(model => model.NOM)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.RAISONSOCIALE)
+            @Html.TextBoxFor(model => model.RAISONSOCIALE)
+            @Html.ValidationMessageFor(model => model.RAISONSOCIALE)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.ADRESSE)
+            @Html.TextBoxFor(model => model.ADRESSE)
+            @Html.ValidationMessageFor(model => model.ADRESSE)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.VILLE)
+            @Html.TextBoxFor(model => model.VILLE)
+            @Html.ValidationMessageFor(model => model.VILLE)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.PAYS)
+            @Html.TextBoxFor(model => model.PAYS)
+            @Html.ValidationMessageFor(model => model.PAYS)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.TELEPHONE)
+            @Html.TextBoxFor(model => model.TELEPHONE)
+            @Html.ValidationMessageFor(model => model.TELEPHONE)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.SITEWEB)
+            @Html.TextBoxFor(model => model.SITEWEB)
+            @Html.ValidationMessageFor(model => model.SITEWEB)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.COURRIEL)
+            @Html.TextBoxFor(model => model.COURRIEL)
+            @Html.ValidationMessageFor(model => model.COURRIEL)
+        </div>
+
+        <div>
+            <input type="submit" class="btnForm" />
+        </div>
     }
 }
-

@@ -8,12 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using projet_mozambique.Models;
 using projet_mozambique.Utilitaires;
-using projet_mozambique.ViewModels;
 
 namespace projet_mozambique.Controllers
 {
     [AccessDeniedAuthorize(Roles = "admin")]
-    public class AdminController : Controller
+    public partial class AdminController : Controller
     {
         private Entities db = new Entities();
         //
@@ -156,11 +155,6 @@ namespace projet_mozambique.Controllers
         
         }
 
-        public ActionResult gestionPartenaires()
-        {
-            return View("GestionPartenaire");
-        }
-
         public ActionResult ModifPagePublique(string nomPage)
         {
             if (nomPage != null)
@@ -281,103 +275,6 @@ namespace projet_mozambique.Controllers
         public ActionResult Sondages()
         {
             return View();
-        }
-
-        public ActionResult SupprimerPublication()
-        {
-            return View();
-        }
-
-        public ActionResult Documents(int? secteur, int? categorie, string motcle)
-        {
-            List<PUBLICATION> listePubs;
-
-            if (secteur == null)
-            {
-                secteur = 1;
-            }
-
-            if (String.IsNullOrEmpty(motcle))
-            {
-                if (categorie == null)
-                {
-                    listePubs = db.GetPubParSecteur(secteur).ToList();
-                }
-                else
-                {
-                    listePubs = db.GetPubParSujet(secteur, categorie).ToList();
-                }
-            }
-            else
-            {
-                listePubs = db.GetPubParMotCle(secteur, motcle).ToList();
-            }
-
-            List<GetSecteurs_Result> listeSecteurs = db.GetSecteurs().ToList();
-            List<GetSujetsPublication_Result> listeSujetsPub = db.GetSujetsPublication().ToList();
-
-            ViewData[Constantes.CLE_SECTEURS] = listeSecteurs;
-            ViewData[Constantes.CLE_SUJETSPUBLICATION] = listeSujetsPub;
-            ViewData[Constantes.CLE_PUBLICATIONS] = listePubs;
-
-            return View();
-        }
-
-        [HttpGet]
-        public ActionResult PublicationDocument()
-        {
-            List<GetSecteurs_Result> listeSecteurs = db.GetSecteurs().ToList();
-            List<GetSujetsPublication_Result> listeSujetsPub = db.GetSujetsPublication().ToList();
-
-            TempData[Constantes.CLE_SECTEURS] = listeSecteurs;
-            TempData[Constantes.CLE_SUJETSPUBLICATION] = listeSujetsPub;
-
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult PublicationDocument(AjoutPublication ajoutPubli)
-        {
-            List<GetSecteurs_Result> listeSecteurs = db.GetSecteurs().ToList();
-            List<GetSujetsPublication_Result> listeSujetsPub = db.GetSujetsPublication().ToList();
-
-            TempData[Constantes.CLE_SECTEURS] = listeSecteurs;
-            TempData[Constantes.CLE_SUJETSPUBLICATION] = listeSujetsPub;
-
-            if (ModelState.IsValid)
-            {
-                HttpPostedFileBase fichier = ajoutPubli.fichier;
-
-                string mimetype = fichier.ContentType;
-                string nomOriginal = Fichiers.GetNomOriginal(fichier.FileName);
-                string nomServeur = Fichiers.GetNomServeur(fichier.FileName);
-
-                fichier.SaveAs(Fichiers.CheminEnvois(nomServeur));
-
-                ObjectParameter idPub = new ObjectParameter("idpub", typeof(int));
-                db.AjouterPublication(ajoutPubli.titre, ajoutPubli.description, ajoutPubli.secteur, ajoutPubli.categorie, nomOriginal, nomServeur, mimetype, 1, idPub);
-
-                TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, "La publication a bien été ajoutée");
-
-                return RedirectToAction("Documents");
-            }
-            else
-            {
-                return View();
-            }
-        }
-
-        public ActionResult TelechargerPublication(string nomFichier)
-        {
-            var cd = new System.Net.Mime.ContentDisposition
-            {
-                FileName = nomFichier,
-                Inline = false,
-            };
-
-            Response.AppendHeader("Content-Disposition", cd.ToString());
-
-            return File(System.IO.File.ReadAllBytes(Fichiers.CheminEnvois(nomFichier)), nomFichier);
         }
 
         public ActionResult AjouterEvenement()

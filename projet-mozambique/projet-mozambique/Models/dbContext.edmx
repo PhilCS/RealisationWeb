@@ -1372,7 +1372,7 @@
           <Parameter Name="idNouvelle" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetNouvelles" ReturnType="Collection(MVPModel.GetNouvelles_Result)" />
-          <FunctionImport Name="GetPartenaire" ReturnType="Collection(MVPModel.GetPartenaire_Result)">
+          <FunctionImport Name="GetPartenaire" EntitySet="PARTENAIRE" ReturnType="Collection(MVPModel.PARTENAIRE)">
           <Parameter Name="idpar" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetPartenaires" ReturnType="Collection(MVPModel.GetPartenaires_Result)" />
@@ -2205,6 +2205,13 @@
         <ComplexType Name="GetPartenaires_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="NOM" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="RAISONSOCIALE" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="ADRESSE" Nullable="true" MaxLength="65" />
+          <Property Type="String" Name="VILLE" Nullable="true" MaxLength="65" />
+          <Property Type="String" Name="PAYS" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="TELEPHONE" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="SITEWEB" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="COURRIEL" Nullable="false" MaxLength="150" />
         </ComplexType>
         <ComplexType Name="GetPubParMotCle_Result">
           <Property Type="String" Name="TITRE" Nullable="false" MaxLength="60" />
@@ -2795,8 +2802,11 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetPartenaire" FunctionName="MVPModel.Store.GetPartenaire">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetPartenaires" FunctionName="MVPModel.Store.GetPartenaires">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="MVPModel.GetPartenaire_Result">
+              <ComplexTypeMapping TypeName="MVPModel.GetPartenaires_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NOM" ColumnName="NOM" />
                 <ScalarProperty Name="RAISONSOCIALE" ColumnName="RAISONSOCIALE" />
                 <ScalarProperty Name="ADRESSE" ColumnName="ADRESSE" />
@@ -2805,14 +2815,6 @@
                 <ScalarProperty Name="TELEPHONE" ColumnName="TELEPHONE" />
                 <ScalarProperty Name="SITEWEB" ColumnName="SITEWEB" />
                 <ScalarProperty Name="COURRIEL" ColumnName="COURRIEL" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetPartenaires" FunctionName="MVPModel.Store.GetPartenaires">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MVPModel.GetPartenaires_Result">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="NOM" ColumnName="NOM" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

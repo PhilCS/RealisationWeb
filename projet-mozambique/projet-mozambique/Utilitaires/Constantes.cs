@@ -35,6 +35,7 @@ namespace projet_mozambique.Utilitaires
         public const string CLE_CORBEILLE = "corbeille";
         public const string CLE_ACTION = "action";
         public const string CLE_BOUTON = "bouton";
+        public const string CLE_PARTENAIRES = "partenaires";
 
     }
 }

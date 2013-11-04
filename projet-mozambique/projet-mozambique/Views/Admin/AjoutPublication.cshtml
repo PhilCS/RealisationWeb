@@ -1,0 +1,61 @@
+﻿@using projet_mozambique.Utilitaires;
+@using projet_mozambique.Models;
+
+@model PUBLICATION
+
+@{
+    ViewBag.Title = "AjoutPublication";
+
+    Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
+
+    var listeSecteurs = ViewData[Constantes.CLE_SECTEURS] as List<GetSecteurs_Result>;
+    var listeSujetsPub = ViewData[Constantes.CLE_SUJETSPUBLICATION] as List<GetSujetsPublication_Result>;
+    
+    <h1>@Resources.Publication.ajoutPublication</h1>
+
+    using (Html.BeginForm("AjoutPublication", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", @class = "formulaire" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <div>
+            @Html.LabelFor(model => model.TITRE)
+            @Html.TextBoxFor(model => model.TITRE)
+            @Html.ValidationMessageFor(model => model.TITRE)
+        </div>
+    
+        <div>
+            @Html.LabelFor(model => model.DESCRIPTION)
+            @Html.TextBoxFor(model => model.DESCRIPTION)
+            @Html.ValidationMessageFor(model => model.DESCRIPTION)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.fichier)
+            @Html.TextBoxFor(model => model.fichier, new { type = "file" })
+            @Html.ValidationMessageFor(model => model.fichier)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.IDSECTEUR)
+            @Html.DropDownListFor(model => model.IDSECTEUR, new SelectList(listeSecteurs, "ID", "NOM"), "")
+            @Html.ValidationMessageFor(model => model.IDSECTEUR)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.IDSUJET)
+            @Html.DropDownListFor(model => model.IDSUJET, new SelectList(listeSujetsPub, "ID", "NOM"), "")
+            @Html.ValidationMessageFor(model => model.IDSUJET)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.motcles)
+            @Html.TextBoxFor(model => model.motcles)
+            @Html.ValidationMessageFor(model => model.motcles)
+        </div>
+    
+        <div>
+            <input type="submit" class="btnForm" />
+        </div>
+    }
+}

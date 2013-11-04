@@ -509,13 +509,22 @@ namespace projet_mozambique.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetNouvelles_Result>("GetNouvelles");
         }
     
-        public virtual ObjectResult<GetPartenaire_Result> GetPartenaire(Nullable<int> idpar)
+        public virtual ObjectResult<PARTENAIRE> GetPartenaire(Nullable<int> idpar)
         {
             var idparParameter = idpar.HasValue ?
                 new ObjectParameter("idpar", idpar) :
                 new ObjectParameter("idpar", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPartenaire_Result>("GetPartenaire", idparParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PARTENAIRE>("GetPartenaire", idparParameter);
+        }
+    
+        public virtual ObjectResult<PARTENAIRE> GetPartenaire(Nullable<int> idpar, MergeOption mergeOption)
+        {
+            var idparParameter = idpar.HasValue ?
+                new ObjectParameter("idpar", idpar) :
+                new ObjectParameter("idpar", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PARTENAIRE>("GetPartenaire", mergeOption, idparParameter);
         }
     
         public virtual ObjectResult<GetPartenaires_Result> GetPartenaires()

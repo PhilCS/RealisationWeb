@@ -132,9 +132,6 @@
   <data name="champsObligatoires" xml:space="preserve">
     <value>Les champs marqués d'une étoile sont obligatoires.</value>
   </data>
-  <data name="documents" xml:space="preserve">
-    <value>Documents</value>
-  </data>
   <data name="erreur404msg" xml:space="preserve">
     <value>La page à laquelle vous tentez d'accéder n'existe pas.</value>
   </data>
@@ -164,6 +161,9 @@
   </data>
   <data name="partenaires" xml:space="preserve">
     <value>Partenaires</value>
+  </data>
+  <data name="publications" xml:space="preserve">
+    <value>Publications</value>
   </data>
   <data name="publieLe" xml:space="preserve">
     <value>Publié le :</value>

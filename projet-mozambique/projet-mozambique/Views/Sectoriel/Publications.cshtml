@@ -1,0 +1,98 @@
+﻿@using projet_mozambique.Utilitaires;
+@using projet_mozambique.Models;
+
+@{
+    ViewBag.Title = "Publications (Droit de publication)";
+
+    Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
+
+    var listeSecteurs = (ViewData[Constantes.CLE_SECTEURS] as List<GetSecteurs_Result>);
+    var listeSujetsPub = (ViewData[Constantes.CLE_SUJETSPUBLICATION] as List<GetSujetsPublication_Result>);
+    var listePub = ViewData[Constantes.CLE_PUBLICATIONS] as List<PUBLICATION>;
+    
+    <h1><a href="/Admin/AjoutPublication"><img src="~/Content/images/icones/icon-add-black.png" title="@Resources.Publication.ajouterPublication" alt="Icône Ajouter" class="icone" /></a>@Resources.Shared.publications</h1>
+    
+    <div class="nav-tab">
+        <ul>
+            @for (int i = 0; i < listeSecteurs.Count; i++)
+            {
+                 <li>
+                     <a href="?secteur=@listeSecteurs[i].ID" 
+                     @if (Request.QueryString["secteur"] == listeSecteurs[i].ID.ToString() || (String.IsNullOrEmpty(Request.QueryString["secteur"]) && i == 0))
+                     {
+                        <text> class="tab-active" </text>
+                     }
+                     >@listeSecteurs[i].NOM</a>
+                 </li>
+            }
+        </ul>
+    </div>
+    
+    <div class="recherche-doc">
+
+        <form method="get">
+            <input type="hidden" name="secteur" value="@Request.QueryString["secteur"]" />
+            <label for="mot-cle">Recherche par mot-clé : </label>
+            <input id="mot-cle" name="motcle" placeholder="mot clé(s)" type="text" value="@Request.QueryString["mot-cle"]"/><br />
+            <label for="categorie">Recherche par catégorie : </label>
+            <select name="categorie" id="categorie">
+                <option value="">&lt;Toutes&gt;</option>
+                @foreach (GetSujetsPublication_Result sujetPub in listeSujetsPub)
+                {
+                    <option value="@sujetPub.ID" @if (Request.QueryString["categorie"] == sujetPub.ID.ToString()) { <text> selected="selected" </text> }>@sujetPub.NOM</option>
+                }
+            </select>
+
+            <input type="submit" value="Rechercher" class="btnForm" />
+        </form>
+
+    </div>
+
+    <div class="line-separator"></div>
+
+    if (listePub.Count > 0)
+    {
+        foreach (GetSujetsPublication_Result sujetPub in listeSujetsPub)
+        {
+            List<PUBLICATION> listePubSujet = listePub.Where(p => p.IDSUJET == sujetPub.ID).ToList();
+
+            if (listePubSujet.Count > 0)
+            {
+                <div id="cat-@sujetPub.ID" class="categorie">
+                    <h2>@sujetPub.NOM</h2>
+                    <div>
+                        <ul>
+                            @foreach (PUBLICATION publi in listePubSujet)
+                            {
+                                <li>
+                                    <a href="ObtenirPublication?nomFichier=@publi.NOMFICHIERSERVEUR">
+                                        <img src="~/Content/images/icones/icone-excel.png" alt="Fichier Excel" />@publi.TITRE
+                                        <span class="date-document">(ajouté le @publi.DATECREATION.ToLongDateString().Replace(DateTime.Now.DayOfWeek.ToString() + ", ", ""))</span> @*Ceci donne le jour, le mois, et l'année formattés correctement pour la langue du système*@
+                                    </a>
+                                    <a href="SupprimerPublication?id=@publi.ID">
+                                        <img src="~/Content/images/icones/icon-trashcan.png" title="Supprimer" alt="Icône supprimer document" class="icone" />
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+        }
+    }
+    else
+    {
+        <div>Aucun résultat</div>
+    }
+}
+
+<script>
+    $(function () {
+        $(".categorie").accordion({
+            heightStyle: "content",
+            collapsible: true,
+            active: false
+        });
+    });
+</script>
+

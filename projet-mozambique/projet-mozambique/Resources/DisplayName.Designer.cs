@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Names {
+namespace Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Names {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("projet_mozambique.App_GlobalResources.DisplayName", typeof(DisplayName).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("projet_mozambique.Resources.DisplayName", typeof(DisplayName).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
