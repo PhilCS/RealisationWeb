@@ -10,7 +10,7 @@
     var listeSujetsPub = (ViewData[Constantes.CLE_SUJETSPUBLICATION] as List<GetSujetsPublication_Result>);
     var listePub = ViewData[Constantes.CLE_PUBLICATIONS] as List<PUBLICATION>;
     
-    <h1>@if(User.IsInRole("admin") || User.IsInRole("professeur")){<a href="/Admin/AjoutPublication"><img src="~/Content/images/icones/icon-add-black.png" title="@Resources.Publication.ajouterPublication" alt="Icône Ajouter" class="icone" /></a>}@Resources.Shared.publications</h1>
+    <h1>@if(!User.IsInRole("etudiant")){<a href="/Admin/AjoutPublication"><img src="~/Content/images/icones/icon-add-black.png" title="@Resources.Publication.ajouterPublication" alt="Icône Ajouter" class="icone" /></a>}@Resources.Shared.publications</h1>
     
     <div class="nav-tab">
         <ul>
@@ -69,7 +69,7 @@
                                         <img src="~/Content/images/icones/icone-excel.png" alt="Fichier Excel" />@publi.TITRE
                                         <span class="date-document">(ajouté le @publi.DATECREATION.ToLongDateString().Replace(DateTime.Now.DayOfWeek.ToString() + ", ", ""))</span> @*Ceci donne le jour, le mois, et l'année formattés correctement pour la langue du système*@
                                     </a>
-                                    @if(User.IsInRole("admin") || User.IsInRole("professeur")){<a href="SupprimerPublication?id=@publi.ID">
+                                    @if(!User.IsInRole("etudiant")){<a href="SupprimerPublication?id=@publi.ID">
                                         <img src="~/Content/images/icones/icon-trashcan.png" title="Supprimer" alt="Icône supprimer document" class="icone" />
                                     </a>}
                                 </li>
