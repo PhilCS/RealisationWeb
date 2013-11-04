@@ -10,18 +10,18 @@ namespace projet_mozambique.Models
     public class MessageModel
     {
         [Required(ErrorMessageResourceName="contenuObligatoire", ErrorMessageResourceType=typeof(Resources.Messages))]
-        [Display(Name = "Contenu", ResourceType = typeof(Names.DisplayName))]
+        [Display(Name = "Contenu", ResourceType = typeof(Resources.DisplayName))]
         public string contenu { get; set; }
 
         [Required(ErrorMessageResourceName = "sujetObligatoire", ErrorMessageResourceType = typeof(Resources.Messages))]
-        [Display(Name = "Sujet", ResourceType = typeof(Names.DisplayName))]
+        [Display(Name = "Sujet", ResourceType = typeof(Resources.DisplayName))]
         public string sujet { get; set; }
 
-        [Display(Name = "PiecesJointes", ResourceType = typeof(Names.DisplayName))]
+        [Display(Name = "PiecesJointes", ResourceType = typeof(Resources.DisplayName))]
         public HttpPostedFileBase piecesJointes { get; set; }
 
         [Required(ErrorMessageResourceName = "destObligatoire", ErrorMessageResourceType = typeof(Resources.Messages))]
-        [Display(Name = "NomsDest", ResourceType = typeof(Names.DisplayName))]
+        [Display(Name = "NomsDest", ResourceType = typeof(Resources.DisplayName))]
         public string destinataires { get; set; }
     }
 }

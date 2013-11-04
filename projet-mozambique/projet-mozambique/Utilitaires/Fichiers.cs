@@ -26,7 +26,7 @@ namespace projet_mozambique.Utilitaires
 
             string extension = Path.GetExtension(nomComplet);
             string prefixe = Path.GetFileNameWithoutExtension(nomComplet);
-            prefixe = prefixe.Substring(0, Math.Min(prefixe.Length, 10) - extension.Length);
+            prefixe = prefixe.Substring(0, Math.Min(prefixe.Length, 100 - extension.Length));
 
             return prefixe + extension;
         }
@@ -37,7 +37,7 @@ namespace projet_mozambique.Utilitaires
 
             string extension = Path.GetExtension(nomComplet);
             string prefixe = Path.GetFileNameWithoutExtension(nomComplet);
-            prefixe = prefixe.Substring(0, Math.Min(prefixe.Length, 32) - extension.Length);
+            prefixe = prefixe.Substring(0, Math.Min(prefixe.Length, 32 - extension.Length));
 
             string nomServeur = prefixe + extension;
             string suffixe;
@@ -45,7 +45,7 @@ namespace projet_mozambique.Utilitaires
             for (int i = 1; File.Exists(CheminEnvois(nomServeur)); i++)
             {
                 suffixe = "_" + i;
-                prefixe = prefixe.Substring(0, Math.Min(prefixe.Length, 32) - (extension.Length + suffixe.Length));
+                prefixe = prefixe.Substring(0, Math.Min(prefixe.Length, 32 - (suffixe.Length + extension.Length)));
                 nomServeur = prefixe + suffixe + extension;
             }
 

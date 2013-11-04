@@ -17,7 +17,7 @@ using System.Transactions;
 namespace projet_mozambique.Controllers
 {
     [Authorize]
-    public class SectorielController : Controller
+    public partial class SectorielController : Controller
     {
         private Entities db = new Entities();
         //
@@ -657,11 +657,6 @@ namespace projet_mozambique.Controllers
                 ObtenirMessagesRecus();
                 return View();
             }
-        }
-
-        public ActionResult Documents()
-        {
-            return View();
         }
 
         public ActionResult ModifierPreferences()

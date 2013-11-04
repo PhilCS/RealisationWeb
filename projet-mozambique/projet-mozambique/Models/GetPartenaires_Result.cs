@@ -15,5 +15,12 @@ namespace projet_mozambique.Models
     {
         public int ID { get; set; }
         public string NOM { get; set; }
+        public string RAISONSOCIALE { get; set; }
+        public string ADRESSE { get; set; }
+        public string VILLE { get; set; }
+        public string PAYS { get; set; }
+        public string TELEPHONE { get; set; }
+        public string SITEWEB { get; set; }
+        public string COURRIEL { get; set; }
     }
 }
