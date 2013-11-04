@@ -8,13 +8,13 @@
     Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
     
     <ul>
-        <li>Nouvelles
+        <li>@Resources.Shared.nouvelles
             <ul>
                 <li><a href="AjouterNouvelle">@Resources.Admin.ajouterNouvelle</a></li>
-                <li><a href="GestionNouvelles">@Resources.Admin.modifierSupprimerNouvelle</a></li>
+                <li><a href="GestionNouvelles?gestion=2">@Resources.Admin.modifierSupprimerNouvelle</a></li>
             </ul>
         </li>
-        <li>Partenaires
+        <li>@Resources.Shared.partenaires
             <ul>
                 <li><a href="gestionPartenaires?gestion=1">Ajouter un partenaire</a></li>
                 <li><a href="gestionPartenaires?gestion=2">Modifier/Supprimer un partenaire</a></li>
