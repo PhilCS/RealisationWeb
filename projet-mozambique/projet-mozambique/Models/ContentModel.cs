@@ -13,25 +13,25 @@ namespace projet_mozambique.Models
 
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
             ErrorMessageResourceType = typeof(Resources.Messages))]
-        [Display(Name = "PageTitle", ResourceType = typeof(Resources.DisplayName))] 
+        [Display(Name = "PageTitle", ResourceType = typeof(Names.DisplayName))] 
         public string titre { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
             ErrorMessageResourceType = typeof(Resources.Messages))]
-        [Display(Name = "PageTitleTrad", ResourceType = typeof(Resources.DisplayName))] 
+        [Display(Name = "PageTitleTrad", ResourceType = typeof(Names.DisplayName))] 
         public string titreTrad { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
             ErrorMessageResourceType = typeof(Resources.Messages))]
-        [Display(Name = "PageContent", ResourceType = typeof(Resources.DisplayName))]
+        [Display(Name = "PageContent", ResourceType = typeof(Names.DisplayName))]
         public string contenu { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
             ErrorMessageResourceType = typeof(Resources.Messages))]
-        [Display(Name = "PageContentTrad", ResourceType = typeof(Resources.DisplayName))]
+        [Display(Name = "PageContentTrad", ResourceType = typeof(Names.DisplayName))]
         public string contenuTrad { get; set; }
 
-        [Display(Name = "File", ResourceType = typeof(Resources.DisplayName))]
+        [Display(Name = "File", ResourceType = typeof(Names.DisplayName))]
         public HttpPostedFileBase File { get; set; }
         
     }

@@ -93,7 +93,6 @@ namespace projet_mozambique
                         HttpContext.Current.Response.SetCookie(c);
                     }
                     */
-                    
                 }
 
                 /*HttpCookie cookie = new HttpCookie("lang");

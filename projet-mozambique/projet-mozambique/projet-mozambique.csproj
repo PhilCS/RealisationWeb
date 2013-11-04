@@ -138,90 +138,75 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\dbContext1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dbContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Admin.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Admin.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Admin.pt.designer.cs">
+    <Compile Include="App_GlobalResources\Admin.pt1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Admin.pt.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Publication.designer.cs">
-      <DependentUpon>Publication.resx</DependentUpon>
+    <Compile Include="App_GlobalResources\Admin1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>Admin.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\DisplayName.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DisplayName.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\DisplayName.pt.designer.cs">
+    <Compile Include="App_GlobalResources\DisplayName.pt1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DisplayName.pt.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Messages.designer.cs">
+    <Compile Include="App_GlobalResources\DisplayName1.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DisplayName.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Messages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Messages.pt.designer.cs">
+    <Compile Include="App_GlobalResources\Messages.pt.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.pt.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Partenaire.designer.cs">
+    <Compile Include="App_GlobalResources\Partenaire.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Partenaire.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Public.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Public.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Public.pt.designer.cs">
+    <Compile Include="App_GlobalResources\Public.pt1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Public.pt.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Sectoriel.designer.cs">
+    <Compile Include="App_GlobalResources\Public1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Sectoriel.resx</DependentUpon>
+      <DependentUpon>Public.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Sectoriel.pt.designer.cs">
+    <Compile Include="App_GlobalResources\Publication.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Publication.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Sectoriel.pt1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Sectoriel.pt.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Shared.designer.cs">
+    <Compile Include="App_GlobalResources\Sectoriel1.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sectoriel.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Shared.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Shared.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Shared.pt.designer.cs">
+    <Compile Include="App_GlobalResources\Shared.pt.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Shared.pt.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\StringResources.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>StringResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\StringResources.pt.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>StringResources.pt.resx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -631,90 +616,62 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Admin.pt.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Admin.pt.designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Admin.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Admin.designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\DisplayName.pt.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>DisplayName.pt.designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\DisplayName.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>DisplayName.designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Messages.pt.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
+    <Content Include="App_GlobalResources\Shared.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Shared.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Shared.pt.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Shared.pt.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Messages.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Messages.pt.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Messages.pt.designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Messages.resx">
+    </Content>
+    <Content Include="App_GlobalResources\Admin.pt.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Admin.pt1.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Admin.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Admin1.designer.cs</LastGenOutput>
+    </Content>
+    <EmbeddedResource Include="App_GlobalResources\DisplayName.pt.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Messages.designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <LastGenOutput>DisplayName.pt1.designer.cs</LastGenOutput>
+      <CustomToolNamespace>Names</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Partenaire.resx">
+    <EmbeddedResource Include="App_GlobalResources\DisplayName.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DisplayName1.designer.cs</LastGenOutput>
+      <CustomToolNamespace>Names</CustomToolNamespace>
+    </EmbeddedResource>
+    <Content Include="App_GlobalResources\Public.pt.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Public.pt1.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Public.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Public1.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Sectoriel.pt.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Sectoriel.pt1.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Sectoriel.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Sectoriel1.designer.cs</LastGenOutput>
+    </Content>
+    <EmbeddedResource Include="App_GlobalResources\Partenaire.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Partenaire.designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Public.pt.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Public.pt.designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Public.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Public.designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Sectoriel.pt.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Sectoriel.pt.designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Sectoriel.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Sectoriel.designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Shared.pt.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Shared.pt.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Shared.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Shared.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\StringResources.pt.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>StringResources.pt.designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\StringResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>StringResources.designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Publication.resx">
+    <EmbeddedResource Include="App_GlobalResources\Publication.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Publication.designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
