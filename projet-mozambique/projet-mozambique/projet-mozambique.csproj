@@ -173,15 +173,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Partenaire.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\Public.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Public.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_GlobalResources\Public.pt1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Public.pt.resx</DependentUpon>
-    </Compile>
-    <Compile Include="App_GlobalResources\Public1.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Public.resx</DependentUpon>
     </Compile>
     <Compile Include="App_GlobalResources\Publication.designer.cs">
       <AutoGen>True</AutoGen>
@@ -654,10 +654,6 @@
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Public.pt1.designer.cs</LastGenOutput>
     </Content>
-    <Content Include="App_GlobalResources\Public.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Public1.designer.cs</LastGenOutput>
-    </Content>
     <Content Include="App_GlobalResources\Sectoriel.pt.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Sectoriel.pt1.designer.cs</LastGenOutput>
@@ -671,6 +667,10 @@
       <LastGenOutput>Partenaire.designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
+    <Content Include="App_GlobalResources\Public.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Public.designer.cs</LastGenOutput>
+    </Content>
     <EmbeddedResource Include="App_GlobalResources\Publication.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Publication.designer.cs</LastGenOutput>
