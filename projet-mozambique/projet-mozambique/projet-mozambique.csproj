@@ -232,6 +232,8 @@
     <Compile Include="Models\CONTENU.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MessageForumModel.cs" />
+    <Compile Include="Models\FilModel.cs" />
     <Compile Include="Models\dbContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

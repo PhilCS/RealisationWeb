@@ -499,6 +499,20 @@ input:read-only
     margin-right:5px;
 }
 
+.nav-bas
+{
+    width:100%;
+    background-color:rgba(0,0,0,0.02);
+    height:45px;
+    border-top:1px solid rgba(0,0,0,0.6);
+}
+
+.infos-supp
+{
+    font-size:11px;
+    font-weight:normal;
+}
+
 .forum
 {
     width:100%;
@@ -510,7 +524,6 @@ input:read-only
     text-align:center;
     width:100%;
     border-collapse:collapse;
-    margin-bottom:10px;
 }
 
 .forum table tbody tr:hover

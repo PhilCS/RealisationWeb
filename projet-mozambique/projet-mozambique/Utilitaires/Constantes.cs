@@ -36,6 +36,9 @@ namespace projet_mozambique.Utilitaires
         public const string CLE_ACTION = "action";
         public const string CLE_BOUTON = "bouton";
         public const string CLE_PARTENAIRES = "partenaires";
+        public const string CLE_FORUM = "forum";
+        public const string CLE_FILSFORUM = "filsForum";
+        public const string CLE_FILDISCUSSION = "fil";
 
     }
 }

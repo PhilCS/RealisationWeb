@@ -167,7 +167,7 @@ header nav ul.nav-secondaire li {
 .content h1 {
     font-size:2.1em;
     text-transform:uppercase;
-    margin:15px 0 30px;
+    margin:15px 0 20px;
 }
 
 .texte_accueil {
@@ -239,6 +239,11 @@ header nav ul.nav-secondaire li {
 
 img.modifier {
     
+}
+
+.nouvelles
+{
+    clear:both;
 }
 
 .nouvelle p

@@ -639,6 +639,7 @@ namespace projet_mozambique.Controllers
             return Content(html);
         }
 
+        //TODO : PAGINER MESSAGES
         public ActionResult Messagerie(int? location)
         {
             if (location == 1)
@@ -665,8 +666,49 @@ namespace projet_mozambique.Controllers
             return View();
         }
 
-        public ActionResult Forum()
+        public ActionResult Forum(int? page)
         {
+            //TODO : ALLER CHERCHER LE BON SECTEUR!
+            int secteur = 1;
+            GetForum_Result f = db.GetForum(secteur).FirstOrDefault();
+            List<GetFilDiscussion_Result> lstFil = db.GetFilDiscussion(f.ID).ToList();
+            FilModel fil;
+            int idFil;
+            List<FilModel> lstFilModel = new List<FilModel>();
+
+            for (int i = 0; i < lstFil.Count; i++)
+            {
+                fil = new FilModel();
+                idFil = lstFil[i].ID;
+
+                fil.id = lstFil[i].ID;
+                fil.nbLectures = lstFil[i].NBLECTURES;
+                fil.nbMessages = (from m in db.MESSAGEFORUM
+                                  join fi in db.FILDISCUSSION on m.IDFILDISCUSSION equals fi.ID
+                                  where fi.ID == idFil
+                                  select m).Count();
+                fil.sujet = lstFil[i].SUJET;
+
+                fil.dernierParticipant = (from u in db.UTILISATEUR
+                                          join m in db.MESSAGEFORUM on u.ID equals m.IDUTILISATEUR
+                                          where m.IDFILDISCUSSION == idFil
+                                          orderby m.DATEPUBLICATION descending
+                                          select u.PRENOM + " " + u.NOM).Take(1).FirstOrDefault();
+
+                fil.dateDerniereReponse = (from u in db.UTILISATEUR
+                                          join m in db.MESSAGEFORUM on u.ID equals m.IDUTILISATEUR
+                                          where m.IDFILDISCUSSION == idFil
+                                          orderby m.DATEPUBLICATION descending
+                                          select m.DATEPUBLICATION).Take(1).FirstOrDefault();
+
+                lstFilModel.Add(fil);
+            }
+
+            ListePaginee<FilModel> lstFilModelPag = new ListePaginee<FilModel>(lstFilModel, page ?? 0, 15);
+
+            ViewData[Constantes.CLE_FORUM] = f;
+            ViewData[Constantes.CLE_FILSFORUM] = lstFilModelPag;
+
             return View();
         }
 
@@ -685,9 +727,61 @@ namespace projet_mozambique.Controllers
             return View();
         }
 
-        public ActionResult FilDiscu()
+        public ActionResult FilDiscu(int id, int? idPage)
         {
-            return View();
+            if (filDiscuSecteurCourant(id))
+            {
+                var fil = from f in db.FILDISCUSSION
+                          where f.ID == id
+                          select f;
+
+                var lstM = db.GetMessagesForum(id);
+                List<MessageForumModel> lstMMod = new List<MessageForumModel>();
+                ListePaginee<MessageForumModel> lstMessPag;
+                MessageForumModel mm;
+
+                foreach (var m in lstM)
+                {
+                    mm = new MessageForumModel();
+                    mm.contenu = m.CONTENU;
+                    mm.datePublication = m.DATEPUBLICATION;
+                    mm.dateModification = m.DATEMODIFICATION ?? DateTime.MinValue;
+                    mm.auteur = (from u in db.UTILISATEUR
+                                 where u.ID == m.IDUTILISATEUR
+                                 select u.PRENOM + " " + u.NOM).FirstOrDefault();
+                    lstMMod.Add(mm);
+                }
+
+                FilModel filMod = new FilModel();
+                FILDISCUSSION unFil = fil.FirstOrDefault();
+                lstMessPag = new ListePaginee<MessageForumModel>(lstMMod, idPage ?? 0, 15);
+
+                filMod.id = unFil.ID;
+                filMod.listeMessages = lstMessPag;
+                filMod.sujet = unFil.SUJET;
+
+                ViewData[Constantes.CLE_FILDISCUSSION] = filMod;
+
+                return View();          
+            }
+
+            return RedirectToAction("Forum");
+        }
+
+        private bool filDiscuSecteurCourant(int id)
+        { 
+            //TODO : RÉCUPÉRER SECTEUR COURANT
+            int idSecteur = 1;
+            var x = from fi in db.FILDISCUSSION
+                    join fo in db.FORUM on fi.IDFORUM equals fo.ID
+                    join s in db.SECTEUR on fo.IDSECTEUR equals s.ID
+                    where fi.ID == id && s.ID == idSecteur
+                    select fi;
+
+            if (x.Any())
+                return true;
+
+            return false;
         }
 
         public ActionResult RepondreFilDiscu()
