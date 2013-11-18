@@ -5,16 +5,38 @@
     
     var lesNouvelles = (ViewData[Constantes.CLE_NOUVELLES] as ListePaginee<GetNouvelles_Result>);
     
-<h1>Nouvelles</h1>
-<div>
+    <h1>@Resources.Public.nouvelles</h1>
+    <div>
     <form action="getResultats" method="post">
         <input type="hidden" name="type" value="@Constantes.RECH_NOUVELLES" />
         <input type="text" name="recherche" maxlength="100" style="width:300px;"/>
         <input type="submit" value="@Resources.Shared.rechercher" class="btnForm" style="margin-left:10px;"/>
     </form>
-</div>
+    </div>
     
-    for (var i = 0; i<lesNouvelles.Count; i++)
+    <ul class="nav-pagination">
+        @if (lesNouvelles.ShowFirstPage)
+        {
+            <li>@Html.ActionLink("<<", "Nouvelles", new { page = 0 })</li>
+            <li>@Html.ActionLink("<", "Nouvelles", new { page = lesNouvelles.PageIndex - 1 })</li>         
+        }
+        else if (lesNouvelles.HasPreviousPage)
+        {
+            <li>@Html.ActionLink("<", "Nouvelles", new { page = lesNouvelles.PageIndex - 1 })</li>
+        }
+    
+        @if (lesNouvelles.ShowLastPage)
+        {
+            <li>@Html.ActionLink(">", "Nouvelles", new { page = lesNouvelles.PageIndex + 1 })</li>
+            <li>@Html.ActionLink(">>", "Nouvelles", new { page = lesNouvelles.TotalPages - 1 })</li>            
+        }
+        else if (lesNouvelles.HasNextPage)
+        {
+            <li>@Html.ActionLink(">", "Nouvelles", new { page = lesNouvelles.PageIndex + 1 })</li>
+        }
+    </ul>
+    <div class="nouvelles">
+    @for (var i = 0; i<lesNouvelles.Count; i++)
     {
         var longMax = Math.Min(lesNouvelles[i].DESCRIPTION.ToString().Length, 300);
         
@@ -39,6 +61,7 @@
             }
         </div>
     }    
+        </div>
     
     <ul class="nav-pagination">
         @if (lesNouvelles.ShowFirstPage)

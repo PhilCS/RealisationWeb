@@ -1,89 +1,35 @@
-﻿@{
+﻿@using projet_mozambique.Models;
+@using projet_mozambique.Utilitaires;
+@{
     ViewBag.Title = "Quisque volutpat metus id purus pulvinar consectetur";
+
+    FilModel f = (ViewData[Constantes.CLE_FILDISCUSSION] as FilModel);
+    //TODO : INCORPORER RESSOURCES
+    
+    <h1>@f.sujet</h1>
+
+    <div>
+        <a href="RepondreFilDiscu"><img src="~/Content/images/icones/icon-reply-forum.png" title="Répondre" alt="Icône répondre" class="icone"/></a>
+    </div>
+
+    foreach (var m in f.listeMessages)
+    {
+        <div class="forum-message">
+            <div class="date-auteur-message">
+                <p>
+                    Par @m.auteur, le @m.datePublication.ToLongDateString().Replace(DateTime.Now.DayOfWeek.ToString() + ", ", "")
+                    @if (m.dateModification != DateTime.MinValue)
+                    { 
+                        <br />
+                        <span class="infos-supp">Dernière modification le @m.dateModification.ToLongDateString().Replace(DateTime.Now.DayOfWeek.ToString() + ", ", "") </span>
+                    }
+                </p>
+            </div>
+            <div class="corps-message">
+                <p>
+                    @m.contenu
+                </p>
+            </div>
+        </div>    
+    }
 }
-
-<h1>Quisque volutpat metus id purus pulvinar consectetur</h1>
-
-<div>
-    <a href="RepondreFilDiscu"><img src="~/Content/images/icones/icon-reply-forum.png" title="Répondre" alt="Icône répondre" class="icone"/></a>
-</div>
-
-<div class="forum-message">
-    <div class="date-auteur-message">
-        <p>
-            Par Vanessa Trépanier, le 30 septembre 2013 12:01
-        </p>
-    </div>
-    <div class="corps-message">
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam blandit est aliquet nulla aliquam, vel pellentesqu
-            neque fringilla. Duis sodales dolor ac tortor tincidunt vulputate. Mauris id sapien magna. Aenean hendrerit interdum
-            massa, sed vestibulum justo pharetra eget. Etiam ac ligula eget nulla faucibus fermentum vitae nec magna. In non
-            augue bibendum, molestie felis et, accumsan metus. Aenean libero leo, bibendum et libero quis, lobortis mollis elit.
-            Proin eget quam suscipit, fermentum magna nec, aliquam tortor. Vestibulum tempor ullamcorper fringilla. Mauris
-            interdum enim at erat ultricies venenatis. Integer gravida tortor id convallis congue. Integer vitae elementum 
-            turpis, quis pellentesque purus. Aliquam ut urna sed purus ultrices dignissim. Nunc imperdiet scelerisque enim eget
-            viverra.
-        </p>
-    </div>
-</div>
-
-<div class="forum-message">
-    <div class="date-auteur-message">
-        <p>
-            Par Vanessa Trépanier, le 30 septembre 2013 12:01
-        </p>
-    </div>
-    <div class="corps-message">
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam blandit est aliquet nulla aliquam, vel pellentesqu
-            neque fringilla. Duis sodales dolor ac tortor tincidunt vulputate. Mauris id sapien magna. Aenean hendrerit interdum
-            massa, sed vestibulum justo pharetra eget. Etiam ac ligula eget nulla faucibus fermentum vitae nec magna. In non
-            augue bibendum, molestie felis et, accumsan metus. Aenean libero leo, bibendum et libero quis, lobortis mollis elit.
-            Proin eget quam suscipit, fermentum magna nec, aliquam tortor. Vestibulum tempor ullamcorper fringilla. Mauris
-            interdum enim at erat ultricies venenatis. Integer gravida tortor id convallis congue. Integer vitae elementum 
-            turpis, quis pellentesque purus. Aliquam ut urna sed purus ultrices dignissim. Nunc imperdiet scelerisque enim eget
-            viverra.
-        </p>
-    </div>
-</div>
-
-<div class="forum-message">
-    <div class="date-auteur-message">
-        <p>
-            Par Vanessa Trépanier, le 30 septembre 2013 12:01
-        </p>
-    </div>
-    <div class="corps-message">
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam blandit est aliquet nulla aliquam, vel pellentesqu
-            neque fringilla. Duis sodales dolor ac tortor tincidunt vulputate. Mauris id sapien magna. Aenean hendrerit interdum
-            massa, sed vestibulum justo pharetra eget. Etiam ac ligula eget nulla faucibus fermentum vitae nec magna. In non
-            augue bibendum, molestie felis et, accumsan metus. Aenean libero leo, bibendum et libero quis, lobortis mollis elit.
-            Proin eget quam suscipit, fermentum magna nec, aliquam tortor. Vestibulum tempor ullamcorper fringilla. Mauris
-            interdum enim at erat ultricies venenatis. Integer gravida tortor id convallis congue. Integer vitae elementum 
-            turpis, quis pellentesque purus. Aliquam ut urna sed purus ultrices dignissim. Nunc imperdiet scelerisque enim eget
-            viverra.
-        </p>
-    </div>
-</div>
-
-<div class="forum-message">
-    <div class="date-auteur-message">
-        <p>
-            Par Vanessa Trépanier, le 30 septembre 2013 12:01
-        </p>
-    </div>
-    <div class="corps-message">
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam blandit est aliquet nulla aliquam, vel pellentesqu
-            neque fringilla. Duis sodales dolor ac tortor tincidunt vulputate. Mauris id sapien magna. Aenean hendrerit interdum
-            massa, sed vestibulum justo pharetra eget. Etiam ac ligula eget nulla faucibus fermentum vitae nec magna. In non
-            augue bibendum, molestie felis et, accumsan metus. Aenean libero leo, bibendum et libero quis, lobortis mollis elit.
-            Proin eget quam suscipit, fermentum magna nec, aliquam tortor. Vestibulum tempor ullamcorper fringilla. Mauris
-            interdum enim at erat ultricies venenatis. Integer gravida tortor id convallis congue. Integer vitae elementum 
-            turpis, quis pellentesque purus. Aliquam ut urna sed purus ultrices dignissim. Nunc imperdiet scelerisque enim eget
-            viverra.
-        </p>
-    </div>
-</div>

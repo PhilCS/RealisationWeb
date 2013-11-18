@@ -1,127 +1,87 @@
-﻿@{
+﻿@using projet_mozambique.Utilitaires
+@using projet_mozambique.Models
+@{
+    //TODO : TRADUCTION RESSOURCES
     ViewBag.Title = "Forum";
-}
 
-<h1>Forum</h1>
+    ListePaginee<FilModel> lesFil = (ViewData[Constantes.CLE_FILSFORUM] as ListePaginee<FilModel>);
+    GetForum_Result f = (ViewData[Constantes.CLE_FORUM] as GetForum_Result);
 
-<nav class="nav-tab">
-    <ul>
-        <li>@Html.ActionLink("Construction", "Forum", new { controller = "Sectoriel" }, new { @class = "tab-active" })</li>
-        <li>@Html.ActionLink("Agriculture", "Forum", "Sectoriel")</li>
-    </ul>
-</nav>
+<h1>@f.TITRE</h1>
 
 <div class="forum">
     
     <a href="NouveauFil"><img src="~/Content/images/icones/icon-add-black.png" title="Nouveau" alt="Icône Nouveau fil" class="icone" /></a>
+    
     <ul class="nav-pagination">
-        <li>1</li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li>...</li>
-        <li><a href="#">Page suivante</a></li>
-        <li><a href="#">Dernière page</a></li>
+        @if (lesFil.ShowFirstPage)
+        {
+            <li>@Html.ActionLink("<<", "Forum", new { page = 0 })</li>
+            <li>@Html.ActionLink("<", "Forum", new { page = lesFil.PageIndex - 1 })</li>         
+        }
+        else if (lesFil.HasPreviousPage)
+        {
+            <li>@Html.ActionLink("<", "Forum", new { page = lesFil.PageIndex - 1 })</li>
+        }
+    
+        @if (lesFil.ShowLastPage)
+        {
+            <li>@Html.ActionLink(">", "Forum", new { page = lesFil.PageIndex + 1 })</li>
+            <li>@Html.ActionLink(">>", "Forum", new { page = lesFil.TotalPages - 1 })</li>            
+        }
+        else if (lesFil.HasNextPage)
+        {
+            <li>@Html.ActionLink(">", "Forum", new { page = lesFil.PageIndex + 1 })</li>
+        }
     </ul>
 
     <table>
         <thead>
             <tr>
                 <th class="col-fildiscu">Fil de discussion</th>
-                <th class="col-nb">Nb Réponses</th>
+                <th class="col-nb">Nb Messages</th>
                 <th class="col-nb">Nb Lectures</th>
                 <th class="col-derniermsg">Dernier message</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td class="col-fildiscu"><a href="FilDiscu">Quisque volutpat metus id purus pulvinar consectetur.</a></td>
-                <td>12</td>
-                <td>56</td>
-                <td>Par Vanessa Trépanier<br />
-                    2 octobre 2013 10:21
-                </td>
-            </tr>
-            <tr>
-                <td class="col-fildiscu"><a href="#">Maecenas eleifend tortor sed odio auctor, a facilisis purus faucibus.</a></td>
-                <td>12</td>
-                <td>56</td>
-                <td>Par Vanessa Trépanier<br />
-                    2 octobre 2013 10:21
-                </td>
-            </tr>
-            <tr>
-                <td class="col-fildiscu"><a href="#">Quisque volutpat metus id purus pulvinar consectetur.</a></td>
-                <td>12</td>
-                <td>56</td>
-                <td>Par Vanessa Trépanier<br />
-                    2 octobre 2013 10:21
-                </td>
-            </tr>
-            <tr>
-               <td class="col-fildiscu"><a href="#">Maecenas laoreet ante non orci aliquet, id pellentesque erat venenatis.</a></td>
-                <td>12</td>
-                <td>56</td>
-                <td>Par Vanessa Trépanier<br />
-                    2 octobre 2013 10:21
-                </td>
-            </tr>
-            <tr>
-               <td class="col-fildiscu"><a href="#">Suspendisse rutrum sem eget lacinia vulputate.</a></td>
-                <td>12</td>
-                <td>56</td>
-                <td>Par Vanessa Trépanier<br />
-                    2 octobre 2013 10:21
-                </td>
-            </tr>
-            <tr>
-               <td class="col-fildiscu"><a href="#">Maecenas laoreet ante non orci aliquet, id pellentesque erat venenatis.</a></td>
-                <td>12</td>
-                <td>56</td>
-                <td>Par Vanessa Trépanier<br />
-                    2 octobre 2013 10:21
-                </td>
-            </tr>
-            <tr>
-               <td class="col-fildiscu"><a href="#">Suspendisse rutrum sem eget lacinia vulputate.</a></td>
-                <td>12</td>
-                <td>56</td>
-                <td>Par Vanessa Trépanier<br />
-                    2 octobre 2013 10:21
-                </td>
-            </tr>
-            <tr>
-               <td class="col-fildiscu"><a href="#">Maecenas eleifend tortor sed odio auctor, a facilisis purus faucibus.</a></td>
-                <td>12</td>
-                <td>56</td>
-                <td>Par Vanessa Trépanier<br />
-                    2 octobre 2013 10:21
-                </td>
-            </tr>
-            <tr>
-               <td class="col-fildiscu"><a href="#">Maecenas eleifend tortor sed odio auctor, a facilisis purus faucibus.</a></td>
-                <td>12</td>
-                <td>56</td>
-                <td>Par Vanessa Trépanier<br />
-                    2 octobre 2013 10:21
-                </td>
-            </tr>
-            <tr>
-               <td class="col-fildiscu"><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a></td>
-                <td>12</td>
-                <td>56</td>
-                <td>Par Vanessa Trépanier<br />
-                    2 octobre 2013 10:21
-                </td>
-            </tr>
+            @for (int i = 0; i < lesFil.Count; i++)
+            {
+                <tr>
+                    <td class="col-fildiscu"><a href="FilDiscu?id=@lesFil[i].id">@lesFil[i].sujet</a></td>
+                    <td>@lesFil[i].nbMessages</td>
+                    <td>@lesFil[i].nbLectures</td>
+                    <td>Par @lesFil[i].dernierParticipant,<br />
+                        @lesFil[i].dateDerniereReponse.ToLongDateString().Replace(DateTime.Now.DayOfWeek.ToString() + ", ", "")
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
+    <div class="nav-bas">
+        <ul class="nav-pagination">
+            @if (lesFil.ShowFirstPage)
+            {
+                <li>@Html.ActionLink("<<", "Forum", new { page = 0 })</li>
+                <li>@Html.ActionLink("<", "Forum", new { page = lesFil.PageIndex - 1 })</li>         
+            }
+            else if (lesFil.HasPreviousPage)
+            {
+                <li>@Html.ActionLink("<", "Forum", new { page = lesFil.PageIndex - 1 })</li>
+            }
+    
+            @if (lesFil.ShowLastPage)
+            {
+                <li>@Html.ActionLink(">", "Forum", new { page = lesFil.PageIndex + 1 })</li>
+                <li>@Html.ActionLink(">>", "Forum", new { page = lesFil.TotalPages - 1 })</li>            
+            }
+            else if (lesFil.HasNextPage)
+            {
+                <li>@Html.ActionLink(">", "Forum", new { page = lesFil.PageIndex + 1 })</li>
+            }
+        </ul>
 
-    <ul class="nav-pagination">
-        <li>1</li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li>...</li>
-        <li><a href="#">Page suivante</a></li>
-        <li><a href="#">Dernière page</a></li>
-    </ul>
+    </div>
 </div>
+    
+}
