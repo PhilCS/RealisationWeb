@@ -36,6 +36,14 @@ namespace projet_mozambique.Models
 
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
             ErrorMessageResourceType = typeof(Resources.Messages))]
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "ConfirmEmail", ResourceType = typeof(Names.DisplayName))]
+        [Compare("courriel", ErrorMessageResourceName = "EmailMatch",
+            ErrorMessageResourceType = typeof(Resources.Messages))]
+        public string courrielConfirm { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
+            ErrorMessageResourceType = typeof(Resources.Messages))]
         [Display(Name = "FirstName", ResourceType = typeof(Names.DisplayName))]
         public string prenom { get; set; }
 

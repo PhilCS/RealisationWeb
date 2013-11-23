@@ -216,4 +216,8 @@
     <value>Titre de la nouvelle</value>
     <comment>NouvelleModel</comment>
   </data>
+  <data name="ConfirmEmail" xml:space="preserve">
+    <value>Confirmation du courriel</value>
+    <comment>UserModel</comment>
+  </data>
 </root>

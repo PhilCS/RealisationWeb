@@ -1,14 +1,28 @@
-﻿<!-- N'est pas fonctionnel, seulement un exemple -->
+﻿@using projet_mozambique.Models
 @if (Request.IsAuthenticated)
 {
-    <!--onchange="this.form.submit()"-->
-    <form method="post">
-        <select id="selectSector" name="sector">
-            <option>Pas fonctionnel encore</option>
-            <option value="agriculture" @(Culture == "fr" ? "selected=\"selected\"" : "")>Agriculture</option>
-            <option value="construction" @(Culture == "pt" ? "selected=\"selected\"" : "")>Construction civile</option>
-            <option value="tourisme" @(Culture == "pt" ? "selected=\"selected\"" : "")>Tourisme</option>
-            <option value="comptabilité" @(Culture == "pt" ? "selected=\"selected\"" : "")>Comptabilité</option>
+    var lst = Session["lstSect"] as Dictionary<int, string>;
+    int current = (int)Session["currentSecteur"];
+    
+    <form method="post" action="/Sectoriel/ChangeSecteur">
+        @Html.Label(Resources.Shared.secteur)
+        <select id="selectSector" name="secteur" onchange="this.form.submit()">
+            @foreach (var s in lst)
+            {
+                string[] noms = s.Value.Split('/');
+                string nom;
+
+                if (Session["Culture"].ToString().Equals("fr"))
+                {
+                    nom = noms[0];
+                }
+                else
+                {
+                    nom = noms[1];
+                }
+                <option value="@s.Key" @(current == s.Key ? "selected=\"selected\"" : "")>@nom</option>
+            }
         </select>
+        <input name="returnUrl" type="hidden" value="@this.Request.RawUrl" />
     </form>
 }

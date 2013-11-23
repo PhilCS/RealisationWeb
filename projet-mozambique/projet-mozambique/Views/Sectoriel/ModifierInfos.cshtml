@@ -15,6 +15,11 @@
             @Html.ValidationMessageFor(m => m.courriel)
         </li>
         <li>
+            @Html.LabelFor(m => m.courrielConfirm) 
+            @Html.TextBoxFor(m => m.courrielConfirm)
+            @Html.ValidationMessageFor(m => m.courrielConfirm)
+        </li>
+        <li>
             @Html.LabelFor(m => m.prenom) 
             @Html.TextBoxFor(m => m.prenom)
             @Html.ValidationMessageFor(m => m.prenom)

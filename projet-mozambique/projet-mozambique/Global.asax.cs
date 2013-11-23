@@ -142,5 +142,40 @@ namespace projet_mozambique
                 Response.Redirect(String.Format("~/Error/{0}?message={1}", action, httpException.Message));
             }
         }
+
+        protected void Session_Start(object sender, EventArgs e)
+        {
+            if (HttpContext.Current.Request.Cookies["lang"] != null)
+            {
+                CultureInfo ci = new CultureInfo(HttpContext.Current.Request.Cookies["lang"].Value);
+                
+                this.Session["Culture"] = ci;
+            }
+
+            if (HttpContext.Current.Request.Cookies["currentSect"] != null)
+                this.Session["currentSecteur"] = int.Parse(HttpContext.Current.Request.Cookies["currentSect"].Value);
+
+            if(HttpContext.Current.Request.Cookies["lstSect"] != null)
+            {
+                Dictionary<int, string> lstSect = new Dictionary<int, string>();
+
+                string[] cookieStr = HttpContext.Current.Request.Cookies["lstSect"].Value.Split('&');
+
+                for(int i = 0; i < cookieStr.Length; i++)
+                {
+                    string[] strSplit = cookieStr[i].Split(',');
+                    int idSecteur = int.Parse(strSplit[0]);
+                    lstSect.Add(idSecteur, strSplit[1]);
+                }
+
+                this.Session["lstSect"] = lstSect;
+            }
+
+        }
+
+        protected void Session_End(object sender, EventArgs e)
+        {
+            // event is raised when a session is abandoned or expires
+        }
     }
 }

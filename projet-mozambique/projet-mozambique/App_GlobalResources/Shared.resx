@@ -210,6 +210,9 @@
   <data name="resultatsRecherche" xml:space="preserve">
     <value>Résultats de la recherche</value>
   </data>
+  <data name="secteur" xml:space="preserve">
+    <value>Secteur</value>
+  </data>
   <data name="selectLanguage" xml:space="preserve">
     <value>Sélectionner une langue</value>
   </data>

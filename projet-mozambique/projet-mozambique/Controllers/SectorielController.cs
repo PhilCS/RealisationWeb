@@ -28,13 +28,36 @@ namespace projet_mozambique.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            var secteur = from s in db.SECTEUR
-                      where s.NOM.ToLower() == "agriculture"
-                      select s;
-
-            SECTEUR unSECTEUR = secteur.FirstOrDefault();
-             
+            int currentSecteur = (int)Session["currentSecteur"];
+            var sectSelect = from s in db.SECTEUR
+                                where s.ID == currentSecteur
+                                select s;
+            SECTEUR unSECTEUR = sectSelect.FirstOrDefault();
+                
             return View(unSECTEUR);
+        }
+
+        [HttpPost]
+        public ActionResult ChangeSecteur(string secteur, string returnUrl)
+        {
+            Session["currentSecteur"] = int.Parse(secteur);
+
+           if (Request.Cookies["currentSect"] != null)
+            {
+                var c = new HttpCookie("currentSect");
+               c.Expires = DateTime.Now.AddMonths(3);
+                c.Value = secteur;
+                Response.Cookies.Add(c);
+            }
+
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Public");
+            }
         }
 
         /// <summary>
@@ -66,10 +89,40 @@ namespace projet_mozambique.Controllers
                 if (utilisateur.Count() != 0)
                 {
                     UTILISATEUR currentUser = (UTILISATEUR)utilisateur.First();
+                   
 
                     if (WebSecurity.Login(currentUser.NOMUTIL, model.Password, model.RememberMe))
                     {
                         CultureInfo ci = new CultureInfo(currentUser.LANGUE.ToLower());
+
+                        
+
+                        Dictionary<int, string> lstSect = new Dictionary<int, string>();
+
+                        var sectUtil = from s in db.UTILISATEURSECTEUR
+                                       where s.IDUTILISATEUR == currentUser.ID
+                                       select s;
+
+                        string cookieStr = "";
+
+                        foreach (var v in sectUtil)
+                        {
+                            lstSect.Add(v.IDSECTEUR, v.SECTEUR.NOM + "/" + v.SECTEUR.NOMTRAD);
+                            cookieStr += v.IDSECTEUR.ToString();
+                            cookieStr += ',';
+                            cookieStr += v.SECTEUR.NOM;
+                            cookieStr += '/';
+                            cookieStr += v.SECTEUR.NOMTRAD;
+                            cookieStr += '&';
+                        }
+
+                        string lst = lstSect.ToString();
+                        //Liste des secteurs de l'utilisateur
+                        Session["lstSect"] = lstSect;
+                        //Index du secteur sélectionné dans la liste des secteurs de l'utilisateur
+                        Session["currentSecteur"] = lstSect.First().Key;
+
+                        Session["Culture"] = ci;
 
                         if (model.RememberMe)
                         {
@@ -77,13 +130,18 @@ namespace projet_mozambique.Controllers
                             cookie.Expires = DateTime.Now.AddMonths(3);
                             cookie.Value = ci.Name;
                             Response.AppendCookie(cookie);
+
+                            HttpCookie cookieLst = new HttpCookie("lstSect");
+                            cookieLst.Expires = DateTime.Now.AddMonths(3);
+                            cookieLst.Value = cookieStr;
+                            Response.AppendCookie(cookieLst);
+
+                            HttpCookie cookieCurrent = new HttpCookie("currentSect");
+                            cookieCurrent.Expires = DateTime.Now.AddMonths(3);
+                            cookieCurrent.Value = lstSect.First().Key.ToString();
+                            Response.AppendCookie(cookieCurrent);
                         }
-
-                        /*if (Request.Cookies.AllKeys.Contains("lang"))
-                            Request.Cookies["lang"].Value = ci.Name;*/
-
-                        Session["Culture"] = ci;
-
+                        
                         return RedirectToAction("Index", "Sectoriel");
                     }
                     else
@@ -109,8 +167,26 @@ namespace projet_mozambique.Controllers
         {
             WebSecurity.Logout();
 
-            if (Request.Cookies.AllKeys.Contains("lang"))
-                Response.Cookies.Remove("lang");
+            if (Request.Cookies["lang"] != null)
+            {
+                var c = new HttpCookie("lang");
+                c.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(c);
+            }
+
+            if (Request.Cookies["lstSect"] != null)
+            {
+                var c = new HttpCookie("lstSect");
+                c.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(c);
+            }
+
+            if (Request.Cookies["currentSect"] != null)
+            {
+                var c = new HttpCookie("currentSect");
+                c.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(c);
+            }
 
             return RedirectToAction("Index", "Public");
         }
@@ -241,6 +317,7 @@ namespace projet_mozambique.Controllers
             ProfileModel model = new ProfileModel();
 
             model.courriel = profil.COURRIEL;
+            model.courrielConfirm = profil.COURRIEL;
             model.prenom = profil.PRENOM;
             model.nom = profil.NOM;
             model.adresse = profil.ADRESSE;

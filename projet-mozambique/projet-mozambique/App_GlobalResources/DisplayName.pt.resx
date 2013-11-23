@@ -216,4 +216,8 @@
     <value>News title</value>
     <comment>NouvelleModel</comment>
   </data>
+  <data name="ConfirmEmail" xml:space="preserve">
+    <value>Confirm email</value>
+    <comment>UserModel</comment>
+  </data>
 </root>

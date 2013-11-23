@@ -208,4 +208,8 @@
     <value>Le nom d'usager est invalide.</value>
     <comment>Login</comment>
   </data>
+  <data name="EmailMatch" xml:space="preserve">
+    <value>Le courriel ne correspond pas.</value>
+    <comment>ModifierInfos</comment>
+  </data>
 </root>

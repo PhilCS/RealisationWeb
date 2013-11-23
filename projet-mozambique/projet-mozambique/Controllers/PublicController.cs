@@ -21,7 +21,7 @@ namespace projet_mozambique.Controllers
         // GET: /Public/
         public ActionResult Index()
         {
-            if (Request.IsAuthenticated && !User.IsInRole("admin"))
+            if (Request.IsAuthenticated /*&& !User.IsInRole("admin")*/)
                 return RedirectToAction("Index", "Sectoriel");
 
             GetContenu_Result contentResult = db.GetContenu("Accueil").FirstOrDefault();
@@ -46,7 +46,7 @@ namespace projet_mozambique.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Public");
             }
         }
 

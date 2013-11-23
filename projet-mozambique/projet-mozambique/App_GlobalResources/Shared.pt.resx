@@ -216,4 +216,7 @@
   <data name="publications" xml:space="preserve">
     <value>Publications</value>
   </data>
+  <data name="secteur" xml:space="preserve">
+    <value>Sector</value>
+  </data>
 </root>

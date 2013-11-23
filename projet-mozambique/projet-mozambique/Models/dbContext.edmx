@@ -339,6 +339,9 @@
           <Property Name="TITREACCUEIL" Type="varchar" Nullable="false" MaxLength="40" />
           <Property Name="TEXTEACCUEIL" Type="text" Nullable="false" />
           <Property Name="URLIMAGEACCUEIL" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="NOMTRAD" Type="varchar" MaxLength="40" />
+          <Property Name="TITREACCUEILTRAD" Type="varchar" MaxLength="40" />
+          <Property Name="TEXTEACCUEILTRAD" Type="text" />
         </EntityType>
         <EntityType Name="SONDAGE">
           <Key>
@@ -1745,6 +1748,9 @@
           <NavigationProperty Name="UTILISATEURSECTEUR" Relationship="MVPModel.FK_UTILSECT_SECT" FromRole="SECTEUR" ToRole="UTILISATEURSECTEUR" />
           <NavigationProperty Name="ECOLE" Relationship="MVPModel.ECOLESECTEUR" FromRole="SECTEUR" ToRole="ECOLE" />
           <NavigationProperty Name="EVENEMENT" Relationship="MVPModel.EVENEMENTSECTEUR" FromRole="SECTEUR" ToRole="EVENEMENT" />
+          <Property Type="String" Name="NOMTRAD" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="TITREACCUEILTRAD" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="TEXTEACCUEILTRAD" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="SONDAGE">
           <Key>
@@ -2506,6 +2512,9 @@
           <EntitySetMapping Name="SECTEUR">
             <EntityTypeMapping TypeName="MVPModel.SECTEUR">
               <MappingFragment StoreEntitySet="SECTEUR">
+                <ScalarProperty Name="TEXTEACCUEILTRAD" ColumnName="TEXTEACCUEILTRAD" />
+                <ScalarProperty Name="TITREACCUEILTRAD" ColumnName="TITREACCUEILTRAD" />
+                <ScalarProperty Name="NOMTRAD" ColumnName="NOMTRAD" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NOM" ColumnName="NOM" />
                 <ScalarProperty Name="TITREACCUEIL" ColumnName="TITREACCUEIL" />
