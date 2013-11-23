@@ -232,6 +232,11 @@
     <Compile Include="Models\CONTENU.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\dbContext1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\MessageForumModel.cs" />
     <Compile Include="Models\FilModel.cs" />
     <Compile Include="Models\dbContext.Context.cs">
@@ -678,6 +683,9 @@
       <LastGenOutput>Publication.designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
