@@ -21,12 +21,19 @@ namespace projet_mozambique.Controllers
         // GET: /Public/
         public ActionResult Index()
         {
-            if (Request.IsAuthenticated /*&& !User.IsInRole("admin")*/)
+            if (Request.IsAuthenticated)
                 return RedirectToAction("Index", "Sectoriel");
 
             GetContenu_Result contentResult = db.GetContenu("Accueil").FirstOrDefault();
 
             return View(contentResult);
+        }
+
+        public ActionResult Public()
+        { 
+            GetContenu_Result contentResult = db.GetContenu("Accueil").FirstOrDefault();
+
+            return View("Index", contentResult);
         }
 
         public ActionResult ChangeCulture(string lang, string returnUrl)

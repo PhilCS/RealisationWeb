@@ -212,4 +212,8 @@
     <value>The email does not match.</value>
     <comment>ModifierInfos</comment>
   </data>
+  <data name="UserAccessDenied" xml:space="preserve">
+    <value>You are not allowed in this section because you are not registered to a sector.</value>
+    <comment>Login</comment>
+  </data>
 </root>

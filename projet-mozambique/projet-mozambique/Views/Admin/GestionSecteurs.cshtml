@@ -1,0 +1,21 @@
+﻿@using projet_mozambique.Utilitaires
+@using projet_mozambique.Models
+@{
+    ViewBag.Title = Resources.Admin.menuSecteurs;
+
+    var lesSecteurs = (ViewData[Constantes.CLE_SECTEURS] as List<SECTEUR>);
+}
+
+<h1>@ViewBag.Title</h1>
+
+<ul class="liste-fleche">
+    @foreach (var s in lesSecteurs)
+    {
+        <li>@Html.ActionLink(s.NOM + " - " + s.NOMTRAD, 
+                                     "getSecteur",
+                                     "Admin",
+                                     new { id = s.ID })</li>
+    }
+</ul>
+<br />
+

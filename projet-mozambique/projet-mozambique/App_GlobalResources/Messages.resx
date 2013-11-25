@@ -212,4 +212,8 @@
     <value>Le courriel ne correspond pas.</value>
     <comment>ModifierInfos</comment>
   </data>
+  <data name="UserAccessDenied" xml:space="preserve">
+    <value>Vous n'avez pas accès à cette section car vous n'êtes inscrit à aucun secteur.</value>
+    <comment>Login</comment>
+  </data>
 </root>

@@ -228,4 +228,10 @@
   <data name="par" xml:space="preserve">
     <value>By</value>
   </data>
+  <data name="sectionPublique" xml:space="preserve">
+    <value>Public section</value>
+  </data>
+  <data name="sectionSectorielle" xml:space="preserve">
+    <value>Sector section</value>
+  </data>
 </root>
