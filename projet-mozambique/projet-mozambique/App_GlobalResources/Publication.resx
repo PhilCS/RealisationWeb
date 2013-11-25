@@ -146,7 +146,7 @@
     <value>Suppression d'une publication</value>
   </data>
   <data name="publicationErreurFichier" xml:space="preserve">
-    <value>Lle fichier publié est inaccessible.</value>
+    <value>Le fichier publié est inaccessible.</value>
   </data>
   <data name="rechercheCategorie" xml:space="preserve">
     <value>Recherche par catégorie</value>

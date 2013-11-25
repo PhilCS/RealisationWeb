@@ -133,7 +133,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Lle fichier publié est inaccessible..
+        ///   Recherche une chaîne localisée semblable à Le fichier publié est inaccessible..
         /// </summary>
         internal static string publicationErreurFichier {
             get {

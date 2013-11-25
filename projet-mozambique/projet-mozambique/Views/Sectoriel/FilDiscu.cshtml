@@ -1,15 +1,14 @@
 ﻿@using projet_mozambique.Models;
 @using projet_mozambique.Utilitaires;
 @{
-    ViewBag.Title = "Quisque volutpat metus id purus pulvinar consectetur";
-
     FilModel f = (ViewData[Constantes.CLE_FILDISCUSSION] as FilModel);
-    //TODO : INCORPORER RESSOURCES
+    
+    ViewBag.Title = f.sujet;
     
     <h1>@f.sujet</h1>
 
     <div>
-        <a href="RepondreFilDiscu"><img src="~/Content/images/icones/icon-reply-forum.png" title="Répondre" alt="Icône répondre" class="icone"/></a>
+        <a href="RepondreFilDiscu"><img src="~/Content/images/icones/icon-reply-forum.png" title="@Resources.Sectoriel.repondre" alt="Icône répondre" class="icone"/></a>
     </div>
 
     foreach (var m in f.listeMessages)
@@ -17,11 +16,11 @@
         <div class="forum-message">
             <div class="date-auteur-message">
                 <p>
-                    Par @m.auteur, le @m.datePublication.ToLongDateString().Replace(DateTime.Now.DayOfWeek.ToString() + ", ", "")
+                    @Resources.Shared.par @m.auteur, @Resources.Shared.le @m.datePublication.ToLongDateString().Replace(DateTime.Now.DayOfWeek.ToString() + ", ", "")
                     @if (m.dateModification != DateTime.MinValue)
                     { 
                         <br />
-                        <span class="infos-supp">Dernière modification le @m.dateModification.ToLongDateString().Replace(DateTime.Now.DayOfWeek.ToString() + ", ", "") </span>
+                        <span class="infos-supp">@Resources.Shared.derniereModifLe @m.dateModification.ToLongDateString().Replace(DateTime.Now.DayOfWeek.ToString() + ", ", "") </span>
                     }
                 </p>
             </div>

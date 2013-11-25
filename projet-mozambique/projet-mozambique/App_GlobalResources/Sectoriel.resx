@@ -175,4 +175,28 @@
   <data name="supprimer" xml:space="preserve">
     <value>Supprimer</value>
   </data>
+  <data name="dernierMessage" xml:space="preserve">
+    <value>Dernier Message</value>
+    <comment>Forum</comment>
+  </data>
+  <data name="filDiscussion" xml:space="preserve">
+    <value>Fil de Discussion</value>
+    <comment>Forum</comment>
+  </data>
+  <data name="forum" xml:space="preserve">
+    <value>Forum</value>
+    <comment>Forum</comment>
+  </data>
+  <data name="nbLectures" xml:space="preserve">
+    <value>Nb Lectures</value>
+    <comment>Forum</comment>
+  </data>
+  <data name="nbMessage" xml:space="preserve">
+    <value>Nb Messages</value>
+    <comment>Forum</comment>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+    <comment>Forum</comment>
+  </data>
 </root>

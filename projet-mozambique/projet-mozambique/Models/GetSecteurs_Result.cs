@@ -18,8 +18,5 @@ namespace projet_mozambique.Models
         public string TITREACCUEIL { get; set; }
         public string TEXTEACCUEIL { get; set; }
         public string URLIMAGEACCUEIL { get; set; }
-        public string NOMTRAD { get; set; }
-        public string TITREACCUEILTRAD { get; set; }
-        public string TEXTEACCUEILTRAD { get; set; }
     }
 }

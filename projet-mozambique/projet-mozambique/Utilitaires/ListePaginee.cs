@@ -42,5 +42,10 @@ namespace projet_mozambique.Utilitaires
             get { return (PageIndex + 2) < TotalPages;  }
         }
 
+        public bool ShowPagination
+        {
+            get { return HasNextPage || HasPreviousPage; }
+        }
+
     }
 }

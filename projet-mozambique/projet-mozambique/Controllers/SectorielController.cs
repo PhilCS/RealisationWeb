@@ -745,8 +745,7 @@ namespace projet_mozambique.Controllers
 
         public ActionResult Forum(int? page)
         {
-            //TODO : ALLER CHERCHER LE BON SECTEUR!
-            int secteur = 1;
+            int secteur = (int)Session["currentSecteur"];
             GetForum_Result f = db.GetForum(secteur).FirstOrDefault();
             List<GetFilDiscussion_Result> lstFil = db.GetFilDiscussion(f.ID).ToList();
             FilModel fil;
@@ -808,9 +807,14 @@ namespace projet_mozambique.Controllers
         {
             if (filDiscuSecteurCourant(id))
             {
+                int idUtil = WebSecurity.GetUserId(User.Identity.Name);
+
                 var fil = from f in db.FILDISCUSSION
                           where f.ID == id
                           select f;
+
+                fil.FirstOrDefault().NBLECTURES += 1;
+                db.SaveChanges();
 
                 var lstM = db.GetMessagesForum(id);
                 List<MessageForumModel> lstMMod = new List<MessageForumModel>();
@@ -847,8 +851,7 @@ namespace projet_mozambique.Controllers
 
         private bool filDiscuSecteurCourant(int id)
         { 
-            //TODO : RÉCUPÉRER SECTEUR COURANT
-            int idSecteur = 1;
+            int idSecteur = (int)Session["currentSecteur"];
             var x = from fi in db.FILDISCUSSION
                     join fo in db.FORUM on fi.IDFORUM equals fo.ID
                     join s in db.SECTEUR on fo.IDSECTEUR equals s.ID

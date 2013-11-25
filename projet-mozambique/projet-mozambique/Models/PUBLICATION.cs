@@ -29,6 +29,7 @@ namespace projet_mozambique.Models
         public string MIMETYPE { get; set; }
         public string NOMFICHIERORIGINAL { get; set; }
         public string NOMFICHIERSERVEUR { get; set; }
+        public int TAILLEFICHIER { get; set; }
     
         public virtual SECTEUR SECTEUR { get; set; }
         public virtual SUJETPUBLICATION SUJETPUBLICATION { get; set; }

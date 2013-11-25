@@ -219,4 +219,13 @@
   <data name="secteur" xml:space="preserve">
     <value>Sector</value>
   </data>
+  <data name="derniereModifLe" xml:space="preserve">
+    <value>Last modification on</value>
+  </data>
+  <data name="le" xml:space="preserve">
+    <value>on</value>
+  </data>
+  <data name="par" xml:space="preserve">
+    <value>By</value>
+  </data>
 </root>
