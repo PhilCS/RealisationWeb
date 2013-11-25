@@ -125,15 +125,19 @@ header nav li{
     font-size:1.1em;
     /*float:left;*/
     /*font-weight:bold;*/
-    padding:10px 20px 3px;
     margin:0;
     text-align:center;
     display:inline-block;
-    border-bottom:7px solid #538d12;
     overflow:auto;
 }
 
-header nav li:hover {
+header nav li a{
+    padding:10px 20px 3px;
+    border-bottom:7px solid #538d12;
+	display: block;
+}
+
+header nav li a:hover {
     border-bottom:7px solid #257dbf;
 }
 
