@@ -28,8 +28,7 @@ namespace projet_mozambique
 
             bundles.Add(new StyleBundle("~/Content/cssPublic").Include("~/Content/public.css"));
 
-            bundles.Add(new StyleBundle("~/Content/cssSectoriel").Include("~/Content/public.css",
-                                                                            "~/Content/sectoriel.css"));
+            bundles.Add(new StyleBundle("~/Content/cssSectoriel").Include("~/Content/sectoriel.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
