@@ -28,36 +28,52 @@ namespace projet_mozambique.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            int currentSecteur = (int)Session["currentSecteur"];
-            var sectSelect = from s in db.SECTEUR
-                                where s.ID == currentSecteur
-                                select s;
-            SECTEUR unSECTEUR = sectSelect.FirstOrDefault();
-                
-            return View(unSECTEUR);
+            if (Session["currentSecteur"] != null)
+            {
+                int currentSecteur = (int)Session["currentSecteur"];
+
+                SECTEUR unSecteur = null;
+
+                if (currentSecteur != 0)
+                {
+                    var sectSelect = from s in db.SECTEUR
+                                     where s.ID == currentSecteur
+                                     select s;
+                    unSecteur = sectSelect.FirstOrDefault();
+                }
+
+                return View(unSecteur);
+            }
+            else
+                return LogOut();
         }
 
         [HttpPost]
         public ActionResult ChangeSecteur(string secteur, string returnUrl)
         {
-            Session["currentSecteur"] = int.Parse(secteur);
-
-           if (Request.Cookies["currentSect"] != null)
+            if (secteur != null && returnUrl != null)
             {
-                var c = new HttpCookie("currentSect");
-               c.Expires = DateTime.Now.AddMonths(3);
-                c.Value = secteur;
-                Response.Cookies.Add(c);
-            }
+                Session["currentSecteur"] = int.Parse(secteur);
 
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
+                if (Request.Cookies["currentSect"] != null)
+                {
+                    var c = new HttpCookie("currentSect");
+                    c.Expires = DateTime.Now.AddMonths(3);
+                    c.Value = secteur;
+                    Response.Cookies.Add(c);
+                }
+
+                if (Url.IsLocalUrl(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Public");
+                }
             }
             else
-            {
-                return RedirectToAction("Index", "Public");
-            }
+                return LogOut();
         }
 
         /// <summary>
@@ -89,39 +105,56 @@ namespace projet_mozambique.Controllers
                 if (utilisateur.Count() != 0)
                 {
                     UTILISATEUR currentUser = (UTILISATEUR)utilisateur.First();
-                   
 
                     if (WebSecurity.Login(currentUser.NOMUTIL, model.Password, model.RememberMe))
                     {
                         CultureInfo ci = new CultureInfo(currentUser.LANGUE.ToLower());
 
-                        
-
                         Dictionary<int, string> lstSect = new Dictionary<int, string>();
 
+                        DateTime currentDate = DateTime.Now;
+
                         var sectUtil = from s in db.UTILISATEURSECTEUR
-                                       where s.IDUTILISATEUR == currentUser.ID
+                                       where s.IDUTILISATEUR == currentUser.ID && s.DEBUTACCES <= currentDate
+                                       && s.FINACCES >= currentDate
                                        select s;
 
                         string cookieStr = "";
 
-                        foreach (var v in sectUtil)
+                        if (sectUtil.FirstOrDefault() != null)
                         {
-                            lstSect.Add(v.IDSECTEUR, v.SECTEUR.NOM + "/" + v.SECTEUR.NOMTRAD);
-                            cookieStr += v.IDSECTEUR.ToString();
-                            cookieStr += ',';
-                            cookieStr += v.SECTEUR.NOM;
-                            cookieStr += '/';
-                            cookieStr += v.SECTEUR.NOMTRAD;
-                            cookieStr += '&';
+                            foreach (var v in sectUtil)
+                            {
+                                lstSect.Add(v.IDSECTEUR, v.SECTEUR.NOM + "/" + v.SECTEUR.NOMTRAD);
+                                cookieStr += v.IDSECTEUR.ToString();
+                                cookieStr += ',';
+                                cookieStr += v.SECTEUR.NOM;
+                                cookieStr += '/';
+                                cookieStr += v.SECTEUR.NOMTRAD;
+                                cookieStr += '&';
+                            }
+                        }
+                        else
+                        {
+                            lstSect = null;
                         }
 
-                        string lst = lstSect.ToString();
+
                         //Liste des secteurs de l'utilisateur
                         Session["lstSect"] = lstSect;
-                        //Index du secteur sélectionné dans la liste des secteurs de l'utilisateur
-                        Session["currentSecteur"] = lstSect.First().Key;
 
+                        if (lstSect == null)
+                        {
+                            // Si l'utilisateur ne fait partie d'aucun secteur, le secteur courant est 0 
+                            // et la page d'accueil de l'utilisateur affiche que l'utilisateur ne fait partie d'aucun secteur
+                            Session["currentSecteur"] = 0;
+                        }
+                        else
+                        {
+                            //Index du secteur sélectionné dans la liste des secteurs de l'utilisateur
+                            Session["currentSecteur"] = lstSect.First().Key;
+                        }
+                        
                         Session["Culture"] = ci;
 
                         if (model.RememberMe)
@@ -131,23 +164,26 @@ namespace projet_mozambique.Controllers
                             cookie.Value = ci.Name;
                             Response.AppendCookie(cookie);
 
-                            HttpCookie cookieLst = new HttpCookie("lstSect");
-                            cookieLst.Expires = DateTime.Now.AddMonths(3);
-                            cookieLst.Value = cookieStr;
-                            Response.AppendCookie(cookieLst);
+                            if (cookieStr != "" && lstSect != null)
+                            {
+                                HttpCookie cookieLst = new HttpCookie("lstSect");
+                                cookieLst.Expires = DateTime.Now.AddMonths(3);
+                                cookieLst.Value = cookieStr;
+                                Response.AppendCookie(cookieLst);
 
-                            HttpCookie cookieCurrent = new HttpCookie("currentSect");
-                            cookieCurrent.Expires = DateTime.Now.AddMonths(3);
-                            cookieCurrent.Value = lstSect.First().Key.ToString();
-                            Response.AppendCookie(cookieCurrent);
+                                HttpCookie cookieCurrent = new HttpCookie("currentSect");
+                                cookieCurrent.Expires = DateTime.Now.AddMonths(3);
+                                cookieCurrent.Value = lstSect.First().Key.ToString();
+                                Response.AppendCookie(cookieCurrent);
+                            }
                         }
-                        
+
                         return RedirectToAction("Index", "Sectoriel");
                     }
                     else
                     {
                         ModelState.AddModelError("", @Resources.Messages.PasswordInvalid);
-                    } 
+                    }
                 }
                 else
                 {
@@ -187,6 +223,9 @@ namespace projet_mozambique.Controllers
                 c.Expires = DateTime.Now.AddDays(-1);
                 Response.Cookies.Add(c);
             }
+
+            Session["lstSect"] = null;
+            Session["currentSecteur"] = null;
 
             return RedirectToAction("Index", "Public");
         }

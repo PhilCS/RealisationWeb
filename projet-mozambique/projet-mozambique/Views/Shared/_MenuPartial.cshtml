@@ -10,7 +10,6 @@
 } else {
     <ul>
         <li>@Html.ActionLink(@Resources.Shared.accueil, "Index", "Sectoriel")</li>
-        <li>@Html.ActionLink(@Resources.Shared.calendrier, "Calendrier", "Sectoriel")</li>
         <li>@Html.ActionLink(@Resources.Shared.publications, "Publications", "Sectoriel")</li>
         <li>@Html.ActionLink(@Resources.Shared.forums, "Forum", "Sectoriel")</li>
         <li>@Html.ActionLink(@Resources.Shared.sondages, "Sondages", "Sectoriel")</li>
@@ -18,5 +17,7 @@
         {
             <li>@Html.ActionLink(@Resources.Shared.admin, "Index", "Admin")</li>
         }
+        <li>@Html.ActionLink(@Resources.Shared.sectionPublique, "Public", "Public")</li>
+       
     </ul>
 }

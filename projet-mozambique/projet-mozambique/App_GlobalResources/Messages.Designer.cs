@@ -313,6 +313,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Vous n&apos;avez pas accès à cette section car vous n&apos;êtes inscrit à aucun secteur..
+        /// </summary>
+        internal static string UserAccessDenied {
+            get {
+                return ResourceManager.GetString("UserAccessDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Le nom d&apos;usager est invalide..
         /// </summary>
         internal static string UsernameInvalid {

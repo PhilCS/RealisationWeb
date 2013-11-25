@@ -247,6 +247,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbContext.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\dbContext1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetPublication_Result.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>

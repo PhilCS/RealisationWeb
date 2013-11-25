@@ -54,9 +54,21 @@ namespace projet_mozambique.Controllers
             return View("AjoutEcole");
         }
 
-        public ActionResult Secteurs()
+        public ActionResult GestionSecteurs()
         {
-            return View("Secteurs");
+            var allSect = from s in db.SECTEUR
+                          select s;
+
+            List<SECTEUR> lstS = allSect.ToList();
+
+            ViewData[Constantes.CLE_SECTEURS] = lstS;
+
+            return View();
+        }
+
+        public ActionResult getSecteur(int id)
+        {
+            return View();
         }
 
         public ActionResult SectionPublique()

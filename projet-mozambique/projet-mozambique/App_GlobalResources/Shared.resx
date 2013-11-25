@@ -231,6 +231,12 @@
   <data name="secteur" xml:space="preserve">
     <value>Secteur</value>
   </data>
+  <data name="sectionPublique" xml:space="preserve">
+    <value>Section publique</value>
+  </data>
+  <data name="sectionSectorielle" xml:space="preserve">
+    <value>Section sectorielle</value>
+  </data>
   <data name="selectLanguage" xml:space="preserve">
     <value>Sélectionner une langue</value>
   </data>
