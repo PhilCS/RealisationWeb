@@ -6,38 +6,30 @@
 
     Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
 
-    var listePartenaires = ViewData[Constantes.CLE_PARTENAIRES] as List<GetPartenaires_Result>;
-    
-    <h1><a href="/Admin/GestionPartenaire"><img src="~/Content/images/icones/icon-add-black.png" title="@Resources.Partenaire.ajouterPartenaire" alt="Icône Ajouter" class="icone" /></a>@Resources.Shared.partenaires</h1>
-
-    @*
-    <div>
-        <form>
-            <input type="text" /><a href="getResultats?resultat=partenaires" class="btnForm" style="margin-left:10px;">Rechercher</a>
-        </form>
-    </div>
-    *@
+    var listePartenaires = ViewData[Constantes.CLE_PARTENAIRES] as List<PARTENAIRE>;
 
     foreach (var partenaire in listePartenaires)
     {
         <div class="article">
-            <p class="titre">@partenaire.NOM <a href="/Admin/GestionPartenaire?id=@partenaire.ID"><img src="~/Content/images/icones/icone-pen.png" title="Modifier" alt="Icône Modifier" /></a></p>
-            <p><span class="lbGras">Raison sociale : </span>@partenaire.RAISONSOCIALE</p>
-            <p><span class="lbGras">Adresse : </span>@partenaire.ADRESSE</p>
-            <p><span class="lbGras">Téléphone : </span>@partenaire.TELEPHONE</p>
-            <p><span class="lbGras">Site web : </span><a href="@partenaire.SITEWEB">@partenaire.SITEWEB</a></p>
-            <p><span class="lbGras">Courriel : </span><a href="mailto:@partenaire.COURRIEL">@partenaire.COURRIEL</a></p>
+            <p class="titre">@partenaire.NOM</p>
+
+            @if (!String.IsNullOrEmpty(partenaire.RAISONSOCIALE))
+            {
+                <p><span class="lbGras">@Names.DisplayName.Mission : </span>@partenaire.RAISONSOCIALE</p>
+            }
+            @if (!String.IsNullOrEmpty(partenaire.ADRESSE))
+            {
+                <p><span class="lbGras">@Names.DisplayName.Address : </span>@partenaire.ADRESSE</p>
+            }
+            @if (!String.IsNullOrEmpty(partenaire.TELEPHONE))
+            {
+                <p><span class="lbGras">@Names.DisplayName.Phone : </span>@partenaire.TELEPHONE</p>
+            }
+            @if (!String.IsNullOrEmpty(partenaire.SITEWEB))
+            {
+                <p><span class="lbGras">@Names.DisplayName.Website : </span><a href="@partenaire.SITEWEB">@partenaire.SITEWEB</a></p>
+            }
+            <p><span class="lbGras">@Names.DisplayName.Email : </span><a href="mailto:@partenaire.COURRIEL">@partenaire.COURRIEL</a></p>
         </div>
     }
-
-    @*
-    <ul class="nav-pagination">
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">...</a></li>
-        <li><a href="#">Page suivante></a></li>
-        <li><a href="#">Dernière page</a></li>
-    </ul>
-    *@
 }

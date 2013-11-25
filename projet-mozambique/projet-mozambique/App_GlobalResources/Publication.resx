@@ -123,32 +123,8 @@
   <data name="ajoutPublication" xml:space="preserve">
     <value>Publication d'un document</value>
   </data>
-  <data name="categorie" xml:space="preserve">
-    <value>Catégorie</value>
-  </data>
-  <data name="categorieRequise" xml:space="preserve">
-    <value>La catégorie est requise</value>
-  </data>
-  <data name="description" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="descriptionLongueur" xml:space="preserve">
-    <value>La description ne peut comporter plus de 100 caractères</value>
-  </data>
-  <data name="descriptionRequise" xml:space="preserve">
-    <value>La description est requise</value>
-  </data>
-  <data name="fichier" xml:space="preserve">
-    <value>Fichier</value>
-  </data>
   <data name="fichierRequis" xml:space="preserve">
     <value>Le fichier est requis</value>
-  </data>
-  <data name="fichierType" xml:space="preserve">
-    <value>Ce type de fichier n'est pas permis</value>
-  </data>
-  <data name="motsCles" xml:space="preserve">
-    <value>Mots-clés</value>
   </data>
   <data name="publicationAjoutee" xml:space="preserve">
     <value>La publication a bien été ajoutée.</value>
@@ -156,19 +132,29 @@
   <data name="publicationErreur" xml:space="preserve">
     <value>Une erreur s'est produite lors de l'ajout de la publication.</value>
   </data>
-  <data name="secteur" xml:space="preserve">
-    <value>Secteur</value>
+  <data name="confirmerSupprPublication" xml:space="preserve">
+    <value>Voulez-vous vraiment supprimer "{0}"?</value>
+    <comment>{0} est remplacé par le nom de la publication</comment>
   </data>
-  <data name="secteurRequis" xml:space="preserve">
-    <value>Le secteur est requis</value>
+  <data name="idPublicationInvalide" xml:space="preserve">
+    <value>La publication spécifiée est invalide ou inexistante.</value>
   </data>
-  <data name="titre" xml:space="preserve">
-    <value>Titre</value>
+  <data name="publicationSupprimee" xml:space="preserve">
+    <value>La publication a bien été supprimée.</value>
   </data>
-  <data name="titreLongeur" xml:space="preserve">
-    <value>Le titre ne peut comporter plus de 60 caractères</value>
+  <data name="suppressionPublication" xml:space="preserve">
+    <value>Suppression d'une publication</value>
   </data>
-  <data name="titreRequis" xml:space="preserve">
-    <value>Le titre est requis</value>
+  <data name="publicationErreurFichier" xml:space="preserve">
+    <value>Lle fichier publié est inaccessible.</value>
+  </data>
+  <data name="rechercheCategorie" xml:space="preserve">
+    <value>Recherche par catégorie</value>
+  </data>
+  <data name="rechercheMotCle" xml:space="preserve">
+    <value>Recherche par mot clé</value>
+  </data>
+  <data name="aucunResultat" xml:space="preserve">
+    <value>Aucun résultat</value>
   </data>
 </root>

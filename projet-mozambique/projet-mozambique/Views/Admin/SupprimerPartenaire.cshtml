@@ -1,0 +1,21 @@
+﻿@model projet_mozambique.Models.PARTENAIRE
+
+@{
+    ViewBag.Title = Resources.Partenaire.suppressionPartenaire;
+    
+    <h1>@Resources.Partenaire.suppressionPartenaire</h1>
+    
+    using (Html.BeginForm("SupprimerPartenaire", "Admin", FormMethod.Post, new { @class = "formulaire" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        @Html.HiddenFor(model => model.ID)
+
+        <div>@String.Format(@Resources.Partenaire.confirmerSupprPartenaire, Model.NOM)</div>
+    
+        <div>
+            <input type="submit" class="btnForm" name="confirmer" value="@Resources.Shared.confirmer" /> &nbsp; <input type="submit" class="btnForm" name="annuler" value="@Resources.Shared.annuler" />
+        </div>
+    }
+}

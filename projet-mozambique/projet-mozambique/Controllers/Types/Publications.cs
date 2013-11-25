@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Objects;
-using System.Linq;
 using System.IO;
-using System.Net;
+using System.Linq;
 using System.Net.Mime;
 using System.Web;
 using System.Web.Mvc;
@@ -13,36 +12,46 @@ using projet_mozambique.Utilitaires;
 
 namespace projet_mozambique.Controllers
 {
+    using IOFile = System.IO.File;
+
     public partial class SectorielController
     {
-        public ActionResult Publications(int? secteur, int? categorie, string motcle)
+        public ActionResult Publications(int? secteur, int? categorie, string motscles)
         {
             List<PUBLICATION> listePubs;
-
-            if (secteur == null)
+            List<GetSecteurs_Result> listeSecteurs = db.GetSecteurs().ToList();
+            List<GetSujetsPublication_Result> listeSujetsPub = db.GetSujetsPublication().ToList();
+            
+            if (User.IsInRole("admin") == false)
             {
-                secteur = 1;
+                secteur = (int)Session["currentSecteur"];
+                listeSecteurs = listeSecteurs.Where(s => s.ID == secteur).ToList();
+            }
+            else if (secteur == null || secteur < 1)
+            {
+                secteur = listeSecteurs.First().ID;
             }
 
-            if (String.IsNullOrEmpty(motcle))
+            if (String.IsNullOrEmpty(motscles))
             {
-                if (categorie == null)
+                if (listeSecteurs.Any(c => c.ID == categorie))
                 {
-                    listePubs = db.GetPubParSecteur(secteur).ToList();
+                    listePubs = db.GetPubParSujet(secteur, categorie).ToList();
                 }
                 else
                 {
-                    listePubs = db.GetPubParSujet(secteur, categorie).ToList();
+                    listePubs = db.GetPubParSecteur(secteur).ToList();
                 }
             }
             else
             {
-                listePubs = db.GetPubParMotCle(secteur, motcle).ToList();
+                List<String> listeMotsCles = motscles.Split(new Char[] {' '}).ToList();
+                string motsClesTraites = MotsCles.TraiterMotsCles(listeMotsCles);
+
+                listePubs = db.GetPubParMotCle(secteur, motsClesTraites).ToList();
             }
 
-            List<GetSecteurs_Result> listeSecteurs = db.GetSecteurs().ToList();
-            List<GetSujetsPublication_Result> listeSujetsPub = db.GetSujetsPublication().ToList();
-
+            ViewData[Constantes.CLE_IDSECTEUR] = secteur;
             ViewData[Constantes.CLE_SECTEURS] = listeSecteurs;
             ViewData[Constantes.CLE_SUJETSPUBLICATION] = listeSujetsPub;
             ViewData[Constantes.CLE_PUBLICATIONS] = listePubs;
@@ -50,18 +59,44 @@ namespace projet_mozambique.Controllers
             return View();
         }
 
-        public ActionResult ObtenirPublication(string nomFichier)
+        public ActionResult ObtenirPublication(int? id)
         {
-            var cd = new ContentDisposition {FileName = nomFichier, Inline = false};
-            Response.AppendHeader("Content-Disposition", cd.ToString());
+            PUBLICATION pub = null;
 
-            return File(System.IO.File.ReadAllBytes(Fichiers.CheminEnvois(nomFichier)), nomFichier);
+            try
+            {
+                if (id == null)
+                    throw new ArgumentNullException("id");
+
+                pub = db.GetPublication(id).First();
+            }
+            catch
+            {
+                TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Publication.idPublicationInvalide);
+            }
+
+            if (pub != null)
+            {
+                var cd = new ContentDisposition { FileName = pub.NOMFICHIERORIGINAL, Inline = false };
+                Response.AppendHeader("Content-Disposition", cd.ToString());
+
+                try
+                {
+                    return File(IOFile.ReadAllBytes(Fichiers.CheminEnvois(pub.NOMFICHIERSERVEUR)), pub.NOMFICHIERORIGINAL);
+                }
+                catch (IOException)
+                {
+                    TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Publication.publicationErreurFichier);
+                }
+            }
+
+            return RedirectToAction("Publications", "Sectoriel");
         }
-    }
-    
-    public partial class AdminController
-    {
+
+        private const string droitsPublication = "admin,professeur,professeurModerateur";
+
         [HttpGet]
+        [AccessDeniedAuthorize(Roles = droitsPublication)]
         public ActionResult AjoutPublication()
         {
             List<GetSecteurs_Result> listeSecteurs = db.GetSecteurs().ToList();
@@ -75,6 +110,7 @@ namespace projet_mozambique.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AccessDeniedAuthorize(Roles = droitsPublication)]
         public ActionResult AjoutPublication(PUBLICATION envoiPubli)
         {
             if (ModelState.IsValid)
@@ -89,8 +125,15 @@ namespace projet_mozambique.Controllers
 
                     fichier.SaveAs(Fichiers.CheminEnvois(nomServeur));
 
-                    ObjectParameter idPub = new ObjectParameter("idpub", typeof(int));
-                    db.AjouterPublication(envoiPubli.TITRE, envoiPubli.DESCRIPTION, envoiPubli.IDSECTEUR, envoiPubli.IDSUJET, nomOriginal, nomServeur, mimetype, WebSecurity.CurrentUserId, idPub);
+                    ObjectParameter idNouvPub = new ObjectParameter("idpub", typeof(int));
+                    db.AjouterPublication(envoiPubli.TITRE, envoiPubli.DESCRIPTION, envoiPubli.IDSECTEUR, envoiPubli.IDSUJET, nomOriginal, nomServeur, mimetype, WebSecurity.CurrentUserId, idNouvPub);
+
+                    List<String> motsCles = envoiPubli.TITRE.Split(new Char[] {' '}).ToList();
+
+                    if (!String.IsNullOrEmpty(envoiPubli.motcles))
+                        motsCles.AddRange(envoiPubli.motcles.Split(new Char[] {' '}));
+
+                    db.UpdateMotsClesPub((int)idNouvPub.Value, MotsCles.TraiterMotsCles(motsCles));
 
                     TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Publication.publicationAjoutee);
 
@@ -111,9 +154,67 @@ namespace projet_mozambique.Controllers
             return View(envoiPubli);
         }
 
-        public ActionResult SupprimerPublication()
+        [HttpGet]
+        [AccessDeniedAuthorize(Roles = droitsPublication)]
+        public ActionResult SupprimerPublication(int? id)
         {
-            return View();
+            PUBLICATION pub = null;
+
+            try
+            {
+                if (id == null)
+                    throw new ArgumentNullException("id");
+
+                pub = db.GetPublication(id).First();
+            }
+            catch
+            {
+                TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Publication.idPublicationInvalide);
+            }
+
+            if (pub != null)
+            {
+                return View(pub);
+            }
+
+            return RedirectToAction("Publications", "Sectoriel");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AccessDeniedAuthorize(Roles = droitsPublication)]
+        public ActionResult SupprimerPublication(int? id, string confirmer, string annuler)
+        {
+            if (!String.IsNullOrEmpty(confirmer) && String.IsNullOrEmpty(annuler))
+            {
+                PUBLICATION pub = null;
+
+                try
+                {
+                    if (id == null)
+                        throw new ArgumentNullException("id");
+
+                    pub = db.GetPublication(id).First();
+                }
+                catch
+                {
+                    TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Publication.idPublicationInvalide);
+                }
+
+                if (pub != null)
+                {
+                    db.SupprimerPublication(id);
+
+                    string cheminEnvoi = Fichiers.CheminEnvois(pub.NOMFICHIERSERVEUR);
+
+                    if (IOFile.Exists(cheminEnvoi))
+                        IOFile.Delete(cheminEnvoi);
+
+                    TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Publication.publicationSupprimee);
+                }
+            }
+
+            return RedirectToAction("Publications", "Sectoriel");
         }
     }
 }

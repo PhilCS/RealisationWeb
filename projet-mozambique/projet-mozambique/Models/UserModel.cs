@@ -54,7 +54,7 @@ namespace projet_mozambique.Models
 
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
             ErrorMessageResourceType = typeof(Resources.Messages))]
-        [Display(Name = "Adress", ResourceType = typeof(Names.DisplayName))]
+        [Display(Name = "Address", ResourceType = typeof(Names.DisplayName))]
         public string adresse { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",

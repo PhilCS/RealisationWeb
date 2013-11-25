@@ -117,12 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ajouterNouvelle" xml:space="preserve">
+    <value>Ajouter une nouvelle</value>
+  </data>
   <data name="CurrentImage" xml:space="preserve">
     <value>Image actuelle</value>
     <comment>ModifPagePublique</comment>
-  </data>
-  <data name="ajouterNouvelle" xml:space="preserve">
-    <value>Ajouter une nouvelle</value>
   </data>
   <data name="gestionSectionPublique" xml:space="preserve">
     <value>Gestion du contenu de la section publique</value>

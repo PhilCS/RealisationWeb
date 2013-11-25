@@ -272,7 +272,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="VALEUR" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="VALEUR" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="MOTCLEPUBLICATION">
           <Key>
@@ -613,7 +613,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MOTCLEPUB_MOTCLE">
-          <End Role="MOTCLE" Type="MVPModel.Store.MOTCLE" Multiplicity="1" />
+          <End Role="MOTCLE" Type="MVPModel.Store.MOTCLE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MOTCLEPUBLICATION" Type="MVPModel.Store.MOTCLEPUBLICATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MOTCLE">
@@ -625,7 +627,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MOTCLEPUB_PUB">
-          <End Role="PUBLICATION" Type="MVPModel.Store.PUBLICATION" Multiplicity="1" />
+          <End Role="PUBLICATION" Type="MVPModel.Store.PUBLICATION" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MOTCLEPUBLICATION" Type="MVPModel.Store.MOTCLEPUBLICATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PUBLICATION">
@@ -938,9 +942,12 @@
           <Parameter Name="idpar" Type="int" Mode="In" />
         </Function>
         <Function Name="GetPartenaires" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetPublication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idpub" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetPubParMotCle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idsecteur" Type="int" Mode="In" />
-          <Parameter Name="motcle" Type="varchar" Mode="In" />
+          <Parameter Name="motscles" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GetPubParSecteur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idsecteur" Type="int" Mode="In" />
@@ -1059,8 +1066,20 @@
           <Parameter Name="ville" Type="varchar" Mode="In" />
           <Parameter Name="langue" Type="char" Mode="In" />
         </Function>
+        <Function Name="NettoyerMotsCles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ReinitMotPasse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Split" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="rowdat" Type="nvarchar" Mode="In" />
+          <Parameter Name="spliton" Type="nvarchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="VALEUR" Type="nvarchar" MaxLength="50" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
         </Function>
         <Function Name="SupprimerChoixSondage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
@@ -1110,6 +1129,10 @@
         <Function Name="SupprimerUtilSect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
           <Parameter Name="secteur" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateMotsClesPub" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idpub" Type="int" Mode="In" />
+          <Parameter Name="motscles" Type="nvarchar" Mode="In" />
         </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -1378,10 +1401,9 @@
           <FunctionImport Name="GetPartenaire" EntitySet="PARTENAIRE" ReturnType="Collection(MVPModel.PARTENAIRE)">
           <Parameter Name="idpar" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetPartenaires" ReturnType="Collection(MVPModel.GetPartenaires_Result)" />
           <FunctionImport Name="GetPubParMotCle" EntitySet="PUBLICATION" ReturnType="Collection(MVPModel.PUBLICATION)">
             <Parameter Name="idsecteur" Mode="In" Type="Int32" />
-            <Parameter Name="motcle" Mode="In" Type="String" />
+            <Parameter Name="motscles" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetPubParSecteur" EntitySet="PUBLICATION" ReturnType="Collection(MVPModel.PUBLICATION)">
           <Parameter Name="idsecteur" Mode="In" Type="Int32" />
@@ -1552,6 +1574,15 @@
             <Parameter Name="secteur" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetSujetsPublication" ReturnType="Collection(MVPModel.GetSujetsPublication_Result)" />
+          <FunctionImport Name="UpdateMotsClesPub">
+            <Parameter Name="idpub" Mode="In" Type="Int32" />
+            <Parameter Name="motscles" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetPublication" EntitySet="PUBLICATION" ReturnType="Collection(MVPModel.PUBLICATION)">
+          <Parameter Name="idpub" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="NettoyerMotsCles" />
+          <FunctionImport Name="GetPartenaires" EntitySet="PARTENAIRE" ReturnType="Collection(MVPModel.PARTENAIRE)" />
         </EntityContainer>
         <EntityType Name="CATEGORIEEVENEMENT">
           <Key>
@@ -1677,7 +1708,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="VALEUR" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="VALEUR" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="PUBLICATION" Relationship="MVPModel.MOTCLEPUBLICATION" FromRole="MOTCLE" ToRole="PUBLICATION" />
         </EntityType>
         <EntityType Name="NOUVELLE">
@@ -2334,6 +2365,30 @@
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="NOM" Nullable="false" MaxLength="50" />
         </ComplexType>
+        <ComplexType Name="GetPubParID_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="TITRE" Nullable="false" MaxLength="60" />
+          <Property Type="DateTime" Name="DATECREATION" Nullable="false" Precision="23" />
+          <Property Type="String" Name="DESCRIPTION" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="IDPUBLICATEUR" Nullable="false" />
+          <Property Type="Int32" Name="IDSUJET" Nullable="false" />
+          <Property Type="Int32" Name="IDSECTEUR" Nullable="false" />
+          <Property Type="String" Name="MIMETYPE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="NOMFICHIERORIGINAL" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="NOMFICHIERSERVEUR" Nullable="true" MaxLength="32" />
+        </ComplexType>
+        <ComplexType Name="GetPublication_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="TITRE" Nullable="false" MaxLength="60" />
+          <Property Type="DateTime" Name="DATECREATION" Nullable="false" Precision="23" />
+          <Property Type="String" Name="DESCRIPTION" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="IDPUBLICATEUR" Nullable="false" />
+          <Property Type="Int32" Name="IDSUJET" Nullable="false" />
+          <Property Type="Int32" Name="IDSECTEUR" Nullable="false" />
+          <Property Type="String" Name="MIMETYPE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="NOMFICHIERORIGINAL" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="NOMFICHIERSERVEUR" Nullable="true" MaxLength="32" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2812,21 +2867,6 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetPartenaire" FunctionName="MVPModel.Store.GetPartenaire">
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetPartenaires" FunctionName="MVPModel.Store.GetPartenaires">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MVPModel.GetPartenaires_Result">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="NOM" ColumnName="NOM" />
-                <ScalarProperty Name="RAISONSOCIALE" ColumnName="RAISONSOCIALE" />
-                <ScalarProperty Name="ADRESSE" ColumnName="ADRESSE" />
-                <ScalarProperty Name="VILLE" ColumnName="VILLE" />
-                <ScalarProperty Name="PAYS" ColumnName="PAYS" />
-                <ScalarProperty Name="TELEPHONE" ColumnName="TELEPHONE" />
-                <ScalarProperty Name="SITEWEB" ColumnName="SITEWEB" />
-                <ScalarProperty Name="COURRIEL" ColumnName="COURRIEL" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetPubParMotCle" FunctionName="MVPModel.Store.GetPubParMotCle">
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetPubParSecteur" FunctionName="MVPModel.Store.GetPubParSecteur">
@@ -2979,6 +3019,12 @@
                 <ScalarProperty Name="NOM" ColumnName="NOM" />
               </ComplexTypeMapping>
             </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateMotsClesPub" FunctionName="MVPModel.Store.UpdateMotsClesPub" />
+          <FunctionImportMapping FunctionImportName="GetPublication" FunctionName="MVPModel.Store.GetPublication">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="NettoyerMotsCles" FunctionName="MVPModel.Store.NettoyerMotsCles" />
+          <FunctionImportMapping FunctionImportName="GetPartenaires" FunctionName="MVPModel.Store.GetPartenaires">
           </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>

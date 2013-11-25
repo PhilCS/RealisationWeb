@@ -88,6 +88,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Annuler.
+        /// </summary>
+        internal static string annuler {
+            get {
+                return ResourceManager.GetString("annuler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Qui sommes-nous?.
         /// </summary>
         internal static string apropos {
@@ -129,6 +138,15 @@ namespace Resources {
         internal static string ci {
             get {
                 return ResourceManager.GetString("ci", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Confirmer.
+        /// </summary>
+        internal static string confirmer {
+            get {
+                return ResourceManager.GetString("confirmer", resourceCulture);
             }
         }
         
@@ -273,6 +291,15 @@ namespace Resources {
         internal static string nouvelles {
             get {
                 return ResourceManager.GetString("nouvelles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à .
+        /// </summary>
+        internal static string oui {
+            get {
+                return ResourceManager.GetString("oui", resourceCulture);
             }
         }
         

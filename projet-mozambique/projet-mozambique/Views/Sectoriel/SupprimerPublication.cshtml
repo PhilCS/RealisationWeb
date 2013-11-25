@@ -1,0 +1,21 @@
+﻿@model projet_mozambique.Models.PUBLICATION
+
+@{
+    ViewBag.Title = Resources.Publication.suppressionPublication;
+    
+    <h1>@Resources.Publication.suppressionPublication</h1>
+    
+    using (Html.BeginForm("SupprimerPublication", "Sectoriel", FormMethod.Post, new { @class = "formulaire" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        @Html.HiddenFor(model => model.ID)
+
+        <div>@String.Format(@Resources.Partenaire.confirmerSupprPartenaire, Model.TITRE)</div>
+    
+        <div>
+            <input type="submit" class="btnForm" name="confirmer" value="@Resources.Shared.confirmer" /> &nbsp; <input type="submit" class="btnForm" name="annuler" value="@Resources.Shared.annuler" />
+        </div>
+    }
+}

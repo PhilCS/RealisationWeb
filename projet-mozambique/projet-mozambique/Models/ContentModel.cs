@@ -31,7 +31,7 @@ namespace projet_mozambique.Models
         [Display(Name = "PageContentTrad", ResourceType = typeof(Names.DisplayName))]
         public string contenuTrad { get; set; }
 
-        [Display(Name = "File", ResourceType = typeof(Names.DisplayName))]
+        [Display(Name = "Image", ResourceType = typeof(Names.DisplayName))]
         public HttpPostedFileBase File { get; set; }
         
     }

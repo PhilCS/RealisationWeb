@@ -63,9 +63,18 @@ namespace Names {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Adresse.
         /// </summary>
-        public static string Adress {
+        public static string Address {
             get {
-                return ResourceManager.GetString("Adress", resourceCulture);
+                return ResourceManager.GetString("Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Catégorie.
+        /// </summary>
+        public static string Category {
+            get {
+                return ResourceManager.GetString("Category", resourceCulture);
             }
         }
         
@@ -106,6 +115,15 @@ namespace Names {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Pays.
+        /// </summary>
+        public static string Country {
+            get {
+                return ResourceManager.GetString("Country", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à De.
         /// </summary>
         public static string de {
@@ -115,7 +133,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Description de la nouvelle.
+        ///   Recherche une chaîne localisée semblable à Description.
         /// </summary>
         public static string Description {
             get {
@@ -133,7 +151,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Image.
+        ///   Recherche une chaîne localisée semblable à Fichier.
         /// </summary>
         public static string File {
             get {
@@ -147,6 +165,24 @@ namespace Names {
         public static string FirstName {
             get {
                 return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Image.
+        /// </summary>
+        public static string Image {
+            get {
+                return ResourceManager.GetString("Image", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Mots-clés.
+        /// </summary>
+        public static string Keywords {
+            get {
+                return ResourceManager.GetString("Keywords", resourceCulture);
             }
         }
         
@@ -165,6 +201,24 @@ namespace Names {
         public static string LastName {
             get {
                 return ResourceManager.GetString("LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Mission et valeurs.
+        /// </summary>
+        public static string Mission {
+            get {
+                return ResourceManager.GetString("Mission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Nom.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
             }
         }
         
@@ -241,6 +295,15 @@ namespace Names {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Téléphone.
+        /// </summary>
+        public static string Phone {
+            get {
+                return ResourceManager.GetString("Phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Pièces jointes.
         /// </summary>
         public static string PiecesJointes {
@@ -259,6 +322,15 @@ namespace Names {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Secteur.
+        /// </summary>
+        public static string Sector {
+            get {
+                return ResourceManager.GetString("Sector", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Sujet.
         /// </summary>
         public static string Sujet {
@@ -268,16 +340,16 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Titre de la nouvelle.
+        ///   Recherche une chaîne localisée semblable à Titre.
         /// </summary>
-        public static string Titre {
+        public static string Title {
             get {
-                return ResourceManager.GetString("Titre", resourceCulture);
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Url de l&apos;image (facultatif).
+        ///   Recherche une chaîne localisée semblable à URL de l&apos;image (facultatif).
         /// </summary>
         public static string UrlImage {
             get {
@@ -291,6 +363,15 @@ namespace Names {
         public static string UserName {
             get {
                 return ResourceManager.GetString("UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Site web.
+        /// </summary>
+        public static string Website {
+            get {
+                return ResourceManager.GetString("Website", resourceCulture);
             }
         }
     }

@@ -14,36 +14,36 @@ namespace projet_mozambique.Models
             [Key]
             public int? ID { get; set; }
 
-            [Display(ResourceType = typeof(Resources.Partenaire), Name = "nom")]
+            [Display(Name = "Name", ResourceType = typeof(Names.DisplayName))]
             [Required]
             [StringLength(60)]
             public string NOM { get; set; }
 
-            [Display(ResourceType = typeof(Resources.Partenaire), Name = "raisonSociale")]
+            [Display(Name = "Mission", ResourceType = typeof(Names.DisplayName))]
             [Required]
             public string RAISONSOCIALE { get; set; }
 
-            [Display(ResourceType = typeof(Resources.Partenaire), Name = "adresse")]
+            [Display(Name = "Address", ResourceType = typeof(Names.DisplayName))]
             [StringLength(65)]
             public string ADRESSE { get; set; }
 
-            [Display(ResourceType = typeof(Resources.Partenaire), Name = "ville")]
+            [Display(Name = "City", ResourceType = typeof(Names.DisplayName))]
             [StringLength(65)]
             public string VILLE { get; set; }
 
-            [Display(ResourceType = typeof(Resources.Partenaire), Name = "pays")]
+            [Display(Name = "Country", ResourceType = typeof(Names.DisplayName))]
             [StringLength(60)]
             public string PAYS { get; set; }
 
-            [Display(ResourceType = typeof(Resources.Partenaire), Name = "telephone")]
+            [Display(Name = "Phone", ResourceType = typeof(Names.DisplayName))]
             [StringLength(20)]
             public string TELEPHONE { get; set; }
 
-            [Display(ResourceType = typeof(Resources.Partenaire), Name = "siteWeb")]
+            [Display(Name = "Website", ResourceType = typeof(Names.DisplayName))]
             [StringLength(150)]
             public string SITEWEB { get; set; }
 
-            [Display(ResourceType = typeof(Resources.Partenaire), Name = "courriel")]
+            [Display(Name = "Email", ResourceType = typeof(Names.DisplayName))]
             [Required]
             [StringLength(150)]
             public string COURRIEL { get; set; }
