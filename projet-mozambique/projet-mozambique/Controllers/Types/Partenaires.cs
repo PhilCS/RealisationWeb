@@ -15,7 +15,7 @@ namespace projet_mozambique.Controllers
     {
         public ActionResult Partenaires()
         {
-            List<GetPartenaires_Result> listePartenaires = db.GetPartenaires().ToList();
+            List<PARTENAIRE> listePartenaires = db.GetPartenaires().ToList();
             ViewData[Constantes.CLE_PARTENAIRES] = listePartenaires;
 
             return View();
@@ -25,29 +25,39 @@ namespace projet_mozambique.Controllers
     public partial class AdminController
     {
         [HttpGet]
-        public ActionResult GestionPartenaire(int? id)
+        public ActionResult GestionPartenaires()
         {
-            if (id != null)
-            {
-                List<PARTENAIRE> listePart = db.GetPartenaire(id).ToList();
+            List<PARTENAIRE> listePartenaires = db.GetPartenaires().ToList();
+            ViewData[Constantes.CLE_PARTENAIRES] = listePartenaires;
 
-                if (listePart.Count > 0)
-                {
-                    return View(listePart.FirstOrDefault());
-                }
-                else
-                {
-                    TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Partenaire.partenaireInexistant);
-                    return RedirectToAction("Partenaires", "Public");
-                }
-            }
-            
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AjouterPartenaire([Bind(Exclude = "ID")] PARTENAIRE envoiPart)
+        public ActionResult GestionPartenaires(int id, string modifier, string supprimer)
+        {
+            if (!String.IsNullOrEmpty(modifier))
+            {
+                return RedirectToAction("ModifierPartenaire", new { @id = id });
+            }
+            else if (!String.IsNullOrEmpty(supprimer))
+            {
+                return RedirectToAction("SupprimerPartenaire", new { @id = id });
+            }
+
+            return RedirectToAction("GestionPartenaires");
+        }
+
+        [HttpGet]
+        public ActionResult AjoutPartenaire()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AjoutPartenaire([Bind(Exclude = "ID")] PARTENAIRE envoiPart)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +74,33 @@ namespace projet_mozambique.Controllers
                 }
             }
 
-            return View("GestionPartenaire", envoiPart);
+            return View(envoiPart);
+        }
+
+        [HttpGet]
+        public ActionResult ModifierPartenaire(int? id)
+        {
+            PARTENAIRE part = null;
+
+            try
+            {
+                if (id == null)
+                    throw new ArgumentNullException("id");
+
+                part = db.GetPartenaire(id).First();
+            }
+            catch
+            {
+                TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Partenaire.partenaireInexistant);
+                return RedirectToAction("Partenaires", "Public");
+            }
+
+            if (part != null)
+            {
+                return View(part);
+            }
+
+            return View();
         }
 
         [HttpPost]
@@ -78,7 +114,7 @@ namespace projet_mozambique.Controllers
                     db.ModifierPartenaire(envoiPart.ID, envoiPart.NOM, envoiPart.RAISONSOCIALE, envoiPart.ADRESSE, envoiPart.VILLE, envoiPart.PAYS, envoiPart.TELEPHONE, envoiPart.SITEWEB, envoiPart.COURRIEL);
 
                     TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Partenaire.partenaireModifie);
-                    return RedirectToAction("Partenaires", "Public");
+                    return RedirectToAction("GestionPartenaires");
                 }
                 catch (Exception ex)
                 {
@@ -86,7 +122,62 @@ namespace projet_mozambique.Controllers
                 }
             }
 
-            return View("GestionPartenaire", envoiPart);
+            return View(envoiPart);
+        }
+
+        [HttpGet]
+        public ActionResult SupprimerPartenaire(int? id)
+        {
+            PARTENAIRE part = null;
+
+            try
+            {
+                if (id == null)
+                    throw new ArgumentNullException("id");
+
+                part = db.GetPartenaire(id).First();
+            }
+            catch
+            {
+                TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Partenaire.partenaireInexistant);
+            }
+
+            if (part != null)
+            {
+                return View(part);
+            }
+
+            return RedirectToAction("GestionPartenaires");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SupprimerPartenaire(int? id, string confirmer, string annuler)
+        {
+            if (!String.IsNullOrEmpty(confirmer) && String.IsNullOrEmpty(annuler))
+            {
+                PARTENAIRE part = null;
+
+                try
+                {
+                    if (id == null)
+                        throw new ArgumentNullException("id");
+
+                    part = db.GetPartenaire(id).First();
+                }
+                catch
+                {
+                    TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Partenaire.partenaireInexistant);
+                }
+
+                if (part != null)
+                {
+                    db.SupprimerPartenaire(id);
+                    TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Partenaire.partenaireSupprime);
+                }
+            }
+
+            return RedirectToAction("GestionPartenaires");
         }
     }
 }

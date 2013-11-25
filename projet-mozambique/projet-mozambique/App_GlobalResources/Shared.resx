@@ -126,6 +126,9 @@
   <data name="ajouter" xml:space="preserve">
     <value>Ajouter</value>
   </data>
+  <data name="annuler" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
   <data name="apropos" xml:space="preserve">
     <value>Qui sommes-nous?</value>
   </data>
@@ -140,6 +143,9 @@
   </data>
   <data name="ci" xml:space="preserve">
     <value>pt</value>
+  </data>
+  <data name="confirmer" xml:space="preserve">
+    <value>Confirmer</value>
   </data>
   <data name="documents" xml:space="preserve">
     <value>Documents</value>
@@ -188,6 +194,9 @@
   </data>
   <data name="nouvelles" xml:space="preserve">
     <value>Nouvelles</value>
+  </data>
+  <data name="oui" xml:space="preserve">
+    <value />
   </data>
   <data name="partenaires" xml:space="preserve">
     <value>Partenaires</value>

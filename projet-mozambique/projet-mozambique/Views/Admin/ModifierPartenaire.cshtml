@@ -1,0 +1,80 @@
+﻿@model projet_mozambique.Models.PARTENAIRE
+
+@{
+    Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
+    
+    string postAction;
+
+    if (Model != null && Model.ID > 0)
+    {
+        ViewBag.Title = Resources.Partenaire.modifPartenaire;
+        <h1>@Resources.Partenaire.modifPartenaire</h1>
+        postAction = "ModifierPartenaire";
+    }
+    else
+    {
+        ViewBag.Title = Resources.Partenaire.ajoutPartenaire;
+        <h1>@Resources.Partenaire.ajoutPartenaire</h1>
+        postAction = "AjoutPartenaire";
+    }
+
+    using (Html.BeginForm(postAction, "Admin", FormMethod.Post, new { @class = "formulaire" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        @Html.HiddenFor(model => model.ID)
+
+        <div>
+            @Html.LabelFor(model => model.NOM)
+            @Html.TextBoxFor(model => model.NOM)
+            @Html.ValidationMessageFor(model => model.NOM)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.RAISONSOCIALE)
+            @Html.TextBoxFor(model => model.RAISONSOCIALE)
+            @Html.ValidationMessageFor(model => model.RAISONSOCIALE)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.ADRESSE)
+            @Html.TextBoxFor(model => model.ADRESSE)
+            @Html.ValidationMessageFor(model => model.ADRESSE)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.VILLE)
+            @Html.TextBoxFor(model => model.VILLE)
+            @Html.ValidationMessageFor(model => model.VILLE)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.PAYS)
+            @Html.TextBoxFor(model => model.PAYS)
+            @Html.ValidationMessageFor(model => model.PAYS)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.TELEPHONE)
+            @Html.TextBoxFor(model => model.TELEPHONE)
+            @Html.ValidationMessageFor(model => model.TELEPHONE)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.SITEWEB)
+            @Html.TextBoxFor(model => model.SITEWEB)
+            @Html.ValidationMessageFor(model => model.SITEWEB)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.COURRIEL)
+            @Html.TextBoxFor(model => model.COURRIEL)
+            @Html.ValidationMessageFor(model => model.COURRIEL)
+        </div>
+
+        <div>
+            <input type="submit" class="btnForm" />
+        </div>
+    }
+}

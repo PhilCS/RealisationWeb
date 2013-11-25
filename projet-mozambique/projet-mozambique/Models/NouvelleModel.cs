@@ -13,7 +13,7 @@ namespace projet_mozambique.Models
 
         [MaxLength(100)]
         [Required(ErrorMessageResourceName = "titreVide", ErrorMessageResourceType = typeof(Resources.Messages))]
-        [Display(Name = "Titre", ResourceType = typeof(Names.DisplayName))]
+        [Display(Name = "Title", ResourceType = typeof(Names.DisplayName))]
         public string titre { get; set; }
 
         [Required(ErrorMessageResourceName = "descriptionVide", ErrorMessageResourceType = typeof(Resources.Messages))]

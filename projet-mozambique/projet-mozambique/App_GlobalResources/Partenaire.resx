@@ -117,23 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="adresse" xml:space="preserve">
-    <value>Adresse</value>
-  </data>
   <data name="ajouterPartenaire" xml:space="preserve">
     <value>Ajouter un partenaire</value>
   </data>
   <data name="ajoutPartenaire" xml:space="preserve">
     <value>Ajout d'un partenaire</value>
   </data>
-  <data name="courriel" xml:space="preserve">
-    <value>Courriel</value>
-  </data>
   <data name="modifPartenaire" xml:space="preserve">
     <value>Modifier un partenaire</value>
-  </data>
-  <data name="nom" xml:space="preserve">
-    <value>Nom</value>
   </data>
   <data name="partenaireAjoute" xml:space="preserve">
     <value>Le partenaire a bien été ajouté.</value>
@@ -147,19 +138,17 @@
   <data name="partenaireModifie" xml:space="preserve">
     <value>Le partenaire a bien été mis à jour.</value>
   </data>
-  <data name="pays" xml:space="preserve">
-    <value>Pays</value>
+  <data name="confirmerSupprPartenaire" xml:space="preserve">
+    <value>Voulez-vous vraiment supprimer "{0}"?</value>
+    <comment>{0} est remplacé par le nom du partenaire</comment>
   </data>
-  <data name="raisonSociale" xml:space="preserve">
-    <value>Raison sociale</value>
+  <data name="modifierSupprimerPartenaire" xml:space="preserve">
+    <value>Modifier/Supprimer un partenaire</value>
   </data>
-  <data name="siteWeb" xml:space="preserve">
-    <value>Site web</value>
+  <data name="partenaireSupprime" xml:space="preserve">
+    <value>Le partenaire a bien été supprimé.</value>
   </data>
-  <data name="telephone" xml:space="preserve">
-    <value>Téléphone</value>
-  </data>
-  <data name="ville" xml:space="preserve">
-    <value>Ville</value>
+  <data name="suppressionPartenaire" xml:space="preserve">
+    <value>Suppression d'un partenaire</value>
   </data>
 </root>

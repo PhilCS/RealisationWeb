@@ -4,7 +4,7 @@
 @model PUBLICATION
 
 @{
-    ViewBag.Title = "AjoutPublication";
+    ViewBag.Title = Resources.Publication.ajoutPublication;
 
     Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
 
@@ -13,7 +13,7 @@
     
     <h1>@Resources.Publication.ajoutPublication</h1>
 
-    using (Html.BeginForm("AjoutPublication", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", @class = "formulaire" }))
+    using (Html.BeginForm("AjoutPublication", "Sectoriel", FormMethod.Post, new { enctype = "multipart/form-data", @class = "formulaire" }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)

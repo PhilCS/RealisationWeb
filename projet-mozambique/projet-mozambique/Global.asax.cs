@@ -139,7 +139,8 @@ namespace projet_mozambique
 
                 // clear error on server
                 Server.ClearError();
-                Response.Redirect(String.Format("~/Error/{0}?message={1}", action, httpException.Message));
+                //Response.Redirect(String.Format("~/Error/{0}?message={1}", action, httpException.Message));
+                Response.Redirect(String.Format("~/Error/{0}", action));
             }
         }
 

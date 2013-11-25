@@ -232,9 +232,7 @@
     <Compile Include="Models\CONTENU.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\dbContext1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
+    <Compile Include="Models\GetPublication_Result.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MessageForumModel.cs" />
@@ -305,6 +303,9 @@
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetPartenaire_Result.cs">
+      <DependentUpon>dbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetPubParID_Result.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetPubParMotCle_Result.cs">
@@ -407,6 +408,7 @@
     <Compile Include="Utilitaires\Fichiers.cs" />
     <Compile Include="Utilitaires\ListePaginee.cs" />
     <Compile Include="Utilitaires\Message.cs" />
+    <Compile Include="Utilitaires\MotsCles.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\images\Falco2.jpg" />
@@ -563,9 +565,9 @@
     <Content Include="Views\Admin\SupprimerFil.cshtml" />
     <Content Include="Views\Sectoriel\Sondages.cshtml" />
     <Content Include="Views\Admin\Sondages.cshtml" />
-    <Content Include="Views\Admin\SupprimerPublication.cshtml" />
+    <Content Include="Views\Sectoriel\SupprimerPublication.cshtml" />
     <Content Include="Views\Sectoriel\Publications.cshtml" />
-    <Content Include="Views\Admin\AjoutPublication.cshtml" />
+    <Content Include="Views\Sectoriel\AjoutPublication.cshtml" />
     <Content Include="Views\Sectoriel\Calendrier.cshtml" />
     <Content Include="Views\Sectoriel\Evenement.cshtml" />
     <Content Include="Views\Admin\AjouterEvenement.cshtml" />
@@ -579,7 +581,7 @@
     <Content Include="Views\Public\Nouvelle.cshtml" />
     <Content Include="Views\Public\PageResultat.cshtml" />
     <Content Include="Views\Admin\GestionNouvelles.cshtml" />
-    <Content Include="Views\Admin\GestionPartenaire.cshtml" />
+    <Content Include="Views\Admin\ModifierPartenaire.cshtml" />
     <Content Include="Views\Admin\ModifierEvenement.cshtml" />
     <Content Include="Views\Admin\ModifEvenementOK.cshtml" />
     <Content Include="Views\Admin\ModifEvenementErreur.cshtml" />
@@ -615,6 +617,9 @@
     <Content Include="Views\Sectoriel\SelectionDest.cshtml" />
     <Content Include="Views\Admin\ModifierNouvelle.cshtml" />
     <Content Include="Views\Admin\AjouterNouvelle.cshtml" />
+    <Content Include="Views\Admin\AjoutPartenaire.cshtml" />
+    <Content Include="Views\Admin\GestionPartenaires.cshtml" />
+    <Content Include="Views\Admin\SupprimerPartenaire.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -670,18 +675,16 @@
       <LastGenOutput>Sectoriel.designer.cs</LastGenOutput>
     </Content>
     <EmbeddedResource Include="App_GlobalResources\Partenaire.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Partenaire.designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
     <Content Include="App_GlobalResources\Public.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Public.designer.cs</LastGenOutput>
     </Content>
     <EmbeddedResource Include="App_GlobalResources\Publication.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Publication.designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

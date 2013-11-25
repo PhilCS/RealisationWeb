@@ -5,25 +5,22 @@
     ViewBag.Title = "Publications (Droit de publication)";
 
     Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
-
-    var listeSecteurs = (ViewData[Constantes.CLE_SECTEURS] as List<GetSecteurs_Result>);
-    var listeSujetsPub = (ViewData[Constantes.CLE_SUJETSPUBLICATION] as List<GetSujetsPublication_Result>);
-    var listePub = ViewData[Constantes.CLE_PUBLICATIONS] as List<PUBLICATION>;
     
-    <h1>@if(!User.IsInRole("etudiant")){<a href="/Admin/AjoutPublication"><img src="~/Content/images/icones/icon-add-black.png" title="@Resources.Publication.ajouterPublication" alt="Icône Ajouter" class="icone" /></a>}@Resources.Shared.publications</h1>
+    var listeSecteurs = ViewData[Constantes.CLE_SECTEURS] as List<GetSecteurs_Result>;
+    var listeSujetsPub = ViewData[Constantes.CLE_SUJETSPUBLICATION] as List<GetSujetsPublication_Result>;
+    var listePub = ViewData[Constantes.CLE_PUBLICATIONS] as List<PUBLICATION>;
+    int secteur = (int)ViewData[Constantes.CLE_IDSECTEUR];
+    
+    <h1>@if(User.IsInRole("etudiant") == false) { <a href="/Sectoriel/AjoutPublication"><img src="~/Content/images/icones/icon-add-black.png" title="@Resources.Publication.ajouterPublication" alt="+" class="icone" /></a>} @Resources.Shared.publications</h1>
     
     <div class="nav-tab">
         <ul>
             @for (int i = 0; i < listeSecteurs.Count; i++)
             {
-                 <li>
-                     <a href="?secteur=@listeSecteurs[i].ID" 
-                     @if (Request.QueryString["secteur"] == listeSecteurs[i].ID.ToString() || (String.IsNullOrEmpty(Request.QueryString["secteur"]) && i == 0))
-                     {
-                        <text> class="tab-active" </text>
-                     }
-                     >@listeSecteurs[i].NOM</a>
-                 </li>
+                <li>
+                    <a @if (listeSecteurs.Count() > 1) { <text> href="?secteur=@listeSecteurs[i].ID" </text> }
+                       @if (secteur == listeSecteurs[i].ID) { <text> class="tab-active" </text> }>@listeSecteurs[i].NOM</a>
+                </li>
             }
         </ul>
     </div>
@@ -31,15 +28,15 @@
     <div class="recherche-doc">
 
         <form method="get">
-            <input type="hidden" name="secteur" value="@Request.QueryString["secteur"]" />
-            <label for="mot-cle">Recherche par mot-clé : </label>
-            <input id="mot-cle" name="motcle" placeholder="mot clé(s)" type="text" value="@Request.QueryString["mot-cle"]"/><br />
-            <label for="categorie">Recherche par catégorie : </label>
+            <input type="hidden" name="secteur" value="@secteur" />
+            <label for="mot-cle">@Resources.Publication.rechercheMotCle : </label>
+            <input id="mot-cle" name="motscles" placeholder="mot clé(s)" type="text" value="@Request.QueryString["motscles"]"/><br />
+            <label for="categorie">@Resources.Publication.rechercheCategorie : </label>
             <select name="categorie" id="categorie">
                 <option value="">&lt;Toutes&gt;</option>
                 @foreach (GetSujetsPublication_Result sujetPub in listeSujetsPub)
                 {
-                    <option value="@sujetPub.ID" @if (Request.QueryString["categorie"] == sujetPub.ID.ToString()) { <text> selected="selected" </text> }>@sujetPub.NOM</option>
+                    <option value="@sujetPub.ID" @if (Convert.ToInt32(Request.QueryString["categorie"]) == sujetPub.ID) { <text> selected="selected" </text> }>@sujetPub.NOM</option>
                 }
             </select>
 
@@ -64,14 +61,17 @@
                         <ul>
                             @foreach (PUBLICATION publi in listePubSujet)
                             {
+                                string typeFichier = Fichiers.GetFichierIcone(@publi.NOMFICHIERORIGINAL, @publi.MIMETYPE);
+                                
                                 <li>
-                                    <a href="ObtenirPublication?nomFichier=@publi.NOMFICHIERSERVEUR">
-                                        <img src="~/Content/images/icones/icone-excel.png" alt="Fichier Excel" />@publi.TITRE
+                                    <a href="ObtenirPublication?id=@publi.ID">
+                                        <img src="~/Content/images/icones/icone-@(typeFichier).png" alt="Fichier @typeFichier" />@publi.TITRE
                                         <span class="date-document">(ajouté le @publi.DATECREATION.ToLongDateString().Replace(DateTime.Now.DayOfWeek.ToString() + ", ", ""))</span> @*Ceci donne le jour, le mois, et l'année formattés correctement pour la langue du système*@
                                     </a>
-                                    @if(!User.IsInRole("etudiant")){<a href="SupprimerPublication?id=@publi.ID">
-                                        <img src="~/Content/images/icones/icon-trashcan.png" title="Supprimer" alt="Icône supprimer document" class="icone" />
-                                    </a>}
+                                    @if (User.IsInRole("etudiant") == false)
+                                    {
+                                        <a href="/Sectoriel/SupprimerPublication/@publi.ID"><img src="~/Content/images/icones/icon-trashcan.png" title="Supprimer" alt="Icône supprimer document" class="icone" /></a>
+                                    }
                                 </li>
                             }
                         </ul>
@@ -82,7 +82,7 @@
     }
     else
     {
-        <div>Aucun résultat</div>
+        <div>@Resources.Publication.aucunResultat</div>
     }
 }
 

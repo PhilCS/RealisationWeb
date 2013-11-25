@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Adress" xml:space="preserve">
+  <data name="Address" xml:space="preserve">
     <value>Adresse</value>
     <comment>UserModel</comment>
   </data>
@@ -140,7 +140,7 @@
     <value>Courriel</value>
     <comment>UserModel</comment>
   </data>
-  <data name="File" xml:space="preserve">
+  <data name="Image" xml:space="preserve">
     <value>Image</value>
     <comment>ContentModel</comment>
   </data>
@@ -201,23 +201,59 @@
     <comment>MessageModel</comment>
   </data>
   <data name="UrlImage" xml:space="preserve">
-    <value>Url de l'image (facultatif)</value>
+    <value>URL de l'image (facultatif)</value>
     <comment>ContentModel</comment>
   </data>
   <data name="UserName" xml:space="preserve">
     <value>Nom d'utilisateur </value>
     <comment>UserModel</comment>
   </data>
-  <data name="Description" xml:space="preserve">
-    <value>Description de la nouvelle</value>
-    <comment>NouvelleModel</comment>
+  <data name="Category" xml:space="preserve">
+    <value>Catégorie</value>
+    <comment>AjoutPublication</comment>
   </data>
-  <data name="Titre" xml:space="preserve">
-    <value>Titre de la nouvelle</value>
-    <comment>NouvelleModel</comment>
+  <data name="Country" xml:space="preserve">
+    <value>Pays</value>
+    <comment>AjoutPartenaire</comment>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+    <comment>NouvelleModel, AjoutPublication</comment>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>Fichier</value>
+    <comment>AjoutPublication</comment>
   </data>
   <data name="ConfirmEmail" xml:space="preserve">
     <value>Confirmation du courriel</value>
     <comment>UserModel</comment>
+  </data>
+  <data name="Keywords" xml:space="preserve">
+    <value>Mots-clés</value>
+    <comment>AjoutPublication</comment>
+  </data>
+  <data name="Mission" xml:space="preserve">
+    <value>Mission et valeurs</value>
+    <comment>AjoutPartenaire</comment>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nom</value>
+    <comment>AjoutPartenaire</comment>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Téléphone</value>
+    <comment>AjoutPartenaire</comment>
+  </data>
+  <data name="Sector" xml:space="preserve">
+    <value>Secteur</value>
+    <comment>AjoutPublication</comment>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Titre</value>
+    <comment>NouvelleModel, AjoutPublication</comment>
+  </data>
+  <data name="Website" xml:space="preserve">
+    <value>Site web</value>
+    <comment>AjoutPartenaire</comment>
   </data>
 </root>

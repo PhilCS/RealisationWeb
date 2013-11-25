@@ -527,35 +527,30 @@ namespace projet_mozambique.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PARTENAIRE>("GetPartenaire", mergeOption, idparParameter);
         }
     
-        public virtual ObjectResult<GetPartenaires_Result> GetPartenaires()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPartenaires_Result>("GetPartenaires");
-        }
-    
-        public virtual ObjectResult<PUBLICATION> GetPubParMotCle(Nullable<int> idsecteur, string motcle)
+        public virtual ObjectResult<PUBLICATION> GetPubParMotCle(Nullable<int> idsecteur, string motscles)
         {
             var idsecteurParameter = idsecteur.HasValue ?
                 new ObjectParameter("idsecteur", idsecteur) :
                 new ObjectParameter("idsecteur", typeof(int));
     
-            var motcleParameter = motcle != null ?
-                new ObjectParameter("motcle", motcle) :
-                new ObjectParameter("motcle", typeof(string));
+            var motsclesParameter = motscles != null ?
+                new ObjectParameter("motscles", motscles) :
+                new ObjectParameter("motscles", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PUBLICATION>("GetPubParMotCle", idsecteurParameter, motcleParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PUBLICATION>("GetPubParMotCle", idsecteurParameter, motsclesParameter);
         }
     
-        public virtual ObjectResult<PUBLICATION> GetPubParMotCle(Nullable<int> idsecteur, string motcle, MergeOption mergeOption)
+        public virtual ObjectResult<PUBLICATION> GetPubParMotCle(Nullable<int> idsecteur, string motscles, MergeOption mergeOption)
         {
             var idsecteurParameter = idsecteur.HasValue ?
                 new ObjectParameter("idsecteur", idsecteur) :
                 new ObjectParameter("idsecteur", typeof(int));
     
-            var motcleParameter = motcle != null ?
-                new ObjectParameter("motcle", motcle) :
-                new ObjectParameter("motcle", typeof(string));
+            var motsclesParameter = motscles != null ?
+                new ObjectParameter("motscles", motscles) :
+                new ObjectParameter("motscles", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PUBLICATION>("GetPubParMotCle", mergeOption, idsecteurParameter, motcleParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PUBLICATION>("GetPubParMotCle", mergeOption, idsecteurParameter, motsclesParameter);
         }
     
         public virtual ObjectResult<PUBLICATION> GetPubParSecteur(Nullable<int> idsecteur)
@@ -1137,6 +1132,52 @@ namespace projet_mozambique.Models
         public virtual ObjectResult<GetSujetsPublication_Result> GetSujetsPublication()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSujetsPublication_Result>("GetSujetsPublication");
+        }
+    
+        public virtual int UpdateMotsClesPub(Nullable<int> idpub, string motscles)
+        {
+            var idpubParameter = idpub.HasValue ?
+                new ObjectParameter("idpub", idpub) :
+                new ObjectParameter("idpub", typeof(int));
+    
+            var motsclesParameter = motscles != null ?
+                new ObjectParameter("motscles", motscles) :
+                new ObjectParameter("motscles", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateMotsClesPub", idpubParameter, motsclesParameter);
+        }
+    
+        public virtual ObjectResult<PUBLICATION> GetPublication(Nullable<int> idpub)
+        {
+            var idpubParameter = idpub.HasValue ?
+                new ObjectParameter("idpub", idpub) :
+                new ObjectParameter("idpub", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PUBLICATION>("GetPublication", idpubParameter);
+        }
+    
+        public virtual ObjectResult<PUBLICATION> GetPublication(Nullable<int> idpub, MergeOption mergeOption)
+        {
+            var idpubParameter = idpub.HasValue ?
+                new ObjectParameter("idpub", idpub) :
+                new ObjectParameter("idpub", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PUBLICATION>("GetPublication", mergeOption, idpubParameter);
+        }
+    
+        public virtual int NettoyerMotsCles()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("NettoyerMotsCles");
+        }
+    
+        public virtual ObjectResult<PARTENAIRE> GetPartenaires()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PARTENAIRE>("GetPartenaires");
+        }
+    
+        public virtual ObjectResult<PARTENAIRE> GetPartenaires(MergeOption mergeOption)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PARTENAIRE>("GetPartenaires", mergeOption);
         }
     }
 }
