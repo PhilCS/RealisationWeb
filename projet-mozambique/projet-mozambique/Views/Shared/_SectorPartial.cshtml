@@ -5,7 +5,7 @@
     int current = (int)Session["currentSecteur"];
     
     <form method="post" action="/Sectoriel/ChangeSecteur">
-        @Html.Label(Resources.Shared.secteur)
+        <label for="secteur">@Resources.Shared.secteur</label>
         <select id="selectSector" name="secteur" onchange="this.form.submit()">
             @foreach (var s in lst)
             {
