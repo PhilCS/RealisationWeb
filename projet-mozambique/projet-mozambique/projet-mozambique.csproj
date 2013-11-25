@@ -232,6 +232,11 @@
     <Compile Include="Models\CONTENU.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\dbContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbContext.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetPublication_Result.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
@@ -241,11 +246,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dbContext.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\dbContext.Designer.cs">
-      <DependentUpon>dbContext.edmx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Models\DESTINATAIREMESSAGE.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
