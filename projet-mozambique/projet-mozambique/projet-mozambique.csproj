@@ -148,6 +148,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Admin.pt.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\Publication.pt.designer.cs">
+      <DependentUpon>Publication.pt.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_GlobalResources\Partenaire.pt.designer.cs">
+      <DependentUpon>Partenaire.pt.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="App_GlobalResources\DisplayName.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -651,6 +661,14 @@
     <Content Include="App_GlobalResources\Admin.resx">
       <LastGenOutput>Admin.designer.cs</LastGenOutput>
       <Generator>GlobalResourceProxyGenerator</Generator>
+    </Content>
+    <Content Include="App_GlobalResources\Partenaire.pt.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Partenaire.pt.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Publication.pt.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Publication.pt.designer.cs</LastGenOutput>
     </Content>
     <EmbeddedResource Include="App_GlobalResources\DisplayName.pt.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

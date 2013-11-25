@@ -147,6 +147,9 @@
   <data name="confirmer" xml:space="preserve">
     <value>Confirmer</value>
   </data>
+  <data name="derniereModifLe" xml:space="preserve">
+    <value>Dernière modification le</value>
+  </data>
   <data name="documents" xml:space="preserve">
     <value>Documents</value>
   </data>
@@ -170,6 +173,9 @@
   </data>
   <data name="langue" xml:space="preserve">
     <value>Portuguese</value>
+  </data>
+  <data name="le" xml:space="preserve">
+    <value>le</value>
   </data>
   <data name="lirePlus" xml:space="preserve">
     <value>Lire la suite...</value>
@@ -197,6 +203,9 @@
   </data>
   <data name="oui" xml:space="preserve">
     <value />
+  </data>
+  <data name="par" xml:space="preserve">
+    <value>Par</value>
   </data>
   <data name="partenaires" xml:space="preserve">
     <value>Partenaires</value>

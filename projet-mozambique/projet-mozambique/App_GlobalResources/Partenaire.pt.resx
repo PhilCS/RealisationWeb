@@ -117,82 +117,38 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="boiteReception" xml:space="preserve">
-    <value>Inbox</value>
+  <data name="ajouterPartenaire" xml:space="preserve">
+    <value>Add a partner</value>
   </data>
-  <data name="ConfirmResetPassword" xml:space="preserve">
-    <value>Confirm</value>
-    <comment>ConfirmationReinitialMotPasse</comment>
+  <data name="ajoutPartenaire" xml:space="preserve">
+    <value>Add a partner</value>
   </data>
-  <data name="corbeille" xml:space="preserve">
-    <value>Trash</value>
+  <data name="modifPartenaire" xml:space="preserve">
+    <value>Edit a partner</value>
   </data>
-  <data name="destinataireInexistant" xml:space="preserve">
-    <value>The user {0} doesn't exist.</value>
+  <data name="partenaireAjoute" xml:space="preserve">
+    <value>The partner has been added.</value>
   </data>
-  <data name="envoyeA" xml:space="preserve">
-    <value>Sent to</value>
+  <data name="partenaireErreur" xml:space="preserve">
+    <value>An error occured while adding the partner.</value>
   </data>
-  <data name="envoyer" xml:space="preserve">
-    <value>Send</value>
+  <data name="partenaireInexistant" xml:space="preserve">
+    <value>The specified partner doesn't exist.</value>
   </data>
-  <data name="messagerie" xml:space="preserve">
-    <value>Mail</value>
+  <data name="partenaireModifie" xml:space="preserve">
+    <value>The partner has been edited.</value>
   </data>
-  <data name="messagesEnvoyes" xml:space="preserve">
-    <value>Sent Mail</value>
+  <data name="confirmerSupprPartenaire" xml:space="preserve">
+    <value>Do you want to delete "{0}"?</value>
+    <comment>{0} est remplacé par le nom du partenaire</comment>
   </data>
-  <data name="ModifierInfos" xml:space="preserve">
-    <value>Change your profile information</value>
-    <comment>Profil</comment>
+  <data name="modifierSupprimerPartenaire" xml:space="preserve">
+    <value>Edit/Delete a partner </value>
   </data>
-  <data name="ModifierMDP" xml:space="preserve">
-    <value>Change your password</value>
-    <comment>Profil</comment>
+  <data name="partenaireSupprime" xml:space="preserve">
+    <value>The partner has been deleted.</value>
   </data>
-  <data name="nom" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="nouveau" xml:space="preserve">
-    <value>New</value>
-  </data>
-  <data name="nouveauMessage" xml:space="preserve">
-    <value>New mail</value>
-  </data>
-  <data name="repondre" xml:space="preserve">
-    <value>Reply</value>
-  </data>
-  <data name="repondreMessage" xml:space="preserve">
-    <value>Reply to mail</value>
-  </data>
-  <data name="ResetPassword" xml:space="preserve">
-    <value>Reset</value>
-    <comment>ReinitialiserMotPasse</comment>
-  </data>
-  <data name="selectionDestinataires" xml:space="preserve">
-    <value>Recipients selection (by name/surname)</value>
-  </data>
-  <data name="supprimer" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="dernierMessage" xml:space="preserve">
-    <value>Last Message</value>
-    <comment>Forum</comment>
-  </data>
-  <data name="filDiscussion" xml:space="preserve">
-    <value>Discussion Thread</value>
-    <comment>Forum</comment>
-  </data>
-  <data name="forum" xml:space="preserve">
-    <value>Forum</value>
-    <comment>Forum</comment>
-  </data>
-  <data name="nbLectures" xml:space="preserve">
-    <value>Number of Readings</value>
-    <comment>Forum</comment>
-  </data>
-  <data name="nbMessage" xml:space="preserve">
-    <value>Number of Messages</value>
-    <comment>Forum</comment>
+  <data name="suppressionPartenaire" xml:space="preserve">
+    <value>Delete a partner</value>
   </data>
 </root>
