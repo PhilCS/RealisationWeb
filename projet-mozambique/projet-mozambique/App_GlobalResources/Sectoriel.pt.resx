@@ -195,4 +195,14 @@
     <value>Number of Messages</value>
     <comment>Forum</comment>
   </data>
+  <data name="contenuPlaceholder" xml:space="preserve">
+    <value>Content</value>
+  </data>
+  <data name="nouveauFil" xml:space="preserve">
+    <value>New discussion thread</value>
+    <comment>Forum</comment>
+  </data>
+  <data name="sujetPlaceholder" xml:space="preserve">
+    <value>Subject</value>
+  </data>
 </root>

@@ -195,8 +195,14 @@
     <value>Nb Messages</value>
     <comment>Forum</comment>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value />
+  <data name="nouveauFil" xml:space="preserve">
+    <value>Nouveau fil de discussion</value>
     <comment>Forum</comment>
+  </data>
+  <data name="contenuPlaceholder" xml:space="preserve">
+    <value>Contenu du message...</value>
+  </data>
+  <data name="sujetPlaceholder" xml:space="preserve">
+    <value>Sujet</value>
   </data>
 </root>

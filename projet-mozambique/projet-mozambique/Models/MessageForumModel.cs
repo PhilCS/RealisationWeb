@@ -9,7 +9,14 @@ namespace projet_mozambique.Models
 {
     public class MessageForumModel
     {
+        [Required(ErrorMessageResourceName = "sujetObligatoire", ErrorMessageResourceType = typeof(Resources.Messages))]
+        [Display(Name = "Sujet", ResourceType = typeof(Names.DisplayName))]
+        public string sujet { get; set; }
+
+        [Required(ErrorMessageResourceName = "contenuObligatoire", ErrorMessageResourceType = typeof(Resources.Messages))]
+        [Display(Name = "Contenu", ResourceType = typeof(Names.DisplayName))]
         public string contenu { get; set; }
+
         public string auteur { get; set; }
         public DateTime datePublication { get; set; }
         public DateTime dateModification { get; set; }

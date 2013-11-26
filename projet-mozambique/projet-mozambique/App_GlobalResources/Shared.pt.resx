@@ -127,7 +127,7 @@
     <value>Add</value>
   </data>
   <data name="apropos" xml:space="preserve">
-    <value>About us</value>
+    <value>Quem somos nós?</value>
   </data>
   <data name="calendrier" xml:space="preserve">
     <value>Calendar</value>
@@ -172,7 +172,7 @@
     <value>Edit</value>
   </data>
   <data name="nousjoindre" xml:space="preserve">
-    <value>Contact Us</value>
+    <value>Contacte-nos</value>
   </data>
   <data name="nouvelles" xml:space="preserve">
     <value>News</value>
@@ -214,7 +214,7 @@
     <value>Error 500</value>
   </data>
   <data name="publications" xml:space="preserve">
-    <value>Publications</value>
+    <value>Publicações</value>
   </data>
   <data name="secteur" xml:space="preserve">
     <value>Sector</value>

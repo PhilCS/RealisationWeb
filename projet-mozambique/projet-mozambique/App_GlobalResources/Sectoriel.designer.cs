@@ -79,6 +79,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Contenu du message....
+        /// </summary>
+        internal static string contenuPlaceholder {
+            get {
+                return ResourceManager.GetString("contenuPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Corbeille.
         /// </summary>
         internal static string corbeille {
@@ -214,6 +223,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Nouveau fil de discussion.
+        /// </summary>
+        internal static string nouveauFil {
+            get {
+                return ResourceManager.GetString("nouveauFil", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Nouveau Message.
         /// </summary>
         internal static string nouveauMessage {
@@ -259,11 +277,11 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à .
+        ///   Recherche une chaîne localisée semblable à Sujet.
         /// </summary>
-        internal static string String1 {
+        internal static string sujetPlaceholder {
             get {
-                return ResourceManager.GetString("String1", resourceCulture);
+                return ResourceManager.GetString("sujetPlaceholder", resourceCulture);
             }
         }
         

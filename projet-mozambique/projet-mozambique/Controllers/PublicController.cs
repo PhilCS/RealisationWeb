@@ -71,12 +71,21 @@ namespace projet_mozambique.Controllers
             return View("Nouvelles");
         }
 
-        public ActionResult getNouvelle(int id)
+        public ActionResult getNouvelle(int? id)
         {
-            GetNouvelle_Result n = db.GetNouvelle(id).FirstOrDefault();
-            ViewData[Constantes.CLE_NOUVELLE] = n;            
+            if (id != null)
+            {
+                GetNouvelle_Result n = db.GetNouvelle(id).FirstOrDefault();
 
-            return View("Nouvelle");
+                if (n != null)
+                {
+                    ViewData[Constantes.CLE_NOUVELLE] = n;
+
+                    return View("Nouvelle");
+                }
+            }
+
+            return RedirectToAction("Nouvelles");
         }
 
         public ActionResult APropos()
