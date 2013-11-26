@@ -1,25 +1,36 @@
-﻿@{
-    ViewBag.Title = "Nouveau fil de discussion";
+﻿@model projet_mozambique.Models.MessageForumModel
+@{
+    ViewBag.Title = Resources.Sectoriel.nouveauFil;
 }
 
-<h1>Nouveau fil de discussion</h1>
+<h1>@ViewBag.Title</h1>
 
-<div class="msg">
-    <p>@projet_mozambique.Utilitaires.Constantes.MESSAGE_CHAMPS_OBLIGATOIRE</p>
-</div>
+@using (Html.BeginForm("NouveauFil", "Sectoriel", FormMethod.Post, new { @class = "formulaire nouveau-message" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
 
-<form method="post" action="FilAjouteOK" class="formulaire nouveau-message">
-
-    <div>
-        <label for="sujet">Sujet du message : *</label>
-        <input autofocus type="text" name="sujet" id="sujet" placeholder="Sujet" />
+    @Html.LabelFor(model => model.sujet)
+    
+    <div class="editor-field">
+        @Html.TextBoxFor(m => m.sujet, new { @maxlength = "100", @placeholder = @Resources.Sectoriel.sujetPlaceholder, @autofocus = "true" })
+        @Html.ValidationMessageFor(model => model.sujet)
     </div>
-    *<br />
-    <textarea></textarea><br />
 
-    <input type="submit" class="btnForm" value="Publier" />
-    <a href="FilPasAjoute">ERREUR</a>
-</form>
+    <div class="editor-field">
+        @Html.TextAreaFor(m => m.contenu, new { @placeholder = @Resources.Sectoriel.contenuPlaceholder })
+        @Html.ValidationMessageFor(model => model.contenu)
+    </div>
+
+    <p>
+        <input type="submit" value="@Resources.Shared.ajouter" class="btnForm" />
+    </p>
+}
+
+
+
+
+
 
 
 

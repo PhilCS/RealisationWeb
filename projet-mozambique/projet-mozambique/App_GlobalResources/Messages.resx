@@ -216,4 +216,12 @@
     <value>Vous n'avez pas accès à cette section car vous n'êtes inscrit à aucun secteur.</value>
     <comment>Login</comment>
   </data>
+  <data name="filAjoute" xml:space="preserve">
+    <value>Le fil de discussion a bien été ajouté.</value>
+    <comment>NouveauFil</comment>
+  </data>
+  <data name="filSupprime" xml:space="preserve">
+    <value>Le fil de discussion a bien été supprimé.</value>
+    <comment>Forum</comment>
+  </data>
 </root>

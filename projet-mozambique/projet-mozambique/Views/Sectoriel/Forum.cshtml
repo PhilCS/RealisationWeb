@@ -6,83 +6,113 @@
     ListePaginee<FilModel> lesFil = (ViewData[Constantes.CLE_FILSFORUM] as ListePaginee<FilModel>);
     GetForum_Result f = (ViewData[Constantes.CLE_FORUM] as GetForum_Result);
 
-<h1>@f.TITRE</h1>
-
-<div class="forum">
-    
-    <a href="NouveauFil"><img src="~/Content/images/icones/icon-add-black.png" title="@Resources.Sectoriel.nouveau" alt="Icône Nouveau fil" class="icone" /></a>
-    
-    <ul class="nav-pagination">
-        @if (lesFil.ShowFirstPage)
-        {
-            <li>@Html.ActionLink("<<", "Forum", new { page = 0 })</li>
-            <li>@Html.ActionLink("<", "Forum", new { page = lesFil.PageIndex - 1 })</li>         
-        }
-        else if (lesFil.HasPreviousPage)
-        {
-            <li>@Html.ActionLink("<", "Forum", new { page = lesFil.PageIndex - 1 })</li>
-        }
-    
-        @if (lesFil.ShowLastPage)
-        {
-            <li>@Html.ActionLink(">", "Forum", new { page = lesFil.PageIndex + 1 })</li>
-            <li>@Html.ActionLink(">>", "Forum", new { page = lesFil.TotalPages - 1 })</li>            
-        }
-        else if (lesFil.HasNextPage)
-        {
-            <li>@Html.ActionLink(">", "Forum", new { page = lesFil.PageIndex + 1 })</li>
-        }
-    </ul>
-
-    <table>
-        <thead>
-            <tr>
-                <th class="col-fildiscu">@Resources.Sectoriel.filDiscussion</th>
-                <th class="col-nb">@Resources.Sectoriel.nbMessage</th>
-                <th class="col-nb">@Resources.Sectoriel.nbLectures</th>
-                <th class="col-derniermsg">@Resources.Sectoriel.dernierMessage</th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (int i = 0; i < lesFil.Count; i++)
-            {
-                <tr>
-                    <td class="col-fildiscu"><a href="FilDiscu?id=@lesFil[i].id">@lesFil[i].sujet</a></td>
-                    <td>@lesFil[i].nbMessages</td>
-                    <td>@lesFil[i].nbLectures</td>
-                    <td>@Resources.Shared.par @lesFil[i].dernierParticipant,<br />
-                        @lesFil[i].dateDerniereReponse.ToLongDateString().Replace(DateTime.Now.DayOfWeek.ToString() + ", ", "")
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    @if (lesFil.ShowPagination)
+    if (f != null)
     {
-        <div class="nav-bas">
-            <ul class="nav-pagination">
-                @if (lesFil.ShowFirstPage)
-                {
-                    <li>@Html.ActionLink("<<", "Forum", new { page = 0 })</li>
-                    <li>@Html.ActionLink("<", "Forum", new { page = lesFil.PageIndex - 1 })</li>         
-                }
-                else if (lesFil.HasPreviousPage)
-                {
-                    <li>@Html.ActionLink("<", "Forum", new { page = lesFil.PageIndex - 1 })</li>
-                }
+    <h1>@f.TITRE</h1>
     
-                @if (lesFil.ShowLastPage)
-                {
-                    <li>@Html.ActionLink(">", "Forum", new { page = lesFil.PageIndex + 1 })</li>
-                    <li>@Html.ActionLink(">>", "Forum", new { page = lesFil.TotalPages - 1 })</li>            
-                }
-                else if (lesFil.HasNextPage)
-                {
-                    <li>@Html.ActionLink(">", "Forum", new { page = lesFil.PageIndex + 1 })</li>
-                }
-            </ul>
-        </div>
+    if (TempData[Constantes.CLE_MESSAGE] != null)
+    {
+        <div class="msg succes">@TempData[Constantes.CLE_MESSAGE]</div>
     }
-</div>
+
+    <div class="forum">
+    
+        <a href="NouveauFil"><img src="~/Content/images/icones/icon-add-black.png" title="@Resources.Sectoriel.nouveau" alt="Icône Nouveau fil" class="icone" /></a>
+    
+        <ul class="nav-pagination">
+            @if (lesFil.ShowFirstPage)
+            {
+                <li>@Html.ActionLink("<<", "Forum", new { page = 0 })</li>
+                <li>@Html.ActionLink("<", "Forum", new { page = lesFil.PageIndex - 1 })</li>         
+            }
+            else if (lesFil.HasPreviousPage)
+            {
+                <li>@Html.ActionLink("<", "Forum", new { page = lesFil.PageIndex - 1 })</li>
+            }
+    
+            @if (lesFil.ShowLastPage)
+            {
+                <li>@Html.ActionLink(">", "Forum", new { page = lesFil.PageIndex + 1 })</li>
+                <li>@Html.ActionLink(">>", "Forum", new { page = lesFil.TotalPages - 1 })</li>            
+            }
+            else if (lesFil.HasNextPage)
+            {
+                <li>@Html.ActionLink(">", "Forum", new { page = lesFil.PageIndex + 1 })</li>
+            }
+        </ul>
+
+        <table>
+            <thead>
+                @if (User.IsInRole("admin") || User.IsInRole("professeurModerateur"))
+                {
+                    <tr>
+                        <th class="col-petite-ad">@Resources.Sectoriel.supprimer</th>
+                        <th class="col-fildiscu-ad">@Resources.Sectoriel.filDiscussion</th>
+                        <th class="col-petite-ad">@Resources.Sectoriel.nbMessage</th>
+                        <th class="col-petite-ad">@Resources.Sectoriel.nbLectures</th>
+                        <th class="col-derniermsg-ad">@Resources.Sectoriel.dernierMessage</th>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <th class="col-fildiscu">@Resources.Sectoriel.filDiscussion</th>
+                        <th class="col-nb">@Resources.Sectoriel.nbMessage</th>
+                        <th class="col-nb">@Resources.Sectoriel.nbLectures</th>
+                        <th class="col-derniermsg">@Resources.Sectoriel.dernierMessage</th>
+                    </tr>
+                }
+                
+            </thead>
+            <tbody>
+                @for (int i = 0; i < lesFil.Count; i++)
+                {
+                    <tr>
+                        @if (User.IsInRole("admin") || User.IsInRole("professeurModerateur"))
+                        {
+                            <td><a href="SupprimerFil?idFil=@lesFil[i].id&noPage=@lesFil.PageIndex">@Resources.Sectoriel.supprimer</a></td>
+                        }
+                        <td class="col-fildiscu"><a href="FilDiscu?id=@lesFil[i].id">@lesFil[i].sujet</a></td>
+                        <td>@lesFil[i].nbMessages</td>
+                        <td>@lesFil[i].nbLectures</td>
+                        <td>@Resources.Shared.par @lesFil[i].dernierParticipant,<br />
+                            @lesFil[i].dateDerniereReponse.ToLongDateString().Replace(DateTime.Now.DayOfWeek.ToString() + ", ", "")
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @if (lesFil.ShowPagination)
+        {
+            <div class="nav-bas">
+                <ul class="nav-pagination">
+                    @if (lesFil.ShowFirstPage)
+                    {
+                        <li>@Html.ActionLink("<<", "Forum", new { page = 0 })</li>
+                        <li>@Html.ActionLink("<", "Forum", new { page = lesFil.PageIndex - 1 })</li>         
+                    }
+                    else if (lesFil.HasPreviousPage)
+                    {
+                        <li>@Html.ActionLink("<", "Forum", new { page = lesFil.PageIndex - 1 })</li>
+                    }
+    
+                    @if (lesFil.ShowLastPage)
+                    {
+                        <li>@Html.ActionLink(">", "Forum", new { page = lesFil.PageIndex + 1 })</li>
+                        <li>@Html.ActionLink(">>", "Forum", new { page = lesFil.TotalPages - 1 })</li>            
+                    }
+                    else if (lesFil.HasNextPage)
+                    {
+                        <li>@Html.ActionLink(">", "Forum", new { page = lesFil.PageIndex + 1 })</li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+    }
+    else
+    {
+        <p>@Resources.Messages.UserAccessDenied</p>
+    }
     
 }

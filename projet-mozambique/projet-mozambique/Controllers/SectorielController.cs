@@ -615,17 +615,24 @@ namespace projet_mozambique.Controllers
             return PartialView();
         }
 
-
-        public ActionResult Download(int id)
+        public ActionResult Download(int? id)
         {
-            var query = from pj in db.PIECEJOINTE
-                        where pj.ID == id
-                        select new { pj.PIECESERIALISEE, pj.NOMPIECE };
+            if (id != null)
+            {
+                var query = from pj in db.PIECEJOINTE
+                            where pj.ID == id
+                            select new { pj.PIECESERIALISEE, pj.NOMPIECE };
 
-            return File(
-                query.FirstOrDefault().PIECESERIALISEE, 
-                System.Net.Mime.MediaTypeNames.Application.Octet, 
-                query.FirstOrDefault().NOMPIECE);
+                if (query.Any())
+                {
+                    return File(
+                        query.FirstOrDefault().PIECESERIALISEE,
+                        System.Net.Mime.MediaTypeNames.Application.Octet,
+                        query.FirstOrDefault().NOMPIECE);
+                }
+            }
+
+            return RedirectToAction("Messagerie");
         }
 
         
@@ -784,47 +791,59 @@ namespace projet_mozambique.Controllers
 
         public ActionResult Forum(int? page)
         {
-            int secteur = (int)Session["currentSecteur"];
-            GetForum_Result f = db.GetForum(secteur).FirstOrDefault();
-            List<GetFilDiscussion_Result> lstFil = db.GetFilDiscussion(f.ID).ToList();
-            FilModel fil;
-            int idFil;
-            List<FilModel> lstFilModel = new List<FilModel>();
-
-            for (int i = 0; i < lstFil.Count; i++)
+            if (Session != null)
             {
-                fil = new FilModel();
-                idFil = lstFil[i].ID;
+                GetForum_Result f = null;
 
-                fil.id = lstFil[i].ID;
-                fil.nbLectures = lstFil[i].NBLECTURES;
-                fil.nbMessages = (from m in db.MESSAGEFORUM
-                                  join fi in db.FILDISCUSSION on m.IDFILDISCUSSION equals fi.ID
-                                  where fi.ID == idFil
-                                  select m).Count();
-                fil.sujet = lstFil[i].SUJET;
+                int secteur = (int)Session["currentSecteur"];
 
-                fil.dernierParticipant = (from u in db.UTILISATEUR
-                                          join m in db.MESSAGEFORUM on u.ID equals m.IDUTILISATEUR
-                                          where m.IDFILDISCUSSION == idFil
-                                          orderby m.DATEPUBLICATION descending
-                                          select u.PRENOM + " " + u.NOM).Take(1).FirstOrDefault();
+                if (secteur != 0)
+                {
+                    f = db.GetForum(secteur).FirstOrDefault();
+                    List<GetFilDiscussion_Result> lstFil = db.GetFilDiscussion(f.ID).ToList();
+                    FilModel fil;
+                    int idFil;
+                    List<FilModel> lstFilModel = new List<FilModel>();
 
-                fil.dateDerniereReponse = (from u in db.UTILISATEUR
-                                          join m in db.MESSAGEFORUM on u.ID equals m.IDUTILISATEUR
-                                          where m.IDFILDISCUSSION == idFil
-                                          orderby m.DATEPUBLICATION descending
-                                          select m.DATEPUBLICATION).Take(1).FirstOrDefault();
+                    for (int i = 0; i < lstFil.Count; i++)
+                    {
+                        fil = new FilModel();
+                        idFil = lstFil[i].ID;
 
-                lstFilModel.Add(fil);
+                        fil.id = lstFil[i].ID;
+                        fil.nbLectures = lstFil[i].NBLECTURES;
+                        fil.nbMessages = (from m in db.MESSAGEFORUM
+                                          join fi in db.FILDISCUSSION on m.IDFILDISCUSSION equals fi.ID
+                                          where fi.ID == idFil
+                                          select m).Count();
+                        fil.sujet = lstFil[i].SUJET;
+
+                        fil.dernierParticipant = (from u in db.UTILISATEUR
+                                                  join m in db.MESSAGEFORUM on u.ID equals m.IDUTILISATEUR
+                                                  where m.IDFILDISCUSSION == idFil
+                                                  orderby m.DATEPUBLICATION descending
+                                                  select u.PRENOM + " " + u.NOM).Take(1).FirstOrDefault();
+
+                        fil.dateDerniereReponse = (from u in db.UTILISATEUR
+                                                   join m in db.MESSAGEFORUM on u.ID equals m.IDUTILISATEUR
+                                                   where m.IDFILDISCUSSION == idFil
+                                                   orderby m.DATEPUBLICATION descending
+                                                   select m.DATEPUBLICATION).Take(1).FirstOrDefault();
+
+                        lstFilModel.Add(fil);
+                    }
+
+                    ListePaginee<FilModel> lstFilModelPag = new ListePaginee<FilModel>(lstFilModel, page ?? 0, 15);
+
+                    ViewData[Constantes.CLE_FILSFORUM] = lstFilModelPag;
+
+                }
+
+                ViewData[Constantes.CLE_FORUM] = f;
+                return View();
             }
-
-            ListePaginee<FilModel> lstFilModelPag = new ListePaginee<FilModel>(lstFilModel, page ?? 0, 15);
-
-            ViewData[Constantes.CLE_FORUM] = f;
-            ViewData[Constantes.CLE_FILSFORUM] = lstFilModelPag;
-
-            return View();
+            else
+                return RedirectToAction("LogOut");
         }
 
         public ActionResult NouveauFil()
@@ -832,60 +851,96 @@ namespace projet_mozambique.Controllers
             return View();
         }
 
-        public ActionResult FilPasAjoute()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult NouveauFil(MessageForumModel model)
         {
-            return View();
-        }
-
-        public ActionResult FilAjouteOK()
-        {
-            return View();
-        }
-
-        public ActionResult FilDiscu(int id, int? idPage)
-        {
-            if (filDiscuSecteurCourant(id))
+            if (ModelState.IsValid)
             {
+                TempData[Constantes.CLE_MESSAGE] = Resources.Messages.filAjoute;
                 int idUtil = WebSecurity.GetUserId(User.Identity.Name);
+                int idSecteur = (int)Session["currentSecteur"];
+                int idForum = (from f in db.FORUM
+                              where f.IDSECTEUR == idSecteur
+                              select f.ID).FirstOrDefault();
 
-                var fil = from f in db.FILDISCUSSION
-                          where f.ID == id
-                          select f;
-
-                fil.FirstOrDefault().NBLECTURES += 1;
-                db.SaveChanges();
-
-                var lstM = db.GetMessagesForum(id);
-                List<MessageForumModel> lstMMod = new List<MessageForumModel>();
-                ListePaginee<MessageForumModel> lstMessPag;
-                MessageForumModel mm;
-
-                foreach (var m in lstM)
+                FILDISCUSSION nouvFil = new FILDISCUSSION
                 {
-                    mm = new MessageForumModel();
-                    mm.contenu = m.CONTENU;
-                    mm.datePublication = m.DATEPUBLICATION;
-                    mm.dateModification = m.DATEMODIFICATION ?? DateTime.MinValue;
-                    mm.auteur = (from u in db.UTILISATEUR
-                                 where u.ID == m.IDUTILISATEUR
-                                 select u.PRENOM + " " + u.NOM).FirstOrDefault();
-                    lstMMod.Add(mm);
+                    SUJET = model.sujet,
+                    IDFORUM = idForum,
+                    DATEPUBLICATION = DateTime.Now
+                };
+
+                db.FILDISCUSSION.Add(nouvFil);
+                db.SaveChanges();
+                db.AjouterMessageForum(model.contenu.Replace("\r\n", Constantes.BR), idUtil, nouvFil.ID);
+
+                return RedirectToAction("Forum");    
+            }
+
+            return View();
+        }
+
+        public ActionResult FilDiscu(int? id, int? idPage)
+        {
+            if (id != null)
+            {
+                if (filDiscuSecteurCourant(id ?? -1))
+                {
+                    int idUtil = WebSecurity.GetUserId(User.Identity.Name);
+
+                    var fil = from f in db.FILDISCUSSION
+                              where f.ID == id
+                              select f;
+
+                    fil.FirstOrDefault().NBLECTURES += 1;
+                    db.SaveChanges();
+
+                    var lstM = db.GetMessagesForum(id);
+                    List<MessageForumModel> lstMMod = new List<MessageForumModel>();
+                    ListePaginee<MessageForumModel> lstMessPag;
+                    MessageForumModel mm;
+
+                    foreach (var m in lstM)
+                    {
+                        mm = new MessageForumModel();
+                        mm.contenu = m.CONTENU.Replace(Constantes.BR, "\r\n");
+                        mm.datePublication = m.DATEPUBLICATION;
+                        mm.dateModification = m.DATEMODIFICATION ?? DateTime.MinValue;
+                        mm.auteur = (from u in db.UTILISATEUR
+                                     where u.ID == m.IDUTILISATEUR
+                                     select u.PRENOM + " " + u.NOM).FirstOrDefault();
+                        lstMMod.Add(mm);
+                    }
+
+                    FilModel filMod = new FilModel();
+                    FILDISCUSSION unFil = fil.FirstOrDefault();
+                    lstMessPag = new ListePaginee<MessageForumModel>(lstMMod, idPage ?? 0, 15);
+
+                    filMod.id = unFil.ID;
+                    filMod.listeMessages = lstMessPag;
+                    filMod.sujet = unFil.SUJET;
+
+                    ViewData[Constantes.CLE_FILDISCUSSION] = filMod;
+
+                    return View();
                 }
-
-                FilModel filMod = new FilModel();
-                FILDISCUSSION unFil = fil.FirstOrDefault();
-                lstMessPag = new ListePaginee<MessageForumModel>(lstMMod, idPage ?? 0, 15);
-
-                filMod.id = unFil.ID;
-                filMod.listeMessages = lstMessPag;
-                filMod.sujet = unFil.SUJET;
-
-                ViewData[Constantes.CLE_FILDISCUSSION] = filMod;
-
-                return View();          
             }
 
             return RedirectToAction("Forum");
+        }
+
+        [AccessDeniedAuthorize(Roles = "admin,professeurModerateur")]
+        public ActionResult SupprimerFil(int? idFil, int? noPage)
+        {
+            if (idFil != null)
+            {
+                db.SupprimerFilDiscussion(idFil);
+
+                TempData[Constantes.CLE_MESSAGE] = Resources.Messages.filSupprime;
+            }
+
+            return RedirectToAction("Forum", "Sectoriel", new { page = noPage });
         }
 
         private bool filDiscuSecteurCourant(int id)
@@ -908,27 +963,7 @@ namespace projet_mozambique.Controllers
             return View();
         }
 
-        public ActionResult MessageFilAjouteOK()
-        {
-            return View();
-        }
-
-        public ActionResult MessageFilPasAjoute()
-        {
-            return View();
-        }
-
         public ActionResult Sondages()
-        {
-            return View();
-        }
-
-        public ActionResult Calendrier()
-        {
-            return View();
-        }
-
-        public ActionResult Evenement()
         {
             return View();
         }
@@ -985,21 +1020,26 @@ namespace projet_mozambique.Controllers
             return SupprimerMessages(new int[1] { id }, definitif);
         }
 
-        public ActionResult RepondreMessage(int id)
+        public ActionResult RepondreMessage(int? id)
         {
-            var messOrigine = from u in db.UTILISATEUR
-                           join mp in db.MESSAGEPRIVE on u.ID equals mp.IDEXPEDITEUR
-                           where mp.ID == id
-                           select new { u.NOMUTIL, mp.CONTENU, mp.SUJET };
+            if (id != null)
+            {
+                var messOrigine = from u in db.UTILISATEUR
+                                  join mp in db.MESSAGEPRIVE on u.ID equals mp.IDEXPEDITEUR
+                                  where mp.ID == id
+                                  select new { u.NOMUTIL, mp.CONTENU, mp.SUJET };
 
-            MessageModel mess = new MessageModel();
-            mess.destinataires = messOrigine.FirstOrDefault().NOMUTIL;
-            mess.sujet = messOrigine.FirstOrDefault().SUJET;
-            mess.contenu = messOrigine.FirstOrDefault().CONTENU;
+                MessageModel mess = new MessageModel();
+                mess.destinataires = messOrigine.FirstOrDefault().NOMUTIL;
+                mess.sujet = messOrigine.FirstOrDefault().SUJET;
+                mess.contenu = messOrigine.FirstOrDefault().CONTENU;
 
-            TempData[Constantes.CLE_MESSAGE] = mess;
+                TempData[Constantes.CLE_MESSAGE] = mess;
 
-            return RedirectToAction("NouveauMessage");
+                return RedirectToAction("NouveauMessage");
+            }
+
+            return RedirectToAction("Messagerie");
         }
 
         private ActionResult RedirectToLocal(string returnUrl)

@@ -130,7 +130,7 @@
     <comment>UserModel</comment>
   </data>
   <data name="Contenu" xml:space="preserve">
-    <value>Contenu</value>
+    <value>Contenu *</value>
     <comment>MessageModel</comment>
   </data>
   <data name="de" xml:space="preserve">
@@ -197,7 +197,7 @@
     <comment>UserModel</comment>
   </data>
   <data name="Sujet" xml:space="preserve">
-    <value>Sujet</value>
+    <value>Sujet du message *</value>
     <comment>MessageModel</comment>
   </data>
   <data name="UrlImage" xml:space="preserve">

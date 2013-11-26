@@ -216,4 +216,12 @@
     <value>You are not allowed in this section because you are not registered to a sector.</value>
     <comment>Login</comment>
   </data>
+  <data name="filAjoute" xml:space="preserve">
+    <value>The discussion thread has been added.</value>
+    <comment>NouveauFil</comment>
+  </data>
+  <data name="filSupprime" xml:space="preserve">
+    <value>The discussion thread has been deleted.</value>
+    <comment>Forum</comment>
+  </data>
 </root>

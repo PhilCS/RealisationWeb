@@ -264,42 +264,12 @@ namespace projet_mozambique.Controllers
             return View("ModifierNousJoindre");
         }
 
-        public ActionResult ForumModerateur()
-        {
-            return View();
-        }
-
-        public ActionResult FilDiscuModerateur()
-        {
-            return View();
-        }
-
         public ActionResult ModifierMsgFil()
         {
             return View();
         }
 
-        public ActionResult SupprimerFil()
-        {
-            return View();
-        }
-
         public ActionResult Sondages()
-        {
-            return View();
-        }
-
-        public ActionResult AjouterEvenement()
-        {
-            return View();
-        }
-
-        public ActionResult Calendrier()
-        {
-            return View();
-        }
-
-        public ActionResult Evenement()
         {
             return View();
         }
@@ -319,52 +289,12 @@ namespace projet_mozambique.Controllers
             return View();
         }
 
-        public ActionResult ModifierEvenement()
-        {
-            return View();
-        }
-
-        public ActionResult ModifEvenementOK()
-        {
-            return View();
-        }
-
-        public ActionResult ModifEvenementErreur()
-        {
-            return View();
-        }
-
-        public ActionResult AjoutEvenementOK()
-        {
-            return View();
-        }
-
-        public ActionResult AjoutEvenementErreur()
-        {
-            return View();
-        }
-
         public ActionResult IndexModifie()
         {
             return View();
         }
 
         public ActionResult NouveauFil()
-        {
-            return View();
-        }
-
-        public ActionResult FilAjouteOK()
-        {
-            return View();
-        }
-
-        public ActionResult FilPasAjoute()
-        {
-            return View();
-        }
-
-        public ActionResult FilModifieOK()
         {
             return View();
         }
