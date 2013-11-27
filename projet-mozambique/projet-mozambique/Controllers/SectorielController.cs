@@ -110,7 +110,8 @@ namespace projet_mozambique.Controllers
                     {
                         CultureInfo ci = new CultureInfo(currentUser.LANGUE.ToLower());
 
-                        Dictionary<int, string> lstSect = new Dictionary<int, string>();
+                        //Dictionary<int, string> lstSect = new Dictionary<int, string>();
+                        List<SECTEUR> lstSect = new List<SECTEUR>();
 
                         DateTime currentDate = DateTime.Now;
 
@@ -119,19 +120,20 @@ namespace projet_mozambique.Controllers
                                        && s.FINACCES >= currentDate
                                        select s;
 
-                        string cookieStr = "";
+                        //string cookieStr = "";
 
                         if (sectUtil.FirstOrDefault() != null)
                         {
                             foreach (var v in sectUtil)
                             {
-                                lstSect.Add(v.IDSECTEUR, v.SECTEUR.NOM + "/" + v.SECTEUR.NOMTRAD);
-                                cookieStr += v.IDSECTEUR.ToString();
+                                //lstSect.Add(v.IDSECTEUR, v.SECTEUR.NOM + "/" + v.SECTEUR.NOMTRAD);
+                                lstSect.Add(v.SECTEUR);
+                                /*cookieStr += v.IDSECTEUR.ToString();
                                 cookieStr += ',';
                                 cookieStr += v.SECTEUR.NOM;
                                 cookieStr += '/';
                                 cookieStr += v.SECTEUR.NOMTRAD;
-                                cookieStr += '&';
+                                cookieStr += '&';*/
                             }
                         }
                         else
@@ -152,7 +154,7 @@ namespace projet_mozambique.Controllers
                         else
                         {
                             //Index du secteur sélectionné dans la liste des secteurs de l'utilisateur
-                            Session["currentSecteur"] = lstSect.First().Key;
+                            Session["currentSecteur"] = lstSect.First().ID;
                         }
                         
                         Session["Culture"] = ci;
@@ -164,16 +166,16 @@ namespace projet_mozambique.Controllers
                             cookie.Value = ci.Name;
                             Response.AppendCookie(cookie);
 
-                            if (cookieStr != "" && lstSect != null)
+                            if (lstSect != null)
                             {
-                                HttpCookie cookieLst = new HttpCookie("lstSect");
+                                /*HttpCookie cookieLst = new HttpCookie("lstSect");
                                 cookieLst.Expires = DateTime.Now.AddMonths(3);
                                 cookieLst.Value = cookieStr;
-                                Response.AppendCookie(cookieLst);
+                                Response.AppendCookie(cookieLst);*/
 
                                 HttpCookie cookieCurrent = new HttpCookie("currentSect");
                                 cookieCurrent.Expires = DateTime.Now.AddMonths(3);
-                                cookieCurrent.Value = lstSect.First().Key.ToString();
+                                cookieCurrent.Value = lstSect.First().ID.ToString();
                                 Response.AppendCookie(cookieCurrent);
                             }
                         }

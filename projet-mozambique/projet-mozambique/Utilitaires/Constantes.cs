@@ -30,8 +30,12 @@ namespace projet_mozambique.Utilitaires
         public const string CLE_PUBLICATIONS = "publications";
         public const string CLE_SECTEURS = "secteurs";
         public const string CLE_IDSECTEUR = "idSecteur";
+        public const string CLE_NOMSECTEUR = "nomSecteur";
         public const string CLE_SUJETSPUBLICATION = "sujetsPublication";
         public const string CLE_LISTE_UTILISATEURS = "listeUtilisateurs";
+        public const string CLE_LISTE_UTILISATEURS_ALL = "AllUtilisateurs";
+        public const string CLE_LISTE_ECOLES = "listeEcoles";
+        public const string CLE_LISTE_ECOLES_ALL = "AllEcoles";
         public const string CLE_TITRE = "titre";
         public const string CLE_CORBEILLE = "corbeille";
         public const string CLE_ACTION = "action";

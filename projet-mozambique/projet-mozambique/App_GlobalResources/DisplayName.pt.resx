@@ -126,7 +126,7 @@
     <comment>UserModel</comment>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
-    <value>Confirm new password</value>
+    <value>Confirm new password *</value>
     <comment>UserModel</comment>
   </data>
   <data name="Contenu" xml:space="preserve">
@@ -141,7 +141,7 @@
     <comment>UserModel</comment>
   </data>
   <data name="File" xml:space="preserve">
-    <value>Image</value>
+    <value>Image (facultative)</value>
     <comment>ContentModel</comment>
   </data>
   <data name="FirstName" xml:space="preserve">
@@ -157,7 +157,7 @@
     <comment>UserModel</comment>
   </data>
   <data name="NewPassword" xml:space="preserve">
-    <value>New password</value>
+    <value>New password *</value>
     <comment>UserModel</comment>
   </data>
   <data name="NomsDest" xml:space="preserve">
@@ -165,23 +165,23 @@
     <comment>MessageModel</comment>
   </data>
   <data name="OldPassword" xml:space="preserve">
-    <value>Current password</value>
+    <value>Current password *</value>
     <comment>UserModel</comment>
   </data>
   <data name="PageContent" xml:space="preserve">
-    <value>Content of the page</value>
+    <value>Content of the page *</value>
     <comment>ContentModel</comment>
   </data>
   <data name="PageContentTrad" xml:space="preserve">
-    <value>Content of the page (Portuguese)</value>
+    <value>Content of the page (Portuguese) *</value>
     <comment>ContentModel</comment>
   </data>
   <data name="PageTitle" xml:space="preserve">
-    <value>Title of the page</value>
+    <value>Title of the page *</value>
     <comment>ContentModel</comment>
   </data>
   <data name="PageTitleTrad" xml:space="preserve">
-    <value>Title of the page (Portuguese)</value>
+    <value>Title of the page (Portuguese) *</value>
     <comment>ContentModel</comment>
   </data>
   <data name="Password" xml:space="preserve">
@@ -219,5 +219,13 @@
   <data name="ConfirmEmail" xml:space="preserve">
     <value>Confirm email</value>
     <comment>UserModel</comment>
+  </data>
+  <data name="SecteurName" xml:space="preserve">
+    <value>Sector Name *</value>
+    <comment>ContentModel</comment>
+  </data>
+  <data name="SecteurTradName" xml:space="preserve">
+    <value>Sector Name (Portuguese) *</value>
+    <comment>ContentModel</comment>
   </data>
 </root>

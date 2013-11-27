@@ -4,18 +4,39 @@
     ViewBag.Title = Resources.Admin.menuSecteurs;
 
     var lesSecteurs = (ViewData[Constantes.CLE_SECTEURS] as List<SECTEUR>);
+    <h1>@ViewBag.Title  <a href="AjoutSecteur" style="display:inline;"><img src="~/Content/images/icones/icon-add-black.png" title="@Resources.Sectoriel.nouveau" alt="Icône Nouveau secteur" /></a>
+</h1> 
+
+    Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
+
+    using (Html.BeginForm("Secteur", "Admin", FormMethod.Post)) {
+        Html.AntiForgeryToken();
+        <ul style="padding-bottom:20px;">
+            @foreach (var s in lesSecteurs)
+            {
+                var boolChk = false;
+                if (s.ID == 1)
+                {
+                    boolChk = true;
+                }
+        
+                <li>@Html.RadioButton("sect", s.ID, boolChk)@s.NOM/@s.NOMTRAD</li>
+        
+                    /*@Html.ActionLink(s.NOM + " - " + s.NOMTRAD, 
+                                             "getSecteur",
+                                             "Admin",
+                                             new { id = s.ID })</li>*/
+            
+            }
+            </ul>
+        <div id="sectBoutons">
+            <input type="submit" value="@Resources.Admin.getUtilsSecteur" name="utilsSecteur" class="btnForm" />
+            <input type="submit" value="@Resources.Admin.getEcolesSecteur" name="ecolesSecteurs" class="btnForm" />
+            <input type="submit" value="@Resources.Shared.modifier" name="modifSecteur" class="btnForm" />
+            <input type="submit" value="@Resources.Shared.supprimer" name="suppSecteur" class="btnForm" />
+        </div>
+    }
 }
 
-<h1>@ViewBag.Title</h1>
 
-<ul class="liste-fleche">
-    @foreach (var s in lesSecteurs)
-    {
-        <li>@Html.ActionLink(s.NOM + " - " + s.NOMTRAD, 
-                                     "getSecteur",
-                                     "Admin",
-                                     new { id = s.ID })</li>
-    }
-</ul>
-<br />
 

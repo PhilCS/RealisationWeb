@@ -151,4 +151,20 @@
   <data name="sectionPublique" xml:space="preserve">
     <value>Section publique</value>
   </data>
+  <data name="getEcolesSecteur" xml:space="preserve">
+    <value>Voir les écoles</value>
+    <comment>GestionSecteurs</comment>
+  </data>
+  <data name="getUtilsSecteur" xml:space="preserve">
+    <value>Voir les utilisateurs</value>
+    <comment>GestionSecteurs</comment>
+  </data>
+  <data name="lstEcoles" xml:space="preserve">
+    <value>Liste des écoles</value>
+    <comment>GestionSecteurs</comment>
+  </data>
+  <data name="lstUtils" xml:space="preserve">
+    <value>Liste des utilisateurs</value>
+    <comment>GestionSecteurs</comment>
+  </data>
 </root>

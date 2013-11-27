@@ -1,0 +1,45 @@
+﻿@using projet_mozambique.Utilitaires;
+@using projet_mozambique.Models;
+@{  
+    ViewBag.Title = @Resources.Admin.lstEcoles;
+    <h2>@ViewBag.Title</h2>
+    
+    Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
+
+    List<ECOLE> lst = (ViewData[Constantes.CLE_LISTE_ECOLES] as List<ECOLE>);
+    List<ECOLE> lstAll = (ViewData[Constantes.CLE_LISTE_ECOLES_ALL] as List<ECOLE>);
+    string nom = ViewData[Constantes.CLE_NOMSECTEUR] as string;
+    int? idSect = ViewData[Constantes.CLE_IDSECTEUR] as int?;
+    
+    if(lstAll.Count > 0)
+    {
+        using (Html.BeginForm("AjoutEcoleSecteur", "Admin", FormMethod.Post)) {
+            <select id="selectEcole" name="idEcole">
+                @foreach (var e in lstAll)
+                {
+                    <option value="@e.ID">@e.NOM</option>
+                }
+              
+            </select>
+            <input name="idSecteur" type="hidden" value="@idSect" />
+            <input type="submit" value="@Resources.Shared.ajouter" name="ajoutEcole" class="btnForm" />
+        }
+    }
+    
+    if(lst != null)
+    {
+        if(lst.Count > 0)
+        {
+        <ul>
+            @foreach(var e in lst)
+            {
+               <li>@e.NOM (Province : @e.PROVINCE)</li> 
+            }
+        </ul>  
+        } 
+        else
+        {
+            <p>@Resources.Messages.SectNoSchool</p>
+        }
+    }
+}

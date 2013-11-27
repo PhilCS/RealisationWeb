@@ -23,13 +23,15 @@ namespace projet_mozambique.Controllers
         {
             if (Request.IsAuthenticated)
                 return RedirectToAction("Index", "Sectoriel");
+            else
+                return RedirectToAction("Home", "Public");
 
-            GetContenu_Result contentResult = db.GetContenu("Accueil").FirstOrDefault();
+            /*GetContenu_Result contentResult = db.GetContenu("Accueil").FirstOrDefault();
 
-            return View(contentResult);
+            return View(contentResult);*/
         }
 
-        public ActionResult Public()
+        public ActionResult Home()
         { 
             GetContenu_Result contentResult = db.GetContenu("Accueil").FirstOrDefault();
 
@@ -40,20 +42,14 @@ namespace projet_mozambique.Controllers
         {
             CultureInfo ci = new CultureInfo(lang);
             Session["Culture"] = ci;
-
-            /*if (Request.Cookies.AllKeys.Contains("lang"))
-            {
-                Request.Cookies["lang"].Value = ci.Name;
-            }*/
             
-            //return Redirect(returnUrl);
             if (Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
             }
             else
             {
-                return RedirectToAction("Index", "Public");
+                return RedirectToAction("Home", "Public");
             }
         }
 

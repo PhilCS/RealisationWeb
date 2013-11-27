@@ -7,17 +7,31 @@
         <li>@Html.ActionLink(@Resources.Shared.apropos, "APropos", "Public")</li>
         <li>@Html.ActionLink(@Resources.Shared.nousjoindre, "NousJoindre", "Public")</li>
     </ul>
-} else {
+} 
+else 
+{
+    var url = Request.RawUrl;
     <ul>
-        <li>@Html.ActionLink(@Resources.Shared.accueil, "Index", "Sectoriel")</li>
-        <li>@Html.ActionLink(@Resources.Shared.publications, "Publications", "Sectoriel")</li>
-        <li>@Html.ActionLink(@Resources.Shared.forums, "Forum", "Sectoriel")</li>
-        <li>@Html.ActionLink(@Resources.Shared.sondages, "Sondages", "Sectoriel")</li>
-        @if (User.IsInRole("admin"))
+        @if(url.StartsWith("/Sectoriel") || url.StartsWith("/Admin"))
         {
-            <li>@Html.ActionLink(@Resources.Shared.admin, "Index", "Admin")</li>
+            <li>@Html.ActionLink(@Resources.Shared.accueil, "Index", "Sectoriel")</li>
+            <li>@Html.ActionLink(@Resources.Shared.publications, "Publications", "Sectoriel")</li>
+            <li>@Html.ActionLink(@Resources.Shared.forums, "Forum", "Sectoriel")</li>
+            <li>@Html.ActionLink(@Resources.Shared.sondages, "Sondages", "Sectoriel")</li>
+            if (User.IsInRole("admin"))
+            {
+                <li>@Html.ActionLink(@Resources.Shared.admin, "Index", "Admin")</li>
+            }
+            <li>@Html.ActionLink(@Resources.Shared.sectionPublique, "Home", "Public")</li>
         }
-        <li>@Html.ActionLink(@Resources.Shared.sectionPublique, "Public", "Public")</li>
-       
+        else
+        {
+            <li>@Html.ActionLink(@Resources.Shared.accueil, "Home", "Public")</li>
+            <li>@Html.ActionLink(@Resources.Shared.nouvelles, "Nouvelles", "Public")</li>
+            <li>@Html.ActionLink(@Resources.Shared.partenaires, "partenaires", "Public")</li>
+            <li>@Html.ActionLink(@Resources.Shared.apropos, "APropos", "Public")</li>
+            <li>@Html.ActionLink(@Resources.Shared.nousjoindre, "NousJoindre", "Public")</li>
+            <li>@Html.ActionLink(@Resources.Shared.sectionSectorielle, "Index", "Sectoriel")</li>
+        }
     </ul>
 }

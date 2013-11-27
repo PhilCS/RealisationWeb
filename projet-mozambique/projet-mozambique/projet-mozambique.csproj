@@ -622,6 +622,11 @@
     <Content Include="Views\Admin\AjoutPartenaire.cshtml" />
     <Content Include="Views\Admin\GestionPartenaires.cshtml" />
     <Content Include="Views\Admin\SupprimerPartenaire.cshtml" />
+    <Content Include="Views\Admin\GestionSecteurs.cshtml" />
+    <Content Include="Views\Admin\UtilisateursSecteur.cshtml" />
+    <Content Include="Views\Admin\EcolesSecteur.cshtml" />
+    <Content Include="Views\Admin\ModifSecteur.cshtml" />
+    <Content Include="Views\Admin\AjoutSecteur.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
