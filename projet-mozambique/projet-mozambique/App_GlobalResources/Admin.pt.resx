@@ -117,15 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ajouterNouvelle" xml:space="preserve">
+    <value>Add a news</value>
+  </data>
   <data name="CurrentImage" xml:space="preserve">
     <value>Current image</value>
     <comment>ModifPagePublique</comment>
   </data>
-  <data name="ajouterNouvelle" xml:space="preserve">
-    <value>Add a news</value>
-  </data>
   <data name="gestionSectionPublique" xml:space="preserve">
     <value>Public section management</value>
+  </data>
+  <data name="getEcolesSecteur" xml:space="preserve">
+    <value>Get schools</value>
+    <comment>GestionSecteurs</comment>
+  </data>
+  <data name="getUtilsSecteur" xml:space="preserve">
+    <value>Get users</value>
+    <comment>GestionSecteurs</comment>
   </data>
   <data name="menuCalendrier" xml:space="preserve">
     <value>Calendar administration</value>
@@ -150,5 +158,13 @@
   </data>
   <data name="sectionPublique" xml:space="preserve">
     <value>Public section</value>
+  </data>
+  <data name="lstEcoles" xml:space="preserve">
+    <value>Schools List</value>
+    <comment>s</comment>
+  </data>
+  <data name="lstUtils" xml:space="preserve">
+    <value>Users List</value>
+    <comment>GestionSecteurs</comment>
   </data>
 </root>

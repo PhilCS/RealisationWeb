@@ -339,10 +339,10 @@
           <Property Name="NOM" Type="varchar" Nullable="false" MaxLength="40" />
           <Property Name="TITREACCUEIL" Type="varchar" Nullable="false" MaxLength="40" />
           <Property Name="TEXTEACCUEIL" Type="text" Nullable="false" />
-          <Property Name="URLIMAGEACCUEIL" Type="varchar" Nullable="false" MaxLength="100" />
-          <Property Name="NOMTRAD" Type="varchar" MaxLength="40" />
-          <Property Name="TITREACCUEILTRAD" Type="varchar" MaxLength="40" />
-          <Property Name="TEXTEACCUEILTRAD" Type="text" />
+          <Property Name="URLIMAGEACCUEIL" Type="varchar" MaxLength="100" />
+          <Property Name="NOMTRAD" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="TITREACCUEILTRAD" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="TEXTEACCUEILTRAD" Type="text" Nullable="false" />
         </EntityType>
         <EntityType Name="SONDAGE">
           <Key>
@@ -762,9 +762,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UTILSECT_UTIL">
-          <End Role="UTILISATEUR" Type="MVPModel.Store.UTILISATEUR" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="UTILISATEUR" Type="MVPModel.Store.UTILISATEUR" Multiplicity="1" />
           <End Role="UTILISATEURSECTEUR" Type="MVPModel.Store.UTILISATEURSECTEUR" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UTILISATEUR">
@@ -1774,16 +1772,16 @@
           <Property Name="NOM" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
           <Property Name="TITREACCUEIL" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
           <Property Name="TEXTEACCUEIL" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
-          <Property Name="URLIMAGEACCUEIL" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="URLIMAGEACCUEIL" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="FORUM" Relationship="MVPModel.FK_FORUM_SECT" FromRole="SECTEUR" ToRole="FORUM" />
           <NavigationProperty Name="PUBLICATION" Relationship="MVPModel.FK_PUB_SECT" FromRole="SECTEUR" ToRole="PUBLICATION" />
           <NavigationProperty Name="SONDAGE" Relationship="MVPModel.FK_SOND_SECT" FromRole="SECTEUR" ToRole="SONDAGE" />
           <NavigationProperty Name="UTILISATEURSECTEUR" Relationship="MVPModel.FK_UTILSECT_SECT" FromRole="SECTEUR" ToRole="UTILISATEURSECTEUR" />
           <NavigationProperty Name="ECOLE" Relationship="MVPModel.ECOLESECTEUR" FromRole="SECTEUR" ToRole="ECOLE" />
           <NavigationProperty Name="EVENEMENT" Relationship="MVPModel.EVENEMENTSECTEUR" FromRole="SECTEUR" ToRole="EVENEMENT" />
-          <Property Type="String" Name="NOMTRAD" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="TITREACCUEILTRAD" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="TEXTEACCUEILTRAD" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NOMTRAD" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Type="String" Name="TITREACCUEILTRAD" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Type="String" Name="TEXTEACCUEILTRAD" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="SONDAGE">
           <Key>

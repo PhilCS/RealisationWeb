@@ -10,6 +10,7 @@ using projet_mozambique.Utilitaires;
 using WebMatrix.WebData;
 using WebMatrix.Data;
 using System.Globalization;
+using projet_mozambique.Models;
 
 namespace projet_mozambique
 {
@@ -35,6 +36,7 @@ namespace projet_mozambique
         {
             CultureInfo ci;
             string langName;
+            List<SECTEUR> lstS = new List<SECTEUR>();
             //It's important to check whether session object is ready
             if (HttpContext.Current.Session != null)
             {
@@ -95,12 +97,65 @@ namespace projet_mozambique
                     */
                 }
 
+                Entities db = new Entities();
+
+                if (Request.IsAuthenticated)
+                {
+                    var currentUser = db.UTILISATEUR.SingleOrDefault(u => u.NOMUTIL == User.Identity.Name);
+
+                    if (currentUser != null)
+                    {
+                        DateTime currentDate = DateTime.Now;
+
+                        var sectUtil = from s in db.UTILISATEURSECTEUR
+                                        where s.IDUTILISATEUR == currentUser.ID && s.DEBUTACCES <= currentDate
+                                        && s.FINACCES >= currentDate
+                                        select s;
+
+                        lstS = null;
+
+                        int cookieValue = 0;
+                        bool currentExist = false;
+                        if (HttpContext.Current.Request.Cookies["currentSect"] != null)
+                        {
+                            cookieValue = int.Parse(HttpContext.Current.Request.Cookies["currentSect"].Value);
+
+                        }
+
+                        if (sectUtil.FirstOrDefault() != null)
+                        {
+                            lstS = new List<SECTEUR>();
+
+                            foreach (var su in sectUtil)
+                            {
+                                lstS.Add(su.SECTEUR);
+
+                                if (su.SECTEUR.ID == cookieValue)
+                                    currentExist = true;
+                            }
+                        }
+
+                        this.Session["lstSect"] = lstS;
+
+                        if (lstS == null)
+                        {
+                            this.Session["currentSecteur"] = 0;
+                        }
+                        else
+                        {
+                            if (currentExist && cookieValue != 0)
+                                this.Session["currentSecteur"] = cookieValue;
+                            else
+                                this.Session["currentSecteur"] = lstS.First().ID;
+                        }
+                    }
+                }
+               
                 /*HttpCookie cookie = new HttpCookie("lang");
                 cookie.Expires = DateTime.Now.AddMonths(3);
                 cookie.Value = ci.Name;
                 HttpContext.Current.Request.Cookies.Add(cookie);*/
                 
-
                 //Finally setting culture for each request
                 System.Threading.Thread.CurrentThread.CurrentUICulture = ci;
                 System.Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(ci.Name);
@@ -153,10 +208,62 @@ namespace projet_mozambique
                 this.Session["Culture"] = ci;
             }
 
-            if (HttpContext.Current.Request.Cookies["currentSect"] != null)
-                this.Session["currentSecteur"] = int.Parse(HttpContext.Current.Request.Cookies["currentSect"].Value);
+            Entities db = new Entities();
 
-            if(HttpContext.Current.Request.Cookies["lstSect"] != null)
+            if(Request.IsAuthenticated)
+            {
+                var currentUser = db.UTILISATEUR.SingleOrDefault(u => u.NOMUTIL == User.Identity.Name);
+
+                if (currentUser != null)
+                {
+                    DateTime currentDate = DateTime.Now;
+
+                    var sectUtil = from s in db.UTILISATEURSECTEUR
+                                   where s.IDUTILISATEUR == currentUser.ID && s.DEBUTACCES <= currentDate
+                                   && s.FINACCES >= currentDate
+                                   select s;
+
+                    List<SECTEUR> lstS = null;
+
+                    int cookieValue = 0;
+                    bool currentExist = false;
+                    if (HttpContext.Current.Request.Cookies["currentSect"] != null)
+                    {
+                        cookieValue = int.Parse(HttpContext.Current.Request.Cookies["currentSect"].Value);
+
+                    }
+
+                    if (sectUtil.FirstOrDefault() != null)
+                    {
+                        lstS = new List<SECTEUR>();
+
+                        foreach (var su in sectUtil)
+                        {
+                            lstS.Add(su.SECTEUR);
+
+                            if (su.SECTEUR.ID == cookieValue)
+                                currentExist = true;
+                        }
+                    }
+
+                    this.Session["lstSect"] = lstS;
+
+                    if (lstS == null)
+                    {
+                        this.Session["currentSecteur"] = 0;
+                    }
+                    else
+                    {
+                        if (currentExist && cookieValue != 0)
+                            this.Session["currentSecteur"] = cookieValue;
+                        else
+                            this.Session["currentSecteur"] = lstS.First().ID;
+                    }
+                }
+            }
+            
+
+            /*if(HttpContext.Current.Request.Cookies["lstSect"] != null)
             {
                 Dictionary<int, string> lstSect = new Dictionary<int, string>();
 
@@ -170,7 +277,7 @@ namespace projet_mozambique
                 }
 
                 this.Session["lstSect"] = lstSect;
-            }
+            }*/
 
         }
 

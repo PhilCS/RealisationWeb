@@ -66,8 +66,300 @@ namespace projet_mozambique.Controllers
             return View();
         }
 
-        public ActionResult getSecteur(int id)
+        public ActionResult Secteur(int sect)
         {
+            var leS = from s in db.SECTEUR
+                           where s.ID == sect
+                           select s;
+
+            if (leS.FirstOrDefault() != null)
+            {
+                if (!string.IsNullOrEmpty(Request.Form["modifSecteur"]))
+                {
+                    return RedirectToAction("ModifSecteur", "Admin", new { @idSect = sect });
+                }
+                else if (!string.IsNullOrEmpty(Request.Form["suppSecteur"]))
+                {
+                    db.SupprimerSecteur(sect);
+                    db.SaveChanges();
+
+                    TempData[Constantes.CLE_MSG_RETOUR] =
+                                new Message(Message.TYPE_MESSAGE.SUCCES, "Secteur supprimé");
+
+                    return RedirectToAction("GestionSecteurs");
+
+                }
+                else if (!string.IsNullOrEmpty(Request.Form["utilsSecteur"]))
+                {
+                    return RedirectToAction("UtilisateursSecteur", "Admin", new { @idSect = sect });
+                }
+                else if (!string.IsNullOrEmpty(Request.Form["ecolesSecteurs"]))
+                {
+                    return RedirectToAction("EcolesSecteur", "Admin", new { @idSect = sect });
+                }
+                else
+                {
+                    return RedirectToAction("GestionSecteur");
+                }
+            }
+
+            TempData[Constantes.CLE_MSG_RETOUR] =
+                                new Message(Message.TYPE_MESSAGE.ERREUR, "Secteur inexistant");
+            return RedirectToAction("GestionSecteur");
+        }
+
+        public ActionResult UtilisateursSecteur(int? idSect)
+        {
+            if (idSect != null)
+            {
+                var leS = from s in db.SECTEUR
+                          where s.ID == idSect
+                          select s;
+
+                if (leS.FirstOrDefault() == null)
+                {
+                    TempData[Constantes.CLE_MSG_RETOUR] =
+                                new Message(Message.TYPE_MESSAGE.ERREUR, @Resources.Messages.SectInexistant);
+                }
+                else
+                {
+                    var lesUtils = from u in db.UTILISATEURSECTEUR
+                                   where u.IDSECTEUR == idSect
+                                   select u.UTILISATEUR;
+
+                    List<UTILISATEUR> lstUtils = lesUtils.ToList();
+
+                    ViewData[Constantes.CLE_LISTE_UTILISATEURS] = lstUtils;
+                    ViewData[Constantes.CLE_NOMSECTEUR] = leS.FirstOrDefault().NOM + "/" + leS.FirstOrDefault().NOMTRAD;                
+                }
+                
+               return View();
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult EcolesSecteur(int? idSect)
+        {
+            if (idSect != null)
+            {
+                var leS = from s in db.SECTEUR
+                          where s.ID == idSect
+                          select s;
+
+                if (leS.FirstOrDefault() == null)
+                {
+                    TempData[Constantes.CLE_MSG_RETOUR] =
+                                new Message(Message.TYPE_MESSAGE.ERREUR, @Resources.Messages.SectInexistant);
+                }
+                else
+                {
+                    var allEcoles = from e in db.ECOLE
+                                    where e.SECTEUR.All(s => s.ID != idSect)
+                                    select e;
+
+                    List<ECOLE> lstEcoles = leS.FirstOrDefault().ECOLE.ToList();
+                    List<ECOLE> lstAllEcoles = allEcoles.ToList();
+
+
+                    ViewData[Constantes.CLE_LISTE_ECOLES] = lstEcoles;
+                    ViewData[Constantes.CLE_LISTE_ECOLES_ALL] = lstAllEcoles;
+                    ViewData[Constantes.CLE_NOMSECTEUR] = leS.FirstOrDefault().NOM + "/" + leS.FirstOrDefault().NOMTRAD;
+                    ViewData[Constantes.CLE_IDSECTEUR] = leS.FirstOrDefault().ID;
+                }
+
+                return View();
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult AjoutEcoleSecteur(int? idEcole, int? idSecteur)
+        {
+            if (!string.IsNullOrEmpty(Request.Form["ajoutEcole"]))
+            {
+                if (idSecteur != null && idEcole != null)
+                {
+                    SECTEUR leS = db.SECTEUR.SingleOrDefault(s => s.ID == idSecteur);
+                    ECOLE uneEcole = db.ECOLE.SingleOrDefault(e => e.ID == idEcole);
+                    leS.ECOLE.Add(uneEcole);
+
+                    db.SaveChanges();
+
+                    TempData[Constantes.CLE_MSG_RETOUR] =
+                        new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.EcoleAjoutSectOk);
+                }
+            }
+
+            return RedirectToAction("EcolesSecteur", new { @idSect = idSecteur });
+            
+        }
+
+        public ActionResult ModifSecteur(int? idSect)
+        {
+            if (idSect != null)
+            {
+                SECTEUR secteur = db.SECTEUR.SingleOrDefault(s => s.ID == idSect);
+
+                if (secteur != null)
+                {
+                    ContentSecteurModel model = new ContentSecteurModel();
+
+                    model.idSect = secteur.ID;
+                    model.nom = secteur.NOM;
+                    model.nomTrad = secteur.NOMTRAD;
+                    model.titre = secteur.TITREACCUEIL;
+                    model.titreTrad = secteur.TITREACCUEILTRAD;
+                    model.contenu = secteur.TEXTEACCUEIL;
+                    model.contenuTrad = secteur.TEXTEACCUEILTRAD;
+                    ViewBag.UrlImage = secteur.URLIMAGEACCUEIL;
+
+                    return View(model);
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ModifSecteur(ContentSecteurModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                string desc = model.contenu.Replace("\r\n", Constantes.BR);
+                string descTrad = model.contenuTrad.Replace("\r\n", Constantes.BR);
+                SECTEUR leSecteur = db.SECTEUR.SingleOrDefault(s => s.ID == model.idSect);
+                leSecteur.NOM = model.nom;
+                leSecteur.NOMTRAD = model.nomTrad;
+                leSecteur.TITREACCUEIL = model.titre;
+                leSecteur.TITREACCUEILTRAD = model.titreTrad;
+                leSecteur.TEXTEACCUEIL = desc;
+                leSecteur.TEXTEACCUEILTRAD = descTrad;
+
+                if (model.File != null)
+                {
+                    HttpPostedFileBase fichier = model.File;
+
+                    int MaxContentLength = 1024 * 1024 * 2; //2 MB
+                    string[] AllowedFileExtensions = new string[] { ".jpg", ".jpeg" };
+
+                    if (!AllowedFileExtensions.Contains(fichier.FileName.Substring(fichier.FileName.LastIndexOf('.'))))
+                    {
+                        ModelState.AddModelError("", @Resources.Messages.FileType + string.Join(", ", AllowedFileExtensions));
+                    }
+                    else if (fichier.ContentLength > MaxContentLength)
+                    {
+                        ModelState.AddModelError("", @Resources.Messages.FileTooLarge + (MaxContentLength / 1024).ToString() + "MB");
+                    }
+                    else
+                    {
+                        //HttpPostedFileBase file = Request.Files.Get(0);
+
+                        //string url = Fichiers.CheminEnvoisImages(fichier.FileName);
+                        var fileName = Path.GetFileName(fichier.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Content/images/photos"), fileName);
+
+                        fichier.SaveAs(path);
+
+                        leSecteur.URLIMAGEACCUEIL = fileName;
+                    }
+                }
+
+                db.SaveChanges();
+
+                TempData[Constantes.CLE_MSG_RETOUR] =
+                    new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.SectModifOk);
+
+                return RedirectToAction("GestionSecteurs");
+            }
+
+            return View();
+        }
+
+        public ActionResult AjoutSecteur()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AjoutSecteur(ContentSecteurModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                string desc = model.contenu.Replace("\r\n", Constantes.BR);
+                string descTrad = model.contenuTrad.Replace("\r\n", Constantes.BR);
+                SECTEUR leSecteur = new SECTEUR();
+                leSecteur.NOM = model.nom;
+                leSecteur.NOMTRAD = model.nomTrad;
+                leSecteur.TITREACCUEIL = model.titre;
+                leSecteur.TITREACCUEILTRAD = model.titreTrad;
+                leSecteur.TEXTEACCUEIL = desc;
+                leSecteur.TEXTEACCUEILTRAD = descTrad;
+
+                if (model.File != null)
+                {
+                    HttpPostedFileBase fichier = model.File;
+
+                    int MaxContentLength = 1024 * 1024 * 2; //2 MB
+                    string[] AllowedFileExtensions = new string[] { ".jpg", ".jpeg" };
+
+                    if (!AllowedFileExtensions.Contains(fichier.FileName.Substring(fichier.FileName.LastIndexOf('.'))))
+                    {
+                        ModelState.AddModelError("", @Resources.Messages.FileType + string.Join(", ", AllowedFileExtensions));
+                    }
+                    else if (fichier.ContentLength > MaxContentLength)
+                    {
+                        ModelState.AddModelError("", @Resources.Messages.FileTooLarge + (MaxContentLength / 1024).ToString() + "MB");
+                    }
+                    else
+                    {
+                        //HttpPostedFileBase file = Request.Files.Get(0);
+
+                        //string url = Fichiers.CheminEnvoisImages(fichier.FileName);
+                        var fileName = Path.GetFileName(fichier.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Content/images/photos"), fileName);
+
+                        fichier.SaveAs(path);
+
+                        leSecteur.URLIMAGEACCUEIL = fileName;
+                    }
+                }
+
+                db.SECTEUR.Add(leSecteur);
+                db.SaveChanges();
+
+                var lesAdmins = from a in db.UTILISATEUR
+                                where a.webpages_Roles.All(r => r.RoleName.Equals("admin"))
+                                select a;
+
+                if (lesAdmins.FirstOrDefault() != null)
+                {
+                    int idNewSect = leSecteur.ID;
+
+                    UTILISATEURSECTEUR newU;
+                    DateTime debut = DateTime.Now;
+                    DateTime fin = DateTime.Now.AddYears(4);
+                    foreach (var a in lesAdmins)
+                    {
+                        newU = new UTILISATEURSECTEUR();
+                        newU.IDSECTEUR = idNewSect;
+                        newU.IDUTILISATEUR = a.ID;
+                        newU.DEBUTACCES = debut;
+                        newU.FINACCES = fin;
+                        db.UTILISATEURSECTEUR.Add(newU);
+                    }
+
+                    db.SaveChanges();
+                }
+                TempData[Constantes.CLE_MSG_RETOUR] =
+                    new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.SectAjoutOk);
+
+                return RedirectToAction("GestionSecteurs");
+            }
+
             return View();
         }
 
@@ -177,7 +469,7 @@ namespace projet_mozambique.Controllers
 
                 if (contentResult != null)
                 {
-                    ContentModel model = new ContentModel();
+                    PublicContentModel model = new PublicContentModel();
 
                     model.nomPage = contentResult.PAGE;
                     model.titre = contentResult.TITRE;
@@ -195,7 +487,7 @@ namespace projet_mozambique.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ModifPagePublique(ContentModel model)
+        public ActionResult ModifPagePublique(PublicContentModel model)
         {
             if (ModelState.IsValid)
             {
@@ -210,11 +502,11 @@ namespace projet_mozambique.Controllers
 
                         if (!AllowedFileExtensions.Contains(fichier.FileName.Substring(fichier.FileName.LastIndexOf('.'))))
                         {
-                            ModelState.AddModelError("", "Please upload Your Photo of type: " + string.Join(", ", AllowedFileExtensions));
+                            ModelState.AddModelError("", @Resources.Messages.FileType + string.Join(", ", AllowedFileExtensions));
                         }
                         else if (fichier.ContentLength > MaxContentLength)
                         {
-                            ModelState.AddModelError("", "Your Photo is too large, maximum allowed size is : " + (MaxContentLength / 1024).ToString() + "MB");
+                            ModelState.AddModelError("", @Resources.Messages.FileTooLarge + (MaxContentLength / 1024).ToString() + "MB");
                         }
                         else
                         {

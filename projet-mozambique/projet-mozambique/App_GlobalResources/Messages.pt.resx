@@ -224,4 +224,28 @@
     <value>The discussion thread has been deleted.</value>
     <comment>Forum</comment>
   </data>
+  <data name="SectInexistant" xml:space="preserve">
+    <value>This sector doesn't exist.</value>
+  </data>
+  <data name="SectNoSchool" xml:space="preserve">
+    <value>No school for this sector.</value>
+  </data>
+  <data name="SectNoUser" xml:space="preserve">
+    <value>No user for this sector.</value>
+  </data>
+  <data name="FileTooLarge" xml:space="preserve">
+    <value>Your Photo is too large, maximum allowed size is :</value>
+  </data>
+  <data name="FileType" xml:space="preserve">
+    <value>Image file must be of type : </value>
+  </data>
+  <data name="SectAjoutOk" xml:space="preserve">
+    <value>The new sector has been added.</value>
+  </data>
+  <data name="EcoleAjoutSectOk" xml:space="preserve">
+    <value>The school has been added to the sector.</value>
+  </data>
+  <data name="UserAjoutSectOk" xml:space="preserve">
+    <value>The user has been added to the sector.</value>
+  </data>
 </root>

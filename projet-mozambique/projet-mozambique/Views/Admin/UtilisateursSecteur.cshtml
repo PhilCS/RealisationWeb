@@ -1,0 +1,29 @@
+﻿@using projet_mozambique.Utilitaires;
+@using projet_mozambique.Models;
+@{  
+    ViewBag.Title = @Resources.Admin.lstUtils;
+    <h2>@ViewBag.Title</h2>
+    
+    Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
+
+    List<UTILISATEUR> lst = (ViewData[Constantes.CLE_LISTE_UTILISATEURS] as List<UTILISATEUR>);
+    string nom = ViewData[Constantes.CLE_NOMSECTEUR] as string;
+    
+    if(lst != null)
+    {
+        if(lst.Count > 0)
+        {
+            <h3>Secteur : @nom </h3>
+            <ul>
+                @foreach(var u in lst)
+                {
+                   <li>@u.PRENOM @u.NOM (@u.NOMUTIL)</li> 
+                }
+            </ul> 
+        }
+        else
+        {
+            <p>@Resources.Messages.SectNoUser</p>
+        }
+    }
+}

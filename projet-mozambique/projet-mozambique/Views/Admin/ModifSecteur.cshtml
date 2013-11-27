@@ -1,0 +1,53 @@
+﻿@model projet_mozambique.Models.ContentSecteurModel
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("ModifSecteur", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <ul>
+        @Html.HiddenFor(model => model.idSect)
+        <li>
+            @Html.LabelFor(m => m.nom)
+            @Html.TextBoxFor(m => m.nom)
+            @Html.ValidationMessageFor(m => m.nom)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.nomTrad)
+            @Html.TextBoxFor(m => m.nomTrad)
+            @Html.ValidationMessageFor(m => m.nomTrad)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.titre)
+            @Html.TextBoxFor(m => m.titre)
+            @Html.ValidationMessageFor(m => m.titre)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.titreTrad)
+            @Html.TextBoxFor(m => m.titreTrad)
+            @Html.ValidationMessageFor(m => m.titreTrad)
+        </li>  
+        <li>
+            @Html.LabelFor(m => m.contenu) 
+            @Html.TextAreaFor(m => m.contenu)
+            @Html.ValidationMessageFor(m => m.contenu)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.contenuTrad) 
+            @Html.TextAreaFor(m => m.contenuTrad)
+            @Html.ValidationMessageFor(m => m.contenuTrad)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.File)
+            @if (ViewBag.UrlImage != null)
+            {
+                string currImg = Resources.Admin.CurrentImage + " : " + ViewBag.UrlImage;
+                <p>@currImg</p>
+            }
+            <input type="file" name="file"/>
+            @Html.ValidationMessageFor(m => m.File)
+        </li>
+    </ul>
+    <input type="submit" value="Modifier" class="btnForm" />
+}
+  

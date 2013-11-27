@@ -126,7 +126,7 @@
     <comment>UserModel</comment>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
-    <value>Confirmation du nouveau mot de passe </value>
+    <value>Confirmation du nouveau mot de passe *</value>
     <comment>UserModel</comment>
   </data>
   <data name="Contenu" xml:space="preserve">
@@ -157,7 +157,7 @@
     <comment>UserModel</comment>
   </data>
   <data name="NewPassword" xml:space="preserve">
-    <value>Nouveau mot de passe</value>
+    <value>Nouveau mot de passe *</value>
     <comment>UserModel</comment>
   </data>
   <data name="NomsDest" xml:space="preserve">
@@ -165,23 +165,23 @@
     <comment>MessageModel</comment>
   </data>
   <data name="OldPassword" xml:space="preserve">
-    <value>Mot de passe actuel</value>
+    <value>Mot de passe actuel *</value>
     <comment>UserModel</comment>
   </data>
   <data name="PageContent" xml:space="preserve">
-    <value>Contenu de la page</value>
+    <value>Contenu de la page * </value>
     <comment>ContentModel</comment>
   </data>
   <data name="PageContentTrad" xml:space="preserve">
-    <value>Contenu de la page (Portuguais)</value>
+    <value>Contenu de la page (Portuguais) *</value>
     <comment>ContentModel</comment>
   </data>
   <data name="PageTitle" xml:space="preserve">
-    <value>Titre de la page</value>
+    <value>Titre de la page *</value>
     <comment>ContentModel</comment>
   </data>
   <data name="PageTitleTrad" xml:space="preserve">
-    <value>Titre de la page (Portuguais)</value>
+    <value>Titre de la page (Portuguais) *</value>
     <comment>ContentModel</comment>
   </data>
   <data name="Password" xml:space="preserve">
@@ -217,7 +217,7 @@
     <comment>AjoutPartenaire</comment>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>Description</value>
+    <value>Description </value>
     <comment>NouvelleModel, AjoutPublication</comment>
   </data>
   <data name="File" xml:space="preserve">
@@ -255,5 +255,13 @@
   <data name="Website" xml:space="preserve">
     <value>Site web</value>
     <comment>AjoutPartenaire</comment>
+  </data>
+  <data name="SecteurName" xml:space="preserve">
+    <value>Nom du secteur *</value>
+    <comment>ContentModel</comment>
+  </data>
+  <data name="SecteurTradName" xml:space="preserve">
+    <value>Nom du secteur (Portuguais) *</value>
+    <comment>ContentModel</comment>
   </data>
 </root>

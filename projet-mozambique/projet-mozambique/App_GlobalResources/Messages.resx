@@ -224,4 +224,31 @@
     <value>Le fil de discussion a bien été supprimé.</value>
     <comment>Forum</comment>
   </data>
+  <data name="SectInexistant" xml:space="preserve">
+    <value>Ce secteur n'existe pas.</value>
+  </data>
+  <data name="SectNoSchool" xml:space="preserve">
+    <value>Aucune école pour ce secteur.</value>
+  </data>
+  <data name="SectNoUser" xml:space="preserve">
+    <value>Aucun utilisateur pour ce secteur.</value>
+  </data>
+  <data name="FileTooLarge" xml:space="preserve">
+    <value>Le fichier est trop gros, la taille maximum est de : </value>
+  </data>
+  <data name="FileType" xml:space="preserve">
+    <value>Les images doivent être de type : </value>
+  </data>
+  <data name="SectAjoutOk" xml:space="preserve">
+    <value>Le nouveau secteur a été ajouté.</value>
+  </data>
+  <data name="EcoleAjoutSectOk" xml:space="preserve">
+    <value>L'école a été ajoutée au secteur.</value>
+  </data>
+  <data name="SectModifOk" xml:space="preserve">
+    <value>Le secteur a été modifié.</value>
+  </data>
+  <data name="UserAjoutSectOk" xml:space="preserve">
+    <value>L'utilisateur a été ajouté au secteur.</value>
+  </data>
 </root>
