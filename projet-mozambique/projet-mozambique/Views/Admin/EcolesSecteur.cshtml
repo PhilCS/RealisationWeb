@@ -33,7 +33,7 @@
         <ul>
             @foreach(var e in lst)
             {
-               <li>@e.NOM (Province : @e.PROVINCE)</li> 
+               <li>@e.NOM (Province : @e.PROVINCE) <a href="SupprimerEcoleSecteur?idEcole=@e.ID&idSecteur=@idSect" style="display:inline;"><img src="~/Content/images/icones/icone-delete.png" title="@Resources.Sectoriel.supprimer" alt="Icône Supprimer" /></a></li> 
             }
         </ul>  
         } 

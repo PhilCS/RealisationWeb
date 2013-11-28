@@ -99,13 +99,13 @@ namespace projet_mozambique.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("GestionSecteur");
+                    return RedirectToAction("GestionSecteurs");
                 }
             }
 
             TempData[Constantes.CLE_MSG_RETOUR] =
                                 new Message(Message.TYPE_MESSAGE.ERREUR, "Secteur inexistant");
-            return RedirectToAction("GestionSecteur");
+            return RedirectToAction("GestionSecteurs");
         }
 
         public ActionResult UtilisateursSecteur(int? idSect)
@@ -189,11 +189,32 @@ namespace projet_mozambique.Controllers
 
                     TempData[Constantes.CLE_MSG_RETOUR] =
                         new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.EcoleAjoutSectOk);
+
+                    return RedirectToAction("EcolesSecteur", new { @idSect = idSecteur });
                 }
             }
 
-            return RedirectToAction("EcolesSecteur", new { @idSect = idSecteur });
+            return RedirectToAction("GestionSecteurs");
+        }
+
+        public ActionResult SupprimerEcoleSecteur(int? idEcole, int? idSecteur)
+        {
+            SECTEUR leS = db.SECTEUR.SingleOrDefault(s => s.ID == idSecteur);
+
+            if(leS != null)
+            {
+                ECOLE uneEcole = db.ECOLE.SingleOrDefault(e => e.ID == idEcole);
+
+                if(uneEcole != null)
+                {
+                    leS.ECOLE.Remove(uneEcole);
+
+                    db.SaveChanges();
+                    return RedirectToAction("EcolesSecteur", new { @idSect = idSecteur });
+                }
+            }
             
+            return RedirectToAction("GestionSecteurs");
         }
 
         public ActionResult ModifSecteur(int? idSect)
