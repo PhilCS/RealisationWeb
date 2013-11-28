@@ -437,9 +437,14 @@
     <Content Include="Content\images\icones\icon-reply-forum.png" />
     <Content Include="Content\images\icones\icon-reply.png" />
     <Content Include="Content\images\icones\icon-trashcan.png" />
+    <Content Include="Content\images\icones\icone-archive.png" />
+    <Content Include="Content\images\icones\icone-delete.png" />
     <Content Include="Content\images\icones\icone-excel.png" />
+    <Content Include="Content\images\icones\icone-generic.png" />
     <Content Include="Content\images\icones\icone-pdf.png" />
+    <Content Include="Content\images\icones\icone-powerpoint.png" />
     <Content Include="Content\images\icones\icone-text.png" />
+    <Content Include="Content\images\icones\icone-word.png" />
     <Content Include="Content\images\mail.png" />
     <Content Include="Content\images\photos\test.jpg" />
     <Content Include="Content\images\profile.png" />
@@ -581,10 +586,7 @@
     <Content Include="Views\Sectoriel\AjoutPublication.cshtml" />
     <Content Include="Views\Admin\Evenement.cshtml" />
     <Content Include="Views\Admin\Calendrier.cshtml" />
-    <Content Include="Views\Admin\Ecoles.cshtml" />
-    <Content Include="Views\Admin\Ecole.cshtml" />
     <Content Include="Views\Admin\AjoutUtilisateur.cshtml" />
-    <Content Include="Views\Admin\AjoutEcole.cshtml" />
     <Content Include="Views\Public\Nouvelle.cshtml" />
     <Content Include="Views\Public\PageResultat.cshtml" />
     <Content Include="Views\Admin\GestionNouvelles.cshtml" />
