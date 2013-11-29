@@ -1,34 +1,6 @@
 ﻿@using projet_mozambique.Models
 @if (Request.IsAuthenticated)
 {
-    /*var lst = Session["lstSect"] as Dictionary<int, string>;
-
-    int current = (int)Session["currentSecteur"];
-    
-    if (lst != null && current != null && current != 0)
-    {
-        <form method="post" action="/Sectoriel/ChangeSecteur">
-            @Html.Label(Resources.Shared.secteur)
-            <select id="selectSector" name="secteur" onchange="this.form.submit()">
-                @foreach (var s in lst)
-                {
-                    string[] noms = s.Value.Split('/');
-                    string nom;
-
-                    if (Session["Culture"].ToString().Equals("fr"))
-                    {
-                        nom = noms[0];
-                    }
-                    else
-                    {
-                        nom = noms[1];
-                    }
-                    <option value="@s.Key" @(current == s.Key ? "selected=\"selected\"" : "")>@nom</option>
-                }
-            </select>
-            <input name="returnUrl" type="hidden" value="@this.Request.RawUrl" />
-        </form>
-    }*/
 
     var lst = Session["lstSect"] as List<SECTEUR>;
 

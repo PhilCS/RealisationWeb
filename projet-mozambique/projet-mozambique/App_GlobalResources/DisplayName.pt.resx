@@ -118,11 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Adress" xml:space="preserve">
-    <value>Adress</value>
+    <value>Adress *</value>
     <comment>UserModel</comment>
   </data>
   <data name="City" xml:space="preserve">
-    <value>City</value>
+    <value>City *</value>
     <comment>UserModel</comment>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
@@ -137,7 +137,7 @@
     <value>From</value>
   </data>
   <data name="Email" xml:space="preserve">
-    <value>Email</value>
+    <value>Email *</value>
     <comment>UserModel</comment>
   </data>
   <data name="File" xml:space="preserve">
@@ -145,15 +145,15 @@
     <comment>ContentModel</comment>
   </data>
   <data name="FirstName" xml:space="preserve">
-    <value>First name</value>
+    <value>First name *</value>
     <comment>UserModel</comment>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>Prefered Language</value>
+    <value>Prefered Language *</value>
     <comment>UserModel</comment>
   </data>
   <data name="LastName" xml:space="preserve">
-    <value>Last name</value>
+    <value>Last name *</value>
     <comment>UserModel</comment>
   </data>
   <data name="NewPassword" xml:space="preserve">
@@ -185,7 +185,7 @@
     <comment>ContentModel</comment>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Password</value>
+    <value>Password *</value>
     <comment>UserModel</comment>
   </data>
   <data name="PiecesJointes" xml:space="preserve">
@@ -205,7 +205,7 @@
     <comment>ContentModel</comment>
   </data>
   <data name="UserName" xml:space="preserve">
-    <value>Username</value>
+    <value>Username *</value>
     <comment>UserModel</comment>
   </data>
   <data name="Description" xml:space="preserve">
@@ -217,7 +217,7 @@
     <comment>NouvelleModel</comment>
   </data>
   <data name="ConfirmEmail" xml:space="preserve">
-    <value>Confirm email</value>
+    <value>Confirm email *</value>
     <comment>UserModel</comment>
   </data>
   <data name="SecteurName" xml:space="preserve">
@@ -227,5 +227,30 @@
   <data name="SecteurTradName" xml:space="preserve">
     <value>Sector Name (Portuguese) *</value>
     <comment>ContentModel</comment>
+  </data>
+  <data name="UserBDay" xml:space="preserve">
+    <value>Date of birth : *</value>
+  </data>
+  <data name="LastConnexion" xml:space="preserve">
+    <value>Last connexion</value>
+  </data>
+  <data name="School" xml:space="preserve">
+    <value>School *</value>
+  </data>
+  <data name="Sectors" xml:space="preserve">
+    <value>Sectors </value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Role *</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country *</value>
+    <comment>AjoutPartenaire</comment>
+  </data>
+  <data name="DebutAcces" xml:space="preserve">
+    <value>Access debut date *</value>
+  </data>
+  <data name="FinAcces" xml:space="preserve">
+    <value>Access end date *</value>
   </data>
 </root>

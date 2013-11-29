@@ -221,4 +221,7 @@
     <value>Titre</value>
     <comment>Nouvelle</comment>
   </data>
+  <data name="ConfirmAccount" xml:space="preserve">
+    <value>Confirmation du nouveau compte</value>
+  </data>
 </root>

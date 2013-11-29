@@ -83,7 +83,10 @@ namespace projet_mozambique.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
-            return View();
+            if(!Request.IsAuthenticated)
+                return View();
+
+            return RedirectToAction("Index", "Sectoriel");
         }
 
         /// <summary>
@@ -96,105 +99,120 @@ namespace projet_mozambique.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model)
         {
-            if (ModelState.IsValid)
+            if (!Request.IsAuthenticated)
             {
-                var utilisateur = from u in db.UTILISATEUR
-                                  where u.NOMUTIL == model.UserName
-                                  select u;
-
-                if (utilisateur.Count() != 0)
+                if (ModelState.IsValid)
                 {
-                    UTILISATEUR currentUser = (UTILISATEUR)utilisateur.First();
+                    var utilisateur = from u in db.UTILISATEUR
+                                      where u.NOMUTIL == model.UserName
+                                      select u;
 
-                    if (WebSecurity.Login(currentUser.NOMUTIL, model.Password, model.RememberMe))
+                    if (utilisateur.Count() != 0)
                     {
-                        CultureInfo ci = new CultureInfo(currentUser.LANGUE.ToLower());
+                        UTILISATEUR currentUser = (UTILISATEUR)utilisateur.First();
 
-                        //Dictionary<int, string> lstSect = new Dictionary<int, string>();
-                        List<SECTEUR> lstSect = new List<SECTEUR>();
-
-                        DateTime currentDate = DateTime.Now;
-
-                        var sectUtil = from s in db.UTILISATEURSECTEUR
-                                       where s.IDUTILISATEUR == currentUser.ID && s.DEBUTACCES <= currentDate
-                                       && s.FINACCES >= currentDate
-                                       select s;
-
-                        //string cookieStr = "";
-
-                        if (sectUtil.FirstOrDefault() != null)
+                        if(WebSecurity.IsConfirmed(currentUser.NOMUTIL))
                         {
-                            foreach (var v in sectUtil)
+                            if (WebSecurity.Login(currentUser.NOMUTIL, model.Password, model.RememberMe))
                             {
-                                //lstSect.Add(v.IDSECTEUR, v.SECTEUR.NOM + "/" + v.SECTEUR.NOMTRAD);
-                                lstSect.Add(v.SECTEUR);
-                                /*cookieStr += v.IDSECTEUR.ToString();
-                                cookieStr += ',';
-                                cookieStr += v.SECTEUR.NOM;
-                                cookieStr += '/';
-                                cookieStr += v.SECTEUR.NOMTRAD;
-                                cookieStr += '&';*/
+                                CultureInfo ci = new CultureInfo(currentUser.LANGUE.ToLower());
+
+                                //Dictionary<int, string> lstSect = new Dictionary<int, string>();
+                                List<SECTEUR> lstSect = new List<SECTEUR>();
+
+                                DateTime currentDate = DateTime.Now;
+
+                                var sectUtil = from s in db.UTILISATEURSECTEUR
+                                               where s.IDUTILISATEUR == currentUser.ID && s.DEBUTACCES <= currentDate
+                                               && s.FINACCES >= currentDate
+                                               select s;
+
+                                //string cookieStr = "";
+
+                                if (sectUtil.FirstOrDefault() != null)
+                                {
+                                    foreach (var v in sectUtil)
+                                    {
+                                        //lstSect.Add(v.IDSECTEUR, v.SECTEUR.NOM + "/" + v.SECTEUR.NOMTRAD);
+                                        lstSect.Add(v.SECTEUR);
+                                        /*cookieStr += v.IDSECTEUR.ToString();
+                                        cookieStr += ',';
+                                        cookieStr += v.SECTEUR.NOM;
+                                        cookieStr += '/';
+                                        cookieStr += v.SECTEUR.NOMTRAD;
+                                        cookieStr += '&';*/
+                                    }
+                                }
+                                else
+                                {
+                                    lstSect = null;
+                                }
+
+
+                                //Liste des secteurs de l'utilisateur
+                                Session["lstSect"] = lstSect;
+
+                                if (lstSect == null)
+                                {
+                                    // Si l'utilisateur ne fait partie d'aucun secteur, le secteur courant est 0 
+                                    // et la page d'accueil de l'utilisateur affiche que l'utilisateur ne fait partie d'aucun secteur
+                                    Session["currentSecteur"] = 0;
+                                }
+                                else
+                                {
+                                    //Index du secteur sélectionné dans la liste des secteurs de l'utilisateur
+                                    Session["currentSecteur"] = lstSect.First().ID;
+                                }
+
+                                Session["Culture"] = ci;
+
+                                if (model.RememberMe)
+                                {
+                                    HttpCookie cookie = new HttpCookie("lang");
+                                    cookie.Expires = DateTime.Now.AddMonths(3);
+                                    cookie.Value = ci.Name;
+                                    Response.AppendCookie(cookie);
+
+                                    if (lstSect != null)
+                                    {
+                                        /*HttpCookie cookieLst = new HttpCookie("lstSect");
+                                        cookieLst.Expires = DateTime.Now.AddMonths(3);
+                                        cookieLst.Value = cookieStr;
+                                        Response.AppendCookie(cookieLst);*/
+
+                                        HttpCookie cookieCurrent = new HttpCookie("currentSect");
+                                        cookieCurrent.Expires = DateTime.Now.AddMonths(3);
+                                        cookieCurrent.Value = lstSect.First().ID.ToString();
+                                        Response.AppendCookie(cookieCurrent);
+                                    }
+                                }
+
+                                currentUser.DERNIERECONNEXION = DateTime.Now;
+
+                                db.SaveChanges();
+
+                                return RedirectToAction("Index", "Sectoriel");
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("", Resources.Messages.PasswordInvalid);
                             }
                         }
                         else
                         {
-                            lstSect = null;
+                            ModelState.AddModelError("", Resources.Messages.AccountNotConfirmed);
                         }
-
-
-                        //Liste des secteurs de l'utilisateur
-                        Session["lstSect"] = lstSect;
-
-                        if (lstSect == null)
-                        {
-                            // Si l'utilisateur ne fait partie d'aucun secteur, le secteur courant est 0 
-                            // et la page d'accueil de l'utilisateur affiche que l'utilisateur ne fait partie d'aucun secteur
-                            Session["currentSecteur"] = 0;
-                        }
-                        else
-                        {
-                            //Index du secteur sélectionné dans la liste des secteurs de l'utilisateur
-                            Session["currentSecteur"] = lstSect.First().ID;
-                        }
-                        
-                        Session["Culture"] = ci;
-
-                        if (model.RememberMe)
-                        {
-                            HttpCookie cookie = new HttpCookie("lang");
-                            cookie.Expires = DateTime.Now.AddMonths(3);
-                            cookie.Value = ci.Name;
-                            Response.AppendCookie(cookie);
-
-                            if (lstSect != null)
-                            {
-                                /*HttpCookie cookieLst = new HttpCookie("lstSect");
-                                cookieLst.Expires = DateTime.Now.AddMonths(3);
-                                cookieLst.Value = cookieStr;
-                                Response.AppendCookie(cookieLst);*/
-
-                                HttpCookie cookieCurrent = new HttpCookie("currentSect");
-                                cookieCurrent.Expires = DateTime.Now.AddMonths(3);
-                                cookieCurrent.Value = lstSect.First().ID.ToString();
-                                Response.AppendCookie(cookieCurrent);
-                            }
-                        }
-
-                        return RedirectToAction("Index", "Sectoriel");
                     }
                     else
                     {
-                        ModelState.AddModelError("", @Resources.Messages.PasswordInvalid);
+                        ModelState.AddModelError("", Resources.Messages.UsernameInvalid);
                     }
                 }
-                else
-                {
-                    ModelState.AddModelError("", @Resources.Messages.UsernameInvalid);
-                }
-            }
 
-            // Si nous sommes arrivés là, quelque chose a échoué, réafficher le formulaire
-            return View(model);
+                // Si nous sommes arrivés là, quelque chose a échoué, réafficher le formulaire
+                return View(model);
+            }
+            return RedirectToAction("Index", "Sectoriel");
         }
 
         /// <summary>
@@ -203,31 +221,34 @@ namespace projet_mozambique.Controllers
         /// <returns>Page d'accueil publique</returns>
         public ActionResult LogOut()
         {
-            WebSecurity.Logout();
-
-            if (Request.Cookies["lang"] != null)
+            if (Request.IsAuthenticated)
             {
-                var c = new HttpCookie("lang");
-                c.Expires = DateTime.Now.AddDays(-1);
-                Response.Cookies.Add(c);
-            }
+                WebSecurity.Logout();
 
-            if (Request.Cookies["lstSect"] != null)
-            {
-                var c = new HttpCookie("lstSect");
-                c.Expires = DateTime.Now.AddDays(-1);
-                Response.Cookies.Add(c);
-            }
+                if (Request.Cookies["lang"] != null)
+                {
+                    var c = new HttpCookie("lang");
+                    c.Expires = DateTime.Now.AddDays(-1);
+                    Response.Cookies.Add(c);
+                }
 
-            if (Request.Cookies["currentSect"] != null)
-            {
-                var c = new HttpCookie("currentSect");
-                c.Expires = DateTime.Now.AddDays(-1);
-                Response.Cookies.Add(c);
-            }
+                if (Request.Cookies["lstSect"] != null)
+                {
+                    var c = new HttpCookie("lstSect");
+                    c.Expires = DateTime.Now.AddDays(-1);
+                    Response.Cookies.Add(c);
+                }
 
-            Session["lstSect"] = null;
-            Session["currentSecteur"] = null;
+                if (Request.Cookies["currentSect"] != null)
+                {
+                    var c = new HttpCookie("currentSect");
+                    c.Expires = DateTime.Now.AddDays(-1);
+                    Response.Cookies.Add(c);
+                }
+
+                Session["lstSect"] = null;
+                Session["currentSecteur"] = null;
+            }
 
             return RedirectToAction("Index", "Public");
         }
@@ -239,7 +260,11 @@ namespace projet_mozambique.Controllers
         [AllowAnonymous]
         public ActionResult ReinitialiserMotPasse()
         {
-            return View();
+            if (!Request.IsAuthenticated)
+            {
+                return View();
+            }
+            return RedirectToAction("Index", "Sectoriel");
         }
 
         /// <summary>
@@ -251,33 +276,38 @@ namespace projet_mozambique.Controllers
         [AllowAnonymous]
         public ActionResult ReinitialiserMotPasse(ResetPassword model)
         {
-            if (ModelState.IsValid)
+            if (!Request.IsAuthenticated)
             {
-                var user = db.UTILISATEUR.FirstOrDefault(u => u.NOMUTIL == model.UserName);
-
-                if (user != null)
+                if (ModelState.IsValid)
                 {
-                    string emailAddress = user.COURRIEL;
-                    if (!string.IsNullOrEmpty(emailAddress))
-                    {
-                        string confirmationToken =
-                            WebSecurity.GeneratePasswordResetToken(model.UserName);
-                        dynamic email = new Email("ResetPassword");
-                        email.To = emailAddress;
-                        email.UserName = model.UserName;
-                        email.ConfirmationToken = confirmationToken;
-                        email.Send();
+                    var user = db.UTILISATEUR.FirstOrDefault(u => u.NOMUTIL == model.UserName);
 
-                        return RedirectToAction("ConfirmationCourriel");
+                    if (user != null)
+                    {
+                        string emailAddress = user.COURRIEL;
+                        if (!string.IsNullOrEmpty(emailAddress))
+                        {
+                            string confirmationToken =
+                                WebSecurity.GeneratePasswordResetToken(model.UserName);
+                            dynamic email = new Email("ResetPassword");
+                            email.To = emailAddress;
+                            email.UserName = model.UserName;
+                            email.ConfirmationToken = confirmationToken;
+                            email.Send();
+
+                            return RedirectToAction("ConfirmationCourriel");
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", Resources.Messages.UsernameInvalid);
                     }
                 }
-                else
-                {
-                    ModelState.AddModelError("", @Resources.Messages.UsernameInvalid);
-                }
-            }
 
-            return View(model);
+
+                return View(model);
+            }
+            return RedirectToAction("Index", "Sectoriel");
         }
 
         /// <summary>
@@ -287,7 +317,11 @@ namespace projet_mozambique.Controllers
         [AllowAnonymous]
         public ActionResult ConfirmationCourriel()
         {
-            return View();
+            if (!Request.IsAuthenticated)
+            {
+                return View();
+            }
+            return RedirectToAction("Index", "Sectoriel");
         }
 
         /// <summary>
@@ -298,8 +332,12 @@ namespace projet_mozambique.Controllers
         [AllowAnonymous]
         public ActionResult ConfirmationReinitialMotPasse(string Id)
         {
-            ResetPasswordConfirmModel model = new ResetPasswordConfirmModel() { Token = Id };
-            return View(model);
+            if (!Request.IsAuthenticated)
+            {
+                ResetPasswordConfirmModel model = new ResetPasswordConfirmModel() { Token = Id };
+                return View(model);
+            }
+            return RedirectToAction("Index", "Sectoriel");
         }
         
         /// <summary>
@@ -311,18 +349,95 @@ namespace projet_mozambique.Controllers
         [HttpPost]
         public ActionResult ConfirmationReinitialMotPasse(ResetPasswordConfirmModel model)
         {
-            if (WebSecurity.ResetPassword(model.Token, model.NewPassword))
+            if (!Request.IsAuthenticated)
             {
-                TempData[Constantes.CLE_MSG_RETOUR] =
-                new Message(Message.TYPE_MESSAGE.SUCCES, @Resources.Messages.ResetPasswordOK);
+                if (ModelState.IsValid)
+                {
+                    if (WebSecurity.ResetPassword(model.Token, model.NewPassword))
+                    {
+                        TempData[Constantes.CLE_MSG_RETOUR] =
+                        new Message(Message.TYPE_MESSAGE.SUCCES, @Resources.Messages.ResetPasswordOK);
+                    }
+                    else
+                    {
+                        TempData[Constantes.CLE_MSG_RETOUR] =
+                        new Message(Message.TYPE_MESSAGE.ERREUR, @Resources.Messages.ResetPasswortInvalid);
+                    }
+
+                    return RedirectToAction("Login", "Sectoriel");
+                }
+
+                return View(model);
             }
-            else
+            return RedirectToAction("Index", "Sectoriel");
+        }
+
+        /// <summary>
+        /// Confirmer la réinitialisation du mot de passe
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        public ActionResult ConfirmationCompte(string Id)
+        {
+            if (!Request.IsAuthenticated)
             {
-                TempData[Constantes.CLE_MSG_RETOUR] =
-                new Message(Message.TYPE_MESSAGE.ERREUR, @Resources.Messages.ResetPasswortInvalid);
+                var user = db.webpages_Membership.FirstOrDefault(m => m.ConfirmationToken.Equals(Id));
+                if (user != null && !user.IsConfirmed.Value)
+                {
+                    string username = db.UTILISATEUR.FirstOrDefault(u => u.ID == user.UserId).NOMUTIL;
+                    ConfirmAccountModel model = new ConfirmAccountModel() { Token = Id, Username = username };
+                    return View(model);
+                }
+
+                return RedirectToAction("Login", "Sectoriel");
             }
-              
-            return RedirectToAction("Login", "Sectoriel");
+
+            return RedirectToAction("Index", "Sectoriel");
+        }
+
+        /// <summary>
+        /// Confirmer la réinitialisation du mot de passe [POST]
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult ConfirmationCompte(ConfirmAccountModel model)
+        {
+            if (!Request.IsAuthenticated)
+            {
+                if (ModelState.IsValid)
+                {
+                    string username = model.Username;
+                    if (!WebSecurity.IsConfirmed(username))
+                    {
+                        int userId = WebSecurity.GetUserId(username);
+                        try
+                        {
+                            if(WebSecurity.ConfirmAccount(model.Token))
+                            {
+                                string token = WebSecurity.GeneratePasswordResetToken(username, 2);
+                                if(WebSecurity.ResetPassword(token, model.NewPassword))
+                                {
+                                    TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.AccountConfirmed);
+                                }
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.ERREUR, e.Message);
+                        }
+                    }
+                    else
+                    {
+                        TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Messages.AccountAlreadyConfirmed);
+                    }
+                }
+                return RedirectToAction("Login", "Sectoriel");
+            }
+
+            return RedirectToAction("Index", "Sectoriel");
         }
 
         /// <summary>
@@ -393,7 +508,7 @@ namespace projet_mozambique.Controllers
 
                 db.ModifierUtilProfil(id, model.courriel, model.nom, model.prenom, model.adresse, model.ville, model.langue);
                 db.SaveChanges();
-                TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, @Resources.Messages.ModifierInfosOK);
+                TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.ModifierInfosOK);
                 return RedirectToAction("Profil", "Sectoriel");
             }
             return View(model);
@@ -420,13 +535,13 @@ namespace projet_mozambique.Controllers
             {
                 if (WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword))
                 {
-                    TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, @Resources.Messages.PasswordChangeOK);
+                    TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.PasswordChangeOK);
                     return RedirectToAction("Profil", "Sectoriel");
                 }
                 else
                 {
-                    ModelState.AddModelError("", @Resources.Messages.ErrorMessage + " " +
-                        @Resources.Messages.PasswordChangeNotOK);
+                    ModelState.AddModelError("", Resources.Messages.ErrorMessage + " " +
+                        Resources.Messages.PasswordChangeNotOK);
                 }
                 
             }
@@ -784,11 +899,6 @@ namespace projet_mozambique.Controllers
                 ObtenirMessagesRecus();
                 return View();
             }
-        }
-
-        public ActionResult ModifierPreferences()
-        {
-            return View();
         }
 
         public ActionResult Forum(int? page)

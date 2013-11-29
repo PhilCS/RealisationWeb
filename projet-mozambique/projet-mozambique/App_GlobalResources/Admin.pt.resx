@@ -160,11 +160,37 @@
     <value>Public section</value>
   </data>
   <data name="lstEcoles" xml:space="preserve">
-    <value>Schools List</value>
-    <comment>s</comment>
+    <value>Schools' List</value>
   </data>
   <data name="lstUtils" xml:space="preserve">
-    <value>Users List</value>
+    <value>Users' List</value>
     <comment>GestionSecteurs</comment>
+  </data>
+  <data name="RechUtils" xml:space="preserve">
+    <value>Search users</value>
+  </data>
+  <data name="RechUtilsParam" xml:space="preserve">
+    <value>Username, First Name, Last Name</value>
+  </data>
+  <data name="lstSecteurs" xml:space="preserve">
+    <value>Sectors' List</value>
+  </data>
+  <data name="tousEcoles" xml:space="preserve">
+    <value>All schools</value>
+  </data>
+  <data name="tousSecteurs" xml:space="preserve">
+    <value>All sectors</value>
+  </data>
+  <data name="aucunResultat" xml:space="preserve">
+    <value>No result</value>
+  </data>
+  <data name="gestionUtilisateur" xml:space="preserve">
+    <value>User Administration</value>
+  </data>
+  <data name="ajoutUtilisateur" xml:space="preserve">
+    <value>New user creation</value>
+  </data>
+  <data name="create" xml:space="preserve">
+    <value>Create</value>
   </data>
 </root>

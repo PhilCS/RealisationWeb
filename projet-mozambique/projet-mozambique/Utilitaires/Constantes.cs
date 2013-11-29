@@ -31,6 +31,7 @@ namespace projet_mozambique.Utilitaires
         public const string CLE_SECTEURS = "secteurs";
         public const string CLE_IDSECTEUR = "idSecteur";
         public const string CLE_NOMSECTEUR = "nomSecteur";
+        public const string CLE_IDECOLE = "idEcole";
         public const string CLE_SUJETSPUBLICATION = "sujetsPublication";
         public const string CLE_LISTE_UTILISATEURS = "listeUtilisateurs";
         public const string CLE_LISTE_UTILISATEURS_ALL = "AllUtilisateurs";
@@ -44,6 +45,7 @@ namespace projet_mozambique.Utilitaires
         public const string CLE_FORUM = "forum";
         public const string CLE_FILSFORUM = "filsForum";
         public const string CLE_FILDISCUSSION = "fil";
+        public const string CLE_UTIL_AJOUTOK = "utilAjoute";
 
     }
 }

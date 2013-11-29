@@ -122,4 +122,26 @@ namespace projet_mozambique.Models
             ErrorMessageResourceType = typeof(Resources.Messages))]
         public string ConfirmPassword { get; set; }
     }
+
+    public class ConfirmAccountModel
+    {
+        public string Username { get; set; }
+        public string Token { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
+            ErrorMessageResourceType = typeof(Resources.Messages))]
+        [StringLength(100, ErrorMessageResourceName = "fieldStringLength",
+            ErrorMessageResourceType = typeof(Resources.Messages), MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "NewPassword", ResourceType = typeof(Names.DisplayName))]
+        public string NewPassword { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
+            ErrorMessageResourceType = typeof(Resources.Messages))]
+        [DataType(DataType.Password)]
+        [Display(Name = "ConfirmPassword", ResourceType = typeof(Names.DisplayName))]
+        [Compare("NewPassword", ErrorMessageResourceName = "NewPasswordMatch",
+            ErrorMessageResourceType = typeof(Resources.Messages))]
+        public string ConfirmPassword { get; set; }
+    }
 }

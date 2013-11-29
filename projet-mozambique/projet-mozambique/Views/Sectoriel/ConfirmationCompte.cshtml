@@ -1,6 +1,6 @@
-﻿@model projet_mozambique.Models.ResetPasswordConfirmModel
+﻿@model projet_mozambique.Models.ConfirmAccountModel
 @{
-    ViewBag.Title = Resources.Shared.forgotPassword;
+    ViewBag.Title = Resources.Sectoriel.ConfirmAccount;
 }
 
 <h2>@ViewBag.Title</h2>
@@ -9,6 +9,7 @@
     @Html.ValidationSummary(true)
     <ul>
         @Html.HiddenFor(m => m.Token)
+        <li style="padding-bottom:5px;">@Resources.Shared.userName @Html.TextBoxFor(m => m.Username, new { @readonly = "readonly" })</li>
         <li>
             @Html.LabelFor(m => m.NewPassword)
             @Html.PasswordFor(m => m.NewPassword)

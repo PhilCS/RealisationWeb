@@ -118,11 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Address" xml:space="preserve">
-    <value>Adresse</value>
+    <value>Adresse *</value>
     <comment>UserModel</comment>
   </data>
   <data name="City" xml:space="preserve">
-    <value>Ville</value>
+    <value>Ville *</value>
     <comment>UserModel</comment>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
@@ -137,7 +137,7 @@
     <value>De</value>
   </data>
   <data name="Email" xml:space="preserve">
-    <value>Courriel</value>
+    <value>Courriel *</value>
     <comment>UserModel</comment>
   </data>
   <data name="Image" xml:space="preserve">
@@ -145,7 +145,7 @@
     <comment>ContentModel</comment>
   </data>
   <data name="FirstName" xml:space="preserve">
-    <value>Prénom</value>
+    <value>Prénom *</value>
     <comment>UserModel</comment>
   </data>
   <data name="Language" xml:space="preserve">
@@ -153,7 +153,7 @@
     <comment>UserModel</comment>
   </data>
   <data name="LastName" xml:space="preserve">
-    <value>Nom</value>
+    <value>Nom *</value>
     <comment>UserModel</comment>
   </data>
   <data name="NewPassword" xml:space="preserve">
@@ -185,7 +185,7 @@
     <comment>ContentModel</comment>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Mot de passe </value>
+    <value>Mot de passe  *</value>
     <comment>UserModel</comment>
   </data>
   <data name="PiecesJointes" xml:space="preserve">
@@ -205,7 +205,7 @@
     <comment>ContentModel</comment>
   </data>
   <data name="UserName" xml:space="preserve">
-    <value>Nom d'utilisateur </value>
+    <value>Nom d'utilisateur  *</value>
     <comment>UserModel</comment>
   </data>
   <data name="Category" xml:space="preserve">
@@ -213,7 +213,7 @@
     <comment>AjoutPublication</comment>
   </data>
   <data name="Country" xml:space="preserve">
-    <value>Pays</value>
+    <value>Pays *</value>
     <comment>AjoutPartenaire</comment>
   </data>
   <data name="Description" xml:space="preserve">
@@ -225,7 +225,7 @@
     <comment>AjoutPublication</comment>
   </data>
   <data name="ConfirmEmail" xml:space="preserve">
-    <value>Confirmation du courriel</value>
+    <value>Confirmation du courriel *</value>
     <comment>UserModel</comment>
   </data>
   <data name="Keywords" xml:space="preserve">
@@ -245,7 +245,7 @@
     <comment>AjoutPartenaire</comment>
   </data>
   <data name="Sector" xml:space="preserve">
-    <value>Secteur</value>
+    <value>Secteur *</value>
     <comment>AjoutPublication</comment>
   </data>
   <data name="Title" xml:space="preserve">
@@ -263,5 +263,26 @@
   <data name="SecteurTradName" xml:space="preserve">
     <value>Nom du secteur (Portuguais) *</value>
     <comment>ContentModel</comment>
+  </data>
+  <data name="UserBDay" xml:space="preserve">
+    <value>Date de naissance *</value>
+  </data>
+  <data name="LastConnexion" xml:space="preserve">
+    <value>Dernière connexion</value>
+  </data>
+  <data name="School" xml:space="preserve">
+    <value>École *</value>
+  </data>
+  <data name="Sectors" xml:space="preserve">
+    <value>Secteurs</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Rôle *</value>
+  </data>
+  <data name="DebutAcces" xml:space="preserve">
+    <value>Date de début d'accès *</value>
+  </data>
+  <data name="FinAcces" xml:space="preserve">
+    <value>Date de fin d'accès *</value>
   </data>
 </root>
