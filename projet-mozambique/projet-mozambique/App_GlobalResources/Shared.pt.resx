@@ -237,4 +237,7 @@
   <data name="userName" xml:space="preserve">
     <value>Username : </value>
   </data>
+  <data name="ecritPar" xml:space="preserve">
+    <value>Written by :</value>
+  </data>
 </root>

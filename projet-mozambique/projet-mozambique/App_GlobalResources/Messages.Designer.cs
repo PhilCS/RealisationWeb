@@ -223,6 +223,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Le message a bien été modifié..
+        /// </summary>
+        internal static string messageModifie {
+            get {
+                return ResourceManager.GetString("messageModifie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Le message n&apos;a pu être envoyé, une erreur est survenue..
         /// </summary>
         internal static string messagePasEnvoye {

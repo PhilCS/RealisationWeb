@@ -5,7 +5,13 @@
     
     ViewBag.Title = f.sujet;
     
-    <h1>@f.sujet</h1>
+    <h1>
+        @f.sujet
+        @if (User.IsInRole(Constantes.ROLE_ADMIN) || User.IsInRole(Constantes.ROLE_PROFMODERATEUR))
+        {
+            <a href="#" id="modif-sujet"><img src="~/Content/images/icones/icone-pen.png" title="@Resources.Shared.modifier" alt="Icône Modifier" /></a>
+        }
+    </h1>
     
     if (TempData[Constantes.CLE_MESSAGE] != null)
     {
@@ -35,10 +41,10 @@
         </ul>
 
     <div>
-        <a href="RepondreFilDiscu?idFil=@f.id"><img src="~/Content/images/icones/icon-reply-forum.png" title="@Resources.Sectoriel.repondre" alt="Icône répondre" class="icone"/></a>
-        @if (User.IsInRole("admin") || User.IsInRole("professeurModerateur"))
+        <a href="RepondreFilDiscu?idFil=@f.id"><img src="~/Content/images/icones/icon-reply-forum.png" title="@Resources.Sectoriel.repondre" alt="Icône Répondre" class="icone"/></a>
+        @if (User.IsInRole(Constantes.ROLE_ADMIN) || User.IsInRole(Constantes.ROLE_PROFMODERATEUR))
         {
-            <a href="SupprimerFil?idFil=@f.id"><img src="~/Content/images/icones/icon-delete-forum.png" title="@Resources.Sectoriel.supprimer" alt="Icône Répondre" class="icone" /></a>
+            <a href="SupprimerFil?idFil=@f.id"><img src="~/Content/images/icones/icon-delete-forum.png" title="@Resources.Sectoriel.supprimer" alt="Icône Supprimer" class="icone" /></a>
         }
     </div>
 
@@ -59,6 +65,13 @@
                 <p>
                     @Html.Raw(m.contenu)
                 </p>
+                @if (User.IsInRole(Constantes.ROLE_ADMIN) || User.IsInRole(Constantes.ROLE_PROFMODERATEUR))
+                {
+                    <div class="moderateur-fildiscu">
+                        <a href="SupprimerMessageFil?idMsg=@m.idMessage&idFil=@f.id&idPage=@f.listeMessages.PageIndex"><img src="~/Content/images/icones/icon-delete-forum-petit.png" title="@Resources.Shared.supprimer" alt="Icône Supprimer message" /></a>
+                        <a href="ModifierMsgFil?idMsg=@m.idMessage&idFil=@f.id&idPage=@f.listeMessages.PageIndex"><img src="~/Content/images/icones/icone-pen.png" title="@Resources.Shared.modifier" alt="Icône Modifier message" /></a>
+                    </div>
+                }
             </div>
         </div>    
     }
@@ -84,4 +97,41 @@
                 <li>@Html.ActionLink(">", "FilDiscu", new { idFil = f.id, idPage = f.listeMessages.PageIndex + 1 })</li>
             }
         </ul>
+    
+    <script>
+        $(document).ready(function () {
+            $("#modif-sujet").click(function (e) {
+                e.preventDefault();
+                var h1 = $("h1").first();
+                var sujet = h1.html().substr(0, h1.html().indexOf("<", 1)).trim();
+                var modifier = '@Resources.Shared.modifier';
+                h1.html('<input type=\x22text\x22 value=\x22' +
+                    sujet + '\x22 class=\x22modif-sujet\x22 autofocus name=\x22sujet\x22 id=\x22sujet\x22> <input type=\x22submit\x22 value=\x22' +
+                    modifier + '\x22 class=\x22btnForm\x22 id=\x22btnModif\x22>');
+
+                var tb = $("#sujet");
+                tb.on("change keyup paste", function (e) {
+                    if (tb.val() == "" && $("#msg").length != 0) {
+                        h1.before("<p class=\x22msg erreur\x22 style=\x22margin:0;\x22 id=\x22msg\x22>@Resources.Messages.sujetObligatoire</p>");
+                        tb.addClass("input-validation-error");
+                    }
+                    else {
+                        $("#msg").remove();
+                        tb.removeClass("input-validation-error");
+                    }
+                        
+                });
+                $("#btnModif").click(function (e) {
+                    if (tb.val() == "") {
+                        h1.before("<p class=\x22msg erreur\x22 style=\x22margin:0;\x22>@Resources.Messages.sujetObligatoire</p>");
+                        tb.addClass("input-validation-error");
+                    }
+                    else
+                        alert("ok");
+                });
+            });
+
+                
+        });
+    </script>
 }

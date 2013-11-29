@@ -153,6 +153,9 @@
   <data name="documents" xml:space="preserve">
     <value>Documents</value>
   </data>
+  <data name="ecritPar" xml:space="preserve">
+    <value>Écrit par :</value>
+  </data>
   <data name="envoyeA" xml:space="preserve">
     <value>Envoyé à</value>
   </data>

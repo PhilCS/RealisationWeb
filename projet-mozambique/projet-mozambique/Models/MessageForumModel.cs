@@ -21,5 +21,6 @@ namespace projet_mozambique.Models
         public DateTime datePublication { get; set; }
         public DateTime dateModification { get; set; }
         public int idFil { get; set; }
+        public int idMessage { get; set; }
     }
 }

@@ -287,7 +287,7 @@ input:read-only
 
 .succes
 {
-    color:#538d12;
+    color:#4d8211;
 }
 
 .erreur ul
@@ -606,6 +606,17 @@ input:read-only
 .date-auteur-message
 {
     font-weight:bold;
+}
+
+.modif-sujet
+{
+    padding:5px;
+    font-size:20px;
+}
+
+h1 .btnForm
+{
+    font-size:20px;
 }
 
 /*SONDAGE*/

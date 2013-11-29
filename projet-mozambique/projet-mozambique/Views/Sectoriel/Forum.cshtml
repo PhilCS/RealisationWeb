@@ -43,7 +43,7 @@
 
         <table>
             <thead>
-                @if (User.IsInRole("admin") || User.IsInRole("professeurModerateur"))
+                @if (User.IsInRole(Constantes.ROLE_ADMIN) || User.IsInRole(Constantes.ROLE_PROFMODERATEUR))
                 {
                     <tr>
                         <th class="col-petite-ad">@Resources.Sectoriel.supprimer</th>
@@ -68,7 +68,7 @@
                 @for (int i = 0; i < lesFil.Count; i++)
                 {
                     <tr>
-                        @if (User.IsInRole("admin") || User.IsInRole("professeurModerateur"))
+                        @if (User.IsInRole(Constantes.ROLE_ADMIN) || User.IsInRole(Constantes.ROLE_PROFMODERATEUR))
                         {
                             <td><a href="SupprimerFil?idFil=@lesFil[i].id&noPage=@lesFil.PageIndex">@Resources.Sectoriel.supprimer</a></td>
                         }
