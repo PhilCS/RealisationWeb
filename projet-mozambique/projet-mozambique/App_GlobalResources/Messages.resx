@@ -251,4 +251,8 @@
   <data name="UserAjoutSectOk" xml:space="preserve">
     <value>L'utilisateur a été ajouté au secteur.</value>
   </data>
+  <data name="messageForumAjoute" xml:space="preserve">
+    <value>Votre message a bien été ajouté.</value>
+    <comment>Forum</comment>
+  </data>
 </root>

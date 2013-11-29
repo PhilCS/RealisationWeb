@@ -248,4 +248,8 @@
   <data name="UserAjoutSectOk" xml:space="preserve">
     <value>The user has been added to the sector.</value>
   </data>
+  <data name="messageForumAjoute" xml:space="preserve">
+    <value>Your message has been added.</value>
+    <comment>Forum</comment>
+  </data>
 </root>

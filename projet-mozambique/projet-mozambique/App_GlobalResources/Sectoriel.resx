@@ -205,4 +205,20 @@
   <data name="sujetPlaceholder" xml:space="preserve">
     <value>Sujet</value>
   </data>
+  <data name="repondreFil" xml:space="preserve">
+    <value>Répondre à un fil de discussion</value>
+    <comment>Forum</comment>
+  </data>
+  <data name="descriptionPlaceholder" xml:space="preserve">
+    <value>Description</value>
+    <comment>Nouvelle</comment>
+  </data>
+  <data name="destinatairesPlaceholder" xml:space="preserve">
+    <value>Noms d'utilisateur</value>
+    <comment>Message Privé</comment>
+  </data>
+  <data name="titrePlaceholder" xml:space="preserve">
+    <value>Titre</value>
+    <comment>Nouvelle</comment>
+  </data>
 </root>
