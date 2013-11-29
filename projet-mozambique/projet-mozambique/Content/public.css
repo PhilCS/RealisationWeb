@@ -211,11 +211,11 @@ header nav ul.nav-secondaire li {
     display:block;
     float:left;
     width:200px;
-    margin-bottom:10px;
+    margin: 5px 0;
 }
 
 .content form input, .content form select {
-    margin-bottom: 10px;
+    margin: 5px 0;
 }
 
 .liste-fleche li

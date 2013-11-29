@@ -1,42 +1,48 @@
-﻿@{
-    ViewBag.Title = "Sondages";
+﻿@using projet_mozambique.Utilitaires;
+@using projet_mozambique.Models;
+
+@{
+    ViewBag.Title = Resources.Sondages.sondagesEnCours;
+
+    Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
+    
+    var listeSondages = ViewData[Constantes.CLE_SONDAGES] as List<SONDAGE>;
 }
 
-<h1>Sondage</h1>
+<h1>@Resources.Sondages.sondagesEnCours</h1>
 
-<div class="sondage">
-    <form method="post" action="#">
-        <h2>Question?</h2>
-        <div class="choix-reponses">
-            <p>
-                <input type="radio" value="oui" name="question" />
-                <label class="radio">Oui</label>                
-            </p>
-            <p>
-                <input type="radio" value="non" name="question" />
-                <label class="radio">Non</label>
-            </p>
-        </div>
-        <input type="submit" class="btnForm" value="Voter"/>
-    </form>
-    
-</div>
+@if (listeSondages.Count == 0)
+{
+    <div>@Resources.Sondages.aucunSondage</div>
+}
+else
+{
+    for (int i = 0; i < listeSondages.Count; i++)
+    {
+        if (!String.IsNullOrEmpty(listeSondages[i].QUESTION))
+        {
+            <hr/>
+            <div id="sondage@(i)" class="sondage">
+                <h2>@listeSondages[i].NOM</h2>
+                <h3>@listeSondages[i].QUESTION</h3>
 
-
-<div class="sondage">
-    <form method="post" action="#">
-        <h2>Encore une question?</h2>
-        <div class="choix-reponses">
-            <p>
-                <input type="radio" value="oui" name="question" />
-                <label class="radio">Oui</label>                
-            </p>
-            <p>
-                <input type="radio" value="non" name="question" />
-                <label class="radio">Non</label>
-            </p>
-        </div>
-        <input type="submit" class="btnForm" value="Voter"/>
-    </form>
-    
-</div>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("idSondage", listeSondages[i].ID);
+            
+                    <div class="choix-reponses">
+                        @foreach (var unChoix in listeSondages[i].CHOIXSONDAGES)
+                        {
+                            <p>
+                                @Html.RadioButton("idChoix", unChoix.ID)
+                                @Html.Label("idChoix", unChoix.VALEUR, new { @class = "radio" })
+                            </p>
+                        }
+                    </div>
+                    <input type="submit" class="btnForm" value="Voter"/>
+                }
+            </div>
+        }
+    }
+}

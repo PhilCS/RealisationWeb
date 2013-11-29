@@ -52,7 +52,7 @@ namespace projet_mozambique.Models
         public DbSet<webpages_OAuthMembership> webpages_OAuthMembership { get; set; }
         public DbSet<webpages_Roles> webpages_Roles { get; set; }
     
-        public virtual int AjouterChoixSondage(Nullable<int> sondage, string valeur)
+        public virtual int AjouterChoixSondage(Nullable<int> sondage, string valeur, string valeurtrad)
         {
             var sondageParameter = sondage.HasValue ?
                 new ObjectParameter("sondage", sondage) :
@@ -62,7 +62,11 @@ namespace projet_mozambique.Models
                 new ObjectParameter("valeur", valeur) :
                 new ObjectParameter("valeur", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AjouterChoixSondage", sondageParameter, valeurParameter);
+            var valeurtradParameter = valeurtrad != null ?
+                new ObjectParameter("valeurtrad", valeurtrad) :
+                new ObjectParameter("valeurtrad", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AjouterChoixSondage", sondageParameter, valeurParameter, valeurtradParameter);
         }
     
         public virtual int AjouterDestinataireMess(Nullable<int> message, Nullable<int> destinataire)
@@ -323,15 +327,23 @@ namespace projet_mozambique.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AjouterSectEven", secteurParameter, evenParameter);
         }
     
-        public virtual int AjouterSondage(string nom, string question, Nullable<System.DateTime> debut, Nullable<System.DateTime> fin, Nullable<int> createur, Nullable<int> secteur)
+        public virtual int AjouterSondage(string nom, string nomtrad, string question, string questiontrad, Nullable<System.DateTime> debut, Nullable<System.DateTime> fin, Nullable<int> createur, Nullable<int> secteur, ObjectParameter idsondage)
         {
             var nomParameter = nom != null ?
                 new ObjectParameter("nom", nom) :
                 new ObjectParameter("nom", typeof(string));
     
+            var nomtradParameter = nomtrad != null ?
+                new ObjectParameter("nomtrad", nomtrad) :
+                new ObjectParameter("nomtrad", typeof(string));
+    
             var questionParameter = question != null ?
                 new ObjectParameter("question", question) :
                 new ObjectParameter("question", typeof(string));
+    
+            var questiontradParameter = questiontrad != null ?
+                new ObjectParameter("questiontrad", questiontrad) :
+                new ObjectParameter("questiontrad", typeof(string));
     
             var debutParameter = debut.HasValue ?
                 new ObjectParameter("debut", debut) :
@@ -349,7 +361,7 @@ namespace projet_mozambique.Models
                 new ObjectParameter("secteur", secteur) :
                 new ObjectParameter("secteur", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AjouterSondage", nomParameter, questionParameter, debutParameter, finParameter, createurParameter, secteurParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AjouterSondage", nomParameter, nomtradParameter, questionParameter, questiontradParameter, debutParameter, finParameter, createurParameter, secteurParameter, idsondage);
         }
     
         public virtual int AjouterSujetPub(string sujet)
@@ -527,30 +539,38 @@ namespace projet_mozambique.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PARTENAIRE>("GetPartenaire", mergeOption, idparParameter);
         }
     
-        public virtual ObjectResult<PUBLICATION> GetPubParMotCle(Nullable<int> idsecteur, string motscles)
+        public virtual ObjectResult<PUBLICATION> GetPubParMotCle(Nullable<int> idsecteur, Nullable<int> idcategorie, string motscles)
         {
             var idsecteurParameter = idsecteur.HasValue ?
                 new ObjectParameter("idsecteur", idsecteur) :
                 new ObjectParameter("idsecteur", typeof(int));
     
+            var idcategorieParameter = idcategorie.HasValue ?
+                new ObjectParameter("idcategorie", idcategorie) :
+                new ObjectParameter("idcategorie", typeof(int));
+    
             var motsclesParameter = motscles != null ?
                 new ObjectParameter("motscles", motscles) :
                 new ObjectParameter("motscles", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PUBLICATION>("GetPubParMotCle", idsecteurParameter, motsclesParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PUBLICATION>("GetPubParMotCle", idsecteurParameter, idcategorieParameter, motsclesParameter);
         }
     
-        public virtual ObjectResult<PUBLICATION> GetPubParMotCle(Nullable<int> idsecteur, string motscles, MergeOption mergeOption)
+        public virtual ObjectResult<PUBLICATION> GetPubParMotCle(Nullable<int> idsecteur, Nullable<int> idcategorie, string motscles, MergeOption mergeOption)
         {
             var idsecteurParameter = idsecteur.HasValue ?
                 new ObjectParameter("idsecteur", idsecteur) :
                 new ObjectParameter("idsecteur", typeof(int));
     
+            var idcategorieParameter = idcategorie.HasValue ?
+                new ObjectParameter("idcategorie", idcategorie) :
+                new ObjectParameter("idcategorie", typeof(int));
+    
             var motsclesParameter = motscles != null ?
                 new ObjectParameter("motscles", motscles) :
                 new ObjectParameter("motscles", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PUBLICATION>("GetPubParMotCle", mergeOption, idsecteurParameter, motsclesParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PUBLICATION>("GetPubParMotCle", mergeOption, idsecteurParameter, idcategorieParameter, motsclesParameter);
         }
     
         public virtual ObjectResult<PUBLICATION> GetPubParSecteur(Nullable<int> idsecteur)
@@ -629,13 +649,38 @@ namespace projet_mozambique.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSondage_Result>("GetSondage", idParameter);
         }
     
-        public virtual ObjectResult<GetSondages_Result> GetSondages(Nullable<int> idsecteur)
+        public virtual ObjectResult<SONDAGE> GetSondages(Nullable<int> idsecteur, Nullable<bool> resultats, Nullable<int> idutil)
         {
             var idsecteurParameter = idsecteur.HasValue ?
                 new ObjectParameter("idsecteur", idsecteur) :
                 new ObjectParameter("idsecteur", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSondages_Result>("GetSondages", idsecteurParameter);
+            var resultatsParameter = resultats.HasValue ?
+                new ObjectParameter("resultats", resultats) :
+                new ObjectParameter("resultats", typeof(bool));
+    
+            var idutilParameter = idutil.HasValue ?
+                new ObjectParameter("idutil", idutil) :
+                new ObjectParameter("idutil", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SONDAGE>("GetSondages", idsecteurParameter, resultatsParameter, idutilParameter);
+        }
+    
+        public virtual ObjectResult<SONDAGE> GetSondages(Nullable<int> idsecteur, Nullable<bool> resultats, Nullable<int> idutil, MergeOption mergeOption)
+        {
+            var idsecteurParameter = idsecteur.HasValue ?
+                new ObjectParameter("idsecteur", idsecteur) :
+                new ObjectParameter("idsecteur", typeof(int));
+    
+            var resultatsParameter = resultats.HasValue ?
+                new ObjectParameter("resultats", resultats) :
+                new ObjectParameter("resultats", typeof(bool));
+    
+            var idutilParameter = idutil.HasValue ?
+                new ObjectParameter("idutil", idutil) :
+                new ObjectParameter("idutil", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SONDAGE>("GetSondages", mergeOption, idsecteurParameter, resultatsParameter, idutilParameter);
         }
     
         public virtual ObjectResult<getUtil_Result> getUtil(string username)
@@ -1178,6 +1223,33 @@ namespace projet_mozambique.Models
         public virtual ObjectResult<PARTENAIRE> GetPartenaires(MergeOption mergeOption)
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PARTENAIRE>("GetPartenaires", mergeOption);
+        }
+    
+        public virtual ObjectResult<CHOIXSONDAGE> GetChoixSondage(Nullable<int> idsondage)
+        {
+            var idsondageParameter = idsondage.HasValue ?
+                new ObjectParameter("idsondage", idsondage) :
+                new ObjectParameter("idsondage", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CHOIXSONDAGE>("GetChoixSondage", idsondageParameter);
+        }
+    
+        public virtual ObjectResult<CHOIXSONDAGE> GetChoixSondage(Nullable<int> idsondage, MergeOption mergeOption)
+        {
+            var idsondageParameter = idsondage.HasValue ?
+                new ObjectParameter("idsondage", idsondage) :
+                new ObjectParameter("idsondage", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CHOIXSONDAGE>("GetChoixSondage", mergeOption, idsondageParameter);
+        }
+    
+        public virtual ObjectResult<GetVotesSondage_Result> GetVotesSondage(Nullable<int> idsondage)
+        {
+            var idsondageParameter = idsondage.HasValue ?
+                new ObjectParameter("idsondage", idsondage) :
+                new ObjectParameter("idsondage", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetVotesSondage_Result>("GetVotesSondage", idsondageParameter);
         }
     }
 }

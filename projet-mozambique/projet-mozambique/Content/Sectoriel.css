@@ -79,6 +79,12 @@
     margin-bottom:10px;
 }
 
+.formulaire div
+{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
 label[class=cb]
 {
     margin:0 5px;
@@ -87,6 +93,42 @@ label[class=cb]
 .formulaire select, .formulaire input:not([type=checkbox]):not([type=date]):not([type=time]):not([type=submit]):not([type=button])
 {
     width:260px;
+}
+
+#formSondage
+{
+    width: 100%;
+}
+
+#formSondage th:first-child
+{
+    width: 1%;
+}
+
+#formSondage th
+{
+    width: 50%;
+}
+
+#formSondage td
+{
+    vertical-align: top;
+}
+
+#formSondage p
+{
+    margin: 0;
+}
+
+#formSondage input[type=text]
+{
+    width: 95%;
+}
+
+#formSondage input[readonly],
+#formSondage input[disabled]
+{
+    background-color: #DDD;
 }
 
 .nouveau-message input[type=text]
@@ -620,15 +662,37 @@ h1 .btnForm
 }
 
 /*SONDAGE*/
-.choix-reponses
+
+.sondage h2,
+.sondage h3
 {
-    margin-left:25px;
+    margin: 5px 0;
+}
+
+.sondage .choix-reponses
+{
+    margin-left: 25px;
 }
 
 .sondage label:not([class=radio])
 {
     width:150px;
     float:left;
+}
+
+.sondage .parent-barre-votes
+{
+    padding: 4px 10px;
+    height: 20px;
+    line-height: 0;
+}
+
+.sondage .barre-votes
+{
+    display: inline-block;
+    height: 100%;
+    min-width: 3px !important;
+    background-color: #257dbf;
 }
 
 /*CALENDRIER*/

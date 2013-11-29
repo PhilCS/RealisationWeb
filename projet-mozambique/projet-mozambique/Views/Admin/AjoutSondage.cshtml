@@ -1,0 +1,200 @@
+﻿@using projet_mozambique.Utilitaires;
+@using projet_mozambique.Models;
+
+@model SondageMultilangue
+
+@{
+    ViewBag.Title = "AjoutSondage";
+    
+    Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
+
+    var listeSecteurs = ViewData[Constantes.CLE_SECTEURS] as List<GetSecteurs_Result>;
+
+    <h2>AjoutSondage</h2>
+    
+    string dateDebut = (Model.DATEDEBUT == null ? "" : ((DateTime)Model.DATEDEBUT).ToString("yyyy/MM/dd"));
+    string dateFin = (Model.DATEFIN == null ? "" : ((DateTime)Model.DATEFIN).ToString("yyyy/MM/dd"));
+    
+    string langue1 = Model.langue1.codeLangue;
+    string langue2 = Model.langue2.codeLangue;
+
+    string nomLangue1;
+    string nomLangue2;
+    
+    if (langue1 == "FR")
+    {
+        nomLangue1 = Resources.Shared.choixLangueFR;
+    }
+    else
+    {
+        nomLangue1 = Resources.Shared.choixLanguePT;
+    }
+        
+    if (langue2 == "PT")
+    {
+        nomLangue2 = Resources.Shared.choixLanguePT;
+    }
+    else
+    {
+        nomLangue2 = Resources.Shared.choixLangueFR;
+    }
+}
+
+@using (Html.BeginForm("AjoutSondage", "Admin", FormMethod.Post, new { @class = "formulaire" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.HiddenFor(model => model.IDSONDAGE);
+    @Html.HiddenFor(model => model.langue1.codeLangue);
+    @Html.HiddenFor(model => model.langue2.codeLangue);
+    
+    <table id="formSondage">
+        <tr>
+            <th></th>
+            <th>
+                @Html.CheckBoxFor(model => model.langue1.langueChoisie, new { id = "sondage" + langue1 }) @(nomLangue1)
+            </th>
+            <th>
+                @Html.CheckBoxFor(model => model.langue2.langueChoisie, new { id = "sondage" + langue2 }) @(nomLangue2)
+            </th>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.langue1.NOM)
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.langue1.NOM, new { @class = "sondage" + langue1 })
+                <p>@Html.ValidationMessageFor(model => model.langue1.NOM)</p>
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.langue2.NOM, new { @class = "sondage" + langue2 })
+                <p>@Html.ValidationMessageFor(model => model.langue2.NOM)</p>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.langue1.QUESTION)
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.langue1.QUESTION, new { @class = "sondage" + langue1 })
+                <p>@Html.ValidationMessageFor(model => model.langue1.QUESTION)</p>
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.langue2.QUESTION, new { @class = "sondage" + langue2 })
+                <p>@Html.ValidationMessageFor(model => model.langue2.QUESTION)</p>
+            </td>
+        </tr>
+
+        @for (int i = 0; i < Model.langue1.CHOIXSONDAGES.Count(); i++)
+        {
+            <tr>
+                <td>
+                    @Html.Label(@Names.DisplayName.Choice + " " + (i+1))
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.langue1.CHOIXSONDAGES[i].VALEUR, new { @class = "sondage" + langue1 })
+                    <p>@Html.ValidationMessageFor(model => model.langue1.CHOIXSONDAGES[i].VALEUR)</p>
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.langue2.CHOIXSONDAGES[i].VALEUR, new { @class = "sondage" + langue2 })
+                    <p>@Html.ValidationMessageFor(model => model.langue2.CHOIXSONDAGES[i].VALEUR)</p>
+                </td>
+            </tr>
+        }
+
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.IDSECTEUR)
+            </td>
+            <td>
+                @Html.DropDownListFor(model => model.IDSECTEUR, new SelectList(listeSecteurs, "ID", "NOM"), "")
+                @Html.ValidationMessageFor(model => model.IDSECTEUR)
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.DATEDEBUT)
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.DATEDEBUT, new { @id = "sondage_datedebut", type = "date", Value = dateDebut })
+                @Html.ValidationMessageFor(model => model.DATEDEBUT)
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.DATEFIN)
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.DATEFIN, new { @id = "sondage_datefin", type = "date", Value = dateFin })
+                @Html.ValidationMessageFor(model => model.DATEFIN)
+            </td>
+        </tr>
+    </table>
+
+    <div>
+        <input type="submit" class="btnForm" />
+    </div>
+}
+
+@section preparationDatePicker {
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/languesDatePicker")
+    <script type="text/javascript">
+        $.datepicker.setDefaults($.datepicker.regional['@Session["Culture"].ToString()']); // Ajustement langue
+    </script>
+}
+
+<script type="text/javascript">
+    $("#sondage_datedebut").datepicker();
+    $("#sondage_datefin").datepicker();
+
+    function cocheLangueSondage(checkbox, langue)
+    {
+        var checked = $(checkbox).prop("checked");
+        var autreLangue = "FR";
+
+        if (langue == "FR")
+            autreLangue = "PT";
+
+        if (!checked && $("#sondage" + autreLangue).prop("checked") == false)
+        {
+            $(checkbox).prop("checked", true);
+            cocheLangueSondage(checkbox, langue);
+        }
+        else
+        {
+            var $form = $("#formSondage");
+            var $validator = $form.validate();
+
+            $("input.sondage" + langue).each(function ()
+            {
+                $(this).prop("disabled", !checked);
+
+                // Réinitialiser la validation si la langue est désactivée
+                if (!checked)
+                {
+                    $(this).closest("td")
+                        .find(".field-validation-error")
+                        .removeClass(".field-validation-error")
+                        .addClass(".field-validation-valid")
+                        .empty();
+
+                    $(this).closest("td")
+                        .find(".input-validation-error")
+                        .removeClass("input-validation-error");
+                }
+            });
+        }
+    }
+
+    $("#sondageFR").change(function () { cocheLangueSondage(this, "FR") });
+    $("#sondagePT").change(function () { cocheLangueSondage(this, "PT") });
+
+    cocheLangueSondage($("#sondageFR").get(), "FR");
+    cocheLangueSondage($("#sondagePT").get(), "PT");
+</script>

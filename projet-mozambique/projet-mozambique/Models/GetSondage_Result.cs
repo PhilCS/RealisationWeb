@@ -13,10 +13,14 @@ namespace projet_mozambique.Models
     
     public partial class GetSondage_Result
     {
+        public int ID { get; set; }
         public string NOM { get; set; }
         public string QUESTION { get; set; }
         public System.DateTime DATEDEBUT { get; set; }
         public System.DateTime DATEFIN { get; set; }
-        public string NOMUTIL { get; set; }
+        public int IDCREATEUR { get; set; }
+        public int IDSECTEUR { get; set; }
+        public string NOMTRAD { get; set; }
+        public string QUESTIONTRAD { get; set; }
     }
 }

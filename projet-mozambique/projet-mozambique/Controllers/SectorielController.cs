@@ -97,7 +97,7 @@ namespace projet_mozambique.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginModel model)
+        public ActionResult Login(LoginModel model, string returnUrl)
         {
             if (!Request.IsAuthenticated)
             {
@@ -1183,17 +1183,6 @@ namespace projet_mozambique.Controllers
                 return RedirectToAction("FilDiscu", new { idFil = model.idFil });
             }
 
-            return View();
-        }
-
-
-        public ActionResult Sondages()
-        {
-            return View();
-        }
-
-        public ActionResult ResultRechDoc()
-        {
             return View();
         }
 
