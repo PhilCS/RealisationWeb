@@ -20,13 +20,13 @@
 
     <div>
         @Html.LabelFor(x => x.destinataires)
-        @Html.TextBoxFor(x => x.destinataires, new { @id = "dest"})
+        @Html.TextBoxFor(x => x.destinataires, new { @id = "dest", @placeholder = @Resources.Sectoriel.destinatairesPlaceholder})
         @Html.ValidationMessageFor(x =>x.destinataires)
     </div>
     
     <div>
         @Html.LabelFor(x => x.sujet) 
-        @Html.TextBoxFor(x => x.sujet, new { @maxlength = "50"})
+        @Html.TextBoxFor(x => x.sujet, new { @maxlength = "50", @placeholder = @Resources.Sectoriel.sujetPlaceholder})
         @Html.ValidationMessageFor(x =>x.sujet)
     </div>
     
@@ -35,7 +35,7 @@
     </div>
     
     @Html.ValidationMessageFor(x =>x.contenu)
-    @Html.TextAreaFor(x => x.contenu) <br />
+    @Html.TextAreaFor(x => x.contenu, new { @placeholder = @Resources.Sectoriel.contenuPlaceholder }) <br />
     
     <input type="submit" value="@Resources.Sectoriel.envoyer" class="btnForm" />
 }

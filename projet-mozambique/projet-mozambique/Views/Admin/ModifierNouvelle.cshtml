@@ -18,7 +18,7 @@
         @Html.LabelFor(model => model.titre)
     </div>
     <div class="editor-field">
-        @Html.TextBoxFor(m => m.titre, new { @maxlength = "100", })
+        @Html.TextBoxFor(m => m.titre, new { @maxlength = "100", @placeholder = @Resources.Sectoriel.titrePlaceholder })
         @Html.ValidationMessageFor(model => model.titre)
     </div>
 
@@ -26,7 +26,7 @@
         @Html.LabelFor(model => model.description)
     </div>
     <div class="editor-field">
-        @Html.TextAreaFor(model => model.description)
+        @Html.TextAreaFor(model => model.description, new { @placeholder = @Resources.Sectoriel.descriptionPlaceholder })
         @Html.ValidationMessageFor(model => model.description)
     </div>
 

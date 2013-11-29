@@ -1,0 +1,36 @@
+﻿@model projet_mozambique.Models.MessageForumModel
+@{
+    ViewBag.Title = Resources.Sectoriel.repondreFil;
+}
+
+<h1>@ViewBag.Title</h1>
+
+<h2>@Resources.Sectoriel.sujetPlaceholder : @Html.TextBoxFor(m => m.sujet, new { @readonly = "readonly" })</h2>
+
+@using (Html.BeginForm("RepondreFilDiscu", "Sectoriel", FormMethod.Post, new { @class = "formulaire nouveau-message" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.HiddenFor(model => model.idFil)
+    @Html.HiddenFor(model => model.sujet)
+
+
+    <div class="editor-field">
+        @Html.TextAreaFor(m => m.contenu, new { @placeholder = @Resources.Sectoriel.contenuPlaceholder })
+        @Html.ValidationMessageFor(model => model.contenu)
+    </div>
+
+    <p>
+        <input type="submit" value="@Resources.Sectoriel.repondre" class="btnForm" />
+    </p>
+}
+
+
+
+
+
+
+
+
+

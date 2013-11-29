@@ -106,11 +106,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Description.
+        /// </summary>
+        internal static string descriptionPlaceholder {
+            get {
+                return ResourceManager.GetString("descriptionPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à L&apos;utilisateur {0} n&apos;existe pas..
         /// </summary>
         internal static string destinataireInexistant {
             get {
                 return ResourceManager.GetString("destinataireInexistant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Noms d&apos;utilisateur.
+        /// </summary>
+        internal static string destinatairesPlaceholder {
+            get {
+                return ResourceManager.GetString("destinatairesPlaceholder", resourceCulture);
             }
         }
         
@@ -250,6 +268,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Répondre à un fil de discussion.
+        /// </summary>
+        internal static string repondreFil {
+            get {
+                return ResourceManager.GetString("repondreFil", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Répondre à un message.
         /// </summary>
         internal static string repondreMessage {
@@ -291,6 +318,15 @@ namespace Resources {
         internal static string supprimer {
             get {
                 return ResourceManager.GetString("supprimer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Titre.
+        /// </summary>
+        internal static string titrePlaceholder {
+            get {
+                return ResourceManager.GetString("titrePlaceholder", resourceCulture);
             }
         }
     }

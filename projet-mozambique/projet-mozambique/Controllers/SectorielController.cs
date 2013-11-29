@@ -883,22 +883,22 @@ namespace projet_mozambique.Controllers
             return View();
         }
 
-        public ActionResult FilDiscu(int? id, int? idPage)
+        public ActionResult FilDiscu(int? idFil, int? idPage)
         {
-            if (id != null)
+            if (idFil != null)
             {
-                if (filDiscuSecteurCourant(id ?? -1))
+                if (filDiscuSecteurCourant(idFil ?? -1))
                 {
                     int idUtil = WebSecurity.GetUserId(User.Identity.Name);
 
                     var fil = from f in db.FILDISCUSSION
-                              where f.ID == id
+                              where f.ID == idFil
                               select f;
 
                     fil.FirstOrDefault().NBLECTURES += 1;
                     db.SaveChanges();
 
-                    var lstM = db.GetMessagesForum(id);
+                    var lstM = db.GetMessagesForum(idFil);
                     List<MessageForumModel> lstMMod = new List<MessageForumModel>();
                     ListePaginee<MessageForumModel> lstMessPag;
                     MessageForumModel mm;
@@ -906,7 +906,7 @@ namespace projet_mozambique.Controllers
                     foreach (var m in lstM)
                     {
                         mm = new MessageForumModel();
-                        mm.contenu = m.CONTENU.Replace(Constantes.BR, "\r\n");
+                        mm.contenu = m.CONTENU;
                         mm.datePublication = m.DATEPUBLICATION;
                         mm.dateModification = m.DATEMODIFICATION ?? DateTime.MinValue;
                         mm.auteur = (from u in db.UTILISATEUR
@@ -917,7 +917,7 @@ namespace projet_mozambique.Controllers
 
                     FilModel filMod = new FilModel();
                     FILDISCUSSION unFil = fil.FirstOrDefault();
-                    lstMessPag = new ListePaginee<MessageForumModel>(lstMMod, idPage ?? 0, 15);
+                    lstMessPag = new ListePaginee<MessageForumModel>(lstMMod, idPage ?? 0, 10);
 
                     filMod.id = unFil.ID;
                     filMod.listeMessages = lstMessPag;
@@ -937,12 +937,18 @@ namespace projet_mozambique.Controllers
         {
             if (idFil != null)
             {
-                db.SupprimerFilDiscussion(idFil);
+                var fil = from f in db.FILDISCUSSION
+                          where f.ID == idFil
+                          select f;
 
-                TempData[Constantes.CLE_MESSAGE] = Resources.Messages.filSupprime;
+                if (fil.Any())
+                {
+                    db.SupprimerFilDiscussion(idFil);
+                    TempData[Constantes.CLE_MESSAGE] = Resources.Messages.filSupprime;
+                }
             }
 
-            return RedirectToAction("Forum", "Sectoriel", new { page = noPage });
+            return RedirectToAction("Forum", "Sectoriel", new { page = noPage ?? 0 });
         }
 
         private bool filDiscuSecteurCourant(int id)
@@ -960,10 +966,45 @@ namespace projet_mozambique.Controllers
             return false;
         }
 
-        public ActionResult RepondreFilDiscu()
+        public ActionResult RepondreFilDiscu(int? idFil)
         {
-            return View();
+            if (idFil != null)
+            {
+                var fil = from f in db.FILDISCUSSION
+                        where f.ID == idFil
+                        select f;
+
+                if (fil.Any())
+                {
+                    MessageForumModel message = new MessageForumModel
+                    {
+                        idFil = idFil ?? 0,
+                        sujet = fil.FirstOrDefault().SUJET
+                    };
+
+                    return View("RepondreFil", message);
+                }
+
+            }
+
+            return RedirectToAction("Forum");
         }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult RepondreFilDiscu(MessageForumModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                TempData[Constantes.CLE_MESSAGE] = Resources.Messages.messageForumAjoute;
+                int idUtil = WebSecurity.GetUserId(User.Identity.Name);
+
+                db.AjouterMessageForum(model.contenu.Replace("\r\n", Constantes.BR), idUtil, model.idFil);
+            }
+
+            return RedirectToAction("FilDiscu", new { idFil = model.idFil });
+        }
+
 
         public ActionResult Sondages()
         {

@@ -20,5 +20,6 @@ namespace projet_mozambique.Models
         public string auteur { get; set; }
         public DateTime datePublication { get; set; }
         public DateTime dateModification { get; set; }
+        public int idFil { get; set; }
     }
 }

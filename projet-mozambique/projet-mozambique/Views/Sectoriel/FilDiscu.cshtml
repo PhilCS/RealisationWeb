@@ -6,9 +6,40 @@
     ViewBag.Title = f.sujet;
     
     <h1>@f.sujet</h1>
+    
+    if (TempData[Constantes.CLE_MESSAGE] != null)
+    {
+        <div class="msg succes">@TempData[Constantes.CLE_MESSAGE]</div>
+    }
+    
+    <ul class="nav-pagination">
+            @if (f.listeMessages.ShowFirstPage)
+            {
+                <li>@Html.ActionLink("<<", "FilDiscu", new { idFil = f.id, idPage = 0 })</li>
+                <li>@Html.ActionLink("<", "FilDiscu", new { idFil = f.id, idPage = f.listeMessages.PageIndex - 1 })</li>         
+            }
+            else if (f.listeMessages.HasPreviousPage)
+            {
+                <li>@Html.ActionLink("<", "FilDiscu", new { idFil = f.id, idPage = f.listeMessages.PageIndex - 1 })</li>
+            }
+    
+            @if (f.listeMessages.ShowLastPage)
+            {
+                <li>@Html.ActionLink(">", "FilDiscu", new { idFil = f.id, idPage = f.listeMessages.PageIndex + 1 })</li>
+                <li>@Html.ActionLink(">>", "FilDiscu", new { idFil = f.id, idPage = f.listeMessages.TotalPages - 1 })</li>            
+            }
+            else if (f.listeMessages.HasNextPage)
+            {
+                <li>@Html.ActionLink(">", "FilDiscu", new { idFil = f.id, idPage = f.listeMessages.PageIndex + 1 })</li>
+            }
+        </ul>
 
     <div>
-        <a href="RepondreFilDiscu"><img src="~/Content/images/icones/icon-reply-forum.png" title="@Resources.Sectoriel.repondre" alt="Icône répondre" class="icone"/></a>
+        <a href="RepondreFilDiscu?idFil=@f.id"><img src="~/Content/images/icones/icon-reply-forum.png" title="@Resources.Sectoriel.repondre" alt="Icône répondre" class="icone"/></a>
+        @if (User.IsInRole("admin") || User.IsInRole("professeurModerateur"))
+        {
+            <a href="SupprimerFil?idFil=@f.id"><img src="~/Content/images/icones/icon-delete-forum.png" title="@Resources.Sectoriel.supprimer" alt="Icône Répondre" class="icone" /></a>
+        }
     </div>
 
     foreach (var m in f.listeMessages)
@@ -16,19 +47,41 @@
         <div class="forum-message">
             <div class="date-auteur-message">
                 <p>
-                    @Resources.Shared.par @m.auteur, @Resources.Shared.le @m.datePublication.ToLongDateString().Replace(DateTime.Now.DayOfWeek.ToString() + ", ", "")
+                    @Resources.Shared.par @m.auteur, @Resources.Shared.le @m.datePublication.ToLongDateString().Replace(DateTime.Now.DayOfWeek.ToString() + ", ", ""), @m.datePublication.ToShortTimeString()
                     @if (m.dateModification != DateTime.MinValue)
                     { 
                         <br />
-                        <span class="infos-supp">@Resources.Shared.derniereModifLe @m.dateModification.ToLongDateString().Replace(DateTime.Now.DayOfWeek.ToString() + ", ", "") </span>
+                        <span class="infos-supp">@Resources.Shared.derniereModifLe @m.dateModification.ToLongDateString().Replace(DateTime.Now.DayOfWeek.ToString() + ", ", ""), @m.dateModification.ToShortTimeString() </span>
                     }
                 </p>
             </div>
             <div class="corps-message">
                 <p>
-                    @m.contenu
+                    @Html.Raw(m.contenu)
                 </p>
             </div>
         </div>    
     }
+    
+    <ul class="nav-pagination">
+            @if (f.listeMessages.ShowFirstPage)
+            {
+                <li>@Html.ActionLink("<<", "FilDiscu", new { idFil = f.id, idPage = 0 })</li>
+                <li>@Html.ActionLink("<", "FilDiscu", new { idFil = f.id, idPage = f.listeMessages.PageIndex - 1 })</li>         
+            }
+            else if (f.listeMessages.HasPreviousPage)
+            {
+                <li>@Html.ActionLink("<", "FilDiscu", new { idFil = f.id, idPage = f.listeMessages.PageIndex - 1 })</li>
+            }
+    
+            @if (f.listeMessages.ShowLastPage)
+            {
+                <li>@Html.ActionLink(">", "FilDiscu", new { idFil = f.id, idPage = f.listeMessages.PageIndex + 1 })</li>
+                <li>@Html.ActionLink(">>", "FilDiscu", new { idFil = f.id, idPage = f.listeMessages.TotalPages - 1 })</li>            
+            }
+            else if (f.listeMessages.HasNextPage)
+            {
+                <li>@Html.ActionLink(">", "FilDiscu", new { idFil = f.id, idPage = f.listeMessages.PageIndex + 1 })</li>
+            }
+        </ul>
 }

@@ -196,7 +196,7 @@
     <comment>Forum</comment>
   </data>
   <data name="contenuPlaceholder" xml:space="preserve">
-    <value>Content</value>
+    <value>Message content...</value>
   </data>
   <data name="nouveauFil" xml:space="preserve">
     <value>New discussion thread</value>
@@ -204,5 +204,21 @@
   </data>
   <data name="sujetPlaceholder" xml:space="preserve">
     <value>Subject</value>
+  </data>
+  <data name="repondreFil" xml:space="preserve">
+    <value>Répondre à un fil de discussion</value>
+    <comment>Forum</comment>
+  </data>
+  <data name="descriptionPlaceholder" xml:space="preserve">
+    <value>Description</value>
+    <comment>Nouvelle</comment>
+  </data>
+  <data name="destinatairesPlaceholder" xml:space="preserve">
+    <value>Usernames</value>
+    <comment>Message Privé</comment>
+  </data>
+  <data name="titrePlaceholder" xml:space="preserve">
+    <value>Title</value>
+    <comment>Nouvelle</comment>
   </data>
 </root>
