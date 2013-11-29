@@ -1,0 +1,82 @@
+﻿@using projet_mozambique.Models
+@using projet_mozambique.Utilitaires;
+@{
+    ViewBag.Title = @Resources.Admin.menuUtil;
+    
+    <h1>@ViewBag.Title <a href="AjoutUtilisateur" style="display:inline;"><img src="~/Content/images/icones/icon-add-black.png" title="@Resources.Sectoriel.nouveau" alt="Icône Nouveau secteur" /></a></h1>
+    List<ECOLE> lstE = ViewData[Constantes.CLE_LISTE_ECOLES] as List<ECOLE>;
+    List<SECTEUR> lstS = ViewData[Constantes.CLE_SECTEURS] as List<SECTEUR>;
+    
+    <h2>@Resources.Admin.RechUtils</h2>
+    
+    Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
+    
+    var utilAjout = ViewData[Constantes.CLE_UTIL_AJOUTOK];
+    
+    if(utilAjout != null)
+    {
+        bool ajoutOk = (bool)utilAjout;
+        
+    }
+    
+    using (Html.BeginForm("GestionUtilisateurs", "Admin", FormMethod.Post, new { @style = "width:40%"}))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <ul>
+            <li> 
+                @Html.TextBox("txtInput", null, new { @placeholder = Resources.Admin.RechUtilsParam, @style = "width:250px" })
+            </li>
+            <li>
+                <select name="idSecteur">
+                    @if (lstS != null && lstS.Count > 0)
+                    {
+                        <option value="0">@Resources.Admin.tousSecteurs</option>
+                        foreach (var s in lstS)
+                        {
+                            <option value="@s.ID" >@s.NOM / @s.NOMTRAD</option>
+                        }
+                    }
+                </select>
+            </li>
+            <li>
+                <select name="idEcole">
+                    @if (lstE != null && lstE.Count > 0)
+                    {
+                        <option value="0">@Resources.Admin.tousEcoles</option>
+                        foreach (var e in lstE)
+                        {
+                            <option value="@e.ID">@e.NOM</option>
+                        }
+                    }
+                </select>
+            </li>  
+        </ul>
+        <input type="submit" value="@Resources.Shared.rechercher" name="rechUtils" class="btnForm" style="float:right;" />
+    }
+
+    List<UTILISATEUR> lstUtils = ViewData[Constantes.CLE_LISTE_UTILISATEURS] as List<UTILISATEUR>;
+    
+    if(lstUtils != null)
+    {
+        <h2>@Resources.Shared.resultatsRecherche</h2>
+        if(lstUtils.Count > 0)
+        {
+            <div style="padding-top:20px;">
+                <ul>
+                    @foreach (var u in lstUtils)
+                    {
+                        <li>
+                            @Html.ActionLink(u.PRENOM + " " + u.NOM + " (" + u.NOMUTIL + ")", "ModifierUtilisateur", "Admin")
+                        </li>
+                    }
+                </ul>
+            </div>  
+        }
+        else
+        {
+            <p>@Resources.Admin.aucunResultat</p>
+        }
+    }
+}
+

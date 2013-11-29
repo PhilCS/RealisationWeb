@@ -1,32 +1,32 @@
 ﻿@model projet_mozambique.Models.LoginModel
 @{
     ViewBag.Title = @Resources.Shared.login;
+
+
+    <h1>@ViewBag.Title</h1>
 }
+    @Html.Partial("~/Views/Shared/AfficherMsg.cshtml")
 
-<h1>@ViewBag.Title</h1>
-
-@Html.Partial("~/Views/Shared/AfficherMsg.cshtml")
-
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-    <ul>
-        <li>
-            @Html.LabelFor(m => m.UserName)
-            @Html.TextBoxFor(m => m.UserName)
-            @Html.ValidationMessageFor(m => m.UserName)
-        </li>
-        <li>
-            @Html.LabelFor(m => m.Password)
-            @Html.PasswordFor(m => m.Password)
-            @Html.ValidationMessageFor(m => m.Password)
-        </li>
-        <li>
-            @Html.CheckBoxFor(m => m.RememberMe)
-            @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
-        </li>
-    </ul>
-    <input type="submit" value="@Resources.Shared.login" class="btnForm" />
-    <br />
-    @Html.ActionLink(@Resources.Shared.forgotPassword, "ReinitialiserMotPasse", "Sectoriel")
-}
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <ul>
+            <li>
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName)
+                @Html.ValidationMessageFor(m => m.UserName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
+            </li>
+            <li>
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+            </li>
+        </ul>
+        <input type="submit" value="@Resources.Shared.login" class="btnForm" />
+        <br />
+        @Html.ActionLink(@Resources.Shared.forgotPassword, "ReinitialiserMotPasse", "Sectoriel")
+    }

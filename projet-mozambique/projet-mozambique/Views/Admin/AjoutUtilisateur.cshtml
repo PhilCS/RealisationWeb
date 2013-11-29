@@ -1,57 +1,77 @@
-﻿@{
-    ViewBag.Title = "Ajouter un utilisateur";
+﻿@model projet_mozambique.Models.AjoutUtilModel
+@{
+    ViewBag.Title = Resources.Admin.ajoutUtilisateur;
 }
 
-<h1>Ajouter un utilisateur</h1>
+<h1>@ViewBag.Title</h1>
 
-<p>Les champs marqués d'une étoile sont obligatoires.</p>
-<p class="msgErreur">L'utilisateur ne peut être modifié.</p>
- <form id="frmAjoutUtil" action="utilisateurs">
-    <label for="login">Identifiant : *</label>
-    <input type="text" name="login" id="ajoutId" />
-    <br />
-    <label for="prenom">Prénom : *</label>
-    <input type="text" name="prenom" id="ajoutPrenom" />
-    <br />
-    <label for="nom">Nom : *</label>
-    <input type="text" name="nom" id="ajoutNom" />
-    <br />
-    <label for="courriel">Courriel : *</label>
-    <input type="email" name="courriel" id="ajoutCourriel" />
-    <br />
-    <label for="adresse">Adresse : *</label>
-    <input type="text" name="adresse" id="ajoutAdresse" />
-    <br />
-    <label for="ville">Ville : *</label>
-    <input type="text" name="ville" id="ajoutVille" />
-    <br />
-    <label for="naissance">Date de naissance : *</label>
-    <input type="date" name="naissance" id="ajoutNaissance" />
-    <br />
-    <label for="ecole">École : *</label>
-    <select name="ecole">
-        <option>École 1</option>
-        <option selected="selected">École 2</option>
-        <option>École 3</option>
-    </select>
-    <br />
-    <label>Secteurs : *</label>
-    <input type="checkbox" name="secteur" value="1" id="1" checked="checked" /><label for="1" class="cb">Agriculture</label>
-    <input type="checkbox" name="secteur" value="2" id="2" /><label for="2" class="cb">Tourisme</label>
-    <input type="checkbox" name="secteur" value="3" id="3" /><label for="3" class="cb">Construction</label>
-    <br />
-    <label for="role">Rôle : *</label>
-    <select name="role">
-        <option>Professeur</option>
-        <option selected="selected">Étudiant</option>
-        <option>Administrateur</option>
-    </select>
-    <br />
-    <label for="langue">Langue : *</label>
-    <input type="radio" name="langue" value="FR" checked="checked" />Français
-    <input type="radio" name="langue" value="PT" />Portuguais
-    <br />
-    <input type="submit" id="btnGestionAjout" value="Ajouter" class="btnForm" />
-    <a href="utilisateurs" class="btnForm">Annuler</a>
-    <br />
-</form>
+@using (Html.BeginForm("AjoutUtilisateur", "Admin", FormMethod.Post)) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <ul>
+        <li>
+            @Html.LabelFor(m => m.nomUtil) 
+            @Html.TextBoxFor(m => m.nomUtil)
+            @Html.ValidationMessageFor(m => m.nomUtil)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.courriel) 
+            @Html.TextBoxFor(m => m.courriel)
+            @Html.ValidationMessageFor(m => m.courriel)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.courrielConfirm) 
+            @Html.TextBoxFor(m => m.courrielConfirm)
+            @Html.ValidationMessageFor(m => m.courrielConfirm)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.prenom) 
+            @Html.TextBoxFor(m => m.prenom)
+            @Html.ValidationMessageFor(m => m.prenom)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.nom) 
+            @Html.TextBoxFor(m => m.nom)
+            @Html.ValidationMessageFor(m => m.nom)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.adresse) 
+            @Html.TextBoxFor(m => m.adresse)
+            @Html.ValidationMessageFor(m => m.adresse)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.ville)
+            @Html.TextBoxFor(m => m.ville)
+            @Html.ValidationMessageFor(m => m.ville)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.dateNaissance)
+            @Html.EditorFor(m => m.dateNaissance)
+            @Html.ValidationMessageFor(m => m.dateNaissance)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.idEcole)
+            @Html.DropDownListFor(m => m.idEcole, new SelectList(Model.Ecoles, "Value", "Text"))
+            @Html.ValidationMessageFor(m => m.idEcole)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.password)
+            @Html.PasswordFor(m => m.password)
+            @Html.ValidationMessageFor(m => m.password)
+        </li>
+        <li style="height:50px;">
+            @Html.LabelFor(m => m.confirmPassword)
+            @Html.PasswordFor(m => m.confirmPassword)
+            @Html.ValidationMessageFor(m => m.confirmPassword)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.roleName)
+            @Html.DropDownListFor(m => m.roleName, new SelectList(Model.Roles, "Value", "Text"))
+            @Html.ValidationMessageFor(m => m.roleName)
+        </li>
+    </ul>
+    <div style="width:40%">
+        <input type="submit" value="@Resources.Admin.create" class="btnForm" name="creerUtil" style="float:right;" />
+    </div>
+    
+}

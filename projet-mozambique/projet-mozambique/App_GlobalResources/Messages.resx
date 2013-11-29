@@ -255,4 +255,16 @@
     <value>Votre message a bien été ajouté.</value>
     <comment>Forum</comment>
   </data>
+  <data name="AccountConfirmed" xml:space="preserve">
+    <value>Votre compte est maintenant activé et le mot de passe a été changé.</value>
+  </data>
+  <data name="AccountAlreadyConfirmed" xml:space="preserve">
+    <value>Votre compte a déjà été activé.</value>
+  </data>
+  <data name="UserAddedOk" xml:space="preserve">
+    <value>Le nouvel utilisateur a été ajouté. Un courriel de confirmation a été envoyé.</value>
+  </data>
+  <data name="AccountNotConfirmed" xml:space="preserve">
+    <value>Avant de vous connecter, vous devez d'abord confirmer votre compte. Un courriel vous a été envoyé pour procéder à la confirmation.</value>
+  </data>
 </root>

@@ -70,6 +70,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Votre compte a déjà été activé..
+        /// </summary>
+        internal static string AccountAlreadyConfirmed {
+            get {
+                return ResourceManager.GetString("AccountAlreadyConfirmed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Votre compte est maintenant activé et le mot de passe a été changé..
+        /// </summary>
+        internal static string AccountConfirmed {
+            get {
+                return ResourceManager.GetString("AccountConfirmed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Avant de vous connecter, vous devez d&apos;abord confirmer votre compte. Un courriel vous a été envoyé pour procéder à la confirmation..
+        /// </summary>
+        internal static string AccountNotConfirmed {
+            get {
+                return ResourceManager.GetString("AccountNotConfirmed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Le contenu du message ne peut être vide..
         /// </summary>
         internal static string contenuObligatoire {
@@ -417,6 +444,15 @@ namespace Resources {
         internal static string UserAccessDenied {
             get {
                 return ResourceManager.GetString("UserAccessDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Le nouvel utilisateur a été ajouté. Un courriel de confirmation a été envoyé..
+        /// </summary>
+        internal static string UserAddedOk {
+            get {
+                return ResourceManager.GetString("UserAddedOk", resourceCulture);
             }
         }
         

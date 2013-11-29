@@ -8,6 +8,10 @@ using System.Web;
 using System.Web.Mvc;
 using projet_mozambique.Models;
 using projet_mozambique.Utilitaires;
+using WebMatrix.WebData;
+using WebMatrix.Data;
+using System.Web.Security;
+using Postal;
 
 namespace projet_mozambique.Controllers
 {
@@ -23,24 +27,137 @@ namespace projet_mozambique.Controllers
             return View();
         }
 
-        public ActionResult Utilisateurs()
+        public ActionResult GestionUtilisateurs()
         {
+            List<ECOLE> lstEcoles = db.ECOLE.ToList();
+            List<SECTEUR> lstSecteurs = db.SECTEUR.ToList();
+
+            ViewData[Constantes.CLE_LISTE_ECOLES] = lstEcoles;
+            ViewData[Constantes.CLE_SECTEURS] = lstSecteurs;
             return View();
         }
 
-        public ActionResult rechUtil()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult GestionUtilisateurs(string txtInput, int? idSecteur, int? idEcole)
         {
-            return View("RechUtilisateur");
+            if (!string.IsNullOrEmpty(Request.Form["rechUtils"]))
+            {
+                if (!string.IsNullOrEmpty(txtInput))
+                {
+                    var resultats = from u in db.UTILISATEUR
+                                    where u.NOMUTIL.Contains(txtInput) || u.NOM.Contains(txtInput) || u.PRENOM.Contains(txtInput)
+                                    select u;
+
+                    List<UTILISATEUR> lstUtils = resultats.ToList();
+                    ViewData[Constantes.CLE_LISTE_UTILISATEURS] = lstUtils;
+
+                    List<ECOLE> lstEcoles = db.ECOLE.ToList();
+                    List<SECTEUR> lstSecteurs = db.SECTEUR.ToList();
+
+                    ViewData[Constantes.CLE_LISTE_ECOLES] = lstEcoles;
+                    ViewData[Constantes.CLE_SECTEURS] = lstSecteurs;
+                }
+            }
+            return View();
         }
 
-        public ActionResult modifierUtil()
+        public ActionResult AjoutUtilisateur()
+        {
+            List<ECOLE> lstEcoles = db.ECOLE.ToList();
+            List<webpages_Roles> lstRoles = db.webpages_Roles.ToList();
+
+            AjoutUtilModel model = new AjoutUtilModel
+            {
+                Ecoles = lstEcoles.Select(e => new SelectListItem
+                {
+                    Text = e.NOM,
+                    Value = e.ID.ToString()
+                }),
+
+                Roles = lstRoles.Select(r => new SelectListItem
+                {
+                    Text = r.RoleName,
+                    Value = r.RoleName
+                })
+            };
+
+            
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AjoutUtilisateur(AjoutUtilModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    string confirmToken = WebSecurity.CreateUserAndAccount(model.nomUtil, model.password, propertyValues: new
+                    {
+                        COURRIEL = model.courriel,
+                        PRENOM = model.prenom,
+                        NOM = model.nom,
+                        ADRESSE = model.adresse,
+                        VILLE = model.ville,
+                        DATENAISSANCE = model.dateNaissance,
+                        IDECOLE = model.idEcole
+                    }, requireConfirmationToken: true);
+
+                    if (!string.IsNullOrEmpty(confirmToken))
+                    {
+                        Roles.AddUserToRole(model.nomUtil, model.roleName);
+                    }
+
+                    if (model.roleName.Equals("admin"))
+                    {
+                        List<SECTEUR> allSect = db.SECTEUR.ToList();
+
+                        int idUtil = WebSecurity.GetUserId(model.nomUtil);
+                        foreach (var s in allSect)
+                        {
+                            UTILISATEURSECTEUR lien = new UTILISATEURSECTEUR();
+                            lien.IDSECTEUR = s.ID;
+                            lien.IDUTILISATEUR = idUtil;
+                            lien.DEBUTACCES = DateTime.Now;
+                            lien.FINACCES = DateTime.Now.AddYears(10);
+
+                            db.UTILISATEURSECTEUR.Add(lien);
+                        }
+
+                        db.SaveChanges();
+                    }
+
+                    dynamic email = new Email("ConfirmAccount");
+                    email.To = model.courriel;
+                    email.UserName = model.nomUtil;
+                    email.ConfirmationToken = confirmToken;
+                    email.Send();
+
+                    TempData[Constantes.CLE_MSG_RETOUR] =
+                        new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.UserAddedOk);
+
+                    return RedirectToAction("GestionUtilisateurs", "Admin");
+
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("", e.Message);
+                }
+            }
+           
+            return View(model);
+        }
+
+        public ActionResult ModifierUtilisateur(int? idUtil)
         {
             return View("ModifUtilisateur");
         }
 
-        public ActionResult ajoutUtil()
+        public ActionResult SupprimerUtilisateur(int? idUtil)
         {
-            return View("AjoutUtilisateur");
+            return View();
         }
 
         public ActionResult Ecoles()
@@ -119,24 +236,100 @@ namespace projet_mozambique.Controllers
                 if (leS.FirstOrDefault() == null)
                 {
                     TempData[Constantes.CLE_MSG_RETOUR] =
-                                new Message(Message.TYPE_MESSAGE.ERREUR, @Resources.Messages.SectInexistant);
+                                new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Messages.SectInexistant);
                 }
                 else
                 {
+                    var allUtils = from u in db.UTILISATEUR
+                                   where u.UTILISATEURSECTEUR.All(s => s.IDSECTEUR != idSect)
+                                   select u;
+
                     var lesUtils = from u in db.UTILISATEURSECTEUR
                                    where u.IDSECTEUR == idSect
                                    select u.UTILISATEUR;
 
                     List<UTILISATEUR> lstUtils = lesUtils.ToList();
+                    List<UTILISATEUR> lstAllUtils = allUtils.ToList();
 
                     ViewData[Constantes.CLE_LISTE_UTILISATEURS] = lstUtils;
-                    ViewData[Constantes.CLE_NOMSECTEUR] = leS.FirstOrDefault().NOM + "/" + leS.FirstOrDefault().NOMTRAD;                
+                    //ViewData[Constantes.CLE_LISTE_UTILISATEURS_ALL] = lstAllUtils;
+                    ViewData[Constantes.CLE_NOMSECTEUR] = leS.FirstOrDefault().NOM + "/" + leS.FirstOrDefault().NOMTRAD;
+                    ViewData[Constantes.CLE_IDSECTEUR] = leS.FirstOrDefault().ID;
+
+                    AjoutUtilSecteurModel model = new AjoutUtilSecteurModel
+                    {
+                        Utilisateurs = lstAllUtils.Select(u => new SelectListItem
+                        {
+                            Text = u.NOMUTIL,
+                            Value = u.ID.ToString()
+                        }), 
+                        idSecteur = idSect.Value
+                    };
+
+                    return View(model);
                 }
                 
                return View();
             }
 
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UtilisateursSecteur(AjoutUtilSecteurModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var leS = db.SECTEUR.SingleOrDefault(s => s.ID == model.idSecteur);
+                var leU = db.UTILISATEUR.SingleOrDefault(u => u.ID == model.idUtil);
+
+                if (leS != null && leU != null)
+                {
+                    UTILISATEURSECTEUR lien = new UTILISATEURSECTEUR();
+                    lien.IDSECTEUR = model.idSecteur;
+                    lien.IDUTILISATEUR = model.idUtil;
+                    lien.DEBUTACCES = model.debutAcces;
+                    lien.FINACCES = model.finAcces;
+
+                    db.UTILISATEURSECTEUR.Add(lien);
+
+                    db.SaveChanges();
+
+                    TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.UserAjoutSectOk);
+
+                }
+
+                return RedirectToAction("UtilisateursSecteur", new { @idSect = model.idSecteur });
+            }
+
+            return View(model);
+        }
+
+        public ActionResult SupprimerUtilSecteur(int? idUtil, int? idSecteur)
+        {
+            if (idUtil != null && idSecteur != null)
+            {
+                SECTEUR leS = db.SECTEUR.SingleOrDefault(s => s.ID == idSecteur);
+
+                if (leS != null)
+                {
+                    var lien = from u in db.UTILISATEURSECTEUR
+                               where u.IDSECTEUR == idSecteur && u.IDUTILISATEUR == idUtil
+                               select u;
+
+                    if (lien != null)
+                    {
+                        UTILISATEURSECTEUR util = lien.FirstOrDefault();
+                        db.UTILISATEURSECTEUR.Remove(util);
+
+                        db.SaveChanges();
+                        return RedirectToAction("UtilisateursSecteur", new { @idSect = idSecteur });
+                    }
+                }
+            }
+
+            return RedirectToAction("GestionSecteurs");
         }
 
         public ActionResult EcolesSecteur(int? idSect)
@@ -150,7 +343,7 @@ namespace projet_mozambique.Controllers
                 if (leS.FirstOrDefault() == null)
                 {
                     TempData[Constantes.CLE_MSG_RETOUR] =
-                                new Message(Message.TYPE_MESSAGE.ERREUR, @Resources.Messages.SectInexistant);
+                                new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Messages.SectInexistant);
                 }
                 else
                 {
@@ -268,11 +461,11 @@ namespace projet_mozambique.Controllers
 
                     if (!AllowedFileExtensions.Contains(fichier.FileName.Substring(fichier.FileName.LastIndexOf('.'))))
                     {
-                        ModelState.AddModelError("", @Resources.Messages.FileType + string.Join(", ", AllowedFileExtensions));
+                        ModelState.AddModelError("", Resources.Messages.FileType + string.Join(", ", AllowedFileExtensions));
                     }
                     else if (fichier.ContentLength > MaxContentLength)
                     {
-                        ModelState.AddModelError("", @Resources.Messages.FileTooLarge + (MaxContentLength / 1024).ToString() + "MB");
+                        ModelState.AddModelError("", Resources.Messages.FileTooLarge + (MaxContentLength / 1024).ToString() + "MB");
                     }
                     else
                     {
@@ -296,7 +489,7 @@ namespace projet_mozambique.Controllers
                 return RedirectToAction("GestionSecteurs");
             }
 
-            return View();
+            return View(model);
         }
 
         public ActionResult AjoutSecteur()
@@ -329,11 +522,11 @@ namespace projet_mozambique.Controllers
 
                     if (!AllowedFileExtensions.Contains(fichier.FileName.Substring(fichier.FileName.LastIndexOf('.'))))
                     {
-                        ModelState.AddModelError("", @Resources.Messages.FileType + string.Join(", ", AllowedFileExtensions));
+                        ModelState.AddModelError("", Resources.Messages.FileType + string.Join(", ", AllowedFileExtensions));
                     }
                     else if (fichier.ContentLength > MaxContentLength)
                     {
-                        ModelState.AddModelError("", @Resources.Messages.FileTooLarge + (MaxContentLength / 1024).ToString() + "MB");
+                        ModelState.AddModelError("", Resources.Messages.FileTooLarge + (MaxContentLength / 1024).ToString() + "MB");
                     }
                     else
                     {
@@ -381,7 +574,7 @@ namespace projet_mozambique.Controllers
                 return RedirectToAction("GestionSecteurs");
             }
 
-            return View();
+            return View(model);
         }
 
         public ActionResult SectionPublique()
@@ -523,11 +716,11 @@ namespace projet_mozambique.Controllers
 
                         if (!AllowedFileExtensions.Contains(fichier.FileName.Substring(fichier.FileName.LastIndexOf('.'))))
                         {
-                            ModelState.AddModelError("", @Resources.Messages.FileType + string.Join(", ", AllowedFileExtensions));
+                            ModelState.AddModelError("", Resources.Messages.FileType + string.Join(", ", AllowedFileExtensions));
                         }
                         else if (fichier.ContentLength > MaxContentLength)
                         {
-                            ModelState.AddModelError("", @Resources.Messages.FileTooLarge + (MaxContentLength / 1024).ToString() + "MB");
+                            ModelState.AddModelError("", Resources.Messages.FileTooLarge + (MaxContentLength / 1024).ToString() + "MB");
                         }
                         else
                         {

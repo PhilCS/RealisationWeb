@@ -70,6 +70,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Création d&apos;un nouvel utilisateur.
+        /// </summary>
+        internal static string ajoutUtilisateur {
+            get {
+                return ResourceManager.GetString("ajoutUtilisateur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Aucun résultat.
+        /// </summary>
+        internal static string aucunResultat {
+            get {
+                return ResourceManager.GetString("aucunResultat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Créer.
+        /// </summary>
+        internal static string create {
+            get {
+                return ResourceManager.GetString("create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Image actuelle.
         /// </summary>
         internal static string CurrentImage {
@@ -84,6 +111,15 @@ namespace Resources {
         internal static string gestionSectionPublique {
             get {
                 return ResourceManager.GetString("gestionSectionPublique", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Gestion de l&apos;utilisateur.
+        /// </summary>
+        internal static string gestionUtilisateur {
+            get {
+                return ResourceManager.GetString("gestionUtilisateur", resourceCulture);
             }
         }
         
@@ -111,6 +147,15 @@ namespace Resources {
         internal static string lstEcoles {
             get {
                 return ResourceManager.GetString("lstEcoles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Liste des secteurs.
+        /// </summary>
+        internal static string lstSecteurs {
+            get {
+                return ResourceManager.GetString("lstSecteurs", resourceCulture);
             }
         }
         
@@ -187,11 +232,47 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Rechercher des utilisateurs.
+        /// </summary>
+        internal static string RechUtils {
+            get {
+                return ResourceManager.GetString("RechUtils", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Nom d&apos;utilisateur, Nom, Prénom.
+        /// </summary>
+        internal static string RechUtilsParam {
+            get {
+                return ResourceManager.GetString("RechUtilsParam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Section publique.
         /// </summary>
         internal static string sectionPublique {
             get {
                 return ResourceManager.GetString("sectionPublique", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Toutes les écoles.
+        /// </summary>
+        internal static string tousEcoles {
+            get {
+                return ResourceManager.GetString("tousEcoles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Tous les secteurs.
+        /// </summary>
+        internal static string tousSecteurs {
+            get {
+                return ResourceManager.GetString("tousSecteurs", resourceCulture);
             }
         }
     }

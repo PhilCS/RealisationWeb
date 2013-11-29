@@ -246,4 +246,7 @@
   <data name="supprimer" xml:space="preserve">
     <value>Supprimer</value>
   </data>
+  <data name="userName" xml:space="preserve">
+    <value>Nom d'utilisateur : </value>
+  </data>
 </root>

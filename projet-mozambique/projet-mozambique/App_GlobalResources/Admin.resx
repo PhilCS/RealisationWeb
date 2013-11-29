@@ -167,4 +167,31 @@
     <value>Liste des utilisateurs</value>
     <comment>GestionSecteurs</comment>
   </data>
+  <data name="RechUtils" xml:space="preserve">
+    <value>Rechercher des utilisateurs</value>
+  </data>
+  <data name="RechUtilsParam" xml:space="preserve">
+    <value>Nom d'utilisateur, Nom, Prénom</value>
+  </data>
+  <data name="lstSecteurs" xml:space="preserve">
+    <value>Liste des secteurs</value>
+  </data>
+  <data name="tousEcoles" xml:space="preserve">
+    <value>Toutes les écoles</value>
+  </data>
+  <data name="tousSecteurs" xml:space="preserve">
+    <value>Tous les secteurs</value>
+  </data>
+  <data name="aucunResultat" xml:space="preserve">
+    <value>Aucun résultat</value>
+  </data>
+  <data name="gestionUtilisateur" xml:space="preserve">
+    <value>Gestion de l'utilisateur</value>
+  </data>
+  <data name="ajoutUtilisateur" xml:space="preserve">
+    <value>Création d'un nouvel utilisateur</value>
+  </data>
+  <data name="create" xml:space="preserve">
+    <value>Créer</value>
+  </data>
 </root>

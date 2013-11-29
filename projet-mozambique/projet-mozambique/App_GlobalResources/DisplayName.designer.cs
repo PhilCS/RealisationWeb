@@ -61,7 +61,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Adresse.
+        ///   Recherche une chaîne localisée semblable à Adresse *.
         /// </summary>
         public static string Address {
             get {
@@ -79,7 +79,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Ville.
+        ///   Recherche une chaîne localisée semblable à Ville *.
         /// </summary>
         public static string City {
             get {
@@ -88,7 +88,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Confirmation du courriel.
+        ///   Recherche une chaîne localisée semblable à Confirmation du courriel *.
         /// </summary>
         public static string ConfirmEmail {
             get {
@@ -115,7 +115,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Pays.
+        ///   Recherche une chaîne localisée semblable à Pays *.
         /// </summary>
         public static string Country {
             get {
@@ -133,6 +133,17 @@ namespace Names {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Date de début d&apos;accès *.
+        /// </summary>
+        public static string DebutAcces {
+            get {
+                return ResourceManager.GetString("DebutAcces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Description .
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Description *.
         /// </summary>
         public static string Description {
@@ -142,7 +153,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Courriel.
+        ///   Recherche une chaîne localisée semblable à Courriel *.
         /// </summary>
         public static string Email {
             get {
@@ -160,7 +171,16 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Prénom.
+        ///   Recherche une chaîne localisée semblable à Date de fin d&apos;accès *.
+        /// </summary>
+        public static string FinAcces {
+            get {
+                return ResourceManager.GetString("FinAcces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Prénom *.
         /// </summary>
         public static string FirstName {
             get {
@@ -196,7 +216,16 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Nom.
+        ///   Recherche une chaîne localisée semblable à Dernière connexion.
+        /// </summary>
+        public static string LastConnexion {
+            get {
+                return ResourceManager.GetString("LastConnexion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Nom *.
         /// </summary>
         public static string LastName {
             get {
@@ -286,7 +315,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Mot de passe .
+        ///   Recherche une chaîne localisée semblable à Mot de passe  *.
         /// </summary>
         public static string Password {
             get {
@@ -322,6 +351,24 @@ namespace Names {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Rôle *.
+        /// </summary>
+        public static string Role {
+            get {
+                return ResourceManager.GetString("Role", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à École *.
+        /// </summary>
+        public static string School {
+            get {
+                return ResourceManager.GetString("School", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Nom du secteur *.
         /// </summary>
         public static string SecteurName {
@@ -340,11 +387,20 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Secteur.
+        ///   Recherche une chaîne localisée semblable à Secteur *.
         /// </summary>
         public static string Sector {
             get {
                 return ResourceManager.GetString("Sector", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Secteurs.
+        /// </summary>
+        public static string Sectors {
+            get {
+                return ResourceManager.GetString("Sectors", resourceCulture);
             }
         }
         
@@ -376,7 +432,16 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Nom d&apos;utilisateur .
+        ///   Recherche une chaîne localisée semblable à Date de naissance *.
+        /// </summary>
+        public static string UserBDay {
+            get {
+                return ResourceManager.GetString("UserBDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Nom d&apos;utilisateur  *.
         /// </summary>
         public static string UserName {
             get {

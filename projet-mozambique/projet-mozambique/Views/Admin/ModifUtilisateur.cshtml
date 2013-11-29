@@ -1,5 +1,51 @@
-﻿@{
-    ViewBag.Title = "Modifier un utilisateur";
+﻿@model projet_mozambique.Models.GestionUtilisateursModel
+@{
+    ViewBag.Title = Resources.Admin.gestionUtilisateur;
+}
+
+<h1>@ViewBag.Title - @Model.</h1>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <ul>
+        <li>
+            @Html.LabelFor(m => m.courriel) 
+            @Html.TextBoxFor(m => m.courriel)
+            @Html.ValidationMessageFor(m => m.courriel)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.courrielConfirm) 
+            @Html.TextBoxFor(m => m.courrielConfirm)
+            @Html.ValidationMessageFor(m => m.courrielConfirm)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.prenom) 
+            @Html.TextBoxFor(m => m.prenom)
+            @Html.ValidationMessageFor(m => m.prenom)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.nom) 
+            @Html.TextBoxFor(m => m.nom)
+            @Html.ValidationMessageFor(m => m.nom)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.adresse) 
+            @Html.TextBoxFor(m => m.adresse)
+            @Html.ValidationMessageFor(m => m.adresse)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.ville)
+            @Html.TextBoxFor(m => m.ville)
+            @Html.ValidationMessageFor(m => m.ville)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.langue)
+            @Html.RadioButtonFor(m => m.langue, "fr")@Resources.Shared.choixLangueFR
+            @Html.RadioButtonFor(m => m.langue, "pt")@Resources.Shared.choixLanguePT
+            @Html.ValidationMessageFor(m => m.langue)
+        </li>
+    </ul>
+    <input type="submit" value="@Resources.Shared.modifier" class="btnForm" />
 }
 
     

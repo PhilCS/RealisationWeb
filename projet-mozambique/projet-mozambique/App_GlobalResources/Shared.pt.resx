@@ -234,4 +234,7 @@
   <data name="sectionSectorielle" xml:space="preserve">
     <value>Sector section</value>
   </data>
+  <data name="userName" xml:space="preserve">
+    <value>Username : </value>
+  </data>
 </root>
