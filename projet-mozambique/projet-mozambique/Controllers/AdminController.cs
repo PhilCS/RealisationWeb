@@ -800,11 +800,6 @@ namespace projet_mozambique.Controllers
             return View();
         }
 
-        public ActionResult NouveauFil()
-        {
-            return View();
-        }
-
         public ActionResult SupprimerSondage()
         {
             return View();

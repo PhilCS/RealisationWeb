@@ -267,4 +267,8 @@
   <data name="AccountNotConfirmed" xml:space="preserve">
     <value>Avant de vous connecter, vous devez d'abord confirmer votre compte. Un courriel vous a été envoyé pour procéder à la confirmation.</value>
   </data>
+  <data name="messageModifie" xml:space="preserve">
+    <value>Le message a bien été modifié.</value>
+    <comment>Forum</comment>
+  </data>
 </root>

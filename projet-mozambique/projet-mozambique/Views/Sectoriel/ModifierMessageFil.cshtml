@@ -1,0 +1,41 @@
+﻿@model projet_mozambique.Models.MessageForumModel
+@{
+    ViewBag.Title = Resources.Sectoriel.modifierMessageForum;
+}
+
+<h1>@ViewBag.Title</h1>
+
+<h2>@Resources.Sectoriel.sujetPlaceholder : @Html.TextBoxFor(m => m.sujet, new { @readonly = "readonly" })</h2>
+
+@using (Html.BeginForm("ModifierMsgFil", "Sectoriel", FormMethod.Post, new { @class = "formulaire nouveau-message" }))
+{
+    
+    Html.ValidationSummary(true);
+
+    @Html.HiddenFor(model => model.idFil);
+    @Html.HiddenFor(model => model.sujet);
+    @Html.HiddenFor(model => model.idMessage);
+    var page = ViewData["noPage"];
+    <input type="hidden" name="idPage" value="@page" />
+    @Html.AntiForgeryToken();
+
+    <p class="gras">@Resources.Shared.ecritPar @Html.DisplayFor(model => model.auteur)</p>
+
+    <div class="editor-field">
+        @Html.TextAreaFor(m => m.contenu, new { @placeholder = @Resources.Sectoriel.contenuPlaceholder })
+        @Html.ValidationMessageFor(model => model.contenu)
+    </div>
+
+    <p>
+        <input type="submit" value="@Resources.Shared.modifier" class="btnForm" />
+    </p>
+}
+
+
+
+
+
+
+
+
+

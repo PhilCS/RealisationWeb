@@ -547,7 +547,6 @@ namespace projet_mozambique.Controllers
             }
             return View(model);
         }
-        
 
         /// <summary>
         /// Retourne la vue partielle qui affiche les messages envoyés
@@ -879,7 +878,6 @@ namespace projet_mozambique.Controllers
             return Content(html);
         }
 
-        //TODO : PAGINER MESSAGES
         public ActionResult Messagerie(int? location)
         {
             if (location == 1)
@@ -1022,6 +1020,7 @@ namespace projet_mozambique.Controllers
                         mm.auteur = (from u in db.UTILISATEUR
                                      where u.ID == m.IDUTILISATEUR
                                      select u.PRENOM + " " + u.NOM).FirstOrDefault();
+                        mm.idMessage = m.ID;
                         lstMMod.Add(mm);
                     }
 
@@ -1113,6 +1112,78 @@ namespace projet_mozambique.Controllers
             }
 
             return RedirectToAction("FilDiscu", new { idFil = model.idFil });
+        }
+
+        [AccessDeniedAuthorize(Roles = "admin,professeurModerateur")]
+        public ActionResult SupprimerMessageFil(int? idMsg, int?idFil, int? idPage)
+        {
+            if (idMsg != null && idFil != null)
+            {
+                var message = from m in db.MESSAGEFORUM
+                              where m.ID == idMsg && m.IDFILDISCUSSION == idFil
+                              select m;
+
+                if (message.Any())
+                {
+                    db.SupprimerMessageForum(idMsg);
+                    TempData[Constantes.CLE_MESSAGE] = Resources.Messages.messageSupprime;
+                }
+            }
+            return RedirectToAction("FilDiscu", new { idFil = idFil, idPage = idPage });
+        }
+
+        [AccessDeniedAuthorize(Roles = "admin,professeurModerateur")]
+        public ActionResult ModifierMsgFil(int? idMsg, int? idFil, int? idPage)
+        {
+            if (idMsg != null && idFil != null)
+            {
+                var message = from m in db.MESSAGEFORUM
+                              join f in db.FILDISCUSSION on m.IDFILDISCUSSION equals f.ID
+                              where m.IDFILDISCUSSION == idFil && m.ID == idMsg
+                              select new { m.CONTENU, f.SUJET, m.IDUTILISATEUR };
+           
+
+                if (message.Any())
+                {
+                    var m = message.FirstOrDefault();
+                    var nomAuteur = (from u in db.UTILISATEUR
+                                     where u.ID == m.IDUTILISATEUR
+                                     select u.PRENOM + " " + u.NOM).FirstOrDefault();
+                    MessageForumModel msgOrigine = new MessageForumModel()
+                    {
+                        contenu = m.CONTENU.Replace(Constantes.BR, "\r\n"),
+                        sujet = m.SUJET,
+                        idFil = idFil ?? 0,
+                        idMessage = idMsg ?? 0,
+                        auteur = nomAuteur
+                    };
+                    ViewData["noPage"] = idPage ?? 0;
+                    return View("ModifierMessageFil", msgOrigine);
+                }
+            }
+
+            return RedirectToAction("Forum");
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult ModifierMsgFil(MessageForumModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var message = (from m in db.MESSAGEFORUM
+                              where m.ID == model.idMessage
+                              select m).FirstOrDefault();
+
+                message.CONTENU = model.contenu.Replace("\r\n", Constantes.BR);
+                message.DATEMODIFICATION = DateTime.Now;
+                db.SaveChanges();
+
+                TempData[Constantes.CLE_MESSAGE] = Resources.Messages.messageModifie;
+                return RedirectToAction("FilDiscu", new { idFil = model.idFil });
+            }
+
+            return View();
         }
 
 

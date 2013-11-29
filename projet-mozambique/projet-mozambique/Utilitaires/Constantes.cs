@@ -47,5 +47,9 @@ namespace projet_mozambique.Utilitaires
         public const string CLE_FILDISCUSSION = "fil";
         public const string CLE_UTIL_AJOUTOK = "utilAjoute";
 
+        public const string ROLE_PROF = "professeur";
+        public const string ROLE_PROFMODERATEUR = "professeurModerateur";
+        public const string ROLE_ADMIN = "admin";
+
     }
 }

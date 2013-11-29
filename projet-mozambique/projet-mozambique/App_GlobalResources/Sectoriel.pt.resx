@@ -224,4 +224,8 @@
   <data name="ConfirmAccount" xml:space="preserve">
     <value>New account confirmation</value>
   </data>
+  <data name="modifierMessageForum" xml:space="preserve">
+    <value>Edit a forum message</value>
+    <comment>Forum</comment>
+  </data>
 </root>
