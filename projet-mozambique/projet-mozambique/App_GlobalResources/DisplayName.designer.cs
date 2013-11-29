@@ -79,6 +79,15 @@ namespace Names {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Choix.
+        /// </summary>
+        public static string Choice {
+            get {
+                return ResourceManager.GetString("Choice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Ville *.
         /// </summary>
         public static string City {
@@ -142,8 +151,6 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Description .
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Description *.
         /// </summary>
         public static string Description {
@@ -158,6 +165,15 @@ namespace Names {
         public static string Email {
             get {
                 return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Date de fin.
+        /// </summary>
+        public static string EndDate {
+            get {
+                return ResourceManager.GetString("EndDate", resourceCulture);
             }
         }
         
@@ -342,6 +358,15 @@ namespace Names {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Question.
+        /// </summary>
+        public static string Question {
+            get {
+                return ResourceManager.GetString("Question", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Se souvenir de moi.
         /// </summary>
         public static string RememberMe {
@@ -401,6 +426,15 @@ namespace Names {
         public static string Sectors {
             get {
                 return ResourceManager.GetString("Sectors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Date de début.
+        /// </summary>
+        public static string StartDate {
+            get {
+                return ResourceManager.GetString("StartDate", resourceCulture);
             }
         }
         

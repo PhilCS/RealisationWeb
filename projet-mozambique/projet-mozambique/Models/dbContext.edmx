@@ -164,7 +164,8 @@
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="IDSONDAGE" Type="int" Nullable="false" />
-          <Property Name="VALEUR" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="VALEUR" Type="nvarchar" Nullable="false" MaxLength="60" />
+          <Property Name="VALEURTRAD" Type="nvarchar" Nullable="false" MaxLength="60" />
         </EntityType>
         <EntityType Name="CONTENU">
           <Key>
@@ -349,12 +350,14 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="NOM" Type="varchar" Nullable="false" MaxLength="60" />
-          <Property Name="QUESTION" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="NOM" Type="nvarchar" Nullable="false" MaxLength="60" />
+          <Property Name="QUESTION" Type="nvarchar" Nullable="false" MaxLength="255" />
           <Property Name="DATEDEBUT" Type="datetime" Nullable="false" />
           <Property Name="DATEFIN" Type="datetime" Nullable="false" />
           <Property Name="IDCREATEUR" Type="int" Nullable="false" />
           <Property Name="IDSECTEUR" Type="int" Nullable="false" />
+          <Property Name="NOMTRAD" Type="nvarchar" Nullable="false" MaxLength="60" />
+          <Property Name="QUESTIONTRAD" Type="nvarchar" Nullable="false" MaxLength="255" />
         </EntityType>
         <EntityType Name="SUJETPUBLICATION">
           <Key>
@@ -438,7 +441,9 @@
           <Property Name="RoleId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_CHOIXSOND_SOND">
-          <End Role="SONDAGE" Type="MVPModel.Store.SONDAGE" Multiplicity="1" />
+          <End Role="SONDAGE" Type="MVPModel.Store.SONDAGE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="CHOIXSONDAGE" Type="MVPModel.Store.CHOIXSONDAGE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SONDAGE">
@@ -774,7 +779,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_VOTESOND_CHOIX">
-          <End Role="CHOIXSONDAGE" Type="MVPModel.Store.CHOIXSONDAGE" Multiplicity="1" />
+          <End Role="CHOIXSONDAGE" Type="MVPModel.Store.CHOIXSONDAGE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="VOTESONDAGE" Type="MVPModel.Store.VOTESONDAGE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CHOIXSONDAGE">
@@ -799,7 +806,8 @@
         </Association>
         <Function Name="AjouterChoixSondage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="sondage" Type="int" Mode="In" />
-          <Parameter Name="valeur" Type="varchar" Mode="In" />
+          <Parameter Name="valeur" Type="nvarchar" Mode="In" />
+          <Parameter Name="valeurtrad" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="AjouterDestinataireMess" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="message" Type="int" Mode="In" />
@@ -879,12 +887,15 @@
           <Parameter Name="even" Type="int" Mode="In" />
         </Function>
         <Function Name="AjouterSondage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="nom" Type="varchar" Mode="In" />
-          <Parameter Name="question" Type="varchar" Mode="In" />
+          <Parameter Name="nom" Type="nvarchar" Mode="In" />
+          <Parameter Name="nomtrad" Type="nvarchar" Mode="In" />
+          <Parameter Name="question" Type="nvarchar" Mode="In" />
+          <Parameter Name="questiontrad" Type="nvarchar" Mode="In" />
           <Parameter Name="debut" Type="datetime" Mode="In" />
           <Parameter Name="fin" Type="datetime" Mode="In" />
           <Parameter Name="createur" Type="int" Mode="In" />
           <Parameter Name="secteur" Type="int" Mode="In" />
+          <Parameter Name="idsondage" Type="int" Mode="InOut" />
         </Function>
         <Function Name="AjouterSujetPub" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="sujet" Type="varchar" Mode="In" />
@@ -899,6 +910,9 @@
         </Function>
         <Function Name="AugmenterNbrLectures" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idfildiscussion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetChoixSondage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idsondage" Type="int" Mode="In" />
         </Function>
         <Function Name="GetContenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nomPage" Type="varchar" Mode="In" />
@@ -946,6 +960,7 @@
         </Function>
         <Function Name="GetPubParMotCle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idsecteur" Type="int" Mode="In" />
+          <Parameter Name="idcategorie" Type="int" Mode="In" />
           <Parameter Name="motscles" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GetPubParSecteur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -967,6 +982,8 @@
         </Function>
         <Function Name="GetSondages" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idsecteur" Type="int" Mode="In" />
+          <Parameter Name="resultats" Type="bit" Mode="In" />
+          <Parameter Name="idutil" Type="int" Mode="In" />
         </Function>
         <Function Name="GetSujetsPublication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="getUtil" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -979,6 +996,9 @@
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
         <Function Name="GetUtils" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetVotesSondage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idsondage" Type="int" Mode="In" />
+        </Function>
         <Function Name="LireMessage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idMessage" Type="int" Mode="In" />
           <Parameter Name="idUtil" Type="int" Mode="In" />
@@ -1260,6 +1280,7 @@
           <FunctionImport Name="AjouterChoixSondage">
             <Parameter Name="sondage" Mode="In" Type="Int32" />
             <Parameter Name="valeur" Mode="In" Type="String" />
+            <Parameter Name="valeurtrad" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="AjouterDestinataireMess">
             <Parameter Name="message" Mode="In" Type="Int32" />
@@ -1340,11 +1361,14 @@
           </FunctionImport>
           <FunctionImport Name="AjouterSondage">
             <Parameter Name="nom" Mode="In" Type="String" />
+            <Parameter Name="nomtrad" Mode="In" Type="String" />
             <Parameter Name="question" Mode="In" Type="String" />
+            <Parameter Name="questiontrad" Mode="In" Type="String" />
             <Parameter Name="debut" Mode="In" Type="DateTime" />
             <Parameter Name="fin" Mode="In" Type="DateTime" />
             <Parameter Name="createur" Mode="In" Type="Int32" />
             <Parameter Name="secteur" Mode="In" Type="Int32" />
+            <Parameter Name="idsondage" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="AjouterSujetPub">
           <Parameter Name="sujet" Mode="In" Type="String" />
@@ -1402,6 +1426,7 @@
           </FunctionImport>
           <FunctionImport Name="GetPubParMotCle" EntitySet="PUBLICATION" ReturnType="Collection(MVPModel.PUBLICATION)">
             <Parameter Name="idsecteur" Mode="In" Type="Int32" />
+            <Parameter Name="idcategorie" Mode="In" Type="Int32" />
             <Parameter Name="motscles" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetPubParSecteur" EntitySet="PUBLICATION" ReturnType="Collection(MVPModel.PUBLICATION)">
@@ -1421,8 +1446,10 @@
           <FunctionImport Name="GetSondage" ReturnType="Collection(MVPModel.GetSondage_Result)">
           <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetSondages" ReturnType="Collection(MVPModel.GetSondages_Result)">
-          <Parameter Name="idsecteur" Mode="In" Type="Int32" />
+          <FunctionImport Name="GetSondages" EntitySet="SONDAGE" ReturnType="Collection(MVPModel.SONDAGE)">
+            <Parameter Name="idsecteur" Mode="In" Type="Int32" />
+            <Parameter Name="resultats" Mode="In" Type="Boolean" />
+            <Parameter Name="idutil" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="getUtil" ReturnType="Collection(MVPModel.getUtil_Result)">
           <Parameter Name="username" Mode="In" Type="String" />
@@ -1582,6 +1609,12 @@
           </FunctionImport>
           <FunctionImport Name="NettoyerMotsCles" />
           <FunctionImport Name="GetPartenaires" EntitySet="PARTENAIRE" ReturnType="Collection(MVPModel.PARTENAIRE)" />
+          <FunctionImport Name="GetChoixSondage" EntitySet="CHOIXSONDAGE" ReturnType="Collection(MVPModel.CHOIXSONDAGE)">
+          <Parameter Name="idsondage" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetVotesSondage" ReturnType="Collection(MVPModel.GetVotesSondage_Result)">
+          <Parameter Name="idsondage" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="CATEGORIEEVENEMENT">
           <Key>
@@ -1597,9 +1630,10 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="IDSONDAGE" Type="Int32" Nullable="false" />
-          <Property Name="VALEUR" Type="String" Nullable="false" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="VALEUR" Type="String" Nullable="false" MaxLength="60" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="SONDAGE" Relationship="MVPModel.FK_CHOIXSOND_SOND" FromRole="CHOIXSONDAGE" ToRole="SONDAGE" />
           <NavigationProperty Name="UTILISATEUR" Relationship="MVPModel.VOTESONDAGE" FromRole="CHOIXSONDAGE" ToRole="UTILISATEUR" />
+          <Property Type="String" Name="VALEURTRAD" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CONTENU">
           <Key>
@@ -1788,8 +1822,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="NOM" Type="String" Nullable="false" MaxLength="60" Unicode="false" FixedLength="false" />
-          <Property Name="QUESTION" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="NOM" Type="String" Nullable="false" MaxLength="60" Unicode="true" FixedLength="false" />
+          <Property Name="QUESTION" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
           <Property Name="DATEDEBUT" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DATEFIN" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IDCREATEUR" Type="Int32" Nullable="false" />
@@ -1797,6 +1831,8 @@
           <NavigationProperty Name="CHOIXSONDAGE" Relationship="MVPModel.FK_CHOIXSOND_SOND" FromRole="SONDAGE" ToRole="CHOIXSONDAGE" />
           <NavigationProperty Name="SECTEUR" Relationship="MVPModel.FK_SOND_SECT" FromRole="SONDAGE" ToRole="SECTEUR" />
           <NavigationProperty Name="UTILISATEUR" Relationship="MVPModel.FK_SOND_CREATEUR" FromRole="SONDAGE" ToRole="UTILISATEUR" />
+          <Property Type="String" Name="NOMTRAD" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="QUESTIONTRAD" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SUJETPUBLICATION">
           <Key>
@@ -2288,28 +2324,6 @@
           <Property Type="String" Name="NOMUTIL" Nullable="false" MaxLength="25" />
           <Property Type="String" Name="VALEUR" Nullable="false" MaxLength="60" />
         </ComplexType>
-        <ComplexType Name="GetSecteurs_Result">
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="NOM" Nullable="false" MaxLength="40" />
-          <Property Type="String" Name="TITREACCUEIL" Nullable="false" MaxLength="40" />
-          <Property Type="String" Name="TEXTEACCUEIL" Nullable="false" MaxLength="Max" />
-          <Property Type="String" Name="URLIMAGEACCUEIL" Nullable="false" MaxLength="100" />
-        </ComplexType>
-        <ComplexType Name="GetSondage_Result">
-          <Property Type="String" Name="NOM" Nullable="false" MaxLength="60" />
-          <Property Type="String" Name="QUESTION" Nullable="false" MaxLength="255" />
-          <Property Type="DateTime" Name="DATEDEBUT" Nullable="false" Precision="23" />
-          <Property Type="DateTime" Name="DATEFIN" Nullable="false" Precision="23" />
-          <Property Type="String" Name="NOMUTIL" Nullable="false" MaxLength="25" />
-        </ComplexType>
-        <ComplexType Name="GetSondages_Result">
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="NOM" Nullable="false" MaxLength="60" />
-          <Property Type="String" Name="QUESTION" Nullable="false" MaxLength="255" />
-          <Property Type="DateTime" Name="DATEDEBUT" Nullable="false" Precision="23" />
-          <Property Type="DateTime" Name="DATEFIN" Nullable="false" Precision="23" />
-          <Property Type="String" Name="NOMUTIL" Nullable="false" MaxLength="25" />
-        </ComplexType>
         <ComplexType Name="getUtil_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="NOMUTIL" Nullable="false" MaxLength="25" />
@@ -2389,6 +2403,61 @@
           <Property Type="String" Name="NOMFICHIERORIGINAL" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="NOMFICHIERSERVEUR" Nullable="true" MaxLength="32" />
         </ComplexType>
+        <ComplexType Name="GetPubParID_Result1">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="TITRE" Nullable="false" MaxLength="60" />
+          <Property Type="DateTime" Name="DATECREATION" Nullable="false" Precision="23" />
+          <Property Type="String" Name="DESCRIPTION" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="IDPUBLICATEUR" Nullable="false" />
+          <Property Type="Int32" Name="IDSUJET" Nullable="false" />
+          <Property Type="Int32" Name="IDSECTEUR" Nullable="false" />
+          <Property Type="String" Name="MIMETYPE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="NOMFICHIERORIGINAL" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="NOMFICHIERSERVEUR" Nullable="true" MaxLength="32" />
+          <Property Type="Int32" Name="TAILLEFICHIER" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetSecteurs_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="NOM" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="TITREACCUEIL" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="TEXTEACCUEIL" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="URLIMAGEACCUEIL" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="NOMTRAD" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="TITREACCUEILTRAD" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="TEXTEACCUEILTRAD" Nullable="false" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="GetChoixSondage_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="IDSONDAGE" Nullable="false" />
+          <Property Type="String" Name="VALEUR" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="VALEURTRAD" Nullable="false" MaxLength="60" />
+        </ComplexType>
+        <ComplexType Name="GetVotesSondage_Result">
+          <Property Type="Int32" Name="IDUTILISATEUR" Nullable="false" />
+          <Property Type="Int32" Name="IDCHOIX" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetSondage_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="NOM" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="QUESTION" Nullable="false" MaxLength="255" />
+          <Property Type="DateTime" Name="DATEDEBUT" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="DATEFIN" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IDCREATEUR" Nullable="false" />
+          <Property Type="Int32" Name="IDSECTEUR" Nullable="false" />
+          <Property Type="String" Name="NOMTRAD" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="QUESTIONTRAD" Nullable="false" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="GetSondages_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="NOM" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="QUESTION" Nullable="false" MaxLength="255" />
+          <Property Type="DateTime" Name="DATEDEBUT" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="DATEFIN" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IDCREATEUR" Nullable="false" />
+          <Property Type="Int32" Name="IDSECTEUR" Nullable="false" />
+          <Property Type="String" Name="NOMTRAD" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="QUESTIONTRAD" Nullable="false" MaxLength="255" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2406,6 +2475,7 @@
           <EntitySetMapping Name="CHOIXSONDAGE">
             <EntityTypeMapping TypeName="MVPModel.CHOIXSONDAGE">
               <MappingFragment StoreEntitySet="CHOIXSONDAGE">
+                <ScalarProperty Name="VALEURTRAD" ColumnName="VALEURTRAD" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="IDSONDAGE" ColumnName="IDSONDAGE" />
                 <ScalarProperty Name="VALEUR" ColumnName="VALEUR" />
@@ -2582,6 +2652,8 @@
           <EntitySetMapping Name="SONDAGE">
             <EntityTypeMapping TypeName="MVPModel.SONDAGE">
               <MappingFragment StoreEntitySet="SONDAGE">
+                <ScalarProperty Name="QUESTIONTRAD" ColumnName="QUESTIONTRAD" />
+                <ScalarProperty Name="NOMTRAD" ColumnName="NOMTRAD" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NOM" ColumnName="NOM" />
                 <ScalarProperty Name="QUESTION" ColumnName="QUESTION" />
@@ -2900,31 +2972,28 @@
                 <ScalarProperty Name="TITREACCUEIL" ColumnName="TITREACCUEIL" />
                 <ScalarProperty Name="TEXTEACCUEIL" ColumnName="TEXTEACCUEIL" />
                 <ScalarProperty Name="URLIMAGEACCUEIL" ColumnName="URLIMAGEACCUEIL" />
+                <ScalarProperty Name="NOMTRAD" ColumnName="NOMTRAD" />
+                <ScalarProperty Name="TITREACCUEILTRAD" ColumnName="TITREACCUEILTRAD" />
+                <ScalarProperty Name="TEXTEACCUEILTRAD" ColumnName="TEXTEACCUEILTRAD" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetSondage" FunctionName="MVPModel.Store.GetSondage">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MVPModel.GetSondage_Result">
-                <ScalarProperty Name="NOM" ColumnName="NOM" />
-                <ScalarProperty Name="QUESTION" ColumnName="QUESTION" />
-                <ScalarProperty Name="DATEDEBUT" ColumnName="DATEDEBUT" />
-                <ScalarProperty Name="DATEFIN" ColumnName="DATEFIN" />
-                <ScalarProperty Name="NOMUTIL" ColumnName="NOMUTIL" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetSondages" FunctionName="MVPModel.Store.GetSondages">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MVPModel.GetSondages_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NOM" ColumnName="NOM" />
                 <ScalarProperty Name="QUESTION" ColumnName="QUESTION" />
                 <ScalarProperty Name="DATEDEBUT" ColumnName="DATEDEBUT" />
                 <ScalarProperty Name="DATEFIN" ColumnName="DATEFIN" />
-                <ScalarProperty Name="NOMUTIL" ColumnName="NOMUTIL" />
+                <ScalarProperty Name="IDCREATEUR" ColumnName="IDCREATEUR" />
+                <ScalarProperty Name="IDSECTEUR" ColumnName="IDSECTEUR" />
+                <ScalarProperty Name="NOMTRAD" ColumnName="NOMTRAD" />
+                <ScalarProperty Name="QUESTIONTRAD" ColumnName="QUESTIONTRAD" />
               </ComplexTypeMapping>
             </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSondages" FunctionName="MVPModel.Store.GetSondages">
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="getUtil" FunctionName="MVPModel.Store.getUtil">
             <ResultMapping>
@@ -3026,6 +3095,16 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="NettoyerMotsCles" FunctionName="MVPModel.Store.NettoyerMotsCles" />
           <FunctionImportMapping FunctionImportName="GetPartenaires" FunctionName="MVPModel.Store.GetPartenaires">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetChoixSondage" FunctionName="MVPModel.Store.GetChoixSondage">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetVotesSondage" FunctionName="MVPModel.Store.GetVotesSondage">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MVPModel.GetVotesSondage_Result">
+                <ScalarProperty Name="IDUTILISATEUR" ColumnName="IDUTILISATEUR" />
+                <ScalarProperty Name="IDCHOIX" ColumnName="IDCHOIX" />
+              </ComplexTypeMapping>
+            </ResultMapping>
           </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>

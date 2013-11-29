@@ -1,0 +1,50 @@
+﻿@using projet_mozambique.Utilitaires;
+@using projet_mozambique.Models;
+
+@{
+    ViewBag.Title = Resources.Sondages.resultatsSondages;
+    
+    var listeSondages = ViewData[Constantes.CLE_SONDAGES] as List<SONDAGE>;
+}
+
+<h1>@Resources.Sondages.resultatsSondages</h1>
+
+@if (listeSondages.Count == 0)
+{
+    <div>@Resources.Sondages.aucunResultat</div>
+}
+else
+{
+    for (int i = 0; i < listeSondages.Count; i++)
+    {
+        if (!String.IsNullOrEmpty(listeSondages[i].QUESTION))
+        {
+            <hr/>
+            <div id="sondage@(listeSondages[i].ID)" class="sondage">
+                <h2>@listeSondages[i].NOM</h2>
+                <h3>@listeSondages[i].QUESTION</h3>
+
+                <div class="choix-reponses">
+                    <table>
+                        @foreach (var unChoix in listeSondages[i].CHOIXSONDAGES)
+                        {
+                            var tailleVotes = (listeSondages[i].nbVotesTotal > 0 ? (unChoix.nbVotes / listeSondages[i].nbVotesTotal) * 500 : 0);
+                
+                            <tr>
+                                <td>
+                                    @unChoix.VALEUR 
+                                </td>
+                                <td class="parent-barre-votes">
+                                    <span class="barre-votes" style="width: @(tailleVotes)px"></span>
+                                </td>
+                                <td>
+                                    @unChoix.nbVotes @(unChoix.nbVotes > 1 ? Resources.Sondages.votes : Resources.Sondages.vote)
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        }
+    }
+}

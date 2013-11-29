@@ -26,6 +26,8 @@ namespace projet_mozambique.Models
         public System.DateTime DATEFIN { get; set; }
         public int IDCREATEUR { get; set; }
         public int IDSECTEUR { get; set; }
+        public string NOMTRAD { get; set; }
+        public string QUESTIONTRAD { get; set; }
     
         public virtual ICollection<CHOIXSONDAGE> CHOIXSONDAGE { get; set; }
         public virtual SECTEUR SECTEUR { get; set; }

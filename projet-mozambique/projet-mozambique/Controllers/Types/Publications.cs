@@ -19,22 +19,15 @@ namespace projet_mozambique.Controllers
         public ActionResult Publications(int? secteur, int? categorie, string motscles)
         {
             List<PUBLICATION> listePubs;
-            List<GetSecteurs_Result> listeSecteurs = db.GetSecteurs().ToList();
+            List<GetSecteurs_Result> listeSecteurs = db.GetSecteursLocalises(Session);
             List<GetSujetsPublication_Result> listeSujetsPub = db.GetSujetsPublication().ToList();
             
-            if (User.IsInRole("admin") == false)
-            {
-                secteur = (int)Session["currentSecteur"];
-                listeSecteurs = listeSecteurs.Where(s => s.ID == secteur).ToList();
-            }
-            else if (secteur == null || secteur < 1)
-            {
-                secteur = listeSecteurs.First().ID;
-            }
+            secteur = (int)Session["currentSecteur"];
+            listeSecteurs = listeSecteurs.Where(s => s.ID == secteur).ToList();
 
             if (String.IsNullOrEmpty(motscles))
             {
-                if (listeSecteurs.Any(c => c.ID == categorie))
+                if (listeSujetsPub.Any(c => c.ID == categorie))
                 {
                     listePubs = db.GetPubParSujet(secteur, categorie).ToList();
                 }
@@ -48,7 +41,14 @@ namespace projet_mozambique.Controllers
                 List<String> listeMotsCles = motscles.Split(new Char[] {' '}).ToList();
                 string motsClesTraites = MotsCles.TraiterMotsCles(listeMotsCles);
 
-                listePubs = db.GetPubParMotCle(secteur, motsClesTraites).ToList();
+                if (listeSujetsPub.Any(c => c.ID == categorie))
+                {
+                    listePubs = db.GetPubParMotCle(secteur, categorie, motsClesTraites).ToList();
+                }
+                else
+                {
+                    listePubs = db.GetPubParMotCle(secteur, null, motsClesTraites).ToList();
+                }
             }
 
             ViewData[Constantes.CLE_IDSECTEUR] = secteur;
@@ -99,7 +99,7 @@ namespace projet_mozambique.Controllers
         [AccessDeniedAuthorize(Roles = droitsPublication)]
         public ActionResult AjoutPublication()
         {
-            List<GetSecteurs_Result> listeSecteurs = db.GetSecteurs().ToList();
+            List<GetSecteurs_Result> listeSecteurs = db.GetSecteursLocalises(Session);
             List<GetSujetsPublication_Result> listeSujetsPub = db.GetSujetsPublication().ToList();
 
             ViewData[Constantes.CLE_SECTEURS] = listeSecteurs;
@@ -145,7 +145,7 @@ namespace projet_mozambique.Controllers
                 }
             }
 
-            List<GetSecteurs_Result> listeSecteurs = db.GetSecteurs().ToList();
+            List<GetSecteurs_Result> listeSecteurs = db.GetSecteursLocalises(Session);
             List<GetSujetsPublication_Result> listeSujetsPub = db.GetSujetsPublication().ToList();
 
             ViewData[Constantes.CLE_SECTEURS] = listeSecteurs;

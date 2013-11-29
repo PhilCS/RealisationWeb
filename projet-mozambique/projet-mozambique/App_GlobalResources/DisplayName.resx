@@ -285,4 +285,20 @@
   <data name="FinAcces" xml:space="preserve">
     <value>Date de fin d'accès *</value>
   </data>
+  <data name="Choice" xml:space="preserve">
+    <value>Choix</value>
+    <comment>AjoutSondage</comment>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>Date de fin</value>
+    <comment>AjoutSondage</comment>
+  </data>
+  <data name="Question" xml:space="preserve">
+    <value>Question</value>
+    <comment>AjoutSondage</comment>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Date de début</value>
+    <comment>AjoutSondage</comment>
+  </data>
 </root>

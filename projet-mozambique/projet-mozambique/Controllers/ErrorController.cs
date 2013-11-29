@@ -22,9 +22,9 @@ namespace projet_mozambique.Controllers
             return View();
         }
 
-        public ActionResult HttpError500()
+        public ActionResult HttpError500(HttpException error)
         {
-            return View();
+            return View(error);
         }
 
         public ActionResult HttpError403()

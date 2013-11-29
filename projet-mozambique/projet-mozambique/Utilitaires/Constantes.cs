@@ -13,7 +13,6 @@ namespace projet_mozambique.Utilitaires
         public const string BR = "<br/>";
 
         public const string RECH_NOUVELLES = "nouvelles";
-        public const string RECH_PARTN = "partenaires";
 
         //CLÉS
         public const string CLE_NOUVELLE = "nouvelle";
@@ -46,6 +45,9 @@ namespace projet_mozambique.Utilitaires
         public const string CLE_FILSFORUM = "filsForum";
         public const string CLE_FILDISCUSSION = "fil";
         public const string CLE_UTIL_AJOUTOK = "utilAjoute";
+        public const string CLE_SONDAGES = "sondages";
+        public const string CLE_SONDAGE = "sondage";
+        public const string CLE_ANCRE = "ancre";
 
         public const string ROLE_PROF = "professeur";
         public const string ROLE_PROFMODERATEUR = "professeurModerateur";

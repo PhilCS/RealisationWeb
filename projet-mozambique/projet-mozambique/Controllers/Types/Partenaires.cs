@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Objects;
 using System.Linq;
-using System.IO;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using projet_mozambique.Models;
 using projet_mozambique.Utilitaires;

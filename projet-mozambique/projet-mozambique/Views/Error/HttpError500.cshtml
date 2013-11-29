@@ -1,9 +1,11 @@
-﻿@{
+﻿@model HttpException
+
+@{
     ViewBag.Title = @Resources.Shared.erreur500titre;
 }
 
 <h1>@ViewBag.Title</h1>
 
 <p>
-    @Request.QueryString["message"]
+    @Model.Message
 </p>

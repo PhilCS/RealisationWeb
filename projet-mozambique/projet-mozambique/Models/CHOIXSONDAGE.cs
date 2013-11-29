@@ -22,6 +22,7 @@ namespace projet_mozambique.Models
         public int ID { get; set; }
         public int IDSONDAGE { get; set; }
         public string VALEUR { get; set; }
+        public string VALEURTRAD { get; set; }
     
         public virtual SONDAGE SONDAGE { get; set; }
         public virtual ICollection<UTILISATEUR> UTILISATEUR { get; set; }

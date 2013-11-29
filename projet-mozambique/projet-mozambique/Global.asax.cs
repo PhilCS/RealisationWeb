@@ -11,6 +11,7 @@ using WebMatrix.WebData;
 using WebMatrix.Data;
 using System.Globalization;
 using projet_mozambique.Models;
+using projet_mozambique.Controllers;
 
 namespace projet_mozambique
 {
@@ -169,7 +170,14 @@ namespace projet_mozambique
 
             HttpException httpException = exception as HttpException;
 
-            if (httpException != null)
+            RouteData routeData = new RouteData();
+            routeData.Values.Add("controller", "Error");
+
+            if (httpException == null)
+            {
+                routeData.Values.Add("action", "Index");
+            }
+            else
             {
                 string action;
 
@@ -192,11 +200,23 @@ namespace projet_mozambique
                         break;
                 }
 
-                // clear error on server
-                Server.ClearError();
-                //Response.Redirect(String.Format("~/Error/{0}?message={1}", action, httpException.Message));
-                Response.Redirect(String.Format("~/Error/{0}", action));
+                routeData.Values.Add("action", action);
             }
+
+            // Pass exception details to the target error View.
+            routeData.Values.Add("error", exception);
+
+            // Clear the error on server.
+            Server.ClearError();
+
+            // Avoid IIS7 getting in the middle
+            Response.TrySkipIisCustomErrors = true;
+
+            Response.StatusCode = httpException.GetHttpCode();
+
+            // Call target Controller and pass the routeData.
+            IController errorController = new ErrorController();
+            errorController.Execute(new RequestContext(new HttpContextWrapper(Context), routeData));
         }
 
         protected void Session_Start(object sender, EventArgs e)
