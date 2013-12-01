@@ -152,17 +152,26 @@ namespace projet_mozambique.Controllers
                                 //Liste des secteurs de l'utilisateur
                                 Session["lstSect"] = lstSect;
 
+                                HttpCookie cookieCurrent = new HttpCookie("currentSect");
+                                cookieCurrent.Expires = DateTime.Now.AddMonths(3);
+
                                 if (lstSect == null)
                                 {
                                     // Si l'utilisateur ne fait partie d'aucun secteur, le secteur courant est 0 
                                     // et la page d'accueil de l'utilisateur affiche que l'utilisateur ne fait partie d'aucun secteur
                                     Session["currentSecteur"] = 0;
+                                    cookieCurrent.Value = "0";
                                 }
                                 else
                                 {
                                     //Index du secteur sélectionné dans la liste des secteurs de l'utilisateur
                                     Session["currentSecteur"] = lstSect.First().ID;
+                                    cookieCurrent.Value = lstSect.First().ID.ToString();
                                 }
+
+                                
+                                
+                                Response.AppendCookie(cookieCurrent);
 
                                 Session["Culture"] = ci;
 
@@ -173,18 +182,6 @@ namespace projet_mozambique.Controllers
                                     cookie.Value = ci.Name;
                                     Response.AppendCookie(cookie);
 
-                                    if (lstSect != null)
-                                    {
-                                        /*HttpCookie cookieLst = new HttpCookie("lstSect");
-                                        cookieLst.Expires = DateTime.Now.AddMonths(3);
-                                        cookieLst.Value = cookieStr;
-                                        Response.AppendCookie(cookieLst);*/
-
-                                        HttpCookie cookieCurrent = new HttpCookie("currentSect");
-                                        cookieCurrent.Expires = DateTime.Now.AddMonths(3);
-                                        cookieCurrent.Value = lstSect.First().ID.ToString();
-                                        Response.AppendCookie(cookieCurrent);
-                                    }
                                 }
 
                                 currentUser.DERNIERECONNEXION = DateTime.Now;
