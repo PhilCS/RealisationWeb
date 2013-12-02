@@ -1,5 +1,5 @@
 ﻿@using projet_mozambique.Models
-@if (Request.IsAuthenticated)
+@if (Request.IsAuthenticated && Session != null)
 {
 
     var lst = Session["lstSect"] as List<SECTEUR>;
