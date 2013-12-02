@@ -18,11 +18,11 @@ else
             <li>@Html.ActionLink(@Resources.Shared.publications, "Publications", "Sectoriel")</li>
             <li>@Html.ActionLink(@Resources.Shared.forums, "Forum", "Sectoriel")</li>
             <li>@Html.ActionLink(@Resources.Shared.sondages, "Sondages", "Sectoriel")</li>
+            <li>@Html.ActionLink(@Resources.Shared.sectionPublique, "Home", "Public")</li>
             if (User.IsInRole("admin"))
             {
                 <li>@Html.ActionLink(@Resources.Shared.admin, "Index", "Admin")</li>
             }
-            <li>@Html.ActionLink(@Resources.Shared.sectionPublique, "Home", "Public")</li>
         }
         else
         {
