@@ -9,10 +9,10 @@ using WebMatrix.WebData;
 using WebMatrix.Data;
 using projet_mozambique.Utilitaires;
 using System.Globalization;
-using Postal;
 using System.IO;
 using System.Data.Common;
 using System.Transactions;
+using System.Net.Mail;
 
 namespace projet_mozambique.Controllers
 {
@@ -284,13 +284,38 @@ namespace projet_mozambique.Controllers
                         string emailAddress = user.COURRIEL;
                         if (!string.IsNullOrEmpty(emailAddress))
                         {
-                            string confirmationToken =
-                                WebSecurity.GeneratePasswordResetToken(model.UserName);
-                            dynamic email = new Email("ResetPassword");
-                            email.To = emailAddress;
-                            email.UserName = model.UserName;
-                            email.ConfirmationToken = confirmationToken;
-                            email.Send();
+                            try
+                            {
+                                string confirmationToken = WebSecurity.GeneratePasswordResetToken(model.UserName);
+                                
+                                MailMessage mail = new MailMessage();
+                                mail.From = new MailAddress(Constantes.EMAIL);
+                                mail.To.Add(emailAddress);
+                                mail.Subject = Resources.Sectoriel.subjectReset;
+                                string lienRetour = "http://localhost:53486/Sectoriel/ConfirmationReinitialMotPasse/" + confirmationToken;
+                                string message = String.Format(Resources.Sectoriel.msgReset, user.NOMUTIL);
+                                message += "<a href=\"";
+                                message += lienRetour;
+                                message += "\">";
+                                message += lienRetour;
+                                message += "</a>";
+                                mail.IsBodyHtml = true;
+                                mail.Body = message;
+
+                                SmtpClient smtp = new SmtpClient();
+                                smtp.Host = Constantes.HOST;
+                                smtp.Port = Constantes.PORT;
+                                smtp.UseDefaultCredentials = false;
+                                smtp.Credentials = new System.Net.NetworkCredential(Constantes.EMAIL, Constantes.EMAIL_PWD);
+                                smtp.EnableSsl = true;
+                                smtp.Send(mail);
+                            }
+                            catch (Exception e)
+                            {
+                                TempData[Constantes.CLE_MSG_RETOUR] =
+                                    new Message(Message.TYPE_MESSAGE.ERREUR, e.Message);
+                                return RedirectToAction("Login", "Sectoriel");
+                            }
 
                             return RedirectToAction("ConfirmationCourriel");
                         }

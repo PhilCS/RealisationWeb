@@ -10,6 +10,12 @@ namespace projet_mozambique.Utilitaires
         private Constantes()
         { }
 
+        // Courriel 
+        public const string EMAIL = "projet.mozambique@outlook.com";
+        public const string EMAIL_PWD = "pmAut2013";
+        public const string HOST = "smtp.live.com";
+        public const int PORT = 25;
+
         public const string BR = "<br/>";
 
         public const string RECH_NOUVELLES = "nouvelles";

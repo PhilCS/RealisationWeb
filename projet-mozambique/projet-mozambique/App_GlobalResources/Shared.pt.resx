@@ -240,4 +240,10 @@
   <data name="ecritPar" xml:space="preserve">
     <value>Written by :</value>
   </data>
+  <data name="mozambique" xml:space="preserve">
+    <value>Mozambique</value>
+  </data>
+  <data name="portail" xml:space="preserve">
+    <value>Portail pédagogique</value>
+  </data>
 </root>
