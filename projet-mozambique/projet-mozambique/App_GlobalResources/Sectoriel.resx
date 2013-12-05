@@ -228,4 +228,13 @@
     <value>Modifier un message du forum</value>
     <comment>Forum</comment>
   </data>
+  <data name="msgConfirmAccount" xml:space="preserve">
+    <value>Bonjour {0}, &lt;br/&gt; Pour compléter votre adhésion au Portail pédagogique, cliquez sur le lien suivant : </value>
+  </data>
+  <data name="msgReset" xml:space="preserve">
+    <value>Bonjour {0}, &lt;br /&gt; Pour compléter le processus de réinitialisation de votre mot de passe, cliquez sur ce lien : </value>
+  </data>
+  <data name="subjectReset" xml:space="preserve">
+    <value>Réinitialisation de votre mot de passe</value>
+  </data>
 </root>

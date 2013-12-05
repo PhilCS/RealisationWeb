@@ -198,6 +198,9 @@
   <data name="modifier" xml:space="preserve">
     <value>Modifier</value>
   </data>
+  <data name="mozambique" xml:space="preserve">
+    <value>Mozambique</value>
+  </data>
   <data name="nousjoindre" xml:space="preserve">
     <value>Nous joindre</value>
   </data>
@@ -212,6 +215,9 @@
   </data>
   <data name="partenaires" xml:space="preserve">
     <value>Partenaires</value>
+  </data>
+  <data name="portail" xml:space="preserve">
+    <value>Portail pédagogique</value>
   </data>
   <data name="profil" xml:space="preserve">
     <value>Profil</value>

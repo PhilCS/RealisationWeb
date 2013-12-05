@@ -11,7 +11,7 @@ using projet_mozambique.Utilitaires;
 using WebMatrix.WebData;
 using WebMatrix.Data;
 using System.Web.Security;
-using Postal;
+using System.Net.Mail;
 
 namespace projet_mozambique.Controllers
 {
@@ -129,11 +129,28 @@ namespace projet_mozambique.Controllers
                         db.SaveChanges();
                     }
 
-                    dynamic email = new Email("ConfirmAccount");
-                    email.To = model.courriel;
-                    email.UserName = model.nomUtil;
-                    email.ConfirmationToken = confirmToken;
-                    email.Send();
+                    MailMessage mail = new MailMessage();
+                    mail.From = new MailAddress(Constantes.EMAIL);
+                    mail.To.Add(model.courriel);
+                    mail.Subject = Resources.Sectoriel.ConfirmAccount;
+                    string lienRetour = "http://localhost:53486/Sectoriel/ConfirmationCompte/" + confirmToken;
+                    string message = String.Format(Resources.Sectoriel.msgConfirmAccount, model.nomUtil);
+                    message += "<a href=\"";
+                    message += lienRetour;
+                    message += "\">";
+                    message += lienRetour;
+                    message += "</a>";
+                    mail.IsBodyHtml = true;
+                    mail.Body = message;
+
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = Constantes.HOST;
+                    smtp.Port = Constantes.PORT;
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Credentials = new System.Net.NetworkCredential(Constantes.EMAIL, Constantes.EMAIL_PWD);
+                    smtp.EnableSsl = true;
+                    smtp.Send(mail);
+                   
 
                     TempData[Constantes.CLE_MSG_RETOUR] =
                         new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.UserAddedOk);
