@@ -32,7 +32,7 @@
             <label for="mot-cle">@Resources.Publication.rechercheMotCle : </label>
             <input id="mot-cle" name="motscles" placeholder="mot clé(s)" type="text" value="@Request.QueryString["motscles"]"/><br />
             <label for="categorie">@Resources.Publication.rechercheCategorie : </label>
-            <select name="categorie" id="categorie">
+            <select name="categorie" id="categorie" class="lst-options-nouvelles">
                 <option value="">&lt;Toutes&gt;</option>
                 @foreach (GetSujetsPublication_Result sujetPub in listeSujetsPub)
                 {

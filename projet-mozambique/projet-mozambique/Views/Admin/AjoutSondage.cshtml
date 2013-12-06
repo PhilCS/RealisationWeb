@@ -110,7 +110,7 @@
                 @Html.LabelFor(model => model.IDSECTEUR)
             </td>
             <td>
-                @Html.DropDownListFor(model => model.IDSECTEUR, new SelectList(listeSecteurs, "ID", "NOM"), "")
+                @Html.DropDownListFor(model => model.IDSECTEUR, new SelectList(listeSecteurs, "ID", "NOM"), "", new { @class = "lst-options-nouvelles" })
                 @Html.ValidationMessageFor(model => model.IDSECTEUR)
             </td>
         </tr>

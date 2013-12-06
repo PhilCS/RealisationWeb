@@ -787,37 +787,7 @@ namespace projet_mozambique.Controllers
             return View("ModifierNousJoindre");
         }
 
-        public ActionResult ModifierMsgFil()
-        {
-            return View();
-        }
-
-        public ActionResult Sondages()
-        {
-            return View();
-        }
-
-        public ActionResult AjouterSondage()
-        {
-            return View();
-        }
-
-        public ActionResult AjoutSondageOK()
-        {
-            return View();
-        }
-
-        public ActionResult AjoutSondageErreur()
-        {
-            return View();
-        }
-
         public ActionResult IndexModifie()
-        {
-            return View();
-        }
-
-        public ActionResult SupprimerSondage()
         {
             return View();
         }

@@ -268,4 +268,8 @@
     <value>The message has been modified.</value>
     <comment>Forum</comment>
   </data>
+  <data name="titreModifie" xml:space="preserve">
+    <value>The thread title has been modified.</value>
+    <comment>Forum</comment>
+  </data>
 </root>

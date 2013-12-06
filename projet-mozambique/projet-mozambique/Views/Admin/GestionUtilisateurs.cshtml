@@ -3,7 +3,10 @@
 @{
     ViewBag.Title = @Resources.Admin.menuUtil;
     
-    <h1>@ViewBag.Title <a href="AjoutUtilisateur" style="display:inline;"><img src="~/Content/images/icones/icon-add-black.png" title="@Resources.Sectoriel.nouveau" alt="Icône Nouveau secteur" /></a></h1>
+    <h1>
+        <a href="AjoutUtilisateur" style="display:inline;"><img src="~/Content/images/icones/icon-add-black.png" title="@Resources.Sectoriel.nouveau" alt="Icône Nouveau secteur" /></a>
+        @ViewBag.Title 
+    </h1>
     List<ECOLE> lstE = ViewData[Constantes.CLE_LISTE_ECOLES] as List<ECOLE>;
     List<SECTEUR> lstS = ViewData[Constantes.CLE_SECTEURS] as List<SECTEUR>;
     
@@ -28,7 +31,7 @@
                 @Html.TextBox("txtInput", null, new { @placeholder = Resources.Admin.RechUtilsParam, @style = "width:250px" })
             </li>
             <li>
-                <select name="idSecteur">
+                <select name="idSecteur" class="lst-options-nouvelles">
                     @if (lstS != null && lstS.Count > 0)
                     {
                         <option value="0">@Resources.Admin.tousSecteurs</option>
@@ -40,7 +43,7 @@
                 </select>
             </li>
             <li>
-                <select name="idEcole">
+                <select name="idEcole" class="lst-options-nouvelles">
                     @if (lstE != null && lstE.Count > 0)
                     {
                         <option value="0">@Resources.Admin.tousEcoles</option>

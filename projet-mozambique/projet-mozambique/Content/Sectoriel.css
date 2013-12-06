@@ -148,7 +148,7 @@ label[class=cb]
     float:right;
     background-color:rgba(0,0,0,0.2);
     width:35%;
-    min-height:425px;
+    min-height:445px;
 }
 
 .selection-dest h3
@@ -497,7 +497,7 @@ input:read-only
 
 .icones-actions img
 {
-    margin:2px;
+    margin:2px 5px;
 }
 
 .nouveau-msg

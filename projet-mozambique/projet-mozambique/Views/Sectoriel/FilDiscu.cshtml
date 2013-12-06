@@ -12,11 +12,13 @@
             <a href="#" id="modif-sujet"><img src="~/Content/images/icones/icone-pen.png" title="@Resources.Shared.modifier" alt="Icône Modifier" /></a>
         }
     </h1>
-    
-    if (TempData[Constantes.CLE_MESSAGE] != null)
-    {
-        <div class="msg succes">@TempData[Constantes.CLE_MESSAGE]</div>
-    }
+
+    <div class="msg succes" id="msgSucces">
+        @if (TempData[Constantes.CLE_MESSAGE] != null)
+        {
+            @TempData[Constantes.CLE_MESSAGE]
+        }
+    </div>
     
     <ul class="nav-pagination">
             @if (f.listeMessages.ShowFirstPage)
@@ -97,7 +99,7 @@
                 <li>@Html.ActionLink(">", "FilDiscu", new { idFil = f.id, idPage = f.listeMessages.PageIndex + 1 })</li>
             }
         </ul>
-    
+
     <script>
         $(document).ready(function () {
             $("#modif-sujet").click(function (e) {
@@ -106,7 +108,7 @@
                 var sujet = h1.html().substr(0, h1.html().indexOf("<", 1)).trim();
                 var modifier = '@Resources.Shared.modifier';
                 h1.html('<input type=\x22text\x22 value=\x22' +
-                    sujet + '\x22 class=\x22modif-sujet\x22 autofocus name=\x22sujet\x22 id=\x22sujet\x22> <input type=\x22submit\x22 value=\x22' +
+                    sujet + '\x22 class=\x22modif-sujet\x22 autofocus name=\x22sujet\x22 id=\x22sujet\x22 maxlength=\x22100\x22> <input type=\x22button\x22 value=\x22' +
                     modifier + '\x22 class=\x22btnForm\x22 id=\x22btnModif\x22>');
 
                 var tb = $("#sujet");
@@ -122,12 +124,24 @@
                         
                 });
                 $("#btnModif").click(function (e) {
-                    if (tb.val() == "") {
+                    var sujet = tb.val();
+                    if (sujet == "") {
                         h1.before("<p class=\x22msg erreur\x22 style=\x22margin:0;\x22>@Resources.Messages.sujetObligatoire</p>");
                         tb.addClass("input-validation-error");
                     }
-                    else
-                        alert("ok");
+                    else {
+                        var id = "@f.id";
+                        var dataPost = { 'idFil': id, 'sujet': sujet };
+                        $.ajax({
+                            url: "@Url.Action("ModifTitreFil", "Sectoriel")",
+                            type: 'POST',
+                            data: dataPost,
+                            success: function () {
+                                h1.html(sujet +  " <a href=\x22#\x22 id=\x22modif-sujet\x22><img src=\x22../../Content/images/icones/icone-pen.png\x22 title=\x22@Resources.Shared.modifier\x22 alt=\x22Icône Modifier\x22 /></a>");
+                                $("#msgSucces").first().html("@Resources.Messages.titreModifie");
+                            }                            
+                        });
+                    }
                 });
             });
 

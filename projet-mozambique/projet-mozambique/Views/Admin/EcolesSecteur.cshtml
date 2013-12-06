@@ -2,7 +2,7 @@
 @using projet_mozambique.Models;
 @{  
     ViewBag.Title = @Resources.Admin.lstEcoles;
-    <h2>@ViewBag.Title</h2>
+    <h1>@ViewBag.Title</h1>
     
     Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
 
@@ -14,7 +14,7 @@
     if(lstAll.Count > 0)
     {
         using (Html.BeginForm("AjoutEcoleSecteur", "Admin", FormMethod.Post)) {
-            <select id="selectEcole" name="idEcole">
+            <select id="selectEcole" name="idEcole" class="lst-options-nouvelles">
                 @foreach (var e in lstAll)
                 {
                     <option value="@e.ID">@e.NOM</option>
@@ -34,7 +34,7 @@
         <ul>
             @foreach(var e in lst)
             {
-               <li>@e.NOM (Province : @e.PROVINCE) <a href="SupprimerEcoleSecteur?idEcole=@e.ID&idSecteur=@idSect" style="display:inline;"><img src="~/Content/images/icones/icone-delete.png" title="@Resources.Sectoriel.supprimer" alt="Icône Supprimer" /></a></li> 
+               <li>@e.NOM (Province : @e.PROVINCE) <a href="SupprimerEcoleSecteur?idEcole=@e.ID&idSecteur=@idSect" style="display:inline;"><img src="~/Content/images/icones/icon-trashcan.png" title="@Resources.Sectoriel.supprimer" alt="Icône Supprimer" /></a></li> 
             }
         </ul>  
         } 

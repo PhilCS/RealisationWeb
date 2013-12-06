@@ -466,6 +466,7 @@
     <Content Include="Content\images\icones\icone-powerpoint.png" />
     <Content Include="Content\images\icones\icone-text.png" />
     <Content Include="Content\images\icones\icone-word.png" />
+    <Content Include="Content\images\icones\icon_inbox.png" />
     <Content Include="Content\images\mail.png" />
     <Content Include="Content\images\photos\test.jpg" />
     <Content Include="Content\images\profile.png" />
@@ -594,7 +595,6 @@
     <Content Include="Views\Public\NousJoindre.cshtml" />
     <Content Include="Views\Admin\GestionUtilisateurs.cshtml" />
     <Content Include="Views\Admin\SectionPublique.cshtml" />
-    <Content Include="Views\Admin\RechUtilisateur.cshtml" />
     <Content Include="Views\Admin\ModifUtilisateur.cshtml" />
     <Content Include="Views\Sectoriel\Index.cshtml" />
     <Content Include="Views\Sectoriel\Messagerie.cshtml" />
@@ -606,9 +606,7 @@
     <Content Include="Views\Sectoriel\NouveauFil.cshtml" />
     <Content Include="Views\Sectoriel\FilDiscu.cshtml" />
     <Content Include="Views\Sectoriel\RepondreFilDiscu.cshtml" />
-    <Content Include="Views\Admin\ModifierMsgFil.cshtml" />
     <Content Include="Views\Sectoriel\Sondages.cshtml" />
-    <Content Include="Views\Admin\Sondages.cshtml" />
     <Content Include="Views\Sectoriel\SupprimerPublication.cshtml" />
     <Content Include="Views\Sectoriel\Publications.cshtml" />
     <Content Include="Views\Sectoriel\AjoutPublication.cshtml" />
@@ -619,10 +617,6 @@
     <Content Include="Views\Admin\ModifierPartenaire.cshtml" />
     <Content Include="Views\Admin\ModifPagePublique.cshtml" />
     <Content Include="Views\Sectoriel\ResultRechDoc.cshtml" />
-    <Content Include="Views\Admin\SupprimerSondage.cshtml" />
-    <Content Include="Views\Admin\AjouterSondage.cshtml" />
-    <Content Include="Views\Admin\AjoutSondageOK.cshtml" />
-    <Content Include="Views\Admin\AjoutSondageErreur.cshtml" />
     <Content Include="Views\Shared\AfficherMsg.cshtml" />
     <Content Include="Views\Error\HttpError404.cshtml" />
     <Content Include="Views\Sectoriel\ListeMessages.cshtml" />
@@ -653,9 +647,6 @@
     <Content Include="Views\Admin\AjoutSecteur.cshtml" />
     <Content Include="Views\Sectoriel\RepondreFil.cshtml" />
     <Content Include="Views\Admin\GestionPartenaire.cshtml" />
-    <Content Include="Views\Admin\PublicationDocument.cshtml" />
-    <Content Include="Views\Admin\PublicationErreur.cshtml" />
-    <Content Include="Views\Admin\PublicationOK.cshtml" />
     <Content Include="Views\Admin\ResultatsRecherche.cshtml" />
     <Content Include="Views\Sectoriel\ConfirmationCompte.cshtml" />
     <Content Include="Views\Emails\ConfirmAccount.cshtml" />

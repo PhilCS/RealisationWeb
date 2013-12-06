@@ -237,4 +237,8 @@
   <data name="subjectReset" xml:space="preserve">
     <value>Réinitialisation de votre mot de passe</value>
   </data>
+  <data name="moveInbox" xml:space="preserve">
+    <value>Rétablir le message</value>
+    <comment>Messagerie</comment>
+  </data>
 </root>
