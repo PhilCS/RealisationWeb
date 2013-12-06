@@ -161,7 +161,7 @@
     <comment>UserModel</comment>
   </data>
   <data name="NomsDest" xml:space="preserve">
-    <value>Destinataires (noms d'utilisateurs)</value>
+    <value>Destinataires (noms d'utilisateurs) *</value>
     <comment>MessageModel</comment>
   </data>
   <data name="OldPassword" xml:space="preserve">

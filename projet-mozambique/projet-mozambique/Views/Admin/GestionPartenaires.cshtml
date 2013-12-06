@@ -16,7 +16,7 @@
     {
         @Html.AntiForgeryToken()
 
-        @Html.DropDownListFor(model => model.ID, new SelectList(listePartenaires, "ID", "NOM"), "")
+        @Html.DropDownListFor(model => model.ID, new SelectList(listePartenaires, "ID", "NOM"), "", new { @class = "lst-options-nouvelles" })
 
         <input type="submit" name="modifier" value="@Resources.Shared.modifier" id="btnModif" class="btnForm" /> 
         <input type="submit" name="supprimer" value="@Resources.Shared.supprimer" id="btnSupp" class="btnForm" />

@@ -614,6 +614,22 @@ namespace projet_mozambique.Controllers
             return PartialView("ListeMessages");
         }
 
+        [HttpPost]
+        public ActionResult ModifTitreFil(int idFil, string sujet)
+        {
+            var fil = from f in db.FILDISCUSSION
+                      where f.ID == idFil
+                      select f;
+
+            if (fil.Any())
+            {
+                fil.FirstOrDefault().SUJET = sujet;
+                db.SaveChanges();
+            }
+
+            return null;
+        }
+
         /// <summary>
         /// Méthode qui va chercher les messages reçus pour pouvoir les passer à la vue
         /// </summary>
@@ -906,11 +922,12 @@ namespace projet_mozambique.Controllers
             {
                 return BoiteReception();
             }
+
             if (location == 2)
             {
                 return MessagesEnvoyes();
             }
-            else if (location == 2)
+            else if (location == 3)
             {
                 return Corbeille();
             }
@@ -1245,6 +1262,35 @@ namespace projet_mozambique.Controllers
                     Session[Constantes.CLE_MESSAGE] = Resources.Messages.messagesSupprimes;
                 else
                     Session[Constantes.CLE_MESSAGE] = Resources.Messages.messageSupprime;
+            }
+
+            return RedirectToAction("Messagerie");
+        }
+
+        public ActionResult DeplacerInbox(int id)
+        {
+            int idUtil = WebSecurity.GetUserId(User.Identity.Name);
+
+            var msgEnvoye = from m in db.MESSAGEPRIVE
+                            where m.ID == id && m.SUPPRIME && m.IDEXPEDITEUR == idUtil
+                            select m;
+
+            if (msgEnvoye.Any())
+            {
+                msgEnvoye.FirstOrDefault().SUPPRIME = false;
+                db.SaveChanges();
+            }
+            else
+            {
+                var msgRecu = from m in db.DESTINATAIREMESSAGE
+                      where m.IDMESSAGE == id && m.SUPPRIME && m.IDUTILISATEUR == idUtil
+                      select m;
+
+                if (msgRecu.Any())
+                {
+                    msgRecu.FirstOrDefault().SUPPRIME = false;
+                    db.SaveChanges();                    
+                }
             }
 
             return RedirectToAction("Messagerie");

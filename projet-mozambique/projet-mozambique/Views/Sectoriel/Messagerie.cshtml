@@ -42,9 +42,10 @@
     </div>
     <div id="lecture" class="mess-lecture">
         <div class="actions-messagerie">
-            <div class="icones-actions">        
-                <a href="RepondreMessage" id="repondre-icone"><img src="~/Content/images/icones/icon-reply.png" title="@Resources.Sectoriel.repondre" alt="Icône répondre" /></a>
-                <a href="SupprimerMessage" id="supprimer-icone"><img src="~/Content/images/icones/icon-trashcan.png" title="@Resources.Sectoriel.supprimer" alt="Icône supprimer" /></a>
+            <div class="icones-actions">  
+                <a href="DeplacerInbox" id="deplacer-icone"><img src="~/Content/images/icones/icon_inbox.png" title="@Resources.Sectoriel.moveInbox" alt="Icône" /></a>      
+                <a href="RepondreMessage" id="repondre-icone"><img src="~/Content/images/icones/icon-reply.png" title="@Resources.Sectoriel.repondre" alt="Icône" /></a>
+                <a href="SupprimerMessage" id="supprimer-icone"><img src="~/Content/images/icones/icon-trashcan.png" title="@Resources.Sectoriel.supprimer" alt="Icône" /></a>
             </div>
         </div>
         <div id="contenu-message">
@@ -66,15 +67,19 @@
                 $("#recep").addClass("active");
                 $("#nouveau-message").show();
                 $("#repondre-icone").show();
+                $("#deplacer-icone").hide();
                 break;
             case "env":
                 $("#repondre-icone").hide();
                 $("#env").addClass("active");
                 $("#nouveau-message").hide();
+                $("#deplacer-icone").hide();
                 break;
             case "corb":
                 $("#corb").addClass("active");
                 $("#nouveau-message").hide();
+                $("#deplacer-icone").show();
+                $("#repondre-icone").show();
                 break;                
         }
 

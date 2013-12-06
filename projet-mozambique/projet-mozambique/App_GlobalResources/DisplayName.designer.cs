@@ -277,7 +277,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Destinataires (noms d&apos;utilisateurs).
+        ///   Recherche une chaîne localisée semblable à Destinataires (noms d&apos;utilisateurs) *.
         /// </summary>
         public static string NomsDest {
             get {

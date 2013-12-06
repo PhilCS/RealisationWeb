@@ -36,7 +36,7 @@
         <ul>
                 <li>
                     @Html.LabelFor(m => m.idUtil)
-                    @Html.DropDownListFor(m => m.idUtil, new SelectList(Model.Utilisateurs, "Value", "Text"))
+                    @Html.DropDownListFor(m => m.idUtil, new SelectList(Model.Utilisateurs, "Value", "Text"), new { @class = "lst-options-nouvelles" })
                     @Html.ValidationMessageFor(m => m.idUtil)
                 </li>
                 <li>
@@ -61,7 +61,7 @@
             <ul>
                 @foreach(var u in lst)
                 {
-                   <li>@u.PRENOM @u.NOM (@u.NOMUTIL) <a href="SupprimerUtilSecteur?idUtil=@u.ID&idSecteur=@Model.idSecteur" style="display:inline;"><img src="~/Content/images/icones/icone-delete.png" title="@Resources.Sectoriel.supprimer" alt="Icône Supprimer" /></a></li> 
+                   <li>@u.PRENOM @u.NOM (@u.NOMUTIL) <a href="SupprimerUtilSecteur?idUtil=@u.ID&idSecteur=@Model.idSecteur" style="display:inline;"><img src="~/Content/images/icones/icon-trashcan.png" title="@Resources.Sectoriel.supprimer" alt="Icône Supprimer" /></a></li> 
                 }
             </ul> 
         }

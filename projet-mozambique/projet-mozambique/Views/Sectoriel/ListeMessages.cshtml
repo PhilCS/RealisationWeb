@@ -71,9 +71,10 @@
 
             if ('@corbeille' == 'False')
                 $("#supprimer-icone").attr("href", "SupprimerMessage?id=" + event.target.id + "&definitif=0");
-            else
+            else {
                 $("#supprimer-icone").attr("href", "SupprimerMessage?id=" + event.target.id + "&definitif=1");
-
+                $("#deplacer-icone").attr("href", "DeplacerInbox?id=" + event.target.id);
+            }
             
         });
 

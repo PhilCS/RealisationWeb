@@ -24,8 +24,10 @@
         @Html.ValidationMessageFor(x =>x.destinataires)
     </div>
     
+    <br />
+    
     <div>
-        @Html.LabelFor(x => x.sujet) 
+        @Html.LabelFor(x => x.sujet)
         @Html.TextBoxFor(x => x.sujet, new { @maxlength = "50", @placeholder = @Resources.Sectoriel.sujetPlaceholder})
         @Html.ValidationMessageFor(x =>x.sujet)
     </div>
