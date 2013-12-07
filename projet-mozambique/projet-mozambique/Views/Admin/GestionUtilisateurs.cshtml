@@ -62,24 +62,24 @@
     
     if(lstUtils != null)
     {
-        <h2>@Resources.Shared.resultatsRecherche</h2>
-        if(lstUtils.Count > 0)
-        {
-            <div style="padding-top:20px;">
+        <div style="padding-top:20px;">
+            <h2>@Resources.Shared.resultatsRecherche</h2>
+            @if(lstUtils.Count > 0)
+            {
                 <ul>
                     @foreach (var u in lstUtils)
                     {
                         <li>
-                            @Html.ActionLink(u.PRENOM + " " + u.NOM + " (" + u.NOMUTIL + ")", "ModifierUtilisateur", "Admin")
+                            @Html.ActionLink(u.PRENOM + " " + u.NOM + " (" + u.NOMUTIL + ")", "ModifUtilisateur", "Admin", new { idUtil = u.ID }, null)
                         </li>
                     }
-                </ul>
-            </div>  
-        }
-        else
-        {
-            <p>@Resources.Admin.aucunResultat</p>
-        }
+                </ul> 
+            }
+            else
+            {
+                <p>@Resources.Admin.aucunResultat</p>
+            }
+        </div>
     }
 }
 

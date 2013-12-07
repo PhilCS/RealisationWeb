@@ -110,94 +110,100 @@ namespace projet_mozambique.Controllers
                     if (utilisateur.Count() != 0)
                     {
                         UTILISATEUR currentUser = (UTILISATEUR)utilisateur.First();
-
-                        if(WebSecurity.IsConfirmed(currentUser.NOMUTIL))
+                        if (currentUser.ACTIF)
                         {
-                            if (WebSecurity.Login(currentUser.NOMUTIL, model.Password, model.RememberMe))
+                            if (WebSecurity.IsConfirmed(currentUser.NOMUTIL))
                             {
-                                CultureInfo ci = new CultureInfo(currentUser.LANGUE.ToLower());
-
-                                //Dictionary<int, string> lstSect = new Dictionary<int, string>();
-                                List<SECTEUR> lstSect = new List<SECTEUR>();
-
-                                DateTime currentDate = DateTime.Now;
-
-                                var sectUtil = from s in db.UTILISATEURSECTEUR
-                                               where s.IDUTILISATEUR == currentUser.ID && s.DEBUTACCES <= currentDate
-                                               && s.FINACCES >= currentDate
-                                               select s;
-
-                                //string cookieStr = "";
-
-                                if (sectUtil.FirstOrDefault() != null)
+                                if (WebSecurity.Login(currentUser.NOMUTIL, model.Password, model.RememberMe))
                                 {
-                                    foreach (var v in sectUtil)
+                                    CultureInfo ci = new CultureInfo(currentUser.LANGUE.ToLower());
+
+                                    //Dictionary<int, string> lstSect = new Dictionary<int, string>();
+                                    List<SECTEUR> lstSect = new List<SECTEUR>();
+
+                                    DateTime currentDate = DateTime.Now;
+
+                                    var sectUtil = from s in db.UTILISATEURSECTEUR
+                                                   where s.IDUTILISATEUR == currentUser.ID && s.DEBUTACCES <= currentDate
+                                                   && s.FINACCES >= currentDate
+                                                   select s;
+
+                                    //string cookieStr = "";
+
+                                    if (sectUtil.FirstOrDefault() != null)
                                     {
-                                        //lstSect.Add(v.IDSECTEUR, v.SECTEUR.NOM + "/" + v.SECTEUR.NOMTRAD);
-                                        lstSect.Add(v.SECTEUR);
-                                        /*cookieStr += v.IDSECTEUR.ToString();
-                                        cookieStr += ',';
-                                        cookieStr += v.SECTEUR.NOM;
-                                        cookieStr += '/';
-                                        cookieStr += v.SECTEUR.NOMTRAD;
-                                        cookieStr += '&';*/
+                                        foreach (var v in sectUtil)
+                                        {
+                                            //lstSect.Add(v.IDSECTEUR, v.SECTEUR.NOM + "/" + v.SECTEUR.NOMTRAD);
+                                            lstSect.Add(v.SECTEUR);
+                                            /*cookieStr += v.IDSECTEUR.ToString();
+                                            cookieStr += ',';
+                                            cookieStr += v.SECTEUR.NOM;
+                                            cookieStr += '/';
+                                            cookieStr += v.SECTEUR.NOMTRAD;
+                                            cookieStr += '&';*/
+                                        }
                                     }
+                                    else
+                                    {
+                                        lstSect = null;
+                                    }
+
+
+                                    //Liste des secteurs de l'utilisateur
+                                    Session["lstSect"] = lstSect;
+
+                                    HttpCookie cookieCurrent = new HttpCookie("currentSect");
+                                    cookieCurrent.Expires = DateTime.Now.AddMonths(3);
+
+                                    if (lstSect == null)
+                                    {
+                                        // Si l'utilisateur ne fait partie d'aucun secteur, le secteur courant est 0 
+                                        // et la page d'accueil de l'utilisateur affiche que l'utilisateur ne fait partie d'aucun secteur
+                                        Session["currentSecteur"] = 0;
+                                        cookieCurrent.Value = "0";
+                                    }
+                                    else
+                                    {
+                                        //Index du secteur sélectionné dans la liste des secteurs de l'utilisateur
+                                        Session["currentSecteur"] = lstSect.First().ID;
+                                        cookieCurrent.Value = lstSect.First().ID.ToString();
+                                    }
+
+
+
+                                    Response.AppendCookie(cookieCurrent);
+
+                                    Session["Culture"] = ci;
+
+                                    if (model.RememberMe)
+                                    {
+                                        HttpCookie cookie = new HttpCookie("lang");
+                                        cookie.Expires = DateTime.Now.AddMonths(3);
+                                        cookie.Value = ci.Name;
+                                        Response.AppendCookie(cookie);
+
+                                    }
+
+                                    currentUser.DERNIERECONNEXION = DateTime.Now;
+
+                                    db.SaveChanges();
+
+                                    return RedirectToAction("Index", "Sectoriel");
                                 }
                                 else
                                 {
-                                    lstSect = null;
+                                    ModelState.AddModelError("", Resources.Messages.PasswordInvalid);
                                 }
-
-
-                                //Liste des secteurs de l'utilisateur
-                                Session["lstSect"] = lstSect;
-
-                                HttpCookie cookieCurrent = new HttpCookie("currentSect");
-                                cookieCurrent.Expires = DateTime.Now.AddMonths(3);
-
-                                if (lstSect == null)
-                                {
-                                    // Si l'utilisateur ne fait partie d'aucun secteur, le secteur courant est 0 
-                                    // et la page d'accueil de l'utilisateur affiche que l'utilisateur ne fait partie d'aucun secteur
-                                    Session["currentSecteur"] = 0;
-                                    cookieCurrent.Value = "0";
-                                }
-                                else
-                                {
-                                    //Index du secteur sélectionné dans la liste des secteurs de l'utilisateur
-                                    Session["currentSecteur"] = lstSect.First().ID;
-                                    cookieCurrent.Value = lstSect.First().ID.ToString();
-                                }
-
-                                
-                                
-                                Response.AppendCookie(cookieCurrent);
-
-                                Session["Culture"] = ci;
-
-                                if (model.RememberMe)
-                                {
-                                    HttpCookie cookie = new HttpCookie("lang");
-                                    cookie.Expires = DateTime.Now.AddMonths(3);
-                                    cookie.Value = ci.Name;
-                                    Response.AppendCookie(cookie);
-
-                                }
-
-                                currentUser.DERNIERECONNEXION = DateTime.Now;
-
-                                db.SaveChanges();
-
-                                return RedirectToAction("Index", "Sectoriel");
                             }
                             else
                             {
-                                ModelState.AddModelError("", Resources.Messages.PasswordInvalid);
+                                ModelState.AddModelError("", Resources.Messages.AccountNotConfirmed);
                             }
                         }
                         else
                         {
-                            ModelState.AddModelError("", Resources.Messages.AccountNotConfirmed);
+                            ModelState.AddModelError("", Resources.Messages.UserNotActive);
                         }
                     }
                     else

@@ -82,8 +82,12 @@ namespace projet_mozambique.Models
             ErrorMessageResourceType = typeof(Resources.Messages))]
         [Display(Name = "UserBDay", ResourceType = typeof(Names.DisplayName))]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime dateNaissance { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public Nullable<DateTime> dateNaissance { get; set; }
+
+        [Required(ErrorMessageResourceName = "fieldRequired",
+            ErrorMessageResourceType = typeof(Resources.Messages))]
+        public bool active { get; set; }
 
         public IEnumerable<System.Web.Mvc.SelectListItem> Ecoles { get; set; }
 
@@ -118,6 +122,10 @@ namespace projet_mozambique.Models
 
     public class ModifUtilisateurModel
     {
+        [Required(ErrorMessageResourceName = "fieldRequired",
+            ErrorMessageResourceType = typeof(Resources.Messages))]
+        public int idUtil { get; set; }
+        
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
            ErrorMessageResourceType = typeof(Resources.Messages))]
         [Display(Name = "UserName", ResourceType = typeof(Names.DisplayName))]
@@ -164,10 +172,15 @@ namespace projet_mozambique.Models
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
             ErrorMessageResourceType = typeof(Resources.Messages))]
         [Display(Name = "UserBDay", ResourceType = typeof(Names.DisplayName))]
-        public DateTime dateNaissance { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public Nullable<DateTime> dateNaissance { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
+        [Required(ErrorMessageResourceName = "fieldRequired",
             ErrorMessageResourceType = typeof(Resources.Messages))]
+        [Display(Name = "Etat", ResourceType = typeof(Names.DisplayName))]
+        public bool active { get; set; }
+
         [Display(Name = "LastConnexion", ResourceType = typeof(Names.DisplayName))]
         public DateTime derniereConnexion { get; set; }
 
@@ -177,25 +190,18 @@ namespace projet_mozambique.Models
         [StringLength(2)]
         public string langue { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
+        public IEnumerable<System.Web.Mvc.SelectListItem> Ecoles { get; set; }
+
+        [Required(ErrorMessageResourceName = "fieldRequired",
             ErrorMessageResourceType = typeof(Resources.Messages))]
         [Display(Name = "School", ResourceType = typeof(Names.DisplayName))]
         public int idEcole { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
-            ErrorMessageResourceType = typeof(Resources.Messages))]
-        [DataType(DataType.Password)]
-        [StringLength(100, ErrorMessageResourceName = "fieldStringLength",
-            ErrorMessageResourceType = typeof(Resources.Messages), MinimumLength = 6)]
-        [Display(Name = "NewPassword", ResourceType = typeof(Names.DisplayName))]
-        public string NewPassword { get; set; }
+        public IEnumerable<System.Web.Mvc.SelectListItem> Roles { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
             ErrorMessageResourceType = typeof(Resources.Messages))]
-        [DataType(DataType.Password)]
-        [Compare("NewPassword", ErrorMessageResourceName = "NewPasswordMatch",
-            ErrorMessageResourceType = typeof(Resources.Messages))]
-        [Display(Name = "ConfirmPassword", ResourceType = typeof(Names.DisplayName))]
-        public string ConfirmPassword { get; set; }
+        [Display(Name = "Role", ResourceType = typeof(Names.DisplayName))]
+        public string roleName { get; set; }
     }
 }

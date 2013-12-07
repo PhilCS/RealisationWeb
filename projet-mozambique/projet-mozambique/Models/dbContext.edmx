@@ -377,10 +377,11 @@
           <Property Name="NOM" Type="varchar" Nullable="false" MaxLength="60" />
           <Property Name="ADRESSE" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="VILLE" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="DATENAISSANCE" Type="date" Nullable="false" />
+          <Property Name="DATENAISSANCE" Type="datetime" Nullable="false" />
           <Property Name="DERNIERECONNEXION" Type="datetime" />
           <Property Name="LANGUE" Type="char" Nullable="false" MaxLength="2" />
           <Property Name="IDECOLE" Type="int" Nullable="false" />
+          <Property Name="ACTIF" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="UTILISATEURSECTEUR">
           <Key>
@@ -389,8 +390,8 @@
           </Key>
           <Property Name="IDUTILISATEUR" Type="int" Nullable="false" />
           <Property Name="IDSECTEUR" Type="int" Nullable="false" />
-          <Property Name="DEBUTACCES" Type="date" Nullable="false" />
-          <Property Name="FINACCES" Type="date" Nullable="false" />
+          <Property Name="DEBUTACCES" Type="datetime" Nullable="false" />
+          <Property Name="FINACCES" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="VOTESONDAGE">
           <Key>
@@ -479,7 +480,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ECOLESECT_ECOLE">
-          <End Role="ECOLE" Type="MVPModel.Store.ECOLE" Multiplicity="1" />
+          <End Role="ECOLE" Type="MVPModel.Store.ECOLE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ECOLESECTEUR" Type="MVPModel.Store.ECOLESECTEUR" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ECOLE">
@@ -491,7 +494,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ECOLESECT_SECT">
-          <End Role="SECTEUR" Type="MVPModel.Store.SECTEUR" Multiplicity="1" />
+          <End Role="SECTEUR" Type="MVPModel.Store.SECTEUR" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ECOLESECTEUR" Type="MVPModel.Store.ECOLESECTEUR" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SECTEUR">
@@ -541,7 +546,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EVENSECT_SECT">
-          <End Role="SECTEUR" Type="MVPModel.Store.SECTEUR" Multiplicity="1" />
+          <End Role="SECTEUR" Type="MVPModel.Store.SECTEUR" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="EVENEMENTSECTEUR" Type="MVPModel.Store.EVENEMENTSECTEUR" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SECTEUR">
@@ -595,7 +602,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MESS_UTIL">
-          <End Role="UTILISATEUR" Type="MVPModel.Store.UTILISATEUR" Multiplicity="1" />
+          <End Role="UTILISATEUR" Type="MVPModel.Store.UTILISATEUR" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MESSAGEFORUM" Type="MVPModel.Store.MESSAGEFORUM" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UTILISATEUR">
@@ -659,7 +668,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PUB_SECT">
-          <End Role="SECTEUR" Type="MVPModel.Store.SECTEUR" Multiplicity="1" />
+          <End Role="SECTEUR" Type="MVPModel.Store.SECTEUR" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="PUBLICATION" Type="MVPModel.Store.PUBLICATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SECTEUR">
@@ -719,7 +730,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SOND_SECT">
-          <End Role="SECTEUR" Type="MVPModel.Store.SECTEUR" Multiplicity="1" />
+          <End Role="SECTEUR" Type="MVPModel.Store.SECTEUR" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="SONDAGE" Type="MVPModel.Store.SONDAGE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SECTEUR">
@@ -755,7 +768,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UTILSECT_SECT">
-          <End Role="SECTEUR" Type="MVPModel.Store.SECTEUR" Multiplicity="1" />
+          <End Role="SECTEUR" Type="MVPModel.Store.SECTEUR" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="UTILISATEURSECTEUR" Type="MVPModel.Store.UTILISATEURSECTEUR" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SECTEUR">
@@ -767,7 +782,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UTILSECT_UTIL">
-          <End Role="UTILISATEUR" Type="MVPModel.Store.UTILISATEUR" Multiplicity="1" />
+          <End Role="UTILISATEUR" Type="MVPModel.Store.UTILISATEUR" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="UTILISATEURSECTEUR" Type="MVPModel.Store.UTILISATEURSECTEUR" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UTILISATEUR">
@@ -1853,7 +1870,7 @@
           <Property Name="NOM" Type="String" Nullable="false" MaxLength="60" Unicode="false" FixedLength="false" />
           <Property Name="ADRESSE" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="VILLE" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="DATENAISSANCE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DATENAISSANCE" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DERNIERECONNEXION" Type="DateTime" Precision="3" />
           <Property Name="LANGUE" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="true" />
           <Property Name="IDECOLE" Type="Int32" Nullable="false" />
@@ -1867,6 +1884,7 @@
           <NavigationProperty Name="UTILISATEURSECTEUR" Relationship="MVPModel.FK_UTILSECT_UTIL" FromRole="UTILISATEUR" ToRole="UTILISATEURSECTEUR" />
           <NavigationProperty Name="CHOIXSONDAGE" Relationship="MVPModel.VOTESONDAGE" FromRole="UTILISATEUR" ToRole="CHOIXSONDAGE" />
           <NavigationProperty Name="webpages_Roles" Relationship="MVPModel.webpages_UsersInRoles" FromRole="UTILISATEUR" ToRole="webpages_Roles" />
+          <Property Type="Boolean" Name="ACTIF" Nullable="false" />
         </EntityType>
         <EntityType Name="UTILISATEURSECTEUR">
           <Key>
@@ -1875,8 +1893,8 @@
           </Key>
           <Property Name="IDUTILISATEUR" Type="Int32" Nullable="false" />
           <Property Name="IDSECTEUR" Type="Int32" Nullable="false" />
-          <Property Name="DEBUTACCES" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="FINACCES" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DEBUTACCES" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FINACCES" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="SECTEUR" Relationship="MVPModel.FK_UTILSECT_SECT" FromRole="UTILISATEURSECTEUR" ToRole="SECTEUR" />
           <NavigationProperty Name="UTILISATEUR" Relationship="MVPModel.FK_UTILSECT_UTIL" FromRole="UTILISATEURSECTEUR" ToRole="UTILISATEUR" />
         </EntityType>
@@ -2675,6 +2693,7 @@
           <EntitySetMapping Name="UTILISATEUR">
             <EntityTypeMapping TypeName="MVPModel.UTILISATEUR">
               <MappingFragment StoreEntitySet="UTILISATEUR">
+                <ScalarProperty Name="ACTIF" ColumnName="ACTIF" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NOMUTIL" ColumnName="NOMUTIL" />
                 <ScalarProperty Name="COURRIEL" ColumnName="COURRIEL" />

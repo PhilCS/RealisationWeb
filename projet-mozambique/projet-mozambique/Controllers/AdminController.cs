@@ -43,21 +43,70 @@ namespace projet_mozambique.Controllers
         {
             if (!string.IsNullOrEmpty(Request.Form["rechUtils"]))
             {
+                IQueryable<UTILISATEUR> resultats;
                 if (!string.IsNullOrEmpty(txtInput))
                 {
-                    var resultats = from u in db.UTILISATEUR
-                                    where u.NOMUTIL.Contains(txtInput) || u.NOM.Contains(txtInput) || u.PRENOM.Contains(txtInput)
+                    if(idSecteur != 0)
+                    {
+                        resultats = from u in db.UTILISATEUR
+                                    where (u.NOMUTIL.Contains(txtInput) ||
+                                    u.NOM.Contains(txtInput) || u.PRENOM.Contains(txtInput)) &&
+                                    u.UTILISATEURSECTEUR.Any(s => s.IDSECTEUR == idSecteur)
                                     select u;
 
-                    List<UTILISATEUR> lstUtils = resultats.ToList();
-                    ViewData[Constantes.CLE_LISTE_UTILISATEURS] = lstUtils;
+                        if (idEcole != 0)
+                            resultats = resultats.Where(e => e.IDECOLE == idEcole);
+                    }
+                    else if (idEcole != 0)
+                    {
+                        resultats = from u in db.UTILISATEUR
+                                    where u.NOMUTIL.Contains(txtInput) ||
+                                    u.NOM.Contains(txtInput) || u.PRENOM.Contains(txtInput)
+                                    select u;
 
-                    List<ECOLE> lstEcoles = db.ECOLE.ToList();
-                    List<SECTEUR> lstSecteurs = db.SECTEUR.ToList();
-
-                    ViewData[Constantes.CLE_LISTE_ECOLES] = lstEcoles;
-                    ViewData[Constantes.CLE_SECTEURS] = lstSecteurs;
+                        resultats = resultats.Where(e => e.IDECOLE == idEcole);
+                    }
+                    else
+                    {
+                        resultats = from u in db.UTILISATEUR
+                                    where u.NOMUTIL.Contains(txtInput) || u.NOM.Contains(txtInput) ||
+                                    u.PRENOM.Contains(txtInput)
+                                    select u;
+                    }
                 }
+                else
+                {
+                    if (idSecteur != 0)
+                    {
+                        resultats = from u in db.UTILISATEUR
+                                    where u.UTILISATEURSECTEUR.Any(s => s.IDSECTEUR == idSecteur)
+                                    select u;
+
+                        if (idEcole != 0)
+                            resultats = resultats.Where(e => e.IDECOLE == idEcole);
+                        
+                    }
+                    else if (idEcole != 0)
+                    {
+                        resultats = from u in db.UTILISATEUR
+                                        where u.IDECOLE == idEcole
+                                        select u;
+                    }
+                    else
+                    {
+                        resultats = from u in db.UTILISATEUR
+                                        select u;
+                    }
+                }
+
+                List<UTILISATEUR> lstUtils = lstUtils = resultats.ToList();
+                ViewData[Constantes.CLE_LISTE_UTILISATEURS] = lstUtils;
+
+                List<ECOLE> lstEcoles = db.ECOLE.DefaultIfEmpty().ToList();
+                List<SECTEUR> lstSecteurs = db.SECTEUR.DefaultIfEmpty().ToList();
+
+                ViewData[Constantes.CLE_LISTE_ECOLES] = lstEcoles;
+                ViewData[Constantes.CLE_SECTEURS] = lstSecteurs;
             }
             return View();
         }
@@ -102,7 +151,8 @@ namespace projet_mozambique.Controllers
                         ADRESSE = model.adresse,
                         VILLE = model.ville,
                         DATENAISSANCE = model.dateNaissance,
-                        IDECOLE = model.idEcole
+                        IDECOLE = model.idEcole,
+                        ACTIF = model.active
                     }, requireConfirmationToken: true);
 
                     if (!string.IsNullOrEmpty(confirmToken))
@@ -167,25 +217,121 @@ namespace projet_mozambique.Controllers
             return View(model);
         }
 
-        public ActionResult ModifierUtilisateur(int? idUtil)
+        public ActionResult ModifUtilisateur(int? idUtil)
         {
-            return View("ModifUtilisateur");
+            if (idUtil != null)
+            {
+                UTILISATEUR leU = db.UTILISATEUR.SingleOrDefault(u => u.ID == idUtil);
+
+                List<ECOLE> lstEcoles = db.ECOLE.ToList();
+                List<webpages_Roles> lstRoles = db.webpages_Roles.ToList();
+
+                ModifUtilisateurModel model = new ModifUtilisateurModel();
+
+                model.nomUtil = leU.NOMUTIL;
+                model.courriel = leU.COURRIEL;
+                model.courrielConfirm = leU.COURRIEL;
+                model.prenom = leU.PRENOM;
+                model.nom = leU.NOM;
+                model.adresse = leU.ADRESSE;
+                model.ville = leU.VILLE;
+                model.dateNaissance = leU.DATENAISSANCE;
+                model.derniereConnexion = leU.DERNIERECONNEXION.Value;
+                model.langue = leU.LANGUE;
+                model.idEcole = leU.IDECOLE;
+                model.active = leU.ACTIF;
+                model.Ecoles = lstEcoles.Select(e => new SelectListItem
+                    {
+                        Text = e.NOM,
+                        Value = e.ID.ToString()
+                    });
+                model.Roles = lstRoles.Select(r => new SelectListItem
+                    {
+                        Text = r.RoleName,
+                        Value = r.RoleName
+                    });
+                model.roleName = leU.webpages_Roles.SingleOrDefault().RoleName;
+
+                return View(model);
+            }
+
+            return RedirectToAction("GestionUtilisateurs", "Admin");
         }
 
-        public ActionResult SupprimerUtilisateur(int? idUtil)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ModifUtilisateur(ModifUtilisateurModel model)
         {
-            return View();
-        }
+            if (ModelState.IsValid)
+            { 
+                UTILISATEUR u = db.UTILISATEUR.SingleOrDefault(i => i.ID == model.idUtil);
+                if(!u.NOMUTIL.Equals(model.nomUtil))
+                    u.NOMUTIL = model.nomUtil;
 
-        public ActionResult Ecoles()
-        {
-            //ViewData["ecole"] = nomEcole;
-            return View();
-        }
+                u.COURRIEL = model.courriel;
+                u.PRENOM = model.prenom;
+                u.NOM = model.nom;
+                u.ADRESSE = model.adresse;
+                u.VILLE = model.ville;
+                u.DATENAISSANCE = u.DATENAISSANCE;
+                u.LANGUE = model.langue;
+                u.IDECOLE = model.idEcole;
+                u.ACTIF = model.active;
+                
+                db.SaveChanges();
 
-        public ActionResult ajoutEcole()
-        {
-            return View("AjoutEcole");
+                string currentRole = u.webpages_Roles.FirstOrDefault().RoleName;
+
+                if (!currentRole.Equals(model.roleName))
+                {
+                    Roles.RemoveUserFromRole(u.NOMUTIL, currentRole);
+                    Roles.AddUserToRole(u.NOMUTIL, model.roleName);
+                }
+
+                if (currentRole.Equals("admin") && !currentRole.Equals(model.roleName))
+                {
+                    var utilSect = from uti in db.UTILISATEURSECTEUR
+                                   where uti.IDUTILISATEUR == u.ID
+                                   select uti;
+
+                    foreach(var utSect in utilSect)
+                    {
+                        UTILISATEURSECTEUR usect = (UTILISATEURSECTEUR)utSect;
+
+                        db.UTILISATEURSECTEUR.Remove(usect);
+                    }
+                }
+                if (model.roleName.Equals("admin"))
+                {
+                    List<SECTEUR> allSect = db.SECTEUR.ToList();
+
+                    int idUtil = WebSecurity.GetUserId(model.nomUtil);
+                    foreach (var s in allSect)
+                    {
+                        bool lienExiste = db.UTILISATEURSECTEUR.Any(us => us.IDSECTEUR == s.ID && us.IDUTILISATEUR == idUtil);
+                        
+                        if (!lienExiste)
+                        {
+                            UTILISATEURSECTEUR lien = new UTILISATEURSECTEUR();
+                            lien.IDSECTEUR = s.ID;
+                            lien.IDUTILISATEUR = idUtil;
+                            lien.DEBUTACCES = DateTime.Now;
+                            lien.FINACCES = DateTime.Now.AddYears(10);
+
+                            db.UTILISATEURSECTEUR.Add(lien);
+                        }
+                    }
+                }
+
+                db.SaveChanges();
+
+                TempData[Constantes.CLE_MSG_RETOUR] =
+                            new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.UserModifOk);
+
+                return RedirectToAction("GestionUtilisateurs", "Admin");
+            }
+
+            return View(model);
         }
 
         public ActionResult GestionSecteurs()
@@ -257,19 +403,34 @@ namespace projet_mozambique.Controllers
                 }
                 else
                 {
+
                     var allUtils = from u in db.UTILISATEUR
                                    where u.UTILISATEURSECTEUR.All(s => s.IDSECTEUR != idSect)
                                    select u;
+
+                    var ecolesSecteur = from e in db.ECOLE
+                                        where e.SECTEUR.Any(s => s.ID == idSect)
+                                        select e.ID;
+
+                    List<UTILISATEUR> lstAllUtils = new List<UTILISATEUR>();
+                    foreach (var e in ecolesSecteur)
+                    {
+                        foreach (var u in allUtils)
+                        {
+                            if (u.IDECOLE == e)
+                            {
+                                lstAllUtils.Add(u);
+                            }
+                        }
+                    }
+
 
                     var lesUtils = from u in db.UTILISATEURSECTEUR
                                    where u.IDSECTEUR == idSect
                                    select u.UTILISATEUR;
 
                     List<UTILISATEUR> lstUtils = lesUtils.ToList();
-                    List<UTILISATEUR> lstAllUtils = allUtils.ToList();
-
                     ViewData[Constantes.CLE_LISTE_UTILISATEURS] = lstUtils;
-                    //ViewData[Constantes.CLE_LISTE_UTILISATEURS_ALL] = lstAllUtils;
                     ViewData[Constantes.CLE_NOMSECTEUR] = leS.FirstOrDefault().NOM + "/" + leS.FirstOrDefault().NOMTRAD;
                     ViewData[Constantes.CLE_IDSECTEUR] = leS.FirstOrDefault().ID;
 
@@ -280,8 +441,11 @@ namespace projet_mozambique.Controllers
                             Text = u.NOMUTIL,
                             Value = u.ID.ToString()
                         }), 
-                        idSecteur = idSect.Value
+                        idSecteur = idSect.Value,
                     };
+
+                    model.debutAcces = DateTime.Now;
+                    model.finAcces = DateTime.Now.AddYears(1);
 
                     return View(model);
                 }

@@ -38,6 +38,7 @@ namespace projet_mozambique.Models
         public Nullable<System.DateTime> DERNIERECONNEXION { get; set; }
         public string LANGUE { get; set; }
         public int IDECOLE { get; set; }
+        public bool ACTIF { get; set; }
     
         public virtual ICollection<DESTINATAIREMESSAGE> DESTINATAIREMESSAGE { get; set; }
         public virtual ECOLE ECOLE { get; set; }

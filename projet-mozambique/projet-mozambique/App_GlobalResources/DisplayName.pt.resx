@@ -253,4 +253,7 @@
   <data name="FinAcces" xml:space="preserve">
     <value>Access end date *</value>
   </data>
+  <data name="Etat" xml:space="preserve">
+    <value>State</value>
+  </data>
 </root>

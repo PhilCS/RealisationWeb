@@ -1,0 +1,2 @@
+ALTER TABLE UTILISATEUR
+ADD ACTIF bit default 1 not null

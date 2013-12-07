@@ -301,4 +301,7 @@
     <value>Date de début</value>
     <comment>AjoutSondage</comment>
   </data>
+  <data name="Etat" xml:space="preserve">
+    <value>État</value>
+  </data>
 </root>

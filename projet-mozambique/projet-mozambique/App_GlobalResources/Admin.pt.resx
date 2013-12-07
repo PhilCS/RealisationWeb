@@ -193,4 +193,7 @@
   <data name="create" xml:space="preserve">
     <value>Create</value>
   </data>
+  <data name="resetPassword" xml:space="preserve">
+    <value>Reset password</value>
+  </data>
 </root>

@@ -250,6 +250,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Réinitialisation du mot de passe.
+        /// </summary>
+        internal static string resetPassword {
+            get {
+                return ResourceManager.GetString("resetPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Section publique.
         /// </summary>
         internal static string sectionPublique {
