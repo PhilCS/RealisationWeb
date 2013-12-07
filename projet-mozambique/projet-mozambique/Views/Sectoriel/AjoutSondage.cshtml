@@ -94,8 +94,9 @@
                 @Html.LabelFor(model => model.nbChoix)
             </td>
             <td>
-                @Html.DropDownListFor(model => model.nbChoix, new SelectList(listeNombreChoix, "Value", "Text"), new { onchange = "this.form.submit()" })
-                <p>@Html.ValidationMessageFor(model => model.nbChoix)</p>
+                @Html.DropDownListFor(model => model.nbChoix, new SelectList(listeNombreChoix, "Value", "Text"), new { id = "nbChoixSondages" })
+                @Html.ValidationMessageFor(model => model.nbChoix)
+                <p></p>
             </td>
         </tr>
 
@@ -123,6 +124,7 @@
             <td>
                 @Html.DropDownListFor(model => model.IDSECTEUR, new SelectList(listeSecteurs, "ID", "NOM"), "")
                 @Html.ValidationMessageFor(model => model.IDSECTEUR)
+                <p></p>
             </td>
         </tr>
 
@@ -162,8 +164,13 @@
 
 <script type="text/javascript" src="/Scripts/cocheLangueFormulaire.js"></script>
 <script type="text/javascript">
-    $("#sondage_datedebut").datepicker();
-    $("#sondage_datefin").datepicker();
+    var aujourdhui = new Date();
+    var demain = new Date(aujourdhui.getFullYear(), aujourdhui.getMonth(), aujourdhui.getDate() + 1);
+
+    $("#sondage_datedebut").datepicker({ minDate: aujourdhui });
+    $("#sondage_datefin").datepicker({ minDate: demain });
+
+    $("#nbChoixSondages").change(function () { this.form.submit() });
 
     $("#sondageFR").change(function () { cocheLangueFormulaire(this, "FR", "sondage") });
     $("#sondagePT").change(function () { cocheLangueFormulaire(this, "PT", "sondage") });

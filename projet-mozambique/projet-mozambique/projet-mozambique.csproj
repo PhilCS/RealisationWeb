@@ -150,6 +150,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Admin.pt.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\Sujets.pt.designer.cs">
+      <DependentUpon>Sujets.pt.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="App_GlobalResources\Sondages.pt.designer.cs">
       <DependentUpon>Sondages.pt.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -726,6 +731,10 @@
     <Content Include="App_GlobalResources\Sondages.pt.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Sondages.pt.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Sujets.pt.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Sujets.pt.designer.cs</LastGenOutput>
     </Content>
     <EmbeddedResource Include="App_GlobalResources\DisplayName.pt.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

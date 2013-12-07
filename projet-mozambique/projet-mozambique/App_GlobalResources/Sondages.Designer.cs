@@ -106,7 +106,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à La date de fin doit être égale ou supérieure à la date de début.
+        ///   Recherche une chaîne localisée semblable à La date de fin doit être supérieure à la date de début.
         /// </summary>
         internal static string dateFinAvantDebut {
             get {

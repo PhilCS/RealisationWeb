@@ -20,12 +20,6 @@
                 <li><a href="GestionPartenaires">@Resources.Partenaire.modifierSupprimerPartenaire</a></li>
             </ul>
         </li>
-        <li>@Resources.Shared.sujetsPublication
-            <ul>
-                <li><a href="AjoutSujet">@Resources.Sujets.ajouterSujet</a></li>
-                <li><a href="GestionSujets">@Resources.Sujets.modifierSupprimerSujet</a></li>
-            </ul>
-        </li>
         <li>@Html.ActionLink(@Resources.Shared.accueil, "ModifPagePublique", "Admin", new { nomPage = "accueil" }, null)</li>
         <li>@Html.ActionLink(@Resources.Shared.apropos, "ModifPagePublique", "Admin", new { nomPage = "about" }, null)</li>
         <li>@Html.ActionLink(@Resources.Shared.nousjoindre, "ModifPagePublique", "Admin", new { nomPage = "contact" }, null)</li>

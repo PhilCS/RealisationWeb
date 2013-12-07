@@ -161,22 +161,36 @@ namespace projet_mozambique.Controllers
             if (sondageMulti.langue2.CHOIXSONDAGES == null)
                 sondageMulti.langue2.CHOIXSONDAGES = new List<CHOIXSONDAGE>();
 
-            /*if (sondageMulti.langue1.CHOIXSONDAGES.Count > sondageMulti.nbChoix)
+
+            int l1ChoixCount = sondageMulti.langue1.CHOIXSONDAGES.Count;
+
+            if (l1ChoixCount > sondageMulti.nbChoix)
             {
-                sondageMulti.langue1.CHOIXSONDAGES = sondageMulti.langue1.CHOIXSONDAGES.RemoveRange(sondageMulti.langue1.CHOIXSONDAGES.C
+                sondageMulti.langue1.CHOIXSONDAGES.RemoveRange(sondageMulti.nbChoix, l1ChoixCount - sondageMulti.nbChoix);
             }
             else
-            {*/
-                for (int i = sondageMulti.langue1.CHOIXSONDAGES.Count; i < sondageMulti.nbChoix; i++)
+            {
+                for (int i = l1ChoixCount; i < sondageMulti.nbChoix; i++)
                 {
                     sondageMulti.langue1.CHOIXSONDAGES.Add(new CHOIXSONDAGE());
                 }
-            //}
-
-            for (int i = sondageMulti.langue2.CHOIXSONDAGES.Count; i < sondageMulti.nbChoix; i++)
-            {
-                sondageMulti.langue2.CHOIXSONDAGES.Add(new CHOIXSONDAGE());
             }
+
+
+            int l2ChoixCount = sondageMulti.langue2.CHOIXSONDAGES.Count;
+
+            if (l2ChoixCount > sondageMulti.nbChoix)
+            {
+                sondageMulti.langue2.CHOIXSONDAGES.RemoveRange(sondageMulti.nbChoix, l2ChoixCount - sondageMulti.nbChoix);
+            }
+            else
+            {
+                for (int i = l2ChoixCount; i < sondageMulti.nbChoix; i++)
+                {
+                    sondageMulti.langue2.CHOIXSONDAGES.Add(new CHOIXSONDAGE());
+                }
+            }
+
 
             if (!sondageMulti.langue1.langueChoisie && !sondageMulti.langue2.langueChoisie)
             {
