@@ -132,10 +132,6 @@
   <data name="publicationErreur" xml:space="preserve">
     <value>Une erreur s'est produite lors de l'ajout de la publication.</value>
   </data>
-  <data name="confirmerSupprPublication" xml:space="preserve">
-    <value>Voulez-vous vraiment supprimer "{0}"?</value>
-    <comment>{0} est remplacé par le nom de la publication</comment>
-  </data>
   <data name="idPublicationInvalide" xml:space="preserve">
     <value>La publication spécifiée est invalide ou inexistante.</value>
   </data>
@@ -149,12 +145,22 @@
     <value>Le fichier publié est inaccessible.</value>
   </data>
   <data name="rechercheCategorie" xml:space="preserve">
-    <value>Recherche par catégorie</value>
+    <value>Recherche par sujet</value>
   </data>
   <data name="rechercheMotCle" xml:space="preserve">
     <value>Recherche par mot clé</value>
   </data>
   <data name="aucunResultat" xml:space="preserve">
     <value>Aucun résultat</value>
+  </data>
+  <data name="motClesPlaceholder" xml:space="preserve">
+    <value>mot clé(s)</value>
+  </data>
+  <data name="supprimerPublication" xml:space="preserve">
+    <value>Supprimer une publication</value>
+  </data>
+  <data name="tous" xml:space="preserve">
+    <value>Tous</value>
+    <comment>"Tous" les sujets</comment>
   </data>
 </root>

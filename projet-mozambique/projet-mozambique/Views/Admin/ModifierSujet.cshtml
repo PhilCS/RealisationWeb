@@ -1,0 +1,91 @@
+﻿@using projet_mozambique.Utilitaires;
+@using projet_mozambique.Models;
+
+@model SUJETPUBLICATION
+
+@{
+    Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
+    
+    string postAction;
+    string boutonAction;
+
+    if (Model != null && Model.ID > 0)
+    {
+        ViewBag.Title = Resources.Sujets.modifierSujet;
+        <h1>@Resources.Sujets.modifierSujet</h1>
+        postAction = "ModifierSujet";
+        boutonAction = Resources.Shared.modifier;
+    }
+    else
+    {
+        ViewBag.Title = Resources.Sujets.ajouterSujet;
+        <h1>@Resources.Sujets.ajouterSujet</h1>
+        postAction = "AjoutSujet";
+        boutonAction = Resources.Shared.ajouter;
+    }
+
+    string langueActive = Session["Culture"].ToString().ToUpper();
+
+    string nomLangue1;
+    string nomLangue2;
+
+    if (langueActive == "FR")
+    {
+        nomLangue1 = Resources.Shared.choixLangueFR;
+        nomLangue2 = Resources.Shared.choixLanguePT;
+    }
+    else
+    {
+        nomLangue1 = Resources.Shared.choixLanguePT;
+        nomLangue2 = Resources.Shared.choixLangueFR;
+    }
+}
+
+@using (Html.BeginForm(postAction, "Admin", FormMethod.Post, new { @class = "form-sujet" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.HiddenFor(model => model.ID)
+
+    <table id="formMultilangue">
+        <tr>
+            <th></th>
+            <th>@(nomLangue1)</th>
+            <th>@(nomLangue2)</th>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.NOM)
+            </td>
+
+            @if (langueActive == "FR")
+            {
+                <td>
+                    @Html.TextBoxFor(model => model.NOM)
+                    <p>@Html.ValidationMessageFor(model => model.NOM)</p>
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.NOMTRAD)
+                    <p>@Html.ValidationMessageFor(model => model.NOMTRAD)</p>
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.TextBoxFor(model => model.NOMTRAD)
+                    <p>@Html.ValidationMessageFor(model => model.NOMTRAD)</p>
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.NOM)
+                    <p>@Html.ValidationMessageFor(model => model.NOM)</p>
+                </td>
+            }
+        </tr>
+    </table>
+
+    <p>
+        <input type="submit" value="@boutonAction" class="btnForm" />
+    </p>
+}

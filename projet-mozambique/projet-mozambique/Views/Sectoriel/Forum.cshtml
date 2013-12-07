@@ -17,7 +17,7 @@
 
     <div class="forum">
     
-        <a href="NouveauFil"><img src="~/Content/images/icones/icon-add-black.png" title="@Resources.Sectoriel.nouveau" alt="Icône Nouveau fil" class="icone" /></a>
+        <a href="NouveauFil"><img src="~/Content/images/icones/icon-add-black.png" title="@Resources.Sectoriel.nouveau" alt="@Resources.Sectoriel.nouveau" class="icone" /></a>
     
         <ul class="nav-pagination">
             @if (lesFil.ShowFirstPage)
@@ -76,7 +76,7 @@
                         <td>@lesFil[i].nbMessages</td>
                         <td>@lesFil[i].nbLectures</td>
                         <td>@Resources.Shared.par @lesFil[i].dernierParticipant,<br />
-                            @lesFil[i].dateDerniereReponse.ToLongDateString().Replace(DateTime.Now.DayOfWeek.ToString() + ", ", "")
+                            @Dates.JourMoisAnnee(lesFil[i].dateDerniereReponse, Session)
                         </td>
                     </tr>
                 }

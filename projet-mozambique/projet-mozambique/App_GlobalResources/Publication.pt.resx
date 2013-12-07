@@ -121,7 +121,7 @@
     <value>Add a publication</value>
   </data>
   <data name="ajoutPublication" xml:space="preserve">
-    <value>Document publication</value>
+    <value>Publish a document</value>
   </data>
   <data name="fichierRequis" xml:space="preserve">
     <value>The file is required.</value>
@@ -130,11 +130,7 @@
     <value>The publication has been added.</value>
   </data>
   <data name="publicationErreur" xml:space="preserve">
-    <value>An error occured while addind the publication.</value>
-  </data>
-  <data name="confirmerSupprPublication" xml:space="preserve">
-    <value>Do you really want to delete "{0}"?</value>
-    <comment>{0} est remplacé par le nom de la publication</comment>
+    <value>An error occured while adding the publication.</value>
   </data>
   <data name="idPublicationInvalide" xml:space="preserve">
     <value>The specified publication is invalid or doesn't exist.</value>
@@ -149,12 +145,22 @@
     <value>The published file is not accessible.</value>
   </data>
   <data name="rechercheCategorie" xml:space="preserve">
-    <value>Search by category</value>
+    <value>Search by subject</value>
   </data>
   <data name="rechercheMotCle" xml:space="preserve">
-    <value>Search by keyword</value>
+    <value>Search by keyword(s)</value>
   </data>
   <data name="aucunResultat" xml:space="preserve">
     <value>No result</value>
+  </data>
+  <data name="motClesPlaceholder" xml:space="preserve">
+    <value>keyword(s)</value>
+  </data>
+  <data name="supprimerPublication" xml:space="preserve">
+    <value>Delete a publication</value>
+  </data>
+  <data name="tous" xml:space="preserve">
+    <value>All</value>
+    <comment>"Tous" les sujets</comment>
   </data>
 </root>

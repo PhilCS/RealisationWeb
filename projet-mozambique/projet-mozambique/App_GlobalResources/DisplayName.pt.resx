@@ -117,12 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Adress" xml:space="preserve">
-    <value>Adress *</value>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
     <comment>UserModel</comment>
   </data>
   <data name="City" xml:space="preserve">
-    <value>City *</value>
+    <value>City</value>
     <comment>UserModel</comment>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
@@ -137,11 +137,11 @@
     <value>From</value>
   </data>
   <data name="Email" xml:space="preserve">
-    <value>Email *</value>
+    <value>Email</value>
     <comment>UserModel</comment>
   </data>
   <data name="File" xml:space="preserve">
-    <value>Image (facultative)</value>
+    <value>File</value>
     <comment>ContentModel</comment>
   </data>
   <data name="FirstName" xml:space="preserve">
@@ -149,7 +149,7 @@
     <comment>UserModel</comment>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>Prefered Language *</value>
+    <value>Prefered Language</value>
     <comment>UserModel</comment>
   </data>
   <data name="LastName" xml:space="preserve">
@@ -201,7 +201,7 @@
     <comment>MessageModel</comment>
   </data>
   <data name="UrlImage" xml:space="preserve">
-    <value>Image url (optional)</value>
+    <value>Picture URL</value>
     <comment>ContentModel</comment>
   </data>
   <data name="UserName" xml:space="preserve">
@@ -209,11 +209,11 @@
     <comment>UserModel</comment>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>News description</value>
+    <value>Description</value>
     <comment>NouvelleModel</comment>
   </data>
   <data name="Titre" xml:space="preserve">
-    <value>News title</value>
+    <value>Title</value>
     <comment>NouvelleModel</comment>
   </data>
   <data name="ConfirmEmail" xml:space="preserve">
@@ -229,7 +229,7 @@
     <comment>ContentModel</comment>
   </data>
   <data name="UserBDay" xml:space="preserve">
-    <value>Date of birth : *</value>
+    <value>Date of birth *</value>
   </data>
   <data name="LastConnexion" xml:space="preserve">
     <value>Last connexion</value>
@@ -244,7 +244,7 @@
     <value>Role *</value>
   </data>
   <data name="Country" xml:space="preserve">
-    <value>Country *</value>
+    <value>Country</value>
     <comment>AjoutPartenaire</comment>
   </data>
   <data name="DebutAcces" xml:space="preserve">
@@ -255,5 +255,56 @@
   </data>
   <data name="Etat" xml:space="preserve">
     <value>State</value>
+  </data>
+  <data name="Choice" xml:space="preserve">
+    <value>Choice</value>
+    <comment>AjoutSondage</comment>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>End date</value>
+    <comment>AjoutSondage</comment>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Picture</value>
+    <comment>ContentModel</comment>
+  </data>
+  <data name="Keywords" xml:space="preserve">
+    <value>Keywords</value>
+    <comment>AjoutPublication</comment>
+  </data>
+  <data name="Mission" xml:space="preserve">
+    <value>Mission and values</value>
+    <comment>AjoutPartenaire</comment>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+    <comment>AjoutPartenaire</comment>
+  </data>
+  <data name="NumberChoices" xml:space="preserve">
+    <value>Number of choices</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+    <comment>AjoutPartenaire</comment>
+  </data>
+  <data name="Question" xml:space="preserve">
+    <value>Question</value>
+    <comment>AjoutSondage</comment>
+  </data>
+  <data name="Sector" xml:space="preserve">
+    <value>Sector</value>
+    <comment>AjoutPublication</comment>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Start date</value>
+    <comment>AjoutSondage</comment>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Subject</value>
+    <comment>AjoutPublication</comment>
+  </data>
+  <data name="Website" xml:space="preserve">
+    <value>Website</value>
+    <comment>AjoutPartenaire</comment>
   </data>
 </root>

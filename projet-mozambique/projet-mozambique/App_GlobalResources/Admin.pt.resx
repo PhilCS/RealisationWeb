@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ajouterNouvelle" xml:space="preserve">
-    <value>Add a news</value>
+    <value>Add an article</value>
   </data>
   <data name="CurrentImage" xml:space="preserve">
     <value>Current image</value>
@@ -151,19 +151,19 @@
     <value>Users administration</value>
   </data>
   <data name="modifierNouvelle" xml:space="preserve">
-    <value>Edit a news</value>
+    <value>Edit an article</value>
   </data>
   <data name="modifierSupprimerNouvelle" xml:space="preserve">
-    <value>Edit/Delete a news</value>
+    <value>Edit/Delete an article</value>
   </data>
   <data name="sectionPublique" xml:space="preserve">
     <value>Public section</value>
   </data>
   <data name="lstEcoles" xml:space="preserve">
-    <value>Schools' List</value>
+    <value>Schools list</value>
   </data>
   <data name="lstUtils" xml:space="preserve">
-    <value>Users' List</value>
+    <value>Users list</value>
     <comment>GestionSecteurs</comment>
   </data>
   <data name="RechUtils" xml:space="preserve">
@@ -173,7 +173,7 @@
     <value>Username, First Name, Last Name</value>
   </data>
   <data name="lstSecteurs" xml:space="preserve">
-    <value>Sectors' List</value>
+    <value>Sectors list</value>
   </data>
   <data name="tousEcoles" xml:space="preserve">
     <value>All schools</value>
@@ -195,5 +195,8 @@
   </data>
   <data name="resetPassword" xml:space="preserve">
     <value>Reset password</value>
+  </data>
+  <data name="menuPublications" xml:space="preserve">
+    <value>Publications administration</value>
   </data>
 </root>

@@ -7,19 +7,23 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace projet_mozambique.Models
 {
-    public class NouvelleModel
+    [MetadataType(typeof(ValidationNouvelle))]
+    public partial class NOUVELLE
     {
-        public int id { get; set; }
+        public bool langueChoisie { get; set; }
+        public string codeLangue { get; set; }
+        public string nomLangue { get; set; }
 
-        [MaxLength(100)]
-        [Required(ErrorMessageResourceName = "titreVide", ErrorMessageResourceType = typeof(Resources.Messages))]
-        [Display(Name = "Title", ResourceType = typeof(Names.DisplayName))]
-        public string titre { get; set; }
+        private class ValidationNouvelle
+        {
+            [Required]
+            [Display(Name = "Title", ResourceType = typeof(Names.DisplayName))]
+            [MaxLength(100)]
+            public string TITRE { get; set; }
 
-        [Required(ErrorMessageResourceName = "descriptionVide", ErrorMessageResourceType = typeof(Resources.Messages))]
-        [Display(Name = "Description", ResourceType = typeof(Names.DisplayName))]
-        public string description { get; set; }
-
-        public System.DateTime datePublication { get; set; }
+            [Required]
+            [Display(Name = "Description", ResourceType = typeof(Names.DisplayName))]
+            public string DESCRIPTION { get; set; }
+        }
     }
 }

@@ -4,7 +4,7 @@
     ViewBag.Title = @Resources.Admin.menuUtil;
     
     <h1>
-        <a href="AjoutUtilisateur" style="display:inline;"><img src="~/Content/images/icones/icon-add-black.png" title="@Resources.Sectoriel.nouveau" alt="Icône Nouveau secteur" /></a>
+        <a href="AjoutUtilisateur" style="display:inline;"><img src="~/Content/images/icones/icon-add-black.png" title="@Resources.Sectoriel.nouveau" alt="@Resources.Sectoriel.nouveau" /></a>
         @ViewBag.Title 
     </h1>
     List<ECOLE> lstE = ViewData[Constantes.CLE_LISTE_ECOLES] as List<ECOLE>;

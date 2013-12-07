@@ -97,6 +97,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Vous devez sélectionner au moins une langue.
+        /// </summary>
+        internal static string aucuneLangueErreur {
+            get {
+                return ResourceManager.GetString("aucuneLangueErreur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Le contenu du message ne peut être vide..
         /// </summary>
         internal static string contenuObligatoire {
@@ -286,42 +295,6 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à La nouvelle a bien été ajoutée..
-        /// </summary>
-        internal static string nouvelleAjoutee {
-            get {
-                return ResourceManager.GetString("nouvelleAjoutee", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à La nouvelle a bien été modifiée..
-        /// </summary>
-        internal static string nouvelleModifiee {
-            get {
-                return ResourceManager.GetString("nouvelleModifiee", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à La nouvelle n&apos;a pu être ajoutée..
-        /// </summary>
-        internal static string nouvellePasAjoutee {
-            get {
-                return ResourceManager.GetString("nouvellePasAjoutee", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à La nouvelle a bien été supprimée..
-        /// </summary>
-        internal static string nouvelleSupprimee {
-            get {
-                return ResourceManager.GetString("nouvelleSupprimee", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Votre mot de passe n&apos;a pas été changé..
         /// </summary>
         internal static string PasswordChangeNotOK {
@@ -367,20 +340,20 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Votre mot de passe n&apos;a pas été réinitialisé..
+        /// </summary>
+        internal static string ResetPasswordInvalid {
+            get {
+                return ResourceManager.GetString("ResetPasswordInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Votre mot de passe a bien été réinitialisé..
         /// </summary>
         internal static string ResetPasswordOK {
             get {
                 return ResourceManager.GetString("ResetPasswordOK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Votre mot de passe n&apos;a pas été réinitialisé..
-        /// </summary>
-        internal static string ResetPasswortInvalid {
-            get {
-                return ResourceManager.GetString("ResetPasswortInvalid", resourceCulture);
             }
         }
         

@@ -42,7 +42,7 @@ namespace projet_mozambique.Controllers
                 return RedirectToAction("SupprimerPartenaire", new { @id = id });
             }
 
-            return RedirectToAction("GestionPartenaires");
+            return RedirectToAction("GestionPartenaires", new { @id = id });
         }
 
         [HttpGet]
@@ -62,7 +62,7 @@ namespace projet_mozambique.Controllers
                     db.AjouterPartenaire(envoiPart.NOM, envoiPart.RAISONSOCIALE, envoiPart.ADRESSE, envoiPart.VILLE, envoiPart.PAYS, envoiPart.TELEPHONE, envoiPart.SITEWEB, envoiPart.COURRIEL);
 
                     TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Partenaire.partenaireAjoute);
-                    return RedirectToAction("Partenaires", "Public");
+                    return RedirectToAction("SectionPublique");
                 }
                 catch (Exception ex)
                 {
@@ -88,7 +88,7 @@ namespace projet_mozambique.Controllers
             catch
             {
                 TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Partenaire.partenaireInexistant);
-                return RedirectToAction("Partenaires", "Public");
+                return RedirectToAction("GestionPartenaires");
             }
 
             if (part != null)

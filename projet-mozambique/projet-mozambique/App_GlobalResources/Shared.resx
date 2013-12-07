@@ -153,6 +153,10 @@
   <data name="confirmer" xml:space="preserve">
     <value>Confirmer</value>
   </data>
+  <data name="confirmerSuppression" xml:space="preserve">
+    <value>Voulez-vous vraiment supprimer "{0}"?</value>
+    <comment>{0} est remplacé par le nom de l'entité à supprimer à l'aide de String.Format</comment>
+  </data>
   <data name="derniereModifLe" xml:space="preserve">
     <value>Dernière modification le</value>
   </data>
@@ -257,6 +261,9 @@
   </data>
   <data name="sondages" xml:space="preserve">
     <value>Sondages</value>
+  </data>
+  <data name="sujetsPublication" xml:space="preserve">
+    <value>Sujets de publication</value>
   </data>
   <data name="supprimer" xml:space="preserve">
     <value>Supprimer</value>

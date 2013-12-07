@@ -1,0 +1,33 @@
+﻿@using projet_mozambique.Utilitaires
+@{
+    ViewBag.Title = @Resources.Admin.menuPublique;
+    var msg = (ViewData[Constantes.CLE_MSG_RETOUR] as Message);
+
+    <h1>@ViewBag.Title</h1>
+    
+    Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
+    
+    <ul>
+        <li>@Resources.Shared.publications
+            <ul>
+                <li><a href="/Sectoriel/AjoutPublication">@Resources.Publication.ajouterPublication</a></li>
+                <li><a href="/Sectoriel/Publications">@Resources.Publication.supprimerPublication</a></li>
+            </ul>
+        </li>
+        <li>@Resources.Shared.sujetsPublication
+            <ul>
+                <li><a href="AjoutSujet">@Resources.Sujets.ajouterSujet</a></li>
+                <li><a href="GestionSujets">@Resources.Sujets.modifierSupprimerSujet</a></li>
+            </ul>
+        </li>
+    </ul>
+    
+}
+
+@*
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".nav-secondaire").toggle();
+    });
+</script>
+*@

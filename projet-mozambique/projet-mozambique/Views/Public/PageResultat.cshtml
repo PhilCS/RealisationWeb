@@ -15,7 +15,7 @@
                 @for (int i = 0; i < lstNouv.Count; i++)
                 {
                     string affiche = lstNouv[i].TITRE + " // " + " " + Resources.Shared.publieLe + " " +
-                        lstNouv[i].DATEPUBLICATION.ToString("yyyy/MM/dd");
+                        Dates.JourMoisAnnee(lstNouv[i].DATEPUBLICATION, Session);
                     
                     <li>@Html.ActionLink(affiche, 
                                         "getNouvelle",

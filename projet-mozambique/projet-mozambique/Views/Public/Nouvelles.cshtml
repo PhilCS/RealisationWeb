@@ -3,11 +3,11 @@
 @{
     ViewBag.Title = Resources.Public.nouvelles;
     
-    var lesNouvelles = (ViewData[Constantes.CLE_NOUVELLES] as ListePaginee<GetNouvelles_Result>);
+    var lesNouvelles = (ViewData[Constantes.CLE_NOUVELLES] as ListePaginee<NOUVELLE>);
     
     <h1>@Resources.Public.nouvelles</h1>
     <div>
-    <form action="getResultats" method="post">
+    <form action="getResultats" method="get">
         <input type="hidden" name="type" value="@Constantes.RECH_NOUVELLES" />
         <input type="text" name="recherche" maxlength="100" style="width:300px;"/>
         <input type="submit" value="@Resources.Shared.rechercher" class="btnForm" style="margin-left:10px;"/>
@@ -43,7 +43,7 @@
         <div class="article">
             <p class="titre">@lesNouvelles[i].TITRE</p>
             <p class="datepubli">
-               @Resources.Shared.publieLe @lesNouvelles[i].DATEPUBLICATION.ToString("yyyy/MM/dd")
+               @Resources.Shared.publieLe @Dates.JourMoisAnnee(lesNouvelles[i].DATEPUBLICATION, Session)
             </p>
 
             @if (longMax < 300) {

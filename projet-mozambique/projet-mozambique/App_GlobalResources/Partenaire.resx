@@ -138,10 +138,6 @@
   <data name="partenaireModifie" xml:space="preserve">
     <value>Le partenaire a bien été mis à jour.</value>
   </data>
-  <data name="confirmerSupprPartenaire" xml:space="preserve">
-    <value>Voulez-vous vraiment supprimer "{0}"?</value>
-    <comment>{0} est remplacé par le nom du partenaire</comment>
-  </data>
   <data name="modifierSupprimerPartenaire" xml:space="preserve">
     <value>Modifier/Supprimer un partenaire</value>
   </data>

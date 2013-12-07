@@ -184,17 +184,25 @@ namespace projet_mozambique.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AjouterMotCle", idpubParameter, valeurParameter, return_value);
         }
     
-        public virtual int AjouterNouvelle(string titre, string description)
+        public virtual int AjouterNouvelle(string titre, string titretrad, string description, string descriptiontrad)
         {
             var titreParameter = titre != null ?
                 new ObjectParameter("titre", titre) :
                 new ObjectParameter("titre", typeof(string));
     
+            var titretradParameter = titretrad != null ?
+                new ObjectParameter("titretrad", titretrad) :
+                new ObjectParameter("titretrad", typeof(string));
+    
             var descriptionParameter = description != null ?
                 new ObjectParameter("description", description) :
                 new ObjectParameter("description", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AjouterNouvelle", titreParameter, descriptionParameter);
+            var descriptiontradParameter = descriptiontrad != null ?
+                new ObjectParameter("descriptiontrad", descriptiontrad) :
+                new ObjectParameter("descriptiontrad", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AjouterNouvelle", titreParameter, titretradParameter, descriptionParameter, descriptiontradParameter);
         }
     
         public virtual int AjouterPartenaire(string nom, string raisonsociale, string adr, string ville, string pays, string tel, string siteweb, string courriel)
@@ -364,13 +372,17 @@ namespace projet_mozambique.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AjouterSondage", nomParameter, nomtradParameter, questionParameter, questiontradParameter, debutParameter, finParameter, createurParameter, secteurParameter, idsondage);
         }
     
-        public virtual int AjouterSujetPub(string sujet)
+        public virtual int AjouterSujetPub(string nom, string nomtrad)
         {
-            var sujetParameter = sujet != null ?
-                new ObjectParameter("sujet", sujet) :
-                new ObjectParameter("sujet", typeof(string));
+            var nomParameter = nom != null ?
+                new ObjectParameter("nom", nom) :
+                new ObjectParameter("nom", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AjouterSujetPub", sujetParameter);
+            var nomtradParameter = nomtrad != null ?
+                new ObjectParameter("nomtrad", nomtrad) :
+                new ObjectParameter("nomtrad", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AjouterSujetPub", nomParameter, nomtradParameter);
         }
     
         public virtual int AjouterUtilSecteur(Nullable<int> id, Nullable<int> secteur)
@@ -507,18 +519,32 @@ namespace projet_mozambique.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMessagesSupprimes_Result>("GetMessagesSupprimes", idUtilParameter);
         }
     
-        public virtual ObjectResult<GetNouvelle_Result> GetNouvelle(Nullable<int> idNouvelle)
+        public virtual ObjectResult<NOUVELLE> GetNouvelle(Nullable<int> idNouvelle)
         {
             var idNouvelleParameter = idNouvelle.HasValue ?
                 new ObjectParameter("idNouvelle", idNouvelle) :
                 new ObjectParameter("idNouvelle", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetNouvelle_Result>("GetNouvelle", idNouvelleParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<NOUVELLE>("GetNouvelle", idNouvelleParameter);
         }
     
-        public virtual ObjectResult<GetNouvelles_Result> GetNouvelles()
+        public virtual ObjectResult<NOUVELLE> GetNouvelle(Nullable<int> idNouvelle, MergeOption mergeOption)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetNouvelles_Result>("GetNouvelles");
+            var idNouvelleParameter = idNouvelle.HasValue ?
+                new ObjectParameter("idNouvelle", idNouvelle) :
+                new ObjectParameter("idNouvelle", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<NOUVELLE>("GetNouvelle", mergeOption, idNouvelleParameter);
+        }
+    
+        public virtual ObjectResult<NOUVELLE> GetNouvelles()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<NOUVELLE>("GetNouvelles");
+        }
+    
+        public virtual ObjectResult<NOUVELLE> GetNouvelles(MergeOption mergeOption)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<NOUVELLE>("GetNouvelles", mergeOption);
         }
     
         public virtual ObjectResult<PARTENAIRE> GetPartenaire(Nullable<int> idpar)
@@ -851,7 +877,7 @@ namespace projet_mozambique.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ModifierMessageForum", idParameter, contenuParameter);
         }
     
-        public virtual int ModifierNouvelle(Nullable<int> id, string titre, string description)
+        public virtual int ModifierNouvelle(Nullable<int> id, string titre, string titretrad, string description, string descriptiontrad)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("id", id) :
@@ -861,11 +887,19 @@ namespace projet_mozambique.Models
                 new ObjectParameter("titre", titre) :
                 new ObjectParameter("titre", typeof(string));
     
+            var titretradParameter = titretrad != null ?
+                new ObjectParameter("titretrad", titretrad) :
+                new ObjectParameter("titretrad", typeof(string));
+    
             var descriptionParameter = description != null ?
                 new ObjectParameter("description", description) :
                 new ObjectParameter("description", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ModifierNouvelle", idParameter, titreParameter, descriptionParameter);
+            var descriptiontradParameter = descriptiontrad != null ?
+                new ObjectParameter("descriptiontrad", descriptiontrad) :
+                new ObjectParameter("descriptiontrad", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ModifierNouvelle", idParameter, titreParameter, titretradParameter, descriptionParameter, descriptiontradParameter);
         }
     
         public virtual int ModifierPartenaire(Nullable<int> id, string nom, string raisonsociale, string adr, string ville, string pays, string tel, string siteweb, string courriel)
@@ -1250,6 +1284,50 @@ namespace projet_mozambique.Models
                 new ObjectParameter("idsondage", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetVotesSondage_Result>("GetVotesSondage", idsondageParameter);
+        }
+    
+        public virtual ObjectResult<SUJETPUBLICATION> GetSujetPublication(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SUJETPUBLICATION>("GetSujetPublication", idParameter);
+        }
+    
+        public virtual ObjectResult<SUJETPUBLICATION> GetSujetPublication(Nullable<int> id, MergeOption mergeOption)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SUJETPUBLICATION>("GetSujetPublication", mergeOption, idParameter);
+        }
+    
+        public virtual int ModifierSujetPub(Nullable<int> id, string nom, string nomtrad)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var nomParameter = nom != null ?
+                new ObjectParameter("nom", nom) :
+                new ObjectParameter("nom", typeof(string));
+    
+            var nomtradParameter = nomtrad != null ?
+                new ObjectParameter("nomtrad", nomtrad) :
+                new ObjectParameter("nomtrad", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ModifierSujetPub", idParameter, nomParameter, nomtradParameter);
+        }
+    
+        public virtual int SupprimerSujetPub(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SupprimerSujetPub", idParameter);
         }
     }
 }

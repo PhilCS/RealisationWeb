@@ -31,7 +31,7 @@ namespace projet_mozambique.Controllers
                 }
             }
 
-            ViewData[Constantes.CLE_SONDAGES] = listeSondages;
+            ViewData[Constantes.CLE_SONDAGES] = listeSondages.Where(s => !String.IsNullOrEmpty(s.QUESTION) && s.CHOIXSONDAGES.Count > 0).ToList();
 
             return View();
         }
@@ -40,7 +40,7 @@ namespace projet_mozambique.Controllers
         public ActionResult Sondages()
         {
             List<SONDAGE> listeSondages = db.GetSondagesLocalises((int)Session["currentSecteur"], false, WebSecurity.CurrentUserId, Session);
-            ViewData[Constantes.CLE_SONDAGES] = listeSondages;
+            ViewData[Constantes.CLE_SONDAGES] = listeSondages.Where(s => !String.IsNullOrEmpty(s.QUESTION) && s.CHOIXSONDAGES.Count > 0).ToList();
 
             return View();
         }
@@ -76,14 +76,15 @@ namespace projet_mozambique.Controllers
                 TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Sondages.sondageInvalide);
             }
 
-            ViewData[Constantes.CLE_SONDAGES] = listeSondages;
+            ViewData[Constantes.CLE_SONDAGES] = listeSondages.Where(s => !String.IsNullOrEmpty(s.QUESTION) && s.CHOIXSONDAGES.Count > 0).ToList();
 
             return View();
         }
-    }
 
-    public partial class AdminController
-    {
+        private const string droitsSondage = "admin,professeur,professeurModerateur";
+
+        [HttpGet]
+        [AccessDeniedAuthorize(Roles = droitsSondage)]
         public ActionResult AjoutSondage()
         {
             SondageMultilangue sondageMulti = new SondageMultilangue();
@@ -91,9 +92,9 @@ namespace projet_mozambique.Controllers
             sondageMulti.langue1 = new SONDAGE();
             sondageMulti.langue2 = new SONDAGE();
 
-            var langue = Session["Culture"] ?? "";
+            var langue = (Session["Culture"] ?? "").ToString().ToUpper();
 
-            if (langue.ToString().ToUpper() == "FR")
+            if (langue == "FR")
             {
                 sondageMulti.langue1.nomLangue = Resources.Shared.choixLangueFR;
                 sondageMulti.langue2.nomLangue = Resources.Shared.choixLanguePT;
@@ -116,7 +117,12 @@ namespace projet_mozambique.Controllers
             sondageMulti.langue1.CHOIXSONDAGES = new List<CHOIXSONDAGE>();
             sondageMulti.langue2.CHOIXSONDAGES = new List<CHOIXSONDAGE>();
 
-            for (int i = 0; i < 2; i++)
+            List<SelectListItem> listeNombreChoix = Enumerable.Range(2, 9).Select(e => new SelectListItem { Text = e.ToString(), Value = e.ToString() }).ToList();
+            ViewData[Constantes.CLE_NOMBRE_CHOIX] = listeNombreChoix;
+
+            sondageMulti.nbChoix = 2;
+
+            for (int i = 0; i < sondageMulti.nbChoix; i++)
             {
                 sondageMulti.langue1.CHOIXSONDAGES.Add(new CHOIXSONDAGE { VALEUR = "" });
                 sondageMulti.langue2.CHOIXSONDAGES.Add(new CHOIXSONDAGE { VALEUR = "" });
@@ -130,6 +136,7 @@ namespace projet_mozambique.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AccessDeniedAuthorize(Roles = droitsSondage)]
         public ActionResult AjoutSondage(SondageMultilangue sondageMulti)
         {
             if (!sondageMulti.langue1.langueChoisie)
@@ -154,22 +161,26 @@ namespace projet_mozambique.Controllers
             if (sondageMulti.langue2.CHOIXSONDAGES == null)
                 sondageMulti.langue2.CHOIXSONDAGES = new List<CHOIXSONDAGE>();
 
-            int nbChoix = Math.Max(sondageMulti.langue1.CHOIXSONDAGES.Count(),
-                                   sondageMulti.langue2.CHOIXSONDAGES.Count());
-
-            for (int i = sondageMulti.langue1.CHOIXSONDAGES.Count(); i < nbChoix; i++)
+            /*if (sondageMulti.langue1.CHOIXSONDAGES.Count > sondageMulti.nbChoix)
             {
-                sondageMulti.langue1.CHOIXSONDAGES.Add(new CHOIXSONDAGE());
+                sondageMulti.langue1.CHOIXSONDAGES = sondageMulti.langue1.CHOIXSONDAGES.RemoveRange(sondageMulti.langue1.CHOIXSONDAGES.C
             }
+            else
+            {*/
+                for (int i = sondageMulti.langue1.CHOIXSONDAGES.Count; i < sondageMulti.nbChoix; i++)
+                {
+                    sondageMulti.langue1.CHOIXSONDAGES.Add(new CHOIXSONDAGE());
+                }
+            //}
 
-            for (int i = sondageMulti.langue2.CHOIXSONDAGES.Count(); i < nbChoix; i++)
+            for (int i = sondageMulti.langue2.CHOIXSONDAGES.Count; i < sondageMulti.nbChoix; i++)
             {
                 sondageMulti.langue2.CHOIXSONDAGES.Add(new CHOIXSONDAGE());
             }
 
             if (!sondageMulti.langue1.langueChoisie && !sondageMulti.langue2.langueChoisie)
             {
-                TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Sondages.aucuneLangueErreur);
+                TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Messages.aucuneLangueErreur);
             }
             else if (ModelState.IsValid)
             {
@@ -201,7 +212,7 @@ namespace projet_mozambique.Controllers
 
                     sondageMulti.IDSONDAGE = (int)idNouvSondage.Value;
 
-                    for (int i = 0; i < nbChoix; i++)
+                    for (int i = 0; i < sondageMulti.nbChoix; i++)
                     {
                         db.AjouterChoixSondage(sondageMulti.IDSONDAGE,
                                                sondageFR.CHOIXSONDAGES[i].VALEUR ?? "",
@@ -210,7 +221,7 @@ namespace projet_mozambique.Controllers
 
                     TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Sondages.sondageAjoute);
 
-                    //return RedirectToAction("Sondages", "Sectoriel");
+                    return RedirectToAction("Sondages", "Sectoriel");
                 }
                 catch (Exception ex)
                 {
@@ -218,10 +229,71 @@ namespace projet_mozambique.Controllers
                 }
             }
 
+            List<SelectListItem> listeNombreChoix = Enumerable.Range(2, 9).Select(e => new SelectListItem { Text = e.ToString(), Value = e.ToString() }).ToList();
+            ViewData[Constantes.CLE_NOMBRE_CHOIX] = listeNombreChoix;
+
             List<GetSecteurs_Result> listeSecteurs = db.GetSecteursLocalises(Session);
             ViewData[Constantes.CLE_SECTEURS] = listeSecteurs;
 
             return View(sondageMulti);
-        }        
+        }
+
+        [HttpGet]
+        [AccessDeniedAuthorize(Roles = droitsSondage)]
+        public ActionResult SupprimerSondage(int? id)
+        {
+            GetSondage_Result sond = null;
+
+            try
+            {
+                if (id == null)
+                    throw new ArgumentNullException("id");
+
+                sond = db.GetSondage(id).First();
+            }
+            catch
+            {
+                TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Sondages.idSondageInvalide);
+            }
+
+            if (sond != null)
+            {
+                return View(sond);
+            }
+
+            return RedirectToAction("ResultatsSondages", "Sectoriel");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AccessDeniedAuthorize(Roles = droitsSondage)]
+        public ActionResult SupprimerSondage(int? id, string confirmer, string annuler)
+        {
+            if (!String.IsNullOrEmpty(confirmer) && String.IsNullOrEmpty(annuler))
+            {
+                GetSondage_Result sond = null;
+
+                try
+                {
+                    if (id == null)
+                        throw new ArgumentNullException("id");
+
+                    sond = db.GetSondage(id).First();
+                }
+                catch
+                {
+                    TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Sondages.idSondageInvalide);
+                }
+
+                if (sond != null)
+                {
+                    db.SupprimerSondage(id);
+
+                    TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Sondages.sondageSupprime);
+                }
+            }
+
+            return RedirectToAction("ResultatsSondages", "Sectoriel");
+        }
     }
 }

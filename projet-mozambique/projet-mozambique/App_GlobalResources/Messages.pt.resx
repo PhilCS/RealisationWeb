@@ -156,18 +156,6 @@
   <data name="AccessDenied" xml:space="preserve">
     <value>You're not allowed in this section.</value>
   </data>
-  <data name="nouvelleAjoutee" xml:space="preserve">
-    <value>The news has been added.</value>
-  </data>
-  <data name="nouvelleModifiee" xml:space="preserve">
-    <value>The news has been modified.</value>
-  </data>
-  <data name="nouvellePasAjoutee" xml:space="preserve">
-    <value>The news could not be added.</value>
-  </data>
-  <data name="nouvelleSupprimee" xml:space="preserve">
-    <value>The news has been deleted.</value>
-  </data>
   <data name="sujetObligatoire" xml:space="preserve">
     <value>The message subject cannot be empty.</value>
   </data>
@@ -277,5 +265,11 @@
   </data>
   <data name="UserNotActive" xml:space="preserve">
     <value>You're not allowed because your account is not active.</value>
+  </data>
+  <data name="aucuneLangueErreur" xml:space="preserve">
+    <value>You must chose at least one language.</value>
+  </data>
+  <data name="SectModifOk" xml:space="preserve">
+    <value>The sector has been edited.</value>
   </data>
 </root>

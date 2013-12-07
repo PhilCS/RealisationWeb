@@ -3,6 +3,8 @@
 
 @{
     ViewBag.Title = Resources.Sondages.resultatsSondages;
+
+    Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
     
     var listeSondages = ViewData[Constantes.CLE_SONDAGES] as List<SONDAGE>;
 }
@@ -15,20 +17,26 @@
 }
 else
 {
-    for (int i = 0; i < listeSondages.Count; i++)
+    foreach (var unSondage in listeSondages)
     {
-        if (!String.IsNullOrEmpty(listeSondages[i].QUESTION))
+        if (!String.IsNullOrEmpty(unSondage.QUESTION))
         {
-            <hr/>
-            <div id="sondage@(listeSondages[i].ID)" class="sondage">
-                <h2>@listeSondages[i].NOM</h2>
-                <h3>@listeSondages[i].QUESTION</h3>
+            <hr class="line-separator" />
+            <div id="sondage@(unSondage.ID)" class="sondage">
+                <h2>
+                    @unSondage.NOM
+                    @if (User.IsInRole("etudiant") == false)
+                    {
+                        <a href="/Sectoriel/SupprimerSondage/@unSondage.ID"><img src="~/Content/images/icones/icon-trashcan.png" title="@Resources.Sondages.supprimerSondage" alt="@Resources.Shared.supprimer" class="icone" /></a>
+                    }
+                </h2>
+                <h3>@unSondage.QUESTION</h3>
 
                 <div class="choix-reponses">
                     <table>
-                        @foreach (var unChoix in listeSondages[i].CHOIXSONDAGES)
+                        @foreach (var unChoix in unSondage.CHOIXSONDAGES)
                         {
-                            var tailleVotes = (listeSondages[i].nbVotesTotal > 0 ? (unChoix.nbVotes / listeSondages[i].nbVotesTotal) * 500 : 0);
+                            var tailleVotes = (unSondage.nbVotesTotal > 0 ? (unChoix.nbVotes / unSondage.nbVotesTotal) * 500 : 0);
                 
                             <tr>
                                 <td>

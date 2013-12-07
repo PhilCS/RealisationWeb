@@ -79,15 +79,6 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Voulez-vous vraiment supprimer &quot;{0}&quot;?.
-        /// </summary>
-        internal static string confirmerSupprPartenaire {
-            get {
-                return ResourceManager.GetString("confirmerSupprPartenaire", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Modifier/Supprimer un partenaire.
         /// </summary>
         internal static string modifierSupprimerPartenaire {

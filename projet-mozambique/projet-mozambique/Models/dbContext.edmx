@@ -288,9 +288,11 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="TITRE" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="TITRE" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="DESCRIPTION" Type="text" Nullable="false" />
           <Property Name="DATEPUBLICATION" Type="datetime" Nullable="false" />
+          <Property Name="TITRETRAD" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="DESCRIPTIONTRAD" Type="text" Nullable="false" />
         </EntityType>
         <EntityType Name="PARTENAIRE">
           <Key>
@@ -340,7 +342,7 @@
           <Property Name="NOM" Type="varchar" Nullable="false" MaxLength="40" />
           <Property Name="TITREACCUEIL" Type="varchar" Nullable="false" MaxLength="40" />
           <Property Name="TEXTEACCUEIL" Type="text" Nullable="false" />
-          <Property Name="URLIMAGEACCUEIL" Type="varchar" MaxLength="100" />
+          <Property Name="URLIMAGEACCUEIL" Type="varchar" Nullable="false" MaxLength="100" />
           <Property Name="NOMTRAD" Type="varchar" Nullable="false" MaxLength="40" />
           <Property Name="TITREACCUEILTRAD" Type="varchar" Nullable="false" MaxLength="40" />
           <Property Name="TEXTEACCUEILTRAD" Type="text" Nullable="false" />
@@ -364,7 +366,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="NOM" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="NOM" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="NOMTRAD" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="UTILISATEUR">
           <Key>
@@ -682,7 +685,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PUB_SUJET">
-          <End Role="SUJETPUBLICATION" Type="MVPModel.Store.SUJETPUBLICATION" Multiplicity="1" />
+          <End Role="SUJETPUBLICATION" Type="MVPModel.Store.SUJETPUBLICATION" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="PUBLICATION" Type="MVPModel.Store.PUBLICATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SUJETPUBLICATION">
@@ -694,7 +699,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PUB_UTIL">
-          <End Role="UTILISATEUR" Type="MVPModel.Store.UTILISATEUR" Multiplicity="1" />
+          <End Role="UTILISATEUR" Type="MVPModel.Store.UTILISATEUR" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="PUBLICATION" Type="MVPModel.Store.PUBLICATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UTILISATEUR">
@@ -718,7 +725,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SOND_CREATEUR">
-          <End Role="UTILISATEUR" Type="MVPModel.Store.UTILISATEUR" Multiplicity="1" />
+          <End Role="UTILISATEUR" Type="MVPModel.Store.UTILISATEUR" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="SONDAGE" Type="MVPModel.Store.SONDAGE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UTILISATEUR">
@@ -862,8 +871,10 @@
           <Parameter Name="return_value" Type="int" Mode="InOut" />
         </Function>
         <Function Name="AjouterNouvelle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="titre" Type="varchar" Mode="In" />
+          <Parameter Name="titre" Type="nvarchar" Mode="In" />
+          <Parameter Name="titretrad" Type="nvarchar" Mode="In" />
           <Parameter Name="description" Type="text" Mode="In" />
+          <Parameter Name="descriptiontrad" Type="text" Mode="In" />
         </Function>
         <Function Name="AjouterPartenaire" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nom" Type="varchar" Mode="In" />
@@ -915,7 +926,8 @@
           <Parameter Name="idsondage" Type="int" Mode="InOut" />
         </Function>
         <Function Name="AjouterSujetPub" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="sujet" Type="varchar" Mode="In" />
+          <Parameter Name="nom" Type="nvarchar" Mode="In" />
+          <Parameter Name="nomtrad" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="AjouterUtilSecteur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
@@ -1002,6 +1014,9 @@
           <Parameter Name="resultats" Type="bit" Mode="In" />
           <Parameter Name="idutil" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetSujetPublication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetSujetsPublication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="getUtil" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="varchar" Mode="In" />
@@ -1058,8 +1073,10 @@
         </Function>
         <Function Name="ModifierNouvelle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
-          <Parameter Name="titre" Type="varchar" Mode="In" />
+          <Parameter Name="titre" Type="nvarchar" Mode="In" />
+          <Parameter Name="titretrad" Type="nvarchar" Mode="In" />
           <Parameter Name="description" Type="text" Mode="In" />
+          <Parameter Name="descriptiontrad" Type="text" Mode="In" />
         </Function>
         <Function Name="ModifierPartenaire" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
@@ -1088,6 +1105,11 @@
         <Function Name="ModifierSujetFilDiscussion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
           <Parameter Name="sujet" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ModifierSujetPub" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="nom" Type="nvarchar" Mode="In" />
+          <Parameter Name="nomtrad" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="ModifierUtilEcole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
@@ -1156,6 +1178,9 @@
           <Parameter Name="secteur" Type="int" Mode="In" />
         </Function>
         <Function Name="SupprimerSondage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SupprimerSujetPub" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
         <Function Name="SupprimerUtilisateur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1336,7 +1361,9 @@
           </FunctionImport>
           <FunctionImport Name="AjouterNouvelle">
             <Parameter Name="titre" Mode="In" Type="String" />
+            <Parameter Name="titretrad" Mode="In" Type="String" />
             <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="descriptiontrad" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="AjouterPartenaire">
             <Parameter Name="nom" Mode="In" Type="String" />
@@ -1388,7 +1415,8 @@
             <Parameter Name="idsondage" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="AjouterSujetPub">
-          <Parameter Name="sujet" Mode="In" Type="String" />
+            <Parameter Name="nom" Mode="In" Type="String" />
+            <Parameter Name="nomtrad" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="AjouterUtilSecteur">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1434,10 +1462,10 @@
           <FunctionImport Name="GetMessagesSupprimes" ReturnType="Collection(MVPModel.GetMessagesSupprimes_Result)">
           <Parameter Name="idUtil" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetNouvelle" ReturnType="Collection(MVPModel.GetNouvelle_Result)">
+          <FunctionImport Name="GetNouvelle" EntitySet="NOUVELLE" ReturnType="Collection(MVPModel.NOUVELLE)">
           <Parameter Name="idNouvelle" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetNouvelles" ReturnType="Collection(MVPModel.GetNouvelles_Result)" />
+          <FunctionImport Name="GetNouvelles" EntitySet="NOUVELLE" ReturnType="Collection(MVPModel.NOUVELLE)" />
           <FunctionImport Name="GetPartenaire" EntitySet="PARTENAIRE" ReturnType="Collection(MVPModel.PARTENAIRE)">
           <Parameter Name="idpar" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1521,7 +1549,9 @@
           <FunctionImport Name="ModifierNouvelle">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="titre" Mode="In" Type="String" />
+            <Parameter Name="titretrad" Mode="In" Type="String" />
             <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="descriptiontrad" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ModifierPartenaire">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1631,6 +1661,17 @@
           </FunctionImport>
           <FunctionImport Name="GetVotesSondage" ReturnType="Collection(MVPModel.GetVotesSondage_Result)">
           <Parameter Name="idsondage" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetSujetPublication" EntitySet="SUJETPUBLICATION" ReturnType="Collection(MVPModel.SUJETPUBLICATION)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ModifierSujetPub">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="nom" Mode="In" Type="String" />
+            <Parameter Name="nomtrad" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SupprimerSujetPub">
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="CATEGORIEEVENEMENT">
@@ -1766,9 +1807,11 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="TITRE" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="TITRE" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="DESCRIPTION" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
           <Property Name="DATEPUBLICATION" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Type="String" Name="TITRETRAD" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DESCRIPTIONTRAD" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PARTENAIRE">
           <Key>
@@ -1823,7 +1866,7 @@
           <Property Name="NOM" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
           <Property Name="TITREACCUEIL" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
           <Property Name="TEXTEACCUEIL" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
-          <Property Name="URLIMAGEACCUEIL" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="URLIMAGEACCUEIL" Type="String" MaxLength="100" Unicode="false" FixedLength="false" Nullable="false" />
           <NavigationProperty Name="FORUM" Relationship="MVPModel.FK_FORUM_SECT" FromRole="SECTEUR" ToRole="FORUM" />
           <NavigationProperty Name="PUBLICATION" Relationship="MVPModel.FK_PUB_SECT" FromRole="SECTEUR" ToRole="PUBLICATION" />
           <NavigationProperty Name="SONDAGE" Relationship="MVPModel.FK_SOND_SECT" FromRole="SECTEUR" ToRole="SONDAGE" />
@@ -1856,8 +1899,9 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="NOM" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="NOM" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="PUBLICATION" Relationship="MVPModel.FK_PUB_SUJET" FromRole="SUJETPUBLICATION" ToRole="PUBLICATION" />
+          <Property Type="String" Name="NOMTRAD" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UTILISATEUR">
           <Key>
@@ -2393,22 +2437,6 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
-        <ComplexType Name="GetSujetsPublication_Result">
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="NOM" Nullable="false" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="GetPubParID_Result">
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="TITRE" Nullable="false" MaxLength="60" />
-          <Property Type="DateTime" Name="DATECREATION" Nullable="false" Precision="23" />
-          <Property Type="String" Name="DESCRIPTION" Nullable="false" MaxLength="100" />
-          <Property Type="Int32" Name="IDPUBLICATEUR" Nullable="false" />
-          <Property Type="Int32" Name="IDSUJET" Nullable="false" />
-          <Property Type="Int32" Name="IDSECTEUR" Nullable="false" />
-          <Property Type="String" Name="MIMETYPE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="NOMFICHIERORIGINAL" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="NOMFICHIERSERVEUR" Nullable="true" MaxLength="32" />
-        </ComplexType>
         <ComplexType Name="GetPublication_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="TITRE" Nullable="false" MaxLength="60" />
@@ -2420,19 +2448,6 @@
           <Property Type="String" Name="MIMETYPE" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="NOMFICHIERORIGINAL" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="NOMFICHIERSERVEUR" Nullable="true" MaxLength="32" />
-        </ComplexType>
-        <ComplexType Name="GetPubParID_Result1">
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="TITRE" Nullable="false" MaxLength="60" />
-          <Property Type="DateTime" Name="DATECREATION" Nullable="false" Precision="23" />
-          <Property Type="String" Name="DESCRIPTION" Nullable="false" MaxLength="100" />
-          <Property Type="Int32" Name="IDPUBLICATEUR" Nullable="false" />
-          <Property Type="Int32" Name="IDSUJET" Nullable="false" />
-          <Property Type="Int32" Name="IDSECTEUR" Nullable="false" />
-          <Property Type="String" Name="MIMETYPE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="NOMFICHIERORIGINAL" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="NOMFICHIERSERVEUR" Nullable="true" MaxLength="32" />
-          <Property Type="Int32" Name="TAILLEFICHIER" Nullable="false" />
         </ComplexType>
         <ComplexType Name="GetSecteurs_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -2475,6 +2490,11 @@
           <Property Type="Int32" Name="IDSECTEUR" Nullable="false" />
           <Property Type="String" Name="NOMTRAD" Nullable="false" MaxLength="60" />
           <Property Type="String" Name="QUESTIONTRAD" Nullable="false" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="GetSujetsPublication_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="NOM" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NOMTRAD" Nullable="false" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2603,6 +2623,8 @@
           <EntitySetMapping Name="NOUVELLE">
             <EntityTypeMapping TypeName="MVPModel.NOUVELLE">
               <MappingFragment StoreEntitySet="NOUVELLE">
+                <ScalarProperty Name="DESCRIPTIONTRAD" ColumnName="DESCRIPTIONTRAD" />
+                <ScalarProperty Name="TITRETRAD" ColumnName="TITRETRAD" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="TITRE" ColumnName="TITRE" />
                 <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
@@ -2685,6 +2707,7 @@
           <EntitySetMapping Name="SUJETPUBLICATION">
             <EntityTypeMapping TypeName="MVPModel.SUJETPUBLICATION">
               <MappingFragment StoreEntitySet="SUJETPUBLICATION">
+                <ScalarProperty Name="NOMTRAD" ColumnName="NOMTRAD" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NOM" ColumnName="NOM" />
               </MappingFragment>
@@ -2938,24 +2961,8 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetNouvelle" FunctionName="MVPModel.Store.GetNouvelle">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MVPModel.GetNouvelle_Result">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="TITRE" ColumnName="TITRE" />
-                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
-                <ScalarProperty Name="DATEPUBLICATION" ColumnName="DATEPUBLICATION" />
-              </ComplexTypeMapping>
-            </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetNouvelles" FunctionName="MVPModel.Store.GetNouvelles">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MVPModel.GetNouvelles_Result">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="TITRE" ColumnName="TITRE" />
-                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
-                <ScalarProperty Name="DATEPUBLICATION" ColumnName="DATEPUBLICATION" />
-              </ComplexTypeMapping>
-            </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetPartenaire" FunctionName="MVPModel.Store.GetPartenaire">
           </FunctionImportMapping>
@@ -3106,6 +3113,7 @@
               <ComplexTypeMapping TypeName="MVPModel.GetSujetsPublication_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="NOMTRAD" ColumnName="NOMTRAD" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3125,6 +3133,10 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSujetPublication" FunctionName="MVPModel.Store.GetSujetPublication">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ModifierSujetPub" FunctionName="MVPModel.Store.ModifierSujetPub" />
+          <FunctionImportMapping FunctionImportName="SupprimerSujetPub" FunctionName="MVPModel.Store.SupprimerSujetPub" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -32,7 +32,7 @@ namespace projet_mozambique.Models
             [Required]
             public int IDSECTEUR { get; set; }
 
-            [Display(Name = "Category", ResourceType = typeof(Names.DisplayName))]
+            [Display(Name = "Subject", ResourceType = typeof(Names.DisplayName))]
             [Required]
             public int IDSUJET { get; set; }
         }

@@ -150,6 +150,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Admin.pt.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\Sondages.pt.designer.cs">
+      <DependentUpon>Sondages.pt.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_GlobalResources\Nouvelles.pt.designer.cs">
+      <DependentUpon>Nouvelles.pt.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_GlobalResources\Nouvelles.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Nouvelles.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_GlobalResources\Publication.pt.designer.cs">
       <DependentUpon>Publication.pt.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -225,6 +240,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Sondages.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\Sujets.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sujets.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -233,6 +253,8 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\PublicController.cs" />
     <Compile Include="Controllers\SectorielController.cs" />
+    <Compile Include="Controllers\Types\Sujets.cs" />
+    <Compile Include="Controllers\Types\Nouvelles.cs" />
     <Compile Include="Controllers\Types\Partenaires.cs" />
     <Compile Include="Controllers\Types\Publications.cs" />
     <Compile Include="Controllers\Types\Sondages.cs" />
@@ -251,24 +273,26 @@
     <Compile Include="Models\CONTENU.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\dbContext.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dbContext.edmx</DependentUpon>
-    </Compile>
+    <Compile Include="Models\AjoutSujet.cs" />
     <Compile Include="Models\dbContext1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetSujetsPublication_Result.cs">
+      <DependentUpon>dbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NouvelleMultilangue.cs" />
+    <Compile Include="Models\dbContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbContext.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\GetChoixSondage_Result.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GestionUtilisateursModel.cs" />
     <Compile Include="Models\GetPublication_Result.cs">
-      <DependentUpon>dbContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GetPubParID_Result1.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetSecteurs_Result.cs">
@@ -348,9 +372,6 @@
     <Compile Include="Models\GetPartenaire_Result.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\GetPubParID_Result.cs">
-      <DependentUpon>dbContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\GetPubParMotCle_Result.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
@@ -364,9 +385,6 @@
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetResultatsSondage_Result.cs">
-      <DependentUpon>dbContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GetSujetsPublication_Result.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetUtilParSecteur_Result.cs">
@@ -440,6 +458,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilitaires\Constantes.cs" />
     <Compile Include="Utilitaires\AccessDeniedAuthorizeAttribute.cs" />
+    <Compile Include="Utilitaires\Dates.cs" />
     <Compile Include="Utilitaires\Localisation.cs" />
     <Compile Include="Utilitaires\Fichiers.cs" />
     <Compile Include="Utilitaires\ListePaginee.cs" />
@@ -475,8 +494,6 @@
     <Content Include="Content\images\icones\icone-pen.png" />
     <Content Include="Content\images\photos\moz-agriculture.jpg" />
     <Content Include="Content\public.css" />
-    <Content Include="Scripts\langues.jquery-ui.datepicker.js" />
-    <Content Include="Content\Sectoriel.css" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -539,6 +556,21 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="Scripts\cocheLangueFormulaire.js" />
+    <None Include="Scripts\jquery-1.8.3.intellisense.js" />
+    <Content Include="Scripts\jquery-1.8.3.js" />
+    <Content Include="Scripts\jquery-1.8.3.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.10.3.js" />
+    <Content Include="Scripts\jquery-ui-1.10.3.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\langues.jquery-ui.datepicker.js" />
+    <Content Include="Content\Sectoriel.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <EntityDeploy Include="Models\dbContext.edmx">
@@ -558,19 +590,6 @@
       <DependentUpon>dbContext.edmx</DependentUpon>
       <LastGenOutput>dbContext1.cs</LastGenOutput>
     </Content>
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery-ui-1.10.3.js" />
-    <Content Include="Scripts\jquery-ui-1.10.3.min.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
@@ -616,7 +635,6 @@
     <Content Include="Views\Admin\GestionNouvelles.cshtml" />
     <Content Include="Views\Admin\ModifierPartenaire.cshtml" />
     <Content Include="Views\Admin\ModifPagePublique.cshtml" />
-    <Content Include="Views\Sectoriel\ResultRechDoc.cshtml" />
     <Content Include="Views\Shared\AfficherMsg.cshtml" />
     <Content Include="Views\Error\HttpError404.cshtml" />
     <Content Include="Views\Sectoriel\ListeMessages.cshtml" />
@@ -646,13 +664,18 @@
     <Content Include="Views\Admin\ModifSecteur.cshtml" />
     <Content Include="Views\Admin\AjoutSecteur.cshtml" />
     <Content Include="Views\Sectoriel\RepondreFil.cshtml" />
-    <Content Include="Views\Admin\GestionPartenaire.cshtml" />
     <Content Include="Views\Admin\ResultatsRecherche.cshtml" />
     <Content Include="Views\Sectoriel\ConfirmationCompte.cshtml" />
     <Content Include="Views\Emails\ConfirmAccount.cshtml" />
     <Content Include="Views\Sectoriel\ModifierMessageFil.cshtml" />
-    <Content Include="Views\Admin\AjoutSondage.cshtml" />
+    <Content Include="Views\Sectoriel\AjoutSondage.cshtml" />
     <Content Include="Views\Sectoriel\ResultatsSondages.cshtml" />
+    <Content Include="Views\Sectoriel\SupprimerSondage.cshtml" />
+    <Content Include="Views\Admin\ModifierSujet.cshtml" />
+    <Content Include="Views\Admin\AjoutSujet.cshtml" />
+    <Content Include="Views\Admin\SupprimerSujet.cshtml" />
+    <Content Include="Views\Admin\GestionSujets.cshtml" />
+    <Content Include="Views\Admin\GestionPublications.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -690,20 +713,31 @@
     <Content Include="App_GlobalResources\Partenaire.pt.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Partenaire.pt.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="App_GlobalResources\Publication.pt.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Publication.pt.designer.cs</LastGenOutput>
     </Content>
+    <Content Include="App_GlobalResources\Nouvelles.pt.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Nouvelles.pt.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Sondages.pt.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Sondages.pt.designer.cs</LastGenOutput>
+    </Content>
     <EmbeddedResource Include="App_GlobalResources\DisplayName.pt.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DisplayName.pt.designer.cs</LastGenOutput>
       <CustomToolNamespace>Names</CustomToolNamespace>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="App_GlobalResources\DisplayName.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DisplayName.designer.cs</LastGenOutput>
       <CustomToolNamespace>Names</CustomToolNamespace>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <Content Include="App_GlobalResources\Public.pt.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
@@ -717,9 +751,14 @@
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Sectoriel.designer.cs</LastGenOutput>
     </Content>
+    <Content Include="App_GlobalResources\Nouvelles.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Nouvelles.Designer.cs</LastGenOutput>
+    </Content>
     <EmbeddedResource Include="App_GlobalResources\Partenaire.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Partenaire.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <Content Include="App_GlobalResources\Public.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
@@ -728,10 +767,15 @@
     <EmbeddedResource Include="App_GlobalResources\Publication.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Publication.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <Content Include="App_GlobalResources\Sondages.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Sondages.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Sujets.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Sujets.Designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

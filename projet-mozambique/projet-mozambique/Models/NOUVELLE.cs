@@ -18,5 +18,7 @@ namespace projet_mozambique.Models
         public string TITRE { get; set; }
         public string DESCRIPTION { get; set; }
         public System.DateTime DATEPUBLICATION { get; set; }
+        public string TITRETRAD { get; set; }
+        public string DESCRIPTIONTRAD { get; set; }
     }
 }
