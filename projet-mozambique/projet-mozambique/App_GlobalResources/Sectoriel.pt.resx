@@ -238,4 +238,7 @@
     <value>Restore email</value>
     <comment>Messagerie</comment>
   </data>
+  <data name="subjectReset" xml:space="preserve">
+    <value>Reset your password</value>
+  </data>
 </root>

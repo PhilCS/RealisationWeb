@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="aucuneLangueErreur" xml:space="preserve">
-    <value>Vous devez sélectionner au moins une langue</value>
-  </data>
   <data name="aucunResultat" xml:space="preserve">
     <value>Aucun résultat disponible</value>
   </data>
@@ -163,5 +160,26 @@
   </data>
   <data name="voteSucces" xml:space="preserve">
     <value>Votre vote a été enregistré avec succès.</value>
+  </data>
+  <data name="ajouterSondage" xml:space="preserve">
+    <value>Ajouter un sondage</value>
+  </data>
+  <data name="ajoutSondage" xml:space="preserve">
+    <value>Ajout d'un sondage</value>
+  </data>
+  <data name="finLe" xml:space="preserve">
+    <value>Fin le</value>
+  </data>
+  <data name="idSondageInvalide" xml:space="preserve">
+    <value>Le sondage spécifié est invalide ou inexistant.</value>
+  </data>
+  <data name="sondageSupprime" xml:space="preserve">
+    <value>Le sondage a bien été supprimé.</value>
+  </data>
+  <data name="suppressionSondage" xml:space="preserve">
+    <value>Suppression d'un sondage</value>
+  </data>
+  <data name="supprimerSondage" xml:space="preserve">
+    <value>Supprimer un sondage</value>
   </data>
 </root>

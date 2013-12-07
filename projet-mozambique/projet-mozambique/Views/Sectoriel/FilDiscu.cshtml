@@ -9,7 +9,7 @@
         @f.sujet
         @if (User.IsInRole(Constantes.ROLE_ADMIN) || User.IsInRole(Constantes.ROLE_PROFMODERATEUR))
         {
-            <a href="#" id="modif-sujet"><img src="~/Content/images/icones/icone-pen.png" title="@Resources.Shared.modifier" alt="Icône Modifier" /></a>
+            <a href="#" id="modif-sujet"><img src="~/Content/images/icones/icone-pen.png" title="@Resources.Shared.modifier" alt="@Resources.Shared.modifier" /></a>
         }
     </h1>
 
@@ -43,10 +43,10 @@
         </ul>
 
     <div>
-        <a href="RepondreFilDiscu?idFil=@f.id"><img src="~/Content/images/icones/icon-reply-forum.png" title="@Resources.Sectoriel.repondre" alt="Icône Répondre" class="icone"/></a>
+        <a href="RepondreFilDiscu?idFil=@f.id"><img src="~/Content/images/icones/icon-reply-forum.png" title="@Resources.Sectoriel.repondre" alt="@Resources.Sectoriel.repondre" class="icone"/></a>
         @if (User.IsInRole(Constantes.ROLE_ADMIN) || User.IsInRole(Constantes.ROLE_PROFMODERATEUR))
         {
-            <a href="SupprimerFil?idFil=@f.id"><img src="~/Content/images/icones/icon-delete-forum.png" title="@Resources.Sectoriel.supprimer" alt="Icône Supprimer" class="icone" /></a>
+            <a href="SupprimerFil?idFil=@f.id"><img src="~/Content/images/icones/icon-delete-forum.png" title="@Resources.Sectoriel.supprimer" alt="@Resources.Sectoriel.supprimer" class="icone" /></a>
         }
     </div>
 
@@ -55,11 +55,11 @@
         <div class="forum-message">
             <div class="date-auteur-message">
                 <p>
-                    @Resources.Shared.par @m.auteur, @Resources.Shared.le @m.datePublication.ToLongDateString().Replace(DateTime.Now.DayOfWeek.ToString() + ", ", ""), @m.datePublication.ToShortTimeString()
+                    @Resources.Shared.par @m.auteur, @Resources.Shared.le @Dates.JourMoisAnnee(m.datePublication, Session), @m.datePublication.ToShortTimeString()
                     @if (m.dateModification != DateTime.MinValue)
                     { 
                         <br />
-                        <span class="infos-supp">@Resources.Shared.derniereModifLe @m.dateModification.ToLongDateString().Replace(DateTime.Now.DayOfWeek.ToString() + ", ", ""), @m.dateModification.ToShortTimeString() </span>
+                        <span class="infos-supp">@Resources.Shared.derniereModifLe @Dates.JourMoisAnnee(m.dateModification, Session), @m.dateModification.ToShortTimeString() </span>
                     }
                 </p>
             </div>
@@ -70,8 +70,8 @@
                 @if (User.IsInRole(Constantes.ROLE_ADMIN) || User.IsInRole(Constantes.ROLE_PROFMODERATEUR))
                 {
                     <div class="moderateur-fildiscu">
-                        <a href="SupprimerMessageFil?idMsg=@m.idMessage&idFil=@f.id&idPage=@f.listeMessages.PageIndex"><img src="~/Content/images/icones/icon-delete-forum-petit.png" title="@Resources.Shared.supprimer" alt="Icône Supprimer message" /></a>
-                        <a href="ModifierMsgFil?idMsg=@m.idMessage&idFil=@f.id&idPage=@f.listeMessages.PageIndex"><img src="~/Content/images/icones/icone-pen.png" title="@Resources.Shared.modifier" alt="Icône Modifier message" /></a>
+                        <a href="SupprimerMessageFil?idMsg=@m.idMessage&idFil=@f.id&idPage=@f.listeMessages.PageIndex"><img src="~/Content/images/icones/icon-delete-forum-petit.png" title="@Resources.Shared.supprimer" alt="@Resources.Shared.supprimer" /></a>
+                        <a href="ModifierMsgFil?idMsg=@m.idMessage&idFil=@f.id&idPage=@f.listeMessages.PageIndex"><img src="~/Content/images/icones/icone-pen.png" title="@Resources.Shared.modifier" alt="@Resources.Shared.modifier" /></a>
                     </div>
                 }
             </div>

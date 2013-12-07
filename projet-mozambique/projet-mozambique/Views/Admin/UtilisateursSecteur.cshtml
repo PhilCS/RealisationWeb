@@ -46,7 +46,7 @@
                     var utilSect = u.UTILISATEURSECTEUR.FirstOrDefault(us => us.IDSECTEUR == Model.idSecteur);
                     <li>
                        @u.PRENOM @u.NOM (@u.NOMUTIL) <strong>@utilSect.DEBUTACCES.ToShortDateString() - @utilSect.FINACCES.ToShortDateString()</strong>
-                       <a href="SupprimerUtilSecteur?idUtil=@u.ID&idSecteur=@Model.idSecteur" style="display:inline;"><img src="~/Content/images/icones/icon-trashcan.png" title="@Resources.Sectoriel.supprimer" alt="Icône Supprimer" /></a>
+                       <a href="SupprimerUtilSecteur?idUtil=@u.ID&idSecteur=@Model.idSecteur" style="display:inline;"><img src="~/Content/images/icones/icon-trashcan.png" title="@Resources.Sectoriel.supprimer" alt="@Resources.Sectoriel.supprimer" /></a>
 
                     </li> 
                 }

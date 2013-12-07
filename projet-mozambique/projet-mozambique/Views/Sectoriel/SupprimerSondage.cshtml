@@ -1,0 +1,21 @@
+﻿@model projet_mozambique.Models.GetSondage_Result
+
+@{
+    ViewBag.Title = Resources.Sondages.suppressionSondage;
+    
+    <h1>@Resources.Sondages.suppressionSondage</h1>
+    
+    using (Html.BeginForm("SupprimerSondage", "Sectoriel", FormMethod.Post, new { @class = "formulaire" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        @Html.HiddenFor(model => model.ID)
+
+        <div>@String.Format(Resources.Shared.confirmerSuppression, Model.NOM)</div>
+    
+        <div>
+            <input type="submit" class="btnForm" name="confirmer" value="@Resources.Shared.confirmer" /> &nbsp; <input type="submit" class="btnForm" name="annuler" value="@Resources.Shared.annuler" />
+        </div>
+    }
+}

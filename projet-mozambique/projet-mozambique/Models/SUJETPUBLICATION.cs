@@ -21,6 +21,7 @@ namespace projet_mozambique.Models
     
         public int ID { get; set; }
         public string NOM { get; set; }
+        public string NOMTRAD { get; set; }
     
         public virtual ICollection<PUBLICATION> PUBLICATION { get; set; }
     }

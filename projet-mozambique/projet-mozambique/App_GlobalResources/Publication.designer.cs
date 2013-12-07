@@ -88,15 +88,6 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Voulez-vous vraiment supprimer &quot;{0}&quot;?.
-        /// </summary>
-        internal static string confirmerSupprPublication {
-            get {
-                return ResourceManager.GetString("confirmerSupprPublication", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Le fichier est requis.
         /// </summary>
         internal static string fichierRequis {
@@ -111,6 +102,15 @@ namespace Resources {
         internal static string idPublicationInvalide {
             get {
                 return ResourceManager.GetString("idPublicationInvalide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à mot clé(s).
+        /// </summary>
+        internal static string motClesPlaceholder {
+            get {
+                return ResourceManager.GetString("motClesPlaceholder", resourceCulture);
             }
         }
         
@@ -151,7 +151,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Recherche par catégorie.
+        ///   Recherche une chaîne localisée semblable à Recherche par sujet.
         /// </summary>
         internal static string rechercheCategorie {
             get {
@@ -174,6 +174,24 @@ namespace Resources {
         internal static string suppressionPublication {
             get {
                 return ResourceManager.GetString("suppressionPublication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Supprimer une publication.
+        /// </summary>
+        internal static string supprimerPublication {
+            get {
+                return ResourceManager.GetString("supprimerPublication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Tous.
+        /// </summary>
+        internal static string tous {
+            get {
+                return ResourceManager.GetString("tous", resourceCulture);
             }
         }
     }

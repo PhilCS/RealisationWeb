@@ -10,42 +10,54 @@
     var listeSujetsPub = ViewData[Constantes.CLE_SUJETSPUBLICATION] as List<GetSujetsPublication_Result>;
     var listePub = ViewData[Constantes.CLE_PUBLICATIONS] as List<PUBLICATION>;
     int secteur = (int)ViewData[Constantes.CLE_IDSECTEUR];
+    int categorie = (int)ViewData[Constantes.CLE_IDCATEGORIE];
     
-    <h1>@if(User.IsInRole("etudiant") == false) { <a href="/Sectoriel/AjoutPublication"><img src="~/Content/images/icones/icon-add-black.png" title="@Resources.Publication.ajouterPublication" alt="+" class="icone" /></a>} @Resources.Shared.publications</h1>
+    <h1>
+        @if(User.IsInRole("etudiant") == false)
+        {
+            <a href="/Sectoriel/AjoutPublication" class="ajouter"><img src="~/Content/images/icones/icon-add-black.png" title="@Resources.Publication.ajouterPublication" alt="@Resources.Shared.ajouter" class="icone" /></a>
+        }
+        @Resources.Shared.publications
+    </h1>
     
-    <div class="nav-tab">
-        <ul>
-            @for (int i = 0; i < listeSecteurs.Count; i++)
-            {
-                <li>
-                    <a @if (listeSecteurs.Count() > 1) { <text> href="?secteur=@listeSecteurs[i].ID" </text> }
-                       @if (secteur == listeSecteurs[i].ID) { <text> class="tab-active" </text> }>@listeSecteurs[i].NOM</a>
-                </li>
-            }
-        </ul>
-    </div>
+    if (listeSecteurs.Count > 1)
+    {
+        <div class="nav-tab">
+            <ul>
+                @foreach (var unSecteur in listeSecteurs)
+                {
+                    <li>
+                        <a href="?secteur=@unSecteur.ID"
+                           @if (secteur == unSecteur.ID) { <text> class="tab-active" </text> }>@unSecteur.NOM</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
     
     <div class="recherche-doc">
 
         <form method="get">
             <input type="hidden" name="secteur" value="@secteur" />
             <label for="mot-cle">@Resources.Publication.rechercheMotCle : </label>
-            <input id="mot-cle" name="motscles" placeholder="mot clé(s)" type="text" value="@Request.QueryString["motscles"]"/><br />
+            <input id="mot-cle" name="motscles" placeholder="@Resources.Publication.motClesPlaceholder" type="text" value="@Request.QueryString["motscles"]"/><br />
             <label for="categorie">@Resources.Publication.rechercheCategorie : </label>
             <select name="categorie" id="categorie" class="lst-options-nouvelles">
-                <option value="">&lt;Toutes&gt;</option>
+                <option value="">&lt;@Resources.Publication.tous&gt;</option>
                 @foreach (GetSujetsPublication_Result sujetPub in listeSujetsPub)
                 {
-                    <option value="@sujetPub.ID" @if (Convert.ToInt32(Request.QueryString["categorie"]) == sujetPub.ID) { <text> selected="selected" </text> }>@sujetPub.NOM</option>
+                    <option value="@sujetPub.ID" @if (categorie == sujetPub.ID) { <text> selected="selected" </text> }>@sujetPub.NOM</option>
                 }
             </select>
 
-            <input type="submit" value="Rechercher" class="btnForm" />
+            <div>
+                <input type="submit" value="@Resources.Shared.rechercher" class="btnForm" />
+            </div>
         </form>
 
     </div>
 
-    <div class="line-separator"></div>
+    <hr class="line-separator" />
 
     if (listePub.Count > 0)
     {
@@ -66,11 +78,11 @@
                                 <li>
                                     <a href="ObtenirPublication?id=@publi.ID">
                                         <img src="~/Content/images/icones/icone-@(typeFichier).png" alt="Fichier @typeFichier" />@publi.TITRE
-                                        <span class="date-document">(ajouté le @publi.DATECREATION.ToLongDateString().Replace(DateTime.Now.DayOfWeek.ToString() + ", ", ""))</span> @*Ceci donne le jour, le mois, et l'année formattés correctement pour la langue du système*@
+                                        <span class="date-document">(ajouté le @Dates.JourMoisAnnee(publi.DATECREATION, Session)</span>
                                     </a>
                                     @if (User.IsInRole("etudiant") == false)
                                     {
-                                        <a href="/Sectoriel/SupprimerPublication/@publi.ID"><img src="~/Content/images/icones/icon-trashcan.png" title="Supprimer" alt="Icône supprimer document" class="icone" /></a>
+                                        <a href="/Sectoriel/SupprimerPublication/@publi.ID"><img src="~/Content/images/icones/icon-trashcan.png" title="@Resources.Publication.supprimerPublication" alt="@Resources.Shared.supprimer" class="icone" /></a>
                                     }
                                 </li>
                             }

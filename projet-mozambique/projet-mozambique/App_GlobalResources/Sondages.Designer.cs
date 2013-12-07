@@ -61,11 +61,20 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Vous devez sélectionner au moins une langue.
+        ///   Recherche une chaîne localisée semblable à Ajouter un sondage.
         /// </summary>
-        internal static string aucuneLangueErreur {
+        internal static string ajouterSondage {
             get {
-                return ResourceManager.GetString("aucuneLangueErreur", resourceCulture);
+                return ResourceManager.GetString("ajouterSondage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Ajout d&apos;un sondage.
+        /// </summary>
+        internal static string ajoutSondage {
+            get {
+                return ResourceManager.GetString("ajoutSondage", resourceCulture);
             }
         }
         
@@ -124,6 +133,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Fin le.
+        /// </summary>
+        internal static string finLe {
+            get {
+                return ResourceManager.GetString("finLe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Le sondage spécifié est invalide ou inexistant..
+        /// </summary>
+        internal static string idSondageInvalide {
+            get {
+                return ResourceManager.GetString("idSondageInvalide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Résultats des sondages.
         /// </summary>
         internal static string resultatsSondages {
@@ -165,6 +192,33 @@ namespace Resources {
         internal static string sondagesEnCours {
             get {
                 return ResourceManager.GetString("sondagesEnCours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Le sondage a bien été supprimé..
+        /// </summary>
+        internal static string sondageSupprime {
+            get {
+                return ResourceManager.GetString("sondageSupprime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Suppression d&apos;un sondage.
+        /// </summary>
+        internal static string suppressionSondage {
+            get {
+                return ResourceManager.GetString("suppressionSondage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Supprimer un sondage.
+        /// </summary>
+        internal static string supprimerSondage {
+            get {
+                return ResourceManager.GetString("supprimerSondage", resourceCulture);
             }
         }
         

@@ -156,18 +156,6 @@
   <data name="AccessDenied" xml:space="preserve">
     <value>Vous n'avez pas accès à cette section.</value>
   </data>
-  <data name="nouvelleAjoutee" xml:space="preserve">
-    <value>La nouvelle a bien été ajoutée.</value>
-  </data>
-  <data name="nouvelleModifiee" xml:space="preserve">
-    <value>La nouvelle a bien été modifiée.</value>
-  </data>
-  <data name="nouvellePasAjoutee" xml:space="preserve">
-    <value>La nouvelle n'a pu être ajoutée.</value>
-  </data>
-  <data name="nouvelleSupprimee" xml:space="preserve">
-    <value>La nouvelle a bien été supprimée.</value>
-  </data>
   <data name="sujetObligatoire" xml:space="preserve">
     <value>Le sujet du message ne peut être vide.</value>
   </data>
@@ -200,7 +188,7 @@
     <value>Votre mot de passe a bien été réinitialisé.</value>
     <comment>ConfirmationReinitialMotPasse</comment>
   </data>
-  <data name="ResetPasswortInvalid" xml:space="preserve">
+  <data name="ResetPasswordInvalid" xml:space="preserve">
     <value>Votre mot de passe n'a pas été réinitialisé.</value>
     <comment>ConfirmationReinitialMotPasse</comment>
   </data>
@@ -280,5 +268,8 @@
   </data>
   <data name="UserNotActive" xml:space="preserve">
     <value>Vous n'avez pas accès car votre compte est désactivé.</value>
+  </data>
+  <data name="aucuneLangueErreur" xml:space="preserve">
+    <value>Vous devez sélectionner au moins une langue</value>
   </data>
 </root>

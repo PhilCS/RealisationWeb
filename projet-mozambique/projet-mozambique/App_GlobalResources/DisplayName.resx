@@ -118,11 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Address" xml:space="preserve">
-    <value>Adresse *</value>
+    <value>Adresse</value>
     <comment>UserModel</comment>
   </data>
   <data name="City" xml:space="preserve">
-    <value>Ville *</value>
+    <value>Ville</value>
     <comment>UserModel</comment>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
@@ -137,7 +137,7 @@
     <value>De</value>
   </data>
   <data name="Email" xml:space="preserve">
-    <value>Courriel *</value>
+    <value>Courriel</value>
     <comment>UserModel</comment>
   </data>
   <data name="Image" xml:space="preserve">
@@ -149,7 +149,7 @@
     <comment>UserModel</comment>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>Langue de préférences</value>
+    <value>Langue de préférence</value>
     <comment>UserModel</comment>
   </data>
   <data name="LastName" xml:space="preserve">
@@ -201,23 +201,23 @@
     <comment>MessageModel</comment>
   </data>
   <data name="UrlImage" xml:space="preserve">
-    <value>URL de l'image (facultatif)</value>
+    <value>URL de l'image</value>
     <comment>ContentModel</comment>
   </data>
   <data name="UserName" xml:space="preserve">
     <value>Nom d'utilisateur  *</value>
     <comment>UserModel</comment>
   </data>
-  <data name="Category" xml:space="preserve">
-    <value>Catégorie</value>
+  <data name="Subject" xml:space="preserve">
+    <value>Sujet</value>
     <comment>AjoutPublication</comment>
   </data>
   <data name="Country" xml:space="preserve">
-    <value>Pays *</value>
+    <value>Pays</value>
     <comment>AjoutPartenaire</comment>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>Description *</value>
+    <value>Description</value>
     <comment>NouvelleModel, AjoutPublication</comment>
   </data>
   <data name="File" xml:space="preserve">
@@ -245,11 +245,11 @@
     <comment>AjoutPartenaire</comment>
   </data>
   <data name="Sector" xml:space="preserve">
-    <value>Secteur *</value>
+    <value>Secteur</value>
     <comment>AjoutPublication</comment>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Titre *</value>
+    <value>Titre</value>
     <comment>NouvelleModel, AjoutPublication</comment>
   </data>
   <data name="Website" xml:space="preserve">
@@ -303,5 +303,8 @@
   </data>
   <data name="Etat" xml:space="preserve">
     <value>État</value>
+  </data>
+  <data name="NumberChoices" xml:space="preserve">
+    <value>Nombre de choix</value>
   </data>
 </root>

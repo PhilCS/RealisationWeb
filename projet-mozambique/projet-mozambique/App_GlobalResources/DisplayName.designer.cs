@@ -61,20 +61,11 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Adresse *.
+        ///   Recherche une chaîne localisée semblable à Adresse.
         /// </summary>
         public static string Address {
             get {
                 return ResourceManager.GetString("Address", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Catégorie.
-        /// </summary>
-        public static string Category {
-            get {
-                return ResourceManager.GetString("Category", resourceCulture);
             }
         }
         
@@ -88,7 +79,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Ville *.
+        ///   Recherche une chaîne localisée semblable à Ville.
         /// </summary>
         public static string City {
             get {
@@ -124,7 +115,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Pays *.
+        ///   Recherche une chaîne localisée semblable à Pays.
         /// </summary>
         public static string Country {
             get {
@@ -151,7 +142,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Description *.
+        ///   Recherche une chaîne localisée semblable à Description.
         /// </summary>
         public static string Description {
             get {
@@ -160,7 +151,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Courriel *.
+        ///   Recherche une chaîne localisée semblable à Courriel.
         /// </summary>
         public static string Email {
             get {
@@ -232,7 +223,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Langue de préférences.
+        ///   Recherche une chaîne localisée semblable à Langue de préférence.
         /// </summary>
         public static string Language {
             get {
@@ -291,6 +282,15 @@ namespace Names {
         public static string NomsDest {
             get {
                 return ResourceManager.GetString("NomsDest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Nombre de choix.
+        /// </summary>
+        public static string NumberChoices {
+            get {
+                return ResourceManager.GetString("NumberChoices", resourceCulture);
             }
         }
         
@@ -421,7 +421,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Secteur *.
+        ///   Recherche une chaîne localisée semblable à Secteur.
         /// </summary>
         public static string Sector {
             get {
@@ -448,6 +448,15 @@ namespace Names {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sujet.
+        /// </summary>
+        public static string Subject {
+            get {
+                return ResourceManager.GetString("Subject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Sujet du message *.
         /// </summary>
         public static string Sujet {
@@ -457,7 +466,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Titre *.
+        ///   Recherche une chaîne localisée semblable à Titre.
         /// </summary>
         public static string Title {
             get {
@@ -466,7 +475,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à URL de l&apos;image (facultatif).
+        ///   Recherche une chaîne localisée semblable à URL de l&apos;image.
         /// </summary>
         public static string UrlImage {
             get {

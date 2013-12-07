@@ -20,7 +20,7 @@ namespace projet_mozambique.Controllers
         {
             List<PUBLICATION> listePubs;
             List<GetSecteurs_Result> listeSecteurs = db.GetSecteursLocalises(Session);
-            List<GetSujetsPublication_Result> listeSujetsPub = db.GetSujetsPublication().ToList();
+            List<GetSujetsPublication_Result> listeSujetsPub = db.GetSujetsPublicationLocalises(Session).ToList();
             
             secteur = (int)Session["currentSecteur"];
             listeSecteurs = listeSecteurs.Where(s => s.ID == secteur).ToList();
@@ -52,6 +52,7 @@ namespace projet_mozambique.Controllers
             }
 
             ViewData[Constantes.CLE_IDSECTEUR] = secteur;
+            ViewData[Constantes.CLE_IDCATEGORIE] = categorie ?? -1;
             ViewData[Constantes.CLE_SECTEURS] = listeSecteurs;
             ViewData[Constantes.CLE_SUJETSPUBLICATION] = listeSujetsPub;
             ViewData[Constantes.CLE_PUBLICATIONS] = listePubs;
@@ -100,7 +101,7 @@ namespace projet_mozambique.Controllers
         public ActionResult AjoutPublication()
         {
             List<GetSecteurs_Result> listeSecteurs = db.GetSecteursLocalises(Session);
-            List<GetSujetsPublication_Result> listeSujetsPub = db.GetSujetsPublication().ToList();
+            List<GetSujetsPublication_Result> listeSujetsPub = db.GetSujetsPublicationLocalises(Session).ToList();
 
             ViewData[Constantes.CLE_SECTEURS] = listeSecteurs;
             ViewData[Constantes.CLE_SUJETSPUBLICATION] = listeSujetsPub;
@@ -146,7 +147,7 @@ namespace projet_mozambique.Controllers
             }
 
             List<GetSecteurs_Result> listeSecteurs = db.GetSecteursLocalises(Session);
-            List<GetSujetsPublication_Result> listeSujetsPub = db.GetSujetsPublication().ToList();
+            List<GetSujetsPublication_Result> listeSujetsPub = db.GetSujetsPublicationLocalises(Session).ToList();
 
             ViewData[Constantes.CLE_SECTEURS] = listeSecteurs;
             ViewData[Constantes.CLE_SUJETSPUBLICATION] = listeSujetsPub;
@@ -215,6 +216,14 @@ namespace projet_mozambique.Controllers
             }
 
             return RedirectToAction("Publications", "Sectoriel");
+        }
+    }
+
+    public partial class AdminController
+    {
+        public ActionResult GestionPublications()
+        {
+            return View();
         }
     }
 }

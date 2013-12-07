@@ -1,13 +1,13 @@
 ﻿@using projet_mozambique.Utilitaires
 @using projet_mozambique.Models
 @{
-    var n =  (ViewData[Constantes.CLE_NOUVELLE] as GetNouvelle_Result);
-    ViewBag.Title = n.TITRE ;
+    var n =  (ViewData[Constantes.CLE_NOUVELLE] as NOUVELLE);
+    ViewBag.Title = n.TITRE;
 }
 
 <div class="nouvelle">
     <h1>@n.TITRE</h1>
-    <h3>@Resources.Shared.publieLe @n.DATEPUBLICATION.ToString("yyyy/MM/dd")</h3>
+    <h3>@Resources.Shared.publieLe @Dates.JourMoisAnnee(n.DATEPUBLICATION, Session)</h3>
 
     <p>@Html.Raw(n.DESCRIPTION)</p>
 </div>

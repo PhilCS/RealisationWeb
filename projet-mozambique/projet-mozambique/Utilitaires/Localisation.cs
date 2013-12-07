@@ -20,16 +20,19 @@ namespace projet_mozambique.Models
             {
                 foreach (var unSecteur in listeSecteurs)
                 {
-                    unSecteur.NOM = unSecteur.NOMTRAD;
-                    unSecteur.TEXTEACCUEIL = unSecteur.TEXTEACCUEILTRAD;
-                    unSecteur.TITREACCUEIL = unSecteur.TITREACCUEILTRAD;
+                    if (!String.IsNullOrWhiteSpace(unSecteur.NOMTRAD))
+                    {
+                        unSecteur.NOM = unSecteur.NOMTRAD;
+                        unSecteur.TEXTEACCUEIL = unSecteur.TEXTEACCUEILTRAD;
+                        unSecteur.TITREACCUEIL = unSecteur.TITREACCUEILTRAD;
+                    }
                 }
             }
 
             return listeSecteurs;
         }
 
-        /*public virtual List<GetSujetsPublication_Result> GetSujetsPublicationLocalises(HttpSessionStateBase Session)
+        public virtual List<GetSujetsPublication_Result> GetSujetsPublicationLocalises(HttpSessionStateBase Session)
         {
             var listeSujetsPub = this.GetSujetsPublication().ToList();
 
@@ -37,12 +40,15 @@ namespace projet_mozambique.Models
             {
                 foreach (var unSujet in listeSujetsPub)
                 {
-                    unSujet.NOM = unSujet.NOMTRAD;
+                    if (!String.IsNullOrWhiteSpace(unSujet.NOMTRAD))
+                    {
+                        unSujet.NOM = unSujet.NOMTRAD;
+                    }
                 }
             }
 
             return listeSujetsPub;
-        }*/
+        }
 
         public virtual List<SONDAGE> GetSondagesLocalises(int idSecteur, bool resultats, int idUtil, HttpSessionStateBase Session)
         {
@@ -55,17 +61,60 @@ namespace projet_mozambique.Models
 
                 if (langue == "PT")
                 {
-                    unSondage.NOM = unSondage.NOMTRAD;
-                    unSondage.QUESTION = unSondage.QUESTIONTRAD;
-
-                    foreach (var unChoix in unSondage.CHOIXSONDAGES)
+                    if (!String.IsNullOrWhiteSpace(unSondage.NOMTRAD))
                     {
-                        unChoix.VALEUR = unChoix.VALEURTRAD;
+                        unSondage.NOM = unSondage.NOMTRAD;
+                        unSondage.QUESTION = unSondage.QUESTIONTRAD;
+
+                        foreach (var unChoix in unSondage.CHOIXSONDAGES)
+                        {
+                            unChoix.VALEUR = unChoix.VALEURTRAD;
+                        }
                     }
                 }
             }
 
             return listeSondages;
+        }
+
+        public virtual List<NOUVELLE> GetNouvelleLocalisee(int? idNouvelle, HttpSessionStateBase Session)
+        {
+            var listeNouvelles = this.GetNouvelle(idNouvelle).ToList();
+            var langue = Session["Culture"].ToString().ToUpper();
+
+            foreach (var uneNouvelle in listeNouvelles)
+            {
+                if (langue == "PT")
+                {
+                    if (!String.IsNullOrWhiteSpace(uneNouvelle.TITRETRAD))
+                    {
+                        uneNouvelle.TITRE = uneNouvelle.TITRETRAD;
+                        uneNouvelle.DESCRIPTION = uneNouvelle.DESCRIPTIONTRAD;
+                    }
+                }
+            }
+
+            return listeNouvelles;
+        }
+
+        public virtual List<NOUVELLE> GetNouvellesLocalisees(HttpSessionStateBase Session)
+        {
+            var listeNouvelles = this.GetNouvelles().ToList();
+            var langue = Session["Culture"].ToString().ToUpper();
+
+            foreach (var uneNouvelle in listeNouvelles)
+            {
+                if (langue == "PT")
+                {
+                    if (!String.IsNullOrWhiteSpace(uneNouvelle.TITRETRAD))
+                    {
+                        uneNouvelle.TITRE = uneNouvelle.TITRETRAD;
+                        uneNouvelle.DESCRIPTION = uneNouvelle.DESCRIPTIONTRAD;
+                    }
+                }
+            }
+
+            return listeNouvelles;
         }
     }
 }

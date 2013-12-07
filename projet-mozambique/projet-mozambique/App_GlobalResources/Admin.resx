@@ -197,4 +197,7 @@
   <data name="resetPassword" xml:space="preserve">
     <value>Réinitialisation du mot de passe</value>
   </data>
+  <data name="menuPublications" xml:space="preserve">
+    <value>Gestion des publications</value>
+  </data>
 </root>

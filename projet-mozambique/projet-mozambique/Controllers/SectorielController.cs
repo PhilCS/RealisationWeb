@@ -49,17 +49,17 @@ namespace projet_mozambique.Controllers
         }
 
         [HttpPost]
-        public ActionResult ChangeSecteur(string secteur, string returnUrl)
+        public ActionResult ChangeSecteur(int? secteur, string returnUrl)
         {
             if (secteur != null && returnUrl != null)
             {
-                Session["currentSecteur"] = int.Parse(secteur);
+                Session["currentSecteur"] = secteur;
 
                 if (Request.Cookies["currentSect"] != null)
                 {
                     var c = new HttpCookie("currentSect");
                     c.Expires = DateTime.Now.AddMonths(3);
-                    c.Value = secteur;
+                    c.Value = secteur.ToString();
                     Response.Cookies.Add(c);
                 }
 
@@ -389,7 +389,7 @@ namespace projet_mozambique.Controllers
                     else
                     {
                         TempData[Constantes.CLE_MSG_RETOUR] =
-                        new Message(Message.TYPE_MESSAGE.ERREUR, @Resources.Messages.ResetPasswortInvalid);
+                        new Message(Message.TYPE_MESSAGE.ERREUR, @Resources.Messages.ResetPasswordInvalid);
                     }
 
                     return RedirectToAction("Login", "Sectoriel");

@@ -1,36 +1,113 @@
 ﻿@using projet_mozambique.Utilitaires;
-@model projet_mozambique.Models.NouvelleModel
+@using projet_mozambique.Models;
+
+@model NouvelleMultilangue
 
 @{
-    ViewBag.Title = Resources.Admin.modifierNouvelle;
+    Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
+    
+    string postAction;
+    string boutonAction;
+
+    if (Model != null && Model.IDNOUVELLE > 0)
+    {
+        ViewBag.Title = Resources.Admin.modifierNouvelle;
+        <h1>@Resources.Admin.modifierNouvelle</h1>
+        postAction = "ModifierNouvelle";
+        boutonAction = Resources.Shared.modifier;
+    }
+    else
+    {
+        ViewBag.Title = Resources.Admin.ajouterNouvelle;
+        <h1>@Resources.Admin.ajouterNouvelle</h1>
+        postAction = "AjouterNouvelle";
+        boutonAction = Resources.Shared.ajouter;
+    }
+    
+    string langue1 = Model.langue1.codeLangue;
+    string langue2 = Model.langue2.codeLangue;
+
+    string nomLangue1;
+    string nomLangue2;
+
+    if (langue1 == "FR")
+    {
+        nomLangue1 = Resources.Shared.choixLangueFR;
+    }
+    else
+    {
+        nomLangue1 = Resources.Shared.choixLanguePT;
+    }
+
+    if (langue2 == "PT")
+    {
+        nomLangue2 = Resources.Shared.choixLanguePT;
+    }
+    else
+    {
+        nomLangue2 = Resources.Shared.choixLangueFR;
+    }
 }
 
-<h1>@Resources.Admin.modifierNouvelle</h1>
-
-@using (Html.BeginForm("ModifierNouvelle", "Admin", FormMethod.Post, new { @class = "form-nouvelle" }))
+@using (Html.BeginForm(postAction, "Admin", FormMethod.Post, new { @class = "form-nouvelle" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    @Html.HiddenFor(model => model.id)
+    @Html.HiddenFor(model => model.IDNOUVELLE)
+    @Html.HiddenFor(model => model.langue1.codeLangue);
+    @Html.HiddenFor(model => model.langue2.codeLangue);
 
-    <div class="editor-label">
-        @Html.LabelFor(model => model.titre)
-    </div>
-    <div class="editor-field">
-        @Html.TextBoxFor(m => m.titre, new { @maxlength = "100", @placeholder = @Resources.Sectoriel.titrePlaceholder })
-        @Html.ValidationMessageFor(model => model.titre)
-    </div>
+    <table id="formMultilangue">
+        <tr>
+            <th></th>
+            <th>
+                @Html.CheckBoxFor(model => model.langue1.langueChoisie, new { id = "nouvelle" + langue1 }) @(nomLangue1)
+            </th>
+            <th>
+                @Html.CheckBoxFor(model => model.langue2.langueChoisie, new { id = "nouvelle" + langue2 }) @(nomLangue2)
+            </th>
+        </tr>
 
-    <div class="editor-label">
-        @Html.LabelFor(model => model.description)
-    </div>
-    <div class="editor-field">
-        @Html.TextAreaFor(model => model.description, new { @placeholder = @Resources.Sectoriel.descriptionPlaceholder })
-        @Html.ValidationMessageFor(model => model.description)
-    </div>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.langue1.TITRE)
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.langue1.TITRE, new { @class = "nouvelle" + langue1 })
+                <p>@Html.ValidationMessageFor(model => model.langue1.TITRE)</p>
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.langue2.TITRE, new { @class = "nouvelle" + langue2 })
+                <p>@Html.ValidationMessageFor(model => model.langue2.TITRE)</p>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.langue1.DESCRIPTION)
+            </td>
+            <td>
+                @Html.TextAreaFor(model => model.langue1.DESCRIPTION, new { @class = "nouvelle" + langue1 })
+                <p>@Html.ValidationMessageFor(model => model.langue1.DESCRIPTION)</p>
+            </td>
+            <td>
+                @Html.TextAreaFor(model => model.langue2.DESCRIPTION, new { @class = "nouvelle" + langue2 })
+                <p>@Html.ValidationMessageFor(model => model.langue2.DESCRIPTION)</p>
+            </td>
+        </tr>
+    </table>
 
     <p>
-        <input type="submit" value="@Resources.Shared.modifier" class="btnForm" />
+        <input type="submit" value="@boutonAction" class="btnForm" />
     </p>
 }
+
+<script type="text/javascript" src="/Scripts/cocheLangueFormulaire.js"></script>
+<script type="text/javascript">
+    $("#nouvelleFR").change(function () { cocheLangueFormulaire(this, "FR", "nouvelle") });
+    $("#nouvellePT").change(function () { cocheLangueFormulaire(this, "PT", "nouvelle") });
+
+    cocheLangueFormulaire($("#nouvelleFR").get(), "FR", "nouvelle");
+    cocheLangueFormulaire($("#nouvellePT").get(), "PT", "nouvelle");
+</script>

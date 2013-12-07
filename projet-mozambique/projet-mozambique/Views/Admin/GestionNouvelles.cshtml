@@ -5,7 +5,7 @@
 
     <h1>@Resources.Admin.modifierSupprimerNouvelle</h1>
             
-    List<GetNouvelles_Result> lstN = (ViewData[Constantes.CLE_NOUVELLES] as List<GetNouvelles_Result>);
+    List<NOUVELLE> lstN = (ViewData[Constantes.CLE_NOUVELLES] as List<NOUVELLE>);
     Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
             
     <form action="ActionNouvelle" method="post">

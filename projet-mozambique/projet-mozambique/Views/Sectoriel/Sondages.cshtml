@@ -9,7 +9,17 @@
     var listeSondages = ViewData[Constantes.CLE_SONDAGES] as List<SONDAGE>;
 }
 
-<h1>@Resources.Sondages.sondagesEnCours</h1>
+<p>
+    <a href="/Sectoriel/ResultatsSondages" class="btnForm">@Resources.Sondages.resultatsSondages</a>
+</p>
+
+<h1>
+    @if(User.IsInRole("etudiant") == false)
+    {
+        <a href="/Sectoriel/AjoutSondage" class="ajouter"><img src="~/Content/images/icones/icon-add-black.png" title="@Resources.Sondages.ajouterSondage" alt="@Resources.Shared.ajouter" class="icone" /></a>
+    }
+    @Resources.Sondages.sondagesEnCours
+</h1>
 
 @if (listeSondages.Count == 0)
 {
@@ -17,32 +27,30 @@
 }
 else
 {
-    for (int i = 0; i < listeSondages.Count; i++)
+    foreach (var unSondage in listeSondages)
     {
-        if (!String.IsNullOrEmpty(listeSondages[i].QUESTION))
-        {
-            <hr/>
-            <div id="sondage@(i)" class="sondage">
-                <h2>@listeSondages[i].NOM</h2>
-                <h3>@listeSondages[i].QUESTION</h3>
+        <hr class="line-separator" />
+        <div id="sondage@(unSondage.ID)" class="sondage">
+            <h2>@unSondage.NOM</h2>
+            <h3>@unSondage.QUESTION</h3>
 
-                @using (Html.BeginForm())
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.Hidden("idSondage", listeSondages[i].ID);
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("idSondage", unSondage.ID);
             
-                    <div class="choix-reponses">
-                        @foreach (var unChoix in listeSondages[i].CHOIXSONDAGES)
-                        {
-                            <p>
-                                @Html.RadioButton("idChoix", unChoix.ID)
-                                @Html.Label("idChoix", unChoix.VALEUR, new { @class = "radio" })
-                            </p>
-                        }
-                    </div>
-                    <input type="submit" class="btnForm" value="Voter"/>
-                }
-            </div>
-        }
+                <div class="choix-reponses">
+                    @foreach (var unChoix in unSondage.CHOIXSONDAGES)
+                    {
+                        <p>
+                            @Html.RadioButton("idChoix", unChoix.ID)
+                            @Html.Label("idChoix", unChoix.VALEUR, new { @class = "radio" })
+                        </p>
+                    }
+                </div>
+                <input type="submit" class="btnForm" value="Voter"/>
+                <span class="date-fin">@Resources.Sondages.finLe @Dates.JourMoisAnnee(@unSondage.DATEFIN, Session)</span>
+            }
+        </div>
     }
 }

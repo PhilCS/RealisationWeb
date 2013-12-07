@@ -53,37 +53,6 @@ namespace projet_mozambique.Controllers
             }
         }
 
-        public ActionResult nouvelles(int? page)
-        {
-            Entities db = new Entities();
-            const int nbParPage = 5;
-
-            List<GetNouvelles_Result> lstN = db.GetNouvelles().ToList();
-            ListePaginee<GetNouvelles_Result> nouvPaginees = 
-                new ListePaginee<GetNouvelles_Result>(lstN, page ?? 0, nbParPage);
-
-            ViewData[Constantes.CLE_NOUVELLES] = nouvPaginees;
-            
-            return View("Nouvelles");
-        }
-
-        public ActionResult getNouvelle(int? id)
-        {
-            if (id != null)
-            {
-                GetNouvelle_Result n = db.GetNouvelle(id).FirstOrDefault();
-
-                if (n != null)
-                {
-                    ViewData[Constantes.CLE_NOUVELLE] = n;
-
-                    return View("Nouvelle");
-                }
-            }
-
-            return RedirectToAction("Nouvelles");
-        }
-
         public ActionResult APropos()
         {
             GetContenu_Result contentResult = db.GetContenu("About").FirstOrDefault();
@@ -96,18 +65,6 @@ namespace projet_mozambique.Controllers
             GetContenu_Result contentResult = db.GetContenu("Contact").FirstOrDefault();
 
             return View(contentResult);
-        }
-
-        [HttpPost]
-        public ActionResult getResultats(string type, string recherche)
-        {
-            List<GetRechercheNouvelle_Result> lstR = db.GetRechercheNouvelle(recherche.Trim()).ToList();
-
-            ViewData[Constantes.CLE_RESUL_RECH] = lstR;
-            ViewData[Constantes.CLE_TYPE_RECHERCHE] = type;
-            ViewData[Constantes.CLE_RECHERCHE] = type;
-
-            return View("PageResultat");
         }
     }
 }

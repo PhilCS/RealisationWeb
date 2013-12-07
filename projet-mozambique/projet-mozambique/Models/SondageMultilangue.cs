@@ -8,7 +8,12 @@ namespace projet_mozambique.Models
 {
     public class SondageMultilangue
     {
+        [Key]
         public int IDSONDAGE { get; set; }
+
+        [Display(Name = "NumberChoices", ResourceType = typeof(Names.DisplayName))]
+        [Range(2, 10)]
+        public int nbChoix { get; set; }
 
         [Display(Name = "Sector", ResourceType = typeof(Names.DisplayName))]
         [Required]

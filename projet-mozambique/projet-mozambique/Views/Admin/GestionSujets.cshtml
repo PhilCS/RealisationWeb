@@ -1,0 +1,24 @@
+﻿@using projet_mozambique.Utilitaires;
+@using projet_mozambique.Models;
+
+@model PARTENAIRE
+
+@{
+    ViewBag.Title = Resources.Sujets.modifierSupprimerSujet;
+    
+    Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
+
+    <h1>@Resources.Sujets.modifierSupprimerSujet</h1>
+    
+    var listeSujets = ViewData[Constantes.CLE_SUJETSPUBLICATION] as List<GetSujetsPublication_Result>;
+            
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.DropDownListFor(model => model.ID, new SelectList(listeSujets, "ID", "NOM"), "", new { @class = "lst-options-nouvelles" })
+
+        <input type="submit" name="modifier" value="@Resources.Shared.modifier" id="btnModif" class="btnForm" /> 
+        <input type="submit" name="supprimer" value="@Resources.Shared.supprimer" id="btnSupp" class="btnForm" />
+    }
+}

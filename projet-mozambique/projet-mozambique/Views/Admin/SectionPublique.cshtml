@@ -16,8 +16,14 @@
         </li>
         <li>@Resources.Shared.partenaires
             <ul>
-                <li><a href="AjoutPartenaire">Ajouter un partenaire</a></li>
-                <li><a href="GestionPartenaires">Modifier/Supprimer un partenaire</a></li>
+                <li><a href="AjoutPartenaire">@Resources.Partenaire.ajouterPartenaire</a></li>
+                <li><a href="GestionPartenaires">@Resources.Partenaire.modifierSupprimerPartenaire</a></li>
+            </ul>
+        </li>
+        <li>@Resources.Shared.sujetsPublication
+            <ul>
+                <li><a href="AjoutSujet">@Resources.Sujets.ajouterSujet</a></li>
+                <li><a href="GestionSujets">@Resources.Sujets.modifierSupprimerSujet</a></li>
             </ul>
         </li>
         <li>@Html.ActionLink(@Resources.Shared.accueil, "ModifPagePublique", "Admin", new { nomPage = "accueil" }, null)</li>
@@ -27,8 +33,10 @@
     
 }
 
+@*
 <script type="text/javascript">
     $(document).ready(function () {
         $(".nav-secondaire").toggle();
     });
 </script>
+*@
