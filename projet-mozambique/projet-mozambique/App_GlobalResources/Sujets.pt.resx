@@ -117,69 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="aucunResultat" xml:space="preserve">
-    <value>Aucun résultat disponible</value>
+  <data name="ajouterSujet" xml:space="preserve">
+    <value>Add a subject</value>
   </data>
-  <data name="aucunSondage" xml:space="preserve">
-    <value>Aucun sondage disponible</value>
+  <data name="aucunNomSpecifie" xml:space="preserve">
+    <value>You must specify a name for at least one language.</value>
   </data>
-  <data name="choixInvalide" xml:space="preserve">
-    <value>Vous devez sélectionner un choix valide.</value>
+  <data name="avertissementSuppr" xml:space="preserve">
+    <value>This will also delete all publications associated to the subject.</value>
   </data>
-  <data name="dateFinAvantDebut" xml:space="preserve">
-    <value>La date de fin doit être supérieure à la date de début</value>
+  <data name="idSujetInvalide" xml:space="preserve">
+    <value>The specified subject is invalide or doesn't exist.</value>
   </data>
-  <data name="dateInvalide" xml:space="preserve">
-    <value>La date doit avoir le format "AAAA/MM/JJ"</value>
+  <data name="modifierSujet" xml:space="preserve">
+    <value>Edit a subject</value>
   </data>
-  <data name="datePassee" xml:space="preserve">
-    <value>La date doit être égale ou supérieure à aujourd'hui</value>
+  <data name="modifierSupprimerSujet" xml:space="preserve">
+    <value>Edit/Delete a subject</value>
   </data>
-  <data name="resultatsSondages" xml:space="preserve">
-    <value>Résultats des sondages</value>
+  <data name="sujetAjoute" xml:space="preserve">
+    <value>The subject has been added.</value>
   </data>
-  <data name="sondageAjoute" xml:space="preserve">
-    <value>Le sondage a bien été ajouté.</value>
+  <data name="sujetErreur" xml:space="preserve">
+    <value>An error occured while adding the subject.</value>
   </data>
-  <data name="sondageErreur" xml:space="preserve">
-    <value>Une erreur s'est produite lors de l'ajout du sondage.</value>
+  <data name="sujetInexistant" xml:space="preserve">
+    <value>The specified subject doesn't exist.</value>
   </data>
-  <data name="sondageInvalide" xml:space="preserve">
-    <value>Le sondage sélectionné est invalide, ou vous avez déjà voté sur celui-ci.</value>
+  <data name="sujetModifie" xml:space="preserve">
+    <value>The subject has been edited.</value>
   </data>
-  <data name="sondagesEnCours" xml:space="preserve">
-    <value>Sondages en cours</value>
+  <data name="sujetSupprime" xml:space="preserve">
+    <value>The subject has been deleted.</value>
   </data>
-  <data name="vote" xml:space="preserve">
-    <value>vote</value>
-    <comment>"1 vote"</comment>
-  </data>
-  <data name="votes" xml:space="preserve">
-    <value>votes</value>
-    <comment>"2 votes"</comment>
-  </data>
-  <data name="voteSucces" xml:space="preserve">
-    <value>Votre vote a été enregistré avec succès.</value>
-  </data>
-  <data name="ajouterSondage" xml:space="preserve">
-    <value>Ajouter un sondage</value>
-  </data>
-  <data name="ajoutSondage" xml:space="preserve">
-    <value>Ajout d'un sondage</value>
-  </data>
-  <data name="finLe" xml:space="preserve">
-    <value>Fin le</value>
-  </data>
-  <data name="idSondageInvalide" xml:space="preserve">
-    <value>Le sondage spécifié est invalide ou inexistant.</value>
-  </data>
-  <data name="sondageSupprime" xml:space="preserve">
-    <value>Le sondage a bien été supprimé.</value>
-  </data>
-  <data name="suppressionSondage" xml:space="preserve">
-    <value>Suppression d'un sondage</value>
-  </data>
-  <data name="supprimerSondage" xml:space="preserve">
-    <value>Supprimer un sondage</value>
+  <data name="suppressionSujet" xml:space="preserve">
+    <value>Delete subject</value>
   </data>
 </root>

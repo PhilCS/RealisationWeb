@@ -147,6 +147,16 @@ label[class=cb]
     background-color: #DDD;
 }
 
+#formMultilangue input[type=date]
+{
+    width: 6em;
+}
+
+#formMultilangue select
+{
+    width: auto;
+}
+
 .nouveau-message input[type=text]
 {
     width:400px;
