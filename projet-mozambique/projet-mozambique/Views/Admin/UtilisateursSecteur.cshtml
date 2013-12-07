@@ -3,31 +3,14 @@
 @model projet_mozambique.Models.AjoutUtilSecteurModel
 @{  
     ViewBag.Title = @Resources.Admin.lstUtils;
-    <h2>@ViewBag.Title</h2>
+
+    string nom = ViewData[Constantes.CLE_NOMSECTEUR] as string;
+    <h2>@ViewBag.Title - @nom</h2>
     
     Html.RenderPartial("~/Views/Shared/AfficherMsg.cshtml");
 
     List<UTILISATEUR> lst = (ViewData[Constantes.CLE_LISTE_UTILISATEURS] as List<UTILISATEUR>);
-    //List<UTILISATEUR> all = ViewData[Constantes.CLE_LISTE_UTILISATEURS_ALL] as List<UTILISATEUR>;
-    string nom = ViewData[Constantes.CLE_NOMSECTEUR] as string;
-    //int? idSect = ViewData[Constantes.CLE_IDSECTEUR] as int?;
     
-    /*if(all.Count > 0)
-    {
-        using (Html.BeginForm("UtilisateursSecteur", "Admin", FormMethod.Post)) {
-            <select id="selectEcole" name="idEcole">
-                @foreach (var u in all)
-                {
-                    <option value="@u.ID">@u.NOM, @u.PRENOM (@u.NOMUTIL)</option>
-                }
-                @Html.EditorFor(
-              
-            </select>
-            <input name="idSecteur" type="hidden" value="@idSect" />
-            <input type="submit" value="@Resources.Shared.ajouter" name="ajoutUtil" class="btnForm" />
-        }
-    }*/
-
     using (Html.BeginForm("UtilisateursSecteur", "Admin", FormMethod.Post)) {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
@@ -57,11 +40,15 @@
     {
         if(lst.Count > 0)
         {
-            <h3>Secteur : @nom </h3>
             <ul>
                 @foreach(var u in lst)
                 {
-                   <li>@u.PRENOM @u.NOM (@u.NOMUTIL) <a href="SupprimerUtilSecteur?idUtil=@u.ID&idSecteur=@Model.idSecteur" style="display:inline;"><img src="~/Content/images/icones/icon-trashcan.png" title="@Resources.Sectoriel.supprimer" alt="Icône Supprimer" /></a></li> 
+                    var utilSect = u.UTILISATEURSECTEUR.FirstOrDefault(us => us.IDSECTEUR == Model.idSecteur);
+                    <li>
+                       @u.PRENOM @u.NOM (@u.NOMUTIL) <strong>@utilSect.DEBUTACCES.ToShortDateString() - @utilSect.FINACCES.ToShortDateString()</strong>
+                       <a href="SupprimerUtilSecteur?idUtil=@u.ID&idSecteur=@Model.idSecteur" style="display:inline;"><img src="~/Content/images/icones/icon-trashcan.png" title="@Resources.Sectoriel.supprimer" alt="Icône Supprimer" /></a>
+
+                    </li> 
                 }
             </ul> 
         }
@@ -70,6 +57,4 @@
             <p>@Resources.Messages.SectNoUser</p>
         }
     }
-
-    @Html.ActionLink("GoBack", "GestionSecteurs")
 }

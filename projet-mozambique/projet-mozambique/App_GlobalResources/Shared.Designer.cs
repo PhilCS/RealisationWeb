@@ -115,6 +115,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Activé.
+        /// </summary>
+        internal static string choixActive {
+            get {
+                return ResourceManager.GetString("choixActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Désactivé.
+        /// </summary>
+        internal static string choixDesactive {
+            get {
+                return ResourceManager.GetString("choixDesactive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Français.
         /// </summary>
         internal static string choixLangueFR {

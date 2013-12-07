@@ -135,6 +135,12 @@
   <data name="calendrier" xml:space="preserve">
     <value>Calendrier</value>
   </data>
+  <data name="choixActive" xml:space="preserve">
+    <value>Activé</value>
+  </data>
+  <data name="choixDesactive" xml:space="preserve">
+    <value>Désactivé</value>
+  </data>
   <data name="choixLangueFR" xml:space="preserve">
     <value>Français</value>
   </data>

@@ -1,13 +1,19 @@
-﻿@model projet_mozambique.Models.GestionUtilisateursModel
+﻿@model projet_mozambique.Models.ModifUtilisateurModel
 @{
     ViewBag.Title = Resources.Admin.gestionUtilisateur;
 }
 
-<h1>@ViewBag.Title - @Model.</h1>
-@using (Html.BeginForm()) {
+<h1>@ViewBag.Title - @Model.nomUtil</h1>
+@using (Html.BeginForm("ModifUtilisateur", "Admin", FormMethod.Post)) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     <ul>
+        @Html.HiddenFor(m => m.idUtil)
+       <li>
+            @Html.LabelFor(m => m.nomUtil) 
+            @Html.TextBoxFor(m => m.nomUtil)
+            @Html.ValidationMessageFor(m => m.nomUtil)
+        </li>
         <li>
             @Html.LabelFor(m => m.courriel) 
             @Html.TextBoxFor(m => m.courriel)
@@ -39,71 +45,36 @@
             @Html.ValidationMessageFor(m => m.ville)
         </li>
         <li>
+            @Html.LabelFor(m => m.derniereConnexion)
+            @Html.TextBoxFor(m => m.derniereConnexion, new { @readonly = "readonly" })
+        </li>
+        <li>
+            @Html.LabelFor(m => m.dateNaissance)
+            @Html.EditorFor(m => m.dateNaissance)
+            @Html.ValidationMessageFor(m => m.dateNaissance)
+        </li>
+        <li style="height:30px;">
+            @Html.LabelFor(m => m.active)
+            @Html.RadioButtonFor(m => m.active, true)@Resources.Shared.choixActive
+            @Html.RadioButtonFor(m => m.active, false)@Resources.Shared.choixDesactive
+            @Html.ValidationMessageFor(m => m.active)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.idEcole)
+            @Html.DropDownListFor(m => m.idEcole, new SelectList(Model.Ecoles, "Value", "Text"))
+            @Html.ValidationMessageFor(m => m.idEcole)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.roleName)
+            @Html.DropDownListFor(m => m.roleName, new SelectList(Model.Roles, "Value", "Text"))
+            @Html.ValidationMessageFor(m => m.roleName)
+        </li>
+        <li>
             @Html.LabelFor(m => m.langue)
             @Html.RadioButtonFor(m => m.langue, "fr")@Resources.Shared.choixLangueFR
             @Html.RadioButtonFor(m => m.langue, "pt")@Resources.Shared.choixLanguePT
             @Html.ValidationMessageFor(m => m.langue)
         </li>
     </ul>
-    <input type="submit" value="@Resources.Shared.modifier" class="btnForm" />
+    <input type="submit" value="@Resources.Shared.modifier" name="modifUtil" class="btnForm" />
 }
-
-    
-    <h1>Modifier l'utilisateur : smnoreau002</h1>
-    <p>Les champs marqués d'une étoile sont obligatoires.</p>
-    <p class="msgOk"></p>
-    <p class="msgErreur"></p>
-    <form id="frmModifUtil">
-        <ul>
-            <li><label for="login">Identifiant : *</label>
-            <input type="text" name="login" id="ajoutId" value="smnoreau002" /></li>
-            <li><label for="prenom" id="lblPrenom">Prénom : *</label>
-            <input type="text" name="prenom" id="ajoutPrenom" value="Sara-Maude" /></li>
-            <li><label for="nom">Nom : *</label>
-            <input type="text" name="nom" id="ajoutNom" value="Noreau" /></li>
-            <li><label for="courriel">Courriel : *</label>
-            <input type="email" name="courriel" id="ajoutCourriel" value="smnoreau@gmail.com" /></li>
-            <li><label for="adresse">Adresse : *</label>
-            <input type="text" name="adresse" id="ajoutAdresse" value="555 avenue blabla" /></li>
-            <li><label for="ville">Ville : *</label>
-            <input type="text" name="ville" id="ajoutVille" value="Maputo" /></li>
-            <li><label for="naissance">Date de naissance : *</label>
-            <input type="date" name="naissance" id="ajoutNaissance" value="1993-09-10" /></li>
-            <li><label for="ecole">École : *</label>
-                <select name="ecole">
-                    <option>École 1</option>
-                    <option selected="selected">École 2</option>
-                    <option>École 3</option>
-                </select></li>
-            <li><label for="secteur">Secteurs : *</label>
-
-                <input type="checkbox" name="secteur" value="1" id="1" checked="checked" /><label for="1" class="cb">Agriculture</label>
-                <input type="checkbox" name="secteur" value="2" id="2"/><label for="2" class="cb">Tourisme</label>
-                <input type="checkbox" name="secteur" value="3" id="3" /><label for="3" class="cb">Construction</label></li>
-            <li><label for="role">Rôle : *</label>
-                <select name="role">
-                    <option>Professeur</option>
-                    <option selected="selected">Étudiant</option>
-                    <option>Administrateur</option>
-                </select></li>
-            <li><label for="langue">Langue : *</label>
-                <input type="radio" name="langue" value="FR" checked="checked" />Français
-                <input type="radio" name="langue" value="PT" />Portuguais</li>
-            <li><input type="submit" class="btnForm" id="btnModifierUtil" value="Modifier" />
-            <a href="utilisateurs?supprimer=1" class="btnForm">Supprimer</a>
-            <a href="utilisateurs" class="btnForm">Annuler</a>
-            </li>
-        </ul>
-    </form>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(".nav-secondaire").toggle();
-        $("#btnModifierUtil").click(function(e) {
-            e.preventDefault();
-            $(".msgOk").html("L'utilisateur a été modifié avec succès");
-            $(".msgErreur").html("L'utilisateur ne peut être modifié. Les champs avec un * sont obligatoires");
-            $("#ajoutPrenom").focus();
-            $("#lblPrenom").addClass("msgErreur");
-        });
-    });
-</script>

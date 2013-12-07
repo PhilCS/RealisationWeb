@@ -677,6 +677,7 @@
     <Content Include="App_GlobalResources\Messages.pt.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Messages.pt.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="App_GlobalResources\Admin.pt.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>

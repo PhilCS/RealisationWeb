@@ -246,4 +246,10 @@
   <data name="portail" xml:space="preserve">
     <value>Portail pédagogique</value>
   </data>
+  <data name="choixActive" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="choixDesactive" xml:space="preserve">
+    <value>Desactive</value>
+  </data>
 </root>

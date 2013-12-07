@@ -275,4 +275,10 @@
     <value>Le titre du fil a bien été modifié.</value>
     <comment>Forum</comment>
   </data>
+  <data name="UserModifOk" xml:space="preserve">
+    <value>L'utilisateur a été modifié.</value>
+  </data>
+  <data name="UserNotActive" xml:space="preserve">
+    <value>Vous n'avez pas accès car votre compte est désactivé.</value>
+  </data>
 </root>

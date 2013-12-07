@@ -272,4 +272,10 @@
     <value>The thread title has been modified.</value>
     <comment>Forum</comment>
   </data>
+  <data name="UserModifOk" xml:space="preserve">
+    <value>The user has been modified.</value>
+  </data>
+  <data name="UserNotActive" xml:space="preserve">
+    <value>You're not allowed because your account is not active.</value>
+  </data>
 </root>
