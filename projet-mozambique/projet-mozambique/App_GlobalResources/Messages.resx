@@ -272,4 +272,7 @@
   <data name="aucuneLangueErreur" xml:space="preserve">
     <value>Vous devez sélectionner au moins une langue</value>
   </data>
+  <data name="DateGreaterThan" xml:space="preserve">
+    <value>La date de fin d'accès doit être plus grande que la date de début.</value>
+  </data>
 </root>

@@ -272,4 +272,7 @@
   <data name="SectModifOk" xml:space="preserve">
     <value>The sector has been edited.</value>
   </data>
+  <data name="DateGreaterThan" xml:space="preserve">
+    <value>End date must be greater than begin date.</value>
+  </data>
 </root>

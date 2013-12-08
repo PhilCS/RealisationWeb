@@ -467,23 +467,83 @@ namespace projet_mozambique.Controllers
 
                 if (leS != null && leU != null)
                 {
-                    UTILISATEURSECTEUR lien = new UTILISATEURSECTEUR();
-                    lien.IDSECTEUR = model.idSecteur;
-                    lien.IDUTILISATEUR = model.idUtil;
-                    lien.DEBUTACCES = model.debutAcces;
-                    lien.FINACCES = model.finAcces;
+                    if (model.debutAcces.CompareTo(model.finAcces) < 0)
+                    {
+                        UTILISATEURSECTEUR lien = new UTILISATEURSECTEUR();
+                        lien.IDSECTEUR = model.idSecteur;
+                        lien.IDUTILISATEUR = model.idUtil;
+                        lien.DEBUTACCES = model.debutAcces;
+                        lien.FINACCES = model.finAcces;
 
-                    db.UTILISATEURSECTEUR.Add(lien);
+                        db.UTILISATEURSECTEUR.Add(lien);
 
-                    db.SaveChanges();
+                        db.SaveChanges();
 
-                    TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.UserAjoutSectOk);
-
+                        TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.UserAjoutSectOk);
+                    }
+                    else
+                    {
+                        TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Messages.DateGreaterThan);
+                    }
                 }
 
                 return RedirectToAction("UtilisateursSecteur", new { @idSect = model.idSecteur });
             }
 
+            return View(model);
+        }
+
+
+        public ActionResult ModifUtilSecteur(int? idUtil, int? idSecteur)
+        {
+            if (idSecteur != null && idUtil != null)
+            {
+                UTILISATEURSECTEUR us = db.UTILISATEURSECTEUR.FirstOrDefault(s => s.IDSECTEUR == idSecteur && s.IDUTILISATEUR == idUtil);
+
+                if (us != null)
+                {
+
+                    ModifSecteurUtilDates model = new ModifSecteurUtilDates();
+                    model.idUtil = us.IDUTILISATEUR;
+                    model.idSecteur = us.IDSECTEUR;
+                    model.debutAcces = us.DEBUTACCES;
+                    model.finAcces = us.FINACCES;
+                    return View(model);
+                }
+            }
+
+            return RedirectToAction("UtilisateursSecteur", "Admin");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ModifUtilSecteur(ModifSecteurUtilDates model)
+        {
+            if (ModelState.IsValid)
+            {
+                UTILISATEURSECTEUR us = db.UTILISATEURSECTEUR.FirstOrDefault(s => s.IDSECTEUR == model.idSecteur && s.IDUTILISATEUR == model.idUtil);
+
+                if (us != null)
+                {
+                    if (model.debutAcces.CompareTo(model.finAcces) < 0)
+                    {
+                        us.DEBUTACCES = model.debutAcces;
+                        us.FINACCES = model.finAcces;
+
+                        db.SaveChanges();
+
+                        TempData[Constantes.CLE_MSG_RETOUR] =
+                                    new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.UserModifOk);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", Resources.Messages.DateGreaterThan);
+                        return View(model);
+                    }
+                }
+
+                return RedirectToAction("UtilisateursSecteur", "Admin", new { idSect = model.idSecteur });
+            }
             return View(model);
         }
 

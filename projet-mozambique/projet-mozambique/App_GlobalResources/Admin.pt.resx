@@ -199,4 +199,7 @@
   <data name="menuPublications" xml:space="preserve">
     <value>Publications administration</value>
   </data>
+  <data name="modifUtilSect" xml:space="preserve">
+    <value>Change access dates</value>
+  </data>
 </root>

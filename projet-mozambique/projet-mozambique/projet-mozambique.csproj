@@ -681,6 +681,7 @@
     <Content Include="Views\Admin\SupprimerSujet.cshtml" />
     <Content Include="Views\Admin\GestionSujets.cshtml" />
     <Content Include="Views\Admin\GestionPublications.cshtml" />
+    <Content Include="Views\Admin\ModifUtilSecteur.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
