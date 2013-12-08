@@ -22,14 +22,14 @@ namespace projet_mozambique.Models
             ErrorMessageResourceType = typeof(Resources.Messages))]
         [Display(Name = "DebutAcces", ResourceType = typeof(Names.DisplayName))]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime debutAcces { get; set; }
 
         [Required(ErrorMessageResourceName = "fieldRequired",
             ErrorMessageResourceType = typeof(Resources.Messages))]
         [Display(Name = "FinAcces", ResourceType = typeof(Names.DisplayName))]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime finAcces { get; set; } 
     }
     
@@ -203,5 +203,30 @@ namespace projet_mozambique.Models
             ErrorMessageResourceType = typeof(Resources.Messages))]
         [Display(Name = "Role", ResourceType = typeof(Names.DisplayName))]
         public string roleName { get; set; }
+    }
+
+    public class ModifSecteurUtilDates
+    {
+        [Required(ErrorMessageResourceName = "fieldRequired",
+           ErrorMessageResourceType = typeof(Resources.Messages))]
+        public int idUtil { get; set; }
+
+        [Required(ErrorMessageResourceName = "fieldRequired",
+           ErrorMessageResourceType = typeof(Resources.Messages))]
+        public int idSecteur { get; set; }
+
+        [Required(ErrorMessageResourceName = "fieldRequired",
+            ErrorMessageResourceType = typeof(Resources.Messages))]
+        [Display(Name = "DebutAcces", ResourceType = typeof(Names.DisplayName))]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime debutAcces { get; set; }
+
+        [Required(ErrorMessageResourceName = "fieldRequired",
+            ErrorMessageResourceType = typeof(Resources.Messages))]
+        [Display(Name = "FinAcces", ResourceType = typeof(Names.DisplayName))]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime finAcces { get; set; } 
     }
 }

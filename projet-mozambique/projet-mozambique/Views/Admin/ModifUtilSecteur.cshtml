@@ -1,0 +1,28 @@
+﻿@model projet_mozambique.Models.ModifSecteurUtilDates
+@{
+    ViewBag.Title = Resources.Admin.modifUtilSect;
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("ModifUtilSecteur", "Admin", FormMethod.Post)) {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        @Html.HiddenFor(m => m.idSecteur)    
+        <ul>
+            @Html.HiddenFor(m => m.idUtil)
+            @Html.HiddenFor(m => m.idSecteur)
+            <li>
+                @Html.LabelFor(m => m.debutAcces)
+                @Html.EditorFor(m => m.debutAcces)
+                @Html.ValidationMessageFor(m => m.debutAcces)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.finAcces)
+                @Html.EditorFor(m => m.finAcces)
+                @Html.ValidationMessageFor(m => m.finAcces)
+            </li>
+        </ul>
+        <input type="submit" value="@Resources.Shared.modifier" name="modifUtilSect" class="btnForm" />
+}

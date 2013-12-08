@@ -115,6 +115,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à La date de fin d&apos;accès doit être plus grande que la date de début..
+        /// </summary>
+        internal static string DateGreaterThan {
+            get {
+                return ResourceManager.GetString("DateGreaterThan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à La description ne peut être vide..
         /// </summary>
         internal static string descriptionVide {

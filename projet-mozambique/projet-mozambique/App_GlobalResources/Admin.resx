@@ -200,4 +200,7 @@
   <data name="menuPublications" xml:space="preserve">
     <value>Gestion des publications</value>
   </data>
+  <data name="modifUtilSect" xml:space="preserve">
+    <value>Modifier les dates d'accès</value>
+  </data>
 </root>
