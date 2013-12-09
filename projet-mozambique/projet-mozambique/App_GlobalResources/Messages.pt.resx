@@ -275,4 +275,7 @@
   <data name="DateGreaterThan" xml:space="preserve">
     <value>End date must be greater than begin date.</value>
   </data>
+  <data name="SecteurDeleted" xml:space="preserve">
+    <value>The sector has been deleted.</value>
+  </data>
 </root>
