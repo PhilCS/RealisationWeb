@@ -163,4 +163,7 @@
     <value>Tous</value>
     <comment>"Tous" les sujets</comment>
   </data>
+  <data name="accesRefuse" xml:space="preserve">
+    <value>Accès refusé.</value>
+  </data>
 </root>

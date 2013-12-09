@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Accès refusé..
+        /// </summary>
+        internal static string accesRefuse {
+            get {
+                return ResourceManager.GetString("accesRefuse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Ajouter une publication.
         /// </summary>
         internal static string ajouterPublication {
