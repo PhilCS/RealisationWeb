@@ -218,7 +218,7 @@
     <value>Nouvelles</value>
   </data>
   <data name="oui" xml:space="preserve">
-    <value />
+    <value>Oui</value>
   </data>
   <data name="par" xml:space="preserve">
     <value>Par</value>
@@ -243,6 +243,14 @@
   </data>
   <data name="recuLe" xml:space="preserve">
     <value>Reçu le</value>
+  </data>
+  <data name="resultat" xml:space="preserve">
+    <value>résultat</value>
+    <comment>1 résultat</comment>
+  </data>
+  <data name="resultats" xml:space="preserve">
+    <value>résultats</value>
+    <comment>2 résultats</comment>
   </data>
   <data name="resultatsRecherche" xml:space="preserve">
     <value>Résultats de la recherche</value>

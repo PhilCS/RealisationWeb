@@ -133,7 +133,7 @@
                 @Html.LabelFor(model => model.DATEDEBUT)
             </td>
             <td>
-                @Html.TextBoxFor(model => model.DATEDEBUT, new { @id = "sondage_datedebut", type = "date", Value = dateDebut })
+                @Html.TextBoxFor(model => model.DATEDEBUT, new { id = "sondage_datedebut", @class = "datePicker", Value = dateDebut })
                 @Html.ValidationMessageFor(model => model.DATEDEBUT)
             </td>
         </tr>
@@ -143,7 +143,7 @@
                 @Html.LabelFor(model => model.DATEFIN)
             </td>
             <td>
-                @Html.TextBoxFor(model => model.DATEFIN, new { @id = "sondage_datefin", type = "date", Value = dateFin })
+                @Html.TextBoxFor(model => model.DATEFIN, new { id = "sondage_datefin", @class = "datePicker", Value = dateFin })
                 @Html.ValidationMessageFor(model => model.DATEFIN)
             </td>
         </tr>

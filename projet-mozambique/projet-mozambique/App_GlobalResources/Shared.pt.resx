@@ -252,4 +252,31 @@
   <data name="choixDesactive" xml:space="preserve">
     <value>Desactive</value>
   </data>
+  <data name="annuler" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="confirmer" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="confirmerSuppression" xml:space="preserve">
+    <value>Do you really want to delete "{0}"?</value>
+    <comment>{0} est remplacé par le nom de l'entité à supprimer à l'aide de String.Format</comment>
+  </data>
+  <data name="envoyeA" xml:space="preserve">
+    <value>Sent to</value>
+  </data>
+  <data name="oui" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="resultat" xml:space="preserve">
+    <value>result</value>
+    <comment>1 résultat</comment>
+  </data>
+  <data name="resultats" xml:space="preserve">
+    <value>results</value>
+    <comment>2 résultats</comment>
+  </data>
+  <data name="sujetsPublication" xml:space="preserve">
+    <value>Publication subjects</value>
+  </data>
 </root>
