@@ -147,7 +147,7 @@ label[class=cb]
     background-color: #DDD;
 }
 
-#formMultilangue input[type=date]
+#formMultilangue input.datePicker
 {
     width: 6em;
 }

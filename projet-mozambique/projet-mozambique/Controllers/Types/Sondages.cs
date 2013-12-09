@@ -196,7 +196,7 @@ namespace projet_mozambique.Controllers
             {
                 TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Messages.aucuneLangueErreur);
             }
-            else if (ModelState.IsValid)
+            else if (ModelState.IsValid && Math.Max(l1ChoixCount, l2ChoixCount) == sondageMulti.nbChoix)
             {
                 try
                 {

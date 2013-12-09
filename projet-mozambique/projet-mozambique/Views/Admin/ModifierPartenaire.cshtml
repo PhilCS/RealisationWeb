@@ -26,13 +26,13 @@
         @Html.HiddenFor(model => model.ID)
 
         <div>
-            @Html.LabelFor(model => model.NOM)
+            @Html.LabelFor(model => model.NOM) *
             @Html.TextBoxFor(model => model.NOM)
             @Html.ValidationMessageFor(model => model.NOM)
         </div>
 
         <div>
-            @Html.LabelFor(model => model.RAISONSOCIALE)
+            @Html.LabelFor(model => model.RAISONSOCIALE) *
             @Html.TextBoxFor(model => model.RAISONSOCIALE)
             @Html.ValidationMessageFor(model => model.RAISONSOCIALE)
         </div>
@@ -68,7 +68,7 @@
         </div>
 
         <div>
-            @Html.LabelFor(model => model.COURRIEL)
+            @Html.LabelFor(model => model.COURRIEL) *
             @Html.TextBoxFor(model => model.COURRIEL)
             @Html.ValidationMessageFor(model => model.COURRIEL)
         </div>

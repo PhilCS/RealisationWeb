@@ -17,7 +17,7 @@ namespace projet_mozambique.Controllers
         [HttpGet]
         public ActionResult GestionSujets()
         {
-            List<GetSujetsPublication_Result> listeSujets = db.GetSujetsPublication().ToList();
+            List<GetSujetsPublication_Result> listeSujets = db.GetSujetsPublicationLocalises(Session).ToList();
             ViewData[Constantes.CLE_SUJETSPUBLICATION] = listeSujets;
 
             return View();
@@ -62,7 +62,7 @@ namespace projet_mozambique.Controllers
 
                     TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Sujets.sujetAjoute);
 
-                    return RedirectToAction("SectionPublique");
+                    return RedirectToAction("GestionPublications");
                 }
                 catch (Exception ex)
                 {

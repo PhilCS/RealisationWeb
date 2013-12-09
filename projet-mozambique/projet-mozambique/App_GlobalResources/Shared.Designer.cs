@@ -358,7 +358,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à .
+        ///   Recherche une chaîne localisée semblable à Oui.
         /// </summary>
         internal static string oui {
             get {
@@ -435,6 +435,24 @@ namespace Resources {
         internal static string recuLe {
             get {
                 return ResourceManager.GetString("recuLe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à résultat.
+        /// </summary>
+        internal static string resultat {
+            get {
+                return ResourceManager.GetString("resultat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à résultats.
+        /// </summary>
+        internal static string resultats {
+            get {
+                return ResourceManager.GetString("resultats", resourceCulture);
             }
         }
         
