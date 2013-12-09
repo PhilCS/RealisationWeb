@@ -376,6 +376,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Le secteur a été supprimé avec succès..
+        /// </summary>
+        internal static string SecteurDeleted {
+            get {
+                return ResourceManager.GetString("SecteurDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Ce secteur n&apos;existe pas..
         /// </summary>
         internal static string SectInexistant {

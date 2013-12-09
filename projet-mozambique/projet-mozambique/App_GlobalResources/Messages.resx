@@ -275,4 +275,7 @@
   <data name="DateGreaterThan" xml:space="preserve">
     <value>La date de fin d'accès doit être plus grande que la date de début.</value>
   </data>
+  <data name="SecteurDeleted" xml:space="preserve">
+    <value>Le secteur a été supprimé avec succès.</value>
+  </data>
 </root>

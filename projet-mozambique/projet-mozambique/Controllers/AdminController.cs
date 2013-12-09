@@ -364,7 +364,7 @@ namespace projet_mozambique.Controllers
                     db.SaveChanges();
 
                     TempData[Constantes.CLE_MSG_RETOUR] =
-                                new Message(Message.TYPE_MESSAGE.SUCCES, "Secteur supprimé");
+                                new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.SecteurDeleted);
 
                     return RedirectToAction("GestionSecteurs");
 
@@ -384,7 +384,7 @@ namespace projet_mozambique.Controllers
             }
 
             TempData[Constantes.CLE_MSG_RETOUR] =
-                                new Message(Message.TYPE_MESSAGE.ERREUR, "Secteur inexistant");
+                                new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Messages.SectInexistant);
             return RedirectToAction("GestionSecteurs");
         }
 
@@ -710,9 +710,6 @@ namespace projet_mozambique.Controllers
                     }
                     else
                     {
-                        //HttpPostedFileBase file = Request.Files.Get(0);
-
-                        //string url = Fichiers.CheminEnvoisImages(fichier.FileName);
                         var fileName = Path.GetFileName(fichier.FileName);
                         var path = Path.Combine(Server.MapPath("~/Content/images/photos"), fileName);
 
@@ -874,9 +871,6 @@ namespace projet_mozambique.Controllers
                         }
                         else
                         {
-                            //HttpPostedFileBase file = Request.Files.Get(0);
-
-                            //string url = Fichiers.CheminEnvoisImages(fichier.FileName);
                             var fileName = Path.GetFileName(fichier.FileName);
                             var path = Path.Combine(Server.MapPath("~/Content/images/photos"), fileName);
 
