@@ -36,7 +36,7 @@ else
                     <table>
                         @foreach (var unChoix in unSondage.CHOIXSONDAGES)
                         {
-                            var tailleVotes = (unSondage.nbVotesTotal > 0 ? (unChoix.nbVotes / unSondage.nbVotesTotal) * 500 : 0);
+                            var tailleVotes = Math.Round(unSondage.nbVotesTotal > 0 ? (unChoix.nbVotes / (float)unSondage.nbVotesTotal) * 500 : 0);
                 
                             <tr>
                                 <td>

@@ -78,16 +78,23 @@ namespace projet_mozambique.Controllers
 
             if (pub != null)
             {
-                var cd = new ContentDisposition { FileName = pub.NOMFICHIERORIGINAL, Inline = false };
-                Response.AppendHeader("Content-Disposition", cd.ToString());
+                if (User.IsInRole("admin") || ((List<SECTEUR>)Session["lstSect"]).Any(s => s.ID == pub.IDSECTEUR))
+                {
+                    var cd = new ContentDisposition { FileName = pub.NOMFICHIERORIGINAL, Inline = false };
+                    Response.AppendHeader("Content-Disposition", cd.ToString());
 
-                try
-                {
-                    return File(IOFile.ReadAllBytes(Fichiers.CheminEnvois(pub.NOMFICHIERSERVEUR)), pub.NOMFICHIERORIGINAL);
+                    try
+                    {
+                        return File(IOFile.ReadAllBytes(Fichiers.CheminEnvois(pub.NOMFICHIERSERVEUR)), pub.NOMFICHIERORIGINAL);
+                    }
+                    catch (IOException)
+                    {
+                        TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Publication.publicationErreurFichier);
+                    }
                 }
-                catch (IOException)
+                else
                 {
-                    TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Publication.publicationErreurFichier);
+                    TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Publication.accesRefuse);
                 }
             }
 
