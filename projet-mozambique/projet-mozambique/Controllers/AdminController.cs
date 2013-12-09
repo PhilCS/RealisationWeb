@@ -904,20 +904,5 @@ namespace projet_mozambique.Controllers
             return View(model);
         }
 
-        public ActionResult ModifAPropos()
-        {
-            return View("ModifierAPropos");
-        }
-
-        public ActionResult modifierNousJoindre()
-        {
-            return View("ModifierNousJoindre");
-        }
-
-        public ActionResult IndexModifie()
-        {
-            return View();
-        }
-
     }
 }

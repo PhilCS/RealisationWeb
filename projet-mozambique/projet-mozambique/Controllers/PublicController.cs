@@ -25,10 +25,6 @@ namespace projet_mozambique.Controllers
                 return RedirectToAction("Index", "Sectoriel");
             else
                 return RedirectToAction("Home", "Public");
-
-            /*GetContenu_Result contentResult = db.GetContenu("Accueil").FirstOrDefault();
-
-            return View(contentResult);*/
         }
 
         public ActionResult Home()
