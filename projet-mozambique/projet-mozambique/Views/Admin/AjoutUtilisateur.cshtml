@@ -55,7 +55,7 @@
             @Html.RadioButtonFor(m => m.active, 1)@Resources.Shared.choixDesactive
             @Html.ValidationMessageFor(m => m.active)
         </li>
-        <li>
+        <li style="height:40px;">
             @Html.LabelFor(m => m.idEcole)
             @Html.DropDownListFor(m => m.idEcole, new SelectList(Model.Ecoles, "Value", "Text"))
             @Html.ValidationMessageFor(m => m.idEcole)

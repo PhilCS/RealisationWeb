@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="accueil" xml:space="preserve">
-    <value>Home</value>
+    <value>Início</value>
   </data>
   <data name="admin" xml:space="preserve">
     <value>Administration</value>
@@ -278,5 +278,8 @@
   </data>
   <data name="sujetsPublication" xml:space="preserve">
     <value>Publication subjects</value>
+  </data>
+  <data name="modifierImage" xml:space="preserve">
+    <value>Change image file</value>
   </data>
 </root>

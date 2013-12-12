@@ -183,7 +183,8 @@ namespace projet_mozambique.Controllers
                     mail.From = new MailAddress(Constantes.EMAIL);
                     mail.To.Add(model.courriel);
                     mail.Subject = Resources.Sectoriel.ConfirmAccount;
-                    string lienRetour = "http://localhost:53486/Sectoriel/ConfirmationCompte/" + confirmToken;
+                    string urlPath = Request.Url.GetLeftPart(UriPartial.Authority);
+                    string lienRetour = urlPath + "/Sectoriel/ConfirmationCompte/" + confirmToken;
                     string message = String.Format(Resources.Sectoriel.msgConfirmAccount, model.nomUtil);
                     message += "<a href=\"";
                     message += lienRetour;
@@ -273,7 +274,7 @@ namespace projet_mozambique.Controllers
                 u.NOM = model.nom;
                 u.ADRESSE = model.adresse;
                 u.VILLE = model.ville;
-                u.DATENAISSANCE = u.DATENAISSANCE;
+                u.DATENAISSANCE = model.dateNaissance;
                 u.LANGUE = model.langue;
                 u.IDECOLE = model.idEcole;
                 u.ACTIF = model.active;
@@ -668,7 +669,7 @@ namespace projet_mozambique.Controllers
                     model.titreTrad = secteur.TITREACCUEILTRAD;
                     model.contenu = secteur.TEXTEACCUEIL;
                     model.contenuTrad = secteur.TEXTEACCUEILTRAD;
-                    ViewBag.UrlImage = secteur.URLIMAGEACCUEIL;
+                    model.fileName = secteur.URLIMAGEACCUEIL;
 
                     return View(model);
                 }
@@ -683,48 +684,58 @@ namespace projet_mozambique.Controllers
         {
             if (ModelState.IsValid)
             {
-                string desc = model.contenu.Replace("\r\n", Constantes.BR);
-                string descTrad = model.contenuTrad.Replace("\r\n", Constantes.BR);
-                SECTEUR leSecteur = db.SECTEUR.SingleOrDefault(s => s.ID == model.idSect);
-                leSecteur.NOM = model.nom;
-                leSecteur.NOMTRAD = model.nomTrad;
-                leSecteur.TITREACCUEIL = model.titre;
-                leSecteur.TITREACCUEILTRAD = model.titreTrad;
-                leSecteur.TEXTEACCUEIL = desc;
-                leSecteur.TEXTEACCUEILTRAD = descTrad;
-
-                if (model.File != null)
+                if (!string.IsNullOrEmpty(Request.Form["modifierSecteur"]))
                 {
-                    HttpPostedFileBase fichier = model.File;
+                    string desc = model.contenu.Replace("\r\n", Constantes.BR);
+                    string descTrad = model.contenuTrad.Replace("\r\n", Constantes.BR);
+                    SECTEUR leSecteur = db.SECTEUR.SingleOrDefault(s => s.ID == model.idSect);
+                    leSecteur.NOM = model.nom;
+                    leSecteur.NOMTRAD = model.nomTrad;
+                    leSecteur.TITREACCUEIL = model.titre;
+                    leSecteur.TITREACCUEILTRAD = model.titreTrad;
+                    leSecteur.TEXTEACCUEIL = desc;
+                    leSecteur.TEXTEACCUEILTRAD = descTrad;
+                    leSecteur.URLIMAGEACCUEIL = model.fileName;
 
-                    int MaxContentLength = 1024 * 1024 * 2; //2 MB
-                    string[] AllowedFileExtensions = new string[] { ".jpg", ".jpeg" };
+                    db.SaveChanges();
 
-                    if (!AllowedFileExtensions.Contains(fichier.FileName.Substring(fichier.FileName.LastIndexOf('.'))))
+                    TempData[Constantes.CLE_MSG_RETOUR] =
+                        new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.SectModifOk);
+
+                    return RedirectToAction("GestionSecteurs");
+                }
+                else if (!string.IsNullOrEmpty(Request.Form["modifierImage"]))
+                {
+                    if (model.File != null)
                     {
-                        ModelState.AddModelError("", Resources.Messages.FileType + string.Join(", ", AllowedFileExtensions));
-                    }
-                    else if (fichier.ContentLength > MaxContentLength)
-                    {
-                        ModelState.AddModelError("", Resources.Messages.FileTooLarge + (MaxContentLength / 1024).ToString() + "MB");
+                        HttpPostedFileBase fichier = model.File;
+
+                        int MaxContentLength = 1024 * 1024 * 2; //2 MB
+                        string[] AllowedFileExtensions = new string[] { ".jpg", ".jpeg" };
+
+                        if (!AllowedFileExtensions.Contains(fichier.FileName.Substring(fichier.FileName.LastIndexOf('.'))))
+                        {
+                            ModelState.AddModelError("", Resources.Messages.FileType + string.Join(", ", AllowedFileExtensions));
+                        }
+                        else if (fichier.ContentLength > MaxContentLength)
+                        {
+                            ModelState.AddModelError("", Resources.Messages.FileTooLarge + (MaxContentLength / 1024).ToString() + "MB");
+                        }
+                        else
+                        {
+                            var fileName = Path.GetFileName(fichier.FileName);
+                            var path = Path.Combine(Server.MapPath("~/Content/images/photos"), fileName);
+
+                            fichier.SaveAs(path);
+                            model.fileName = fileName;
+                        }
                     }
                     else
                     {
-                        var fileName = Path.GetFileName(fichier.FileName);
-                        var path = Path.Combine(Server.MapPath("~/Content/images/photos"), fileName);
-
-                        fichier.SaveAs(path);
-
-                        leSecteur.URLIMAGEACCUEIL = fileName;
+                        model.fileName = null;
                     }
+
                 }
-
-                db.SaveChanges();
-
-                TempData[Constantes.CLE_MSG_RETOUR] =
-                    new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.SectModifOk);
-
-                return RedirectToAction("GestionSecteurs");
             }
 
             return View(model);
@@ -837,7 +848,7 @@ namespace projet_mozambique.Controllers
                     model.titreTrad = contentResult.TITRE_TRAD;
                     model.contenu = contentResult.CONTENU;
                     model.contenuTrad = contentResult.CONTENU_TRAD;
-                    ViewBag.UrlImage = contentResult.URLIMAGE;
+                    model.fileName = contentResult.URLIMAGE;
 
                     return View(model);
                 }
@@ -852,7 +863,29 @@ namespace projet_mozambique.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (model.nomPage != null && (model.nomPage.Equals("accueil") || model.nomPage.Equals("about") || model.nomPage.Equals("contact")))
+                if(!string.IsNullOrEmpty(Request.Form["modifierPage"]))
+                {
+                    if (model.nomPage != null && (model.nomPage.Equals("accueil") || model.nomPage.Equals("about") || model.nomPage.Equals("contact")))
+                    {
+                        db.ModifierContenu(model.nomPage, model.titre, model.titreTrad, model.contenu, model.contenuTrad, model.fileName);
+                         
+                        db.SaveChanges();
+
+                        if (model.nomPage.Equals("about"))
+                        {
+                            return RedirectToAction("APropos", "Public");
+                        }
+                        else if (model.nomPage.Equals("contact"))
+                        {
+                            return RedirectToAction("NousJoindre", "Public");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Home", "Public");
+                        }
+                    }
+                }
+                else if(!string.IsNullOrEmpty(Request.Form["modifierImage"]))
                 {
                     if (model.File != null)
                     {
@@ -876,27 +909,13 @@ namespace projet_mozambique.Controllers
 
                             fichier.SaveAs(path);
 
-                            db.ModifierContenu(model.nomPage, model.titre, model.titreTrad, model.contenu, model.contenuTrad, fileName);
+                            model.fileName = fileName;
+
                         }
                     }
                     else
                     {
-                        db.ModifierContenu(model.nomPage, model.titre, model.titreTrad, model.contenu, model.contenuTrad, null);
-                    }
-
-                    db.SaveChanges();
-
-                    if (model.nomPage.Equals("about"))
-                    {
-                        return RedirectToAction("APropos", "Public");
-                    }
-                    else if (model.nomPage.Equals("contact"))
-                    {
-                        return RedirectToAction("NousJoindre", "Public");
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Public");
+                        model.fileName = null;
                     }
                 }
             }

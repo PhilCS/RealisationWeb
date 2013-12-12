@@ -298,7 +298,8 @@ namespace projet_mozambique.Controllers
                                 mail.From = new MailAddress(Constantes.EMAIL);
                                 mail.To.Add(emailAddress);
                                 mail.Subject = Resources.Sectoriel.subjectReset;
-                                string lienRetour = "http://localhost:53486/Sectoriel/ConfirmationReinitialMotPasse/" + confirmationToken;
+                                string urlPath = Request.Url.GetLeftPart(UriPartial.Authority);
+                                string lienRetour = urlPath + "/Sectoriel/ConfirmationReinitialMotPasse/" + confirmationToken;
                                 string message = String.Format(Resources.Sectoriel.msgReset, user.NOMUTIL);
                                 message += "<a href=\"";
                                 message += lienRetour;
