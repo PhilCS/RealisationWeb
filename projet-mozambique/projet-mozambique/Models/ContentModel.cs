@@ -31,6 +31,8 @@ namespace projet_mozambique.Models
         [Display(Name = "PageContentTrad", ResourceType = typeof(Names.DisplayName))]
         public string contenuTrad { get; set; }
 
+        public string fileName { get; set; }
+
         [Display(Name = "Image", ResourceType = typeof(Names.DisplayName))]
         public HttpPostedFileBase File { get; set; }
         
@@ -70,31 +72,10 @@ namespace projet_mozambique.Models
         [Display(Name = "PageContentTrad", ResourceType = typeof(Names.DisplayName))]
         public string contenuTrad { get; set; }
 
+        public string fileName { get; set; }
+
         [Display(Name = "Image", ResourceType = typeof(Names.DisplayName))]
         public HttpPostedFileBase File { get; set; }
     }
 
-    public class ValidateFileAttribute : ValidationAttribute
-    {
-        public override bool IsValid(object value)
-        {
-            int MaxContentLength = 1024 * 1024 * 2; //2 MB
-            string[] AllowedFileExtensions = new string[] { ".jpg", ".jpeg" };
-
-            var file = value as HttpPostedFileBase;
-
-            if (!AllowedFileExtensions.Contains(file.FileName.Substring(file.FileName.LastIndexOf('.'))))
-            {
-                ErrorMessage = "Please upload Your Photo of type: " + string.Join(", ", AllowedFileExtensions);
-                return false;
-            }
-            else if (file.ContentLength > MaxContentLength)
-            {
-                ErrorMessage = "Your Photo is too large, maximum allowed size is : " + (MaxContentLength / 1024).ToString() + "MB";
-                return false;
-            }
-            else
-                return true;
-        }
-    }
 }

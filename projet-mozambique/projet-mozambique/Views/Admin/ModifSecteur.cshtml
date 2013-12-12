@@ -37,17 +37,20 @@
             @Html.TextAreaFor(m => m.contenuTrad)
             @Html.ValidationMessageFor(m => m.contenuTrad)
         </li>
+        @if(Model.fileName != null)
+        {
+            <li>
+                @Html.Label(Resources.Admin.CurrentImage)
+                @Html.TextBoxFor(m => m.fileName, new { @readonly = "readonly", @style="width:300px" })
+            </li>
+        }
         <li>
             @Html.LabelFor(m => m.File)
-            @if (ViewBag.UrlImage != null)
-            {
-                string currImg = Resources.Admin.CurrentImage + " : " + ViewBag.UrlImage;
-                <p>@currImg</p>
-            }
             <input type="file" name="file"/>
             @Html.ValidationMessageFor(m => m.File)
+            <input type="submit" value="@Resources.Shared.modifierImage" name="modifierImage" class="btnForm" />
         </li>
     </ul>
-    <input type="submit" value="Modifier" class="btnForm" />
+    <input type="submit" value="Modifier" name="modifierSecteur" class="btnForm" />
 }
   

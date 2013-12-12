@@ -83,10 +83,11 @@ namespace projet_mozambique.Models
         [Display(Name = "UserBDay", ResourceType = typeof(Names.DisplayName))]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public Nullable<DateTime> dateNaissance { get; set; }
+        public DateTime dateNaissance { get; set; }
 
         [Required(ErrorMessageResourceName = "fieldRequired",
             ErrorMessageResourceType = typeof(Resources.Messages))]
+        [Display(Name = "Etat", ResourceType = typeof(Names.DisplayName))]
         public bool active { get; set; }
 
         public IEnumerable<System.Web.Mvc.SelectListItem> Ecoles { get; set; }
@@ -174,7 +175,7 @@ namespace projet_mozambique.Models
         [Display(Name = "UserBDay", ResourceType = typeof(Names.DisplayName))]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public Nullable<DateTime> dateNaissance { get; set; }
+        public DateTime dateNaissance { get; set; }
 
         [Required(ErrorMessageResourceName = "fieldRequired",
             ErrorMessageResourceType = typeof(Resources.Messages))]

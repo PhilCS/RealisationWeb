@@ -10,13 +10,13 @@
     {
         <h1>@Model.TITREACCUEIL - @Resources.Shared.secteur @Model.NOM</h1>
         <img class="img-accueil" src="~/Content/images/photos/@Model.URLIMAGEACCUEIL" alt="Photo" />
-        <p>@Model.TEXTEACCUEIL</p>
+        <p>@Html.Raw(Model.TEXTEACCUEIL)</p>
     }
     else
     {   
         <h1>@Model.TITREACCUEILTRAD - @Resources.Shared.secteur @Model.NOMTRAD</h1>
         <img class="img-accueil" src="~/Content/images/photos/@Model.URLIMAGEACCUEIL" alt="Photo" />
-        <p>@Model.TEXTEACCUEILTRAD</p>
+        <p>@Html.Raw(Model.TEXTEACCUEILTRAD)</p>
     }
 }    
 else

@@ -13,7 +13,7 @@
             <img class="img-accueil img-sous" src="~/Content/images/photos/@Model.URLIMAGE" alt="Photo Agriculture" />
         }
     </div>
-    <p>@Model.CONTENU</p> 
+    <p>@Html.Raw(Model.CONTENU)</p> 
 }
 else
 {
@@ -25,6 +25,6 @@ else
             <img class="img-accueil img-sous" src="~/Content/images/photos/@Model.URLIMAGE" alt="Photo Agriculture" />
         }
     </div>
-    <p>@Model.CONTENU_TRAD</p>
+    <p>@Html.Raw(Model.CONTENU_TRAD)</p>
 }
 

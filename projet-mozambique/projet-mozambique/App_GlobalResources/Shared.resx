@@ -208,6 +208,9 @@
   <data name="modifier" xml:space="preserve">
     <value>Modifier</value>
   </data>
+  <data name="modifierImage" xml:space="preserve">
+    <value>Changer l'image</value>
+  </data>
   <data name="mozambique" xml:space="preserve">
     <value>Mozambique</value>
   </data>

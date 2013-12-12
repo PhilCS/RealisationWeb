@@ -284,6 +284,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetPubParID_Result.cs" />
+    <Compile Include="Models\GetPubParID_Result1.cs" />
     <Compile Include="Models\GetSujetsPublication_Result.cs">
       <DependentUpon>dbContext.tt</DependentUpon>
     </Compile>
