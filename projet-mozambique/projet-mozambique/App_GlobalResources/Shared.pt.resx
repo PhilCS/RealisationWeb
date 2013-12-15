@@ -282,4 +282,7 @@
   <data name="modifierImage" xml:space="preserve">
     <value>Change image file</value>
   </data>
+  <data name="aide" xml:space="preserve">
+    <value>Help</value>
+  </data>
 </root>

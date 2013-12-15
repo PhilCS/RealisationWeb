@@ -241,4 +241,12 @@
     <value>Rétablir le message</value>
     <comment>Messagerie</comment>
   </data>
+  <data name="guideAdmin" xml:space="preserve">
+    <value>Guide de l'administrateur</value>
+    <comment>Aide</comment>
+  </data>
+  <data name="guideUtil" xml:space="preserve">
+    <value>Guide de l'utilisateur</value>
+    <comment>Aide</comment>
+  </data>
 </root>

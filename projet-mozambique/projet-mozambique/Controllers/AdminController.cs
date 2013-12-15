@@ -724,7 +724,7 @@ namespace projet_mozambique.Controllers
                         else
                         {
                             var fileName = Path.GetFileName(fichier.FileName);
-                            var path = Path.Combine(Server.MapPath("~/Content/images/photos"), fileName);
+                            var path = Path.Combine(Server.MapPath("~/Content/images/photos/"), fileName);
 
                             fichier.SaveAs(path);
                             model.fileName = fileName;
@@ -734,7 +734,7 @@ namespace projet_mozambique.Controllers
                     {
                         model.fileName = null;
                     }
-
+                    return View(model);
                 }
             }
 
@@ -917,6 +917,8 @@ namespace projet_mozambique.Controllers
                     {
                         model.fileName = null;
                     }
+
+                    return View(model);
                 }
             }
             

@@ -48,6 +48,20 @@ namespace projet_mozambique.Controllers
                 return LogOut();
         }
 
+        public ActionResult Aide()
+        {
+            if (User.IsInRole("admin"))
+            {
+                ViewBag.Admin = true;
+            }
+            else
+            {
+                ViewBag.Admin = false;
+            }
+
+            return View();
+        }
+
         [HttpPost]
         public ActionResult ChangeSecteur(int? secteur, string returnUrl)
         {

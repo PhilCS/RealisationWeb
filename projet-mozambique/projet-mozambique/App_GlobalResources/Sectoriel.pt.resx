@@ -241,4 +241,12 @@
   <data name="subjectReset" xml:space="preserve">
     <value>Reset your password</value>
   </data>
+  <data name="guideAdmin" xml:space="preserve">
+    <value>Administrator's guide</value>
+    <comment>Aide</comment>
+  </data>
+  <data name="guideUtil" xml:space="preserve">
+    <value>User's guide</value>
+    <comment>Aide</comment>
+  </data>
 </root>

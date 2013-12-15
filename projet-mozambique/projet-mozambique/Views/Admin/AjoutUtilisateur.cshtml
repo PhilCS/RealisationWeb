@@ -49,13 +49,13 @@
             @Html.EditorFor(m => m.dateNaissance)
             @Html.ValidationMessageFor(m => m.dateNaissance)
         </li>
-        <li>
+        <li style="height:30px;">
             @Html.LabelFor(m => m.active)
             @Html.RadioButtonFor(m => m.active, 0)@Resources.Shared.choixActive
             @Html.RadioButtonFor(m => m.active, 1)@Resources.Shared.choixDesactive
             @Html.ValidationMessageFor(m => m.active)
         </li>
-        <li style="height:40px;">
+        <li>
             @Html.LabelFor(m => m.idEcole)
             @Html.DropDownListFor(m => m.idEcole, new SelectList(Model.Ecoles, "Value", "Text"))
             @Html.ValidationMessageFor(m => m.idEcole)
