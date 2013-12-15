@@ -391,6 +391,14 @@ input:read-only
     height:24px;
 }
 
+.aide-img
+{
+    background:url('images/aide.png') no-repeat center right;
+    display:inline-block;
+    width:24px;
+    height:24px;
+}
+
 /*MESSAGERIE*/
 #contenu-message h3
 {   

@@ -6,7 +6,7 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     <ul>
-            @Html.HiddenFor(m => m.nomPage)
+            @*@Html.HiddenFor(m => m.nomPage)*@
           <li>
             @Html.LabelFor(m => m.titre) 
             @if (Model.nomPage.ToLower().Equals("accueil"))

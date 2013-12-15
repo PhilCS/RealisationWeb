@@ -184,6 +184,9 @@
   <data name="forums" xml:space="preserve">
     <value>Forums</value>
   </data>
+  <data name="help" xml:space="preserve">
+    <value>Aide</value>
+  </data>
   <data name="langue" xml:space="preserve">
     <value>Portuguese</value>
   </data>

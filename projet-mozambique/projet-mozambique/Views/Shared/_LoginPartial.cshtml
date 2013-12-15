@@ -5,6 +5,7 @@
         <div class="icons">
             @Html.ActionLink(" ", "Messagerie", new { controller = "Sectoriel" }, new { @class = "msg-img", title=@Resources.Shared.messagerie })
             @Html.ActionLink(" ", "Profil", "Sectoriel", routeValues: null, htmlAttributes: new { @class = "profil-img", title=@Resources.Shared.profil })
+            @Html.ActionLink(" ", "Aide", "Sectoriel", routeValues: null, htmlAttributes: new { @class = "aide-img", title=@Resources.Shared.help })
         </div>
         <div class="change">
             @Html.ActionLink(@Resources.Shared.langue, "ChangeCulture", "Public", new { lang = @Resources.Shared.ci, returnUrl = this.Request.RawUrl }, null)
