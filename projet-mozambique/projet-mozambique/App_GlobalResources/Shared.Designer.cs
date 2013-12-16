@@ -286,6 +286,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à guide-utilisateur-admin-fr.pdf.
+        /// </summary>
+        internal static string lienGuideAdmin {
+            get {
+                return ResourceManager.GetString("lienGuideAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à guide-utilisateur-fr.pdf.
+        /// </summary>
+        internal static string lienGuideUtil {
+            get {
+                return ResourceManager.GetString("lienGuideUtil", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Lire la suite....
         /// </summary>
         internal static string lirePlus {
