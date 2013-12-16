@@ -173,8 +173,8 @@ namespace projet_mozambique.Controllers
 
                 db.AjouterNouvelle(nouvelleFR.TITRE ?? "",
                                    nouvellePT.TITRE ?? "",
-                                   (nouvelleFR.DESCRIPTION != null ? Regex.Replace(nouvelleFR.DESCRIPTION, "\r?\n", Constantes.BR) : ""),
-                                   (nouvellePT.DESCRIPTION != null ? Regex.Replace(nouvellePT.DESCRIPTION, "\r?\n", Constantes.BR) : ""));
+                                   Message.NewlineToBr(nouvelleFR.DESCRIPTION ?? ""),
+                                   Message.NewlineToBr(nouvellePT.DESCRIPTION ?? ""));
 
                 TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Nouvelles.nouvelleAjoutee);
 
@@ -216,8 +216,8 @@ namespace projet_mozambique.Controllers
                     nouvelleMulti.langue1.TITRE = nouv.TITRE ?? "";
                     nouvelleMulti.langue2.TITRE = nouv.TITRETRAD ?? "";
 
-                    nouvelleMulti.langue1.DESCRIPTION = nouv.DESCRIPTION ?? "";
-                    nouvelleMulti.langue2.DESCRIPTION = nouv.DESCRIPTIONTRAD ?? "";
+                    nouvelleMulti.langue1.DESCRIPTION = Message.BrToNewline(nouv.DESCRIPTION ?? "");
+                    nouvelleMulti.langue2.DESCRIPTION = Message.BrToNewline(nouv.DESCRIPTIONTRAD ?? "");
                 }
                 else
                 {
@@ -230,8 +230,8 @@ namespace projet_mozambique.Controllers
                     nouvelleMulti.langue1.TITRE = nouv.TITRETRAD ?? "";
                     nouvelleMulti.langue2.TITRE = nouv.TITRE ?? "";
 
-                    nouvelleMulti.langue1.DESCRIPTION = nouv.DESCRIPTIONTRAD ?? "";
-                    nouvelleMulti.langue2.DESCRIPTION = nouv.DESCRIPTION ?? "";
+                    nouvelleMulti.langue1.DESCRIPTION = Message.BrToNewline(nouv.DESCRIPTIONTRAD ?? "");
+                    nouvelleMulti.langue2.DESCRIPTION = Message.BrToNewline(nouv.DESCRIPTION ?? "");
                 }
 
                 nouvelleMulti.langue1.langueChoisie = !String.IsNullOrEmpty(nouv.TITRE);
@@ -293,8 +293,8 @@ namespace projet_mozambique.Controllers
                 db.ModifierNouvelle(nouvelleMulti.IDNOUVELLE,
                                     nouvelleFR.TITRE ?? "",
                                     nouvellePT.TITRE ?? "",
-                                    (nouvelleFR.DESCRIPTION != null ? Regex.Replace(nouvelleFR.DESCRIPTION, "\r?\n", Constantes.BR) : ""),
-                                    (nouvellePT.DESCRIPTION != null ? Regex.Replace(nouvellePT.DESCRIPTION, "\r?\n", Constantes.BR) : ""));
+                                    Message.NewlineToBr(nouvelleFR.DESCRIPTION ?? ""),
+                                    Message.NewlineToBr(nouvellePT.DESCRIPTION ?? ""));
 
                 TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Nouvelles.nouvelleModifiee);
 

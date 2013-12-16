@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace projet_mozambique.Utilitaires
@@ -28,6 +29,16 @@ namespace projet_mozambique.Utilitaires
         public override string ToString()
         {
             return message;
+        }
+
+        public static string BrToNewline(string message)
+        {
+            return Regex.Replace(message, @"<br\s*/?>", "\r\n");
+        }
+
+        public static string NewlineToBr(string message)
+        {
+            return Regex.Replace(message, "\r?\n|\r", "<br/>");
         }
     }
 }

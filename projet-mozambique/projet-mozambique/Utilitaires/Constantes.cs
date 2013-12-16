@@ -16,8 +16,6 @@ namespace projet_mozambique.Utilitaires
         public const string HOST = "smtp.live.com";
         public const int PORT = 25;
 
-        public const string BR = "<br/>";
-
         public const string RECH_NOUVELLES = "nouvelles";
 
         //CLÉS
