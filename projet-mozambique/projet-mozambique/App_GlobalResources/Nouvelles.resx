@@ -132,4 +132,7 @@
   <data name="nouvelleSupprimee" xml:space="preserve">
     <value>La nouvelle a bien été supprimée.</value>
   </data>
+  <data name="suppressionNouvelle" xml:space="preserve">
+    <value>Suppression d'une nouvelle</value>
+  </data>
 </root>

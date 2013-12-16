@@ -90,10 +90,10 @@ namespace projet_mozambique.Controllers
             }
             else if (!String.IsNullOrEmpty(supprimer))
             {
-                db.SupprimerNouvelle(id);
-                TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Nouvelles.nouvelleSupprimee);
+                //db.SupprimerNouvelle(id);
+                //TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Nouvelles.nouvelleSupprimee);
 
-                return RedirectToAction("GestionNouvelles", new { gestion = 2 });
+                return RedirectToAction("SupprimerNouvelle", new { @id = id });
             }
 
             return RedirectToAction("SectionPublique");
@@ -303,5 +303,61 @@ namespace projet_mozambique.Controllers
 
             return View(nouvelleMulti);
         }
+
+        [HttpGet]
+        public ActionResult SupprimerNouvelle(int? id)
+        {
+            NOUVELLE nouv = null;
+
+            try
+            {
+                if (id == null)
+                    throw new ArgumentNullException("id");
+
+                nouv = db.GetNouvelleLocalisee(id, Session).First();
+            }
+            catch
+            {
+                TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Nouvelles.nouvelleInexistante);
+            }
+
+            if (nouv != null)
+            {
+                return View(nouv);
+            }
+
+            return RedirectToAction("GestionNouvelles", new { gestion = 2 });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SupprimerNouvelle(int? id, string confirmer, string annuler)
+        {
+            if (!String.IsNullOrEmpty(confirmer) && String.IsNullOrEmpty(annuler))
+            {
+                NOUVELLE nouv = null;
+
+                try
+                {
+                    if (id == null)
+                        throw new ArgumentNullException("id");
+
+                    nouv = db.GetNouvelleLocalisee(id, Session).First();
+                }
+                catch
+                {
+                    TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.ERREUR, Resources.Nouvelles.nouvelleInexistante);
+                }
+
+                if (nouv != null)
+                {
+                    db.SupprimerNouvelle(id);
+                    TempData[Constantes.CLE_MSG_RETOUR] = new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Nouvelles.nouvelleSupprimee);
+                }
+            }
+
+            return RedirectToAction("GestionNouvelles", new { gestion = 2 });
+        }
+
     }
 }

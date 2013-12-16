@@ -104,5 +104,14 @@ namespace Resources {
                 return ResourceManager.GetString("nouvelleSupprimee", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Suppression d&apos;une nouvelle.
+        /// </summary>
+        internal static string suppressionNouvelle {
+            get {
+                return ResourceManager.GetString("suppressionNouvelle", resourceCulture);
+            }
+        }
     }
 }
