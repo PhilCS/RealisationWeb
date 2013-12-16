@@ -20,23 +20,6 @@
         @Resources.Shared.publications
     </h1>
     
-    @*
-    if (listeSecteurs.Count > 1)
-    {
-        <div class="nav-tab">
-            <ul>
-                @foreach (var unSecteur in listeSecteurs)
-                {
-                    <li>
-                        <a href="?secteur=@unSecteur.ID"
-                           @if (secteur == unSecteur.ID) { <text> class="tab-active" </text> }>@unSecteur.NOM</a>
-                    </li>
-                }
-            </ul>
-        </div>
-    }
-    *@
-    
     <div class="recherche-doc">
 
         <form method="get">

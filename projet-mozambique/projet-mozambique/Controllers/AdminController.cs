@@ -667,8 +667,8 @@ namespace projet_mozambique.Controllers
                     model.nomTrad = secteur.NOMTRAD;
                     model.titre = secteur.TITREACCUEIL;
                     model.titreTrad = secteur.TITREACCUEILTRAD;
-                    model.contenu = secteur.TEXTEACCUEIL;
-                    model.contenuTrad = secteur.TEXTEACCUEILTRAD;
+                    model.contenu = Message.BrToNewline(secteur.TEXTEACCUEIL ?? "");
+                    model.contenuTrad = Message.BrToNewline(secteur.TEXTEACCUEILTRAD ?? "");
                     model.fileName = secteur.URLIMAGEACCUEIL;
 
                     return View(model);
@@ -686,8 +686,8 @@ namespace projet_mozambique.Controllers
             {
                 if (!string.IsNullOrEmpty(Request.Form["modifierSecteur"]))
                 {
-                    string desc = model.contenu.Replace("\r\n", Constantes.BR);
-                    string descTrad = model.contenuTrad.Replace("\r\n", Constantes.BR);
+                    string desc = Message.NewlineToBr(model.contenu);
+                    string descTrad = Message.NewlineToBr(model.contenuTrad);
                     SECTEUR leSecteur = db.SECTEUR.SingleOrDefault(s => s.ID == model.idSect);
                     leSecteur.NOM = model.nom;
                     leSecteur.NOMTRAD = model.nomTrad;
@@ -752,8 +752,8 @@ namespace projet_mozambique.Controllers
         {
             if (ModelState.IsValid)
             {
-                string desc = model.contenu.Replace("\r\n", Constantes.BR);
-                string descTrad = model.contenuTrad.Replace("\r\n", Constantes.BR);
+                string desc = Message.NewlineToBr(model.contenu);
+                string descTrad = Message.NewlineToBr(model.contenuTrad);
                 SECTEUR leSecteur = new SECTEUR();
                 leSecteur.NOM = model.nom;
                 leSecteur.NOMTRAD = model.nomTrad;
@@ -846,8 +846,8 @@ namespace projet_mozambique.Controllers
                     model.nomPage = contentResult.PAGE;
                     model.titre = contentResult.TITRE;
                     model.titreTrad = contentResult.TITRE_TRAD;
-                    model.contenu = contentResult.CONTENU;
-                    model.contenuTrad = contentResult.CONTENU_TRAD;
+                    model.contenu = Message.BrToNewline(contentResult.CONTENU);
+                    model.contenuTrad = Message.BrToNewline(contentResult.CONTENU_TRAD);
                     model.fileName = contentResult.URLIMAGE;
 
                     return View(model);

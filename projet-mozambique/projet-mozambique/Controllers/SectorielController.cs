@@ -890,7 +890,7 @@ namespace projet_mozambique.Controllers
                 //AJOUT DU MESSAGE
                 db.AjouterMessagePrive(WebSecurity.GetUserId(User.Identity.Name),
                                         message.sujet,
-                                        message.contenu.Replace("\r\n", Constantes.BR));
+                                        Message.NewlineToBr(message.contenu));
 
                 var id = (from mp in db.MESSAGEPRIVE
                             orderby mp.ID descending
@@ -1043,7 +1043,7 @@ namespace projet_mozambique.Controllers
 
                 db.FILDISCUSSION.Add(nouvFil);
                 db.SaveChanges();
-                db.AjouterMessageForum(model.contenu.Replace("\r\n", Constantes.BR), idUtil, nouvFil.ID);
+                db.AjouterMessageForum(Message.NewlineToBr(model.contenu), idUtil, nouvFil.ID);
 
                 return RedirectToAction("Forum");    
             }
@@ -1168,7 +1168,7 @@ namespace projet_mozambique.Controllers
                 TempData[Constantes.CLE_MESSAGE] = Resources.Messages.messageForumAjoute;
                 int idUtil = WebSecurity.GetUserId(User.Identity.Name);
 
-                db.AjouterMessageForum(model.contenu.Replace("\r\n", Constantes.BR), idUtil, model.idFil);
+                db.AjouterMessageForum(Message.NewlineToBr(model.contenu), idUtil, model.idFil);
             }
 
             return RedirectToAction("FilDiscu", new { idFil = model.idFil });
@@ -1211,7 +1211,7 @@ namespace projet_mozambique.Controllers
                                      select u.PRENOM + " " + u.NOM).FirstOrDefault();
                     MessageForumModel msgOrigine = new MessageForumModel()
                     {
-                        contenu = m.CONTENU.Replace(Constantes.BR, "\r\n"),
+                        contenu = Message.BrToNewline(m.CONTENU),
                         sujet = m.SUJET,
                         idFil = idFil ?? 0,
                         idMessage = idMsg ?? 0,
@@ -1235,7 +1235,7 @@ namespace projet_mozambique.Controllers
                               where m.ID == model.idMessage
                               select m).FirstOrDefault();
 
-                message.CONTENU = model.contenu.Replace("\r\n", Constantes.BR);
+                message.CONTENU = Message.NewlineToBr(model.contenu);
                 message.DATEMODIFICATION = DateTime.Now;
                 db.SaveChanges();
 
