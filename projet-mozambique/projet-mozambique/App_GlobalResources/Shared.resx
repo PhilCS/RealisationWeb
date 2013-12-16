@@ -193,6 +193,12 @@
   <data name="le" xml:space="preserve">
     <value>le</value>
   </data>
+  <data name="lienGuideAdmin" xml:space="preserve">
+    <value>guide-utilisateur-admin-fr.pdf</value>
+  </data>
+  <data name="lienGuideUtil" xml:space="preserve">
+    <value>guide-utilisateur-fr.pdf</value>
+  </data>
   <data name="lirePlus" xml:space="preserve">
     <value>Lire la suite...</value>
   </data>

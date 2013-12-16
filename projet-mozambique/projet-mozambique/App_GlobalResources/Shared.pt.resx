@@ -282,7 +282,13 @@
   <data name="modifierImage" xml:space="preserve">
     <value>Change image file</value>
   </data>
-  <data name="aide" xml:space="preserve">
+  <data name="help" xml:space="preserve">
     <value>Help</value>
+  </data>
+  <data name="lienGuideAdmin" xml:space="preserve">
+    <value>guide-utilisateur-admin-pt.pdf</value>
+  </data>
+  <data name="lienGuideUtil" xml:space="preserve">
+    <value>guide-utilisateur-pt.pdf</value>
   </data>
 </root>

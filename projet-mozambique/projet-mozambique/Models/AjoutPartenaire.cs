@@ -25,22 +25,27 @@ namespace projet_mozambique.Models
 
             [Display(Name = "Address", ResourceType = typeof(Names.DisplayName))]
             [StringLength(65)]
+            [Required]
             public string ADRESSE { get; set; }
 
             [Display(Name = "City", ResourceType = typeof(Names.DisplayName))]
             [StringLength(65)]
+            [Required]
             public string VILLE { get; set; }
 
             [Display(Name = "Country", ResourceType = typeof(Names.DisplayName))]
             [StringLength(60)]
+            [Required]
             public string PAYS { get; set; }
 
             [Display(Name = "Phone", ResourceType = typeof(Names.DisplayName))]
             [StringLength(20)]
+            [Required]
             public string TELEPHONE { get; set; }
 
             [Display(Name = "Website", ResourceType = typeof(Names.DisplayName))]
             [StringLength(150)]
+            [Required]
             public string SITEWEB { get; set; }
 
             [Display(Name = "Email", ResourceType = typeof(Names.DisplayName))]

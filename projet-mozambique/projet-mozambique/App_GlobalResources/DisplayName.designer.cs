@@ -61,7 +61,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Adresse.
+        ///   Recherche une chaîne localisée semblable à Adresse *.
         /// </summary>
         public static string Address {
             get {
@@ -79,7 +79,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Ville.
+        ///   Recherche une chaîne localisée semblable à Ville *.
         /// </summary>
         public static string City {
             get {
@@ -115,7 +115,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Pays.
+        ///   Recherche une chaîne localisée semblable à Pays *.
         /// </summary>
         public static string Country {
             get {
@@ -151,7 +151,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Courriel.
+        ///   Recherche une chaîne localisée semblable à Courriel *.
         /// </summary>
         public static string Email {
             get {
@@ -169,7 +169,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à État.
+        ///   Recherche une chaîne localisée semblable à État *.
         /// </summary>
         public static string Etat {
             get {
@@ -250,7 +250,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Mission et valeurs.
+        ///   Recherche une chaîne localisée semblable à Mission et valeurs *.
         /// </summary>
         public static string Mission {
             get {
@@ -259,7 +259,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Nom.
+        ///   Recherche une chaîne localisée semblable à Nom *.
         /// </summary>
         public static string Name {
             get {
@@ -349,7 +349,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Téléphone.
+        ///   Recherche une chaîne localisée semblable à Téléphone *.
         /// </summary>
         public static string Phone {
             get {
@@ -466,7 +466,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Titre.
+        ///   Recherche une chaîne localisée semblable à Titre *.
         /// </summary>
         public static string Title {
             get {
@@ -502,7 +502,7 @@ namespace Names {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Site web.
+        ///   Recherche une chaîne localisée semblable à Site web *.
         /// </summary>
         public static string Website {
             get {

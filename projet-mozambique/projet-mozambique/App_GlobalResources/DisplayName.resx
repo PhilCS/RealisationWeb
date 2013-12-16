@@ -118,11 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Address" xml:space="preserve">
-    <value>Adresse</value>
+    <value>Adresse *</value>
     <comment>UserModel</comment>
   </data>
   <data name="City" xml:space="preserve">
-    <value>Ville</value>
+    <value>Ville *</value>
     <comment>UserModel</comment>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
@@ -137,7 +137,7 @@
     <value>De</value>
   </data>
   <data name="Email" xml:space="preserve">
-    <value>Courriel</value>
+    <value>Courriel *</value>
     <comment>UserModel</comment>
   </data>
   <data name="Image" xml:space="preserve">
@@ -213,7 +213,7 @@
     <comment>AjoutPublication</comment>
   </data>
   <data name="Country" xml:space="preserve">
-    <value>Pays</value>
+    <value>Pays *</value>
     <comment>AjoutPartenaire</comment>
   </data>
   <data name="Description" xml:space="preserve">
@@ -233,15 +233,15 @@
     <comment>AjoutPublication</comment>
   </data>
   <data name="Mission" xml:space="preserve">
-    <value>Mission et valeurs</value>
+    <value>Mission et valeurs *</value>
     <comment>AjoutPartenaire</comment>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Nom</value>
+    <value>Nom *</value>
     <comment>AjoutPartenaire</comment>
   </data>
   <data name="Phone" xml:space="preserve">
-    <value>Téléphone</value>
+    <value>Téléphone *</value>
     <comment>AjoutPartenaire</comment>
   </data>
   <data name="Sector" xml:space="preserve">
@@ -249,11 +249,11 @@
     <comment>AjoutPublication</comment>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Titre</value>
+    <value>Titre *</value>
     <comment>NouvelleModel, AjoutPublication</comment>
   </data>
   <data name="Website" xml:space="preserve">
-    <value>Site web</value>
+    <value>Site web *</value>
     <comment>AjoutPartenaire</comment>
   </data>
   <data name="SecteurName" xml:space="preserve">
@@ -302,7 +302,7 @@
     <comment>AjoutSondage</comment>
   </data>
   <data name="Etat" xml:space="preserve">
-    <value>État</value>
+    <value>État *</value>
   </data>
   <data name="NumberChoices" xml:space="preserve">
     <value>Nombre de choix</value>
