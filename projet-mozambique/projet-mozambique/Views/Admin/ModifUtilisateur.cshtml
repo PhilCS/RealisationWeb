@@ -45,10 +45,6 @@
             @Html.ValidationMessageFor(m => m.ville)
         </li>
         <li>
-            @Html.LabelFor(m => m.derniereConnexion)
-            @Html.TextBoxFor(m => m.derniereConnexion, new { @readonly = "readonly" })
-        </li>
-        <li>
             @Html.LabelFor(m => m.dateNaissance)
             @Html.EditorFor(m => m.dateNaissance)
             @Html.ValidationMessageFor(m => m.dateNaissance)

@@ -182,9 +182,6 @@ namespace projet_mozambique.Models
         [Display(Name = "Etat", ResourceType = typeof(Names.DisplayName))]
         public bool active { get; set; }
 
-        [Display(Name = "LastConnexion", ResourceType = typeof(Names.DisplayName))]
-        public DateTime derniereConnexion { get; set; }
-
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fieldRequired",
             ErrorMessageResourceType = typeof(Resources.Messages))]
         [Display(Name = "Language", ResourceType = typeof(Names.DisplayName))]

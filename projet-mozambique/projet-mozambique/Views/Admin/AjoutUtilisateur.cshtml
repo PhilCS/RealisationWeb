@@ -51,8 +51,8 @@
         </li>
         <li style="height:30px;">
             @Html.LabelFor(m => m.active)
-            @Html.RadioButtonFor(m => m.active, 0)@Resources.Shared.choixActive
-            @Html.RadioButtonFor(m => m.active, 1)@Resources.Shared.choixDesactive
+            @Html.RadioButtonFor(m => m.active, true)@Resources.Shared.choixActive
+            @Html.RadioButtonFor(m => m.active, false)@Resources.Shared.choixDesactive
             @Html.ValidationMessageFor(m => m.active)
         </li>
         <li>

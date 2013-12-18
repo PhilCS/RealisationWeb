@@ -116,20 +116,17 @@ namespace projet_mozambique.Controllers
             List<ECOLE> lstEcoles = db.ECOLE.ToList();
             List<webpages_Roles> lstRoles = db.webpages_Roles.ToList();
 
-            AjoutUtilModel model = new AjoutUtilModel
+            AjoutUtilModel model = new AjoutUtilModel();
+            model.Ecoles = lstEcoles.Select(e => new SelectListItem
             {
-                Ecoles = lstEcoles.Select(e => new SelectListItem
-                {
-                    Text = e.NOM,
-                    Value = e.ID.ToString()
-                }),
-
-                Roles = lstRoles.Select(r => new SelectListItem
-                {
-                    Text = r.RoleName,
-                    Value = r.RoleName
-                })
-            };
+                Text = e.NOM,
+                Value = e.ID.ToString()
+            });
+            model.Roles = lstRoles.Select(r => new SelectListItem
+            {
+                Text = r.RoleName,
+                Value = r.RoleName
+            });
 
             
             return View(model);
@@ -201,7 +198,7 @@ namespace projet_mozambique.Controllers
                     smtp.Credentials = new System.Net.NetworkCredential(Constantes.EMAIL, Constantes.EMAIL_PWD);
                     smtp.EnableSsl = true;
                     smtp.Send(mail);
-                   
+
 
                     TempData[Constantes.CLE_MSG_RETOUR] =
                         new Message(Message.TYPE_MESSAGE.SUCCES, Resources.Messages.UserAddedOk);
@@ -213,6 +210,21 @@ namespace projet_mozambique.Controllers
                 {
                     ModelState.AddModelError("", e.Message);
                 }
+            }
+            else
+            {
+                List<ECOLE> lstEcoles = db.ECOLE.ToList();
+                List<webpages_Roles> lstRoles = db.webpages_Roles.ToList();
+                model.Ecoles = lstEcoles.Select(e => new SelectListItem
+                {
+                    Text = e.NOM,
+                    Value = e.ID.ToString()
+                });
+                model.Roles = lstRoles.Select(r => new SelectListItem
+                {
+                    Text = r.RoleName,
+                    Value = r.RoleName
+                });
             }
            
             return View(model);
@@ -237,7 +249,6 @@ namespace projet_mozambique.Controllers
                 model.adresse = leU.ADRESSE;
                 model.ville = leU.VILLE;
                 model.dateNaissance = leU.DATENAISSANCE;
-                model.derniereConnexion = leU.DERNIERECONNEXION.Value;
                 model.langue = leU.LANGUE;
                 model.idEcole = leU.IDECOLE;
                 model.active = leU.ACTIF;
