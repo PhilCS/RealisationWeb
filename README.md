@@ -1,3 +1,4 @@
+Meilleure note de la classe, celle-ci toutefois oubliée.
 Exemples de code :
 - [Sondages.cs](/projet-mozambique/projet-mozambique/Controllers/Types/Sondages.cs)
 - [Nouvelles.cs](/projet-mozambique/projet-mozambique/Controllers/Types/Nouvelles.cs)
